@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alsania – Sovereign Technology Ecosystem</title>
+    <meta name="description" content="Join the waitlist for Alsania's sovereign technology ecosystem. Get notified when Nyx, DevCon, ScrypGen and other projects launch.">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GYKRZLYBXQ');
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>The Future is Sovereign</h1>
+                <p>
+                    Alsania is building the ecosystem for creators, innovators, and visionaries 
+                    who believe technology should empower individuals, not corporations. 
+                    Own your identity, control your data, and build with tools that respect your sovereignty.
+                </p>
+                <div class="hero-actions">
+                    <a href="#waitlist" class="alsania-btn">Join the Waitlist</a>
+                    <a href="/utils/nyx/" class="alsania-btn secondary" id="download-nyx">Try Nyx Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Live & Ready Now</h2>
+            <p class="text-center mb-3">These projects are available today. No waiting required.</p>
+            <div class="ecosystem-grid">
+                <div class="ecosystem-item">
+                    <h3>Nyx Browser Extension</h3>
+                    <p>A powerful browser extension that integrates MCP tools with AI platforms. Automate your workflow across 13+ AI platforms including DeepSeek, Gemini, and GitHub Copilot.</p>
+                    <a href="/utils/nyx/" class="alsania-btn">Download Nyx</a>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>Official Merchandise</h3>
+                    <p>Show your support for sovereign technology with official Alsania merchandise. High-quality designs that represent the movement.</p>
+                    <a href="/dashery/" class="alsania-btn secondary">Shop on Dashery</a>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>Community Designs</h3>
+                    <p>Additional designs and creative merchandise from our community artists on Redbubble. Wear your beliefs.</p>
+                    <a href="/redirect/redbubble" class="alsania-btn secondary">Browse Redbubble</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section id="ecosystem" class="section" style="background: var(--bg-tertiary);">
+        <div class="container">
+            <h2 class="section-title">Coming Soon to Alsania</h2>
+            <p class="text-center mb-3">Get notified when these projects launch. Each solves real problems for creators and developers.</p>
+            <div class="ecosystem-grid">
+                <div class="ecosystem-item">
+                    <h3>DevCon (VSCode Extension)</h3>
+                    <p>AI assistant integrated directly into VSCode. Get context-aware coding assistance, documentation lookup, and intelligent code completion.</p>
+                    <span class="status-badge">In Development</span>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>ScrypGen</h3>
+                    <p>Natural language to script generator. Describe what you need in plain English, get working scripts in Python, JavaScript, Bash, and more.</p>
+                    <span class="status-badge">Alpha Testing</span>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>Nyx Unified (Premium)</h3>
+                    <p>Enhanced version of Nyx with advanced features: team collaboration, custom tool creation, priority support, and enterprise deployment options.</p>
+                    <span class="status-badge">Coming Q2 2025</span>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>Alsania Enhanced Domains</h3>
+                    <p>Sovereign identity system on the blockchain. Mint, manage, and enhance your unique Alsania domains as your digital identity.</p>
+                    <span class="status-badge">In Development</span>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>AlsaniaFX Marketplace</h3>
+                    <p>Decentralized marketplace for trading sovereign NFTs and tokens with 1% platform fees (not 2.5% like others). Fair trading for creators.</p>
+                    <span class="status-badge">Smart Contracts Ready</span>
+                </div>
+                <div class="ecosystem-item">
+                    <h3>Encrypted Messaging</h3>
+                    <p>Connect with other Alsanians using fully encrypted on-chain messaging and social features. Your conversations belong to you.</p>
+                    <span class="status-badge">Planned</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section id="waitlist" class="section waitlist-section">
+        <div class="container">
+            <h2 class="section-title">Get Project Release Alerts</h2>
+            <p class="text-center mb-2">
+                Be the first to know when new projects launch. We'll email you about releases, updates, 
+                and exclusive early access opportunities. No spam, just important announcements.
+            </p>
+            <form id="waitlist-form" class="waitlist-form">
+                <input 
+                    type="email" 
+                    id="waitlist-email" 
+                    name="email" 
+                    placeholder="Enter your email address" 
+                    autocomplete="email" 
+                    required 
+                    aria-label="Email address for project alerts"
+                />
+                <button type="submit" class="alsania-btn">Get Notified</button>
+            </form>
+            <div id="waitlist-message" class="form-message"></div>
+            <p class="text-center mt-2" style="color: var(--text-muted); font-size: 0.9rem;">
+                Join 500+ creators already waiting. We respect your privacy and won't share your email.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Additional analytics for waitlist tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track waitlist section visibility
+            const waitlistSection = document.getElementById('waitlist');
+            if (waitlistSection && typeof gtag !== 'undefined') {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            gtag('event', 'waitlist_section_view', {
+                                'event_category': 'Engagement',
+                                'event_label': 'Waitlist Section Visible'
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(waitlistSection);
+            }
+            
+            // Track project clicks
+            document.querySelectorAll('.ecosystem-item a').forEach(link => {
+                link.addEventListener('click', function() {
+                    const projectName = this.closest('.ecosystem-item').querySelector('h3').textContent;
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'project_click', {
+                            'event_category': 'Engagement',
+                            'event_label': projectName
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

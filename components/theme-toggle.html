@@ -1,0 +1,60 @@
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox" aria-label="Toggle dark/light mode">
+  <label for="theme-toggle" class="theme-toggle-label">
+    <span class="theme-toggle-icon">🌙</span>
+    <span class="theme-toggle-slider"></span>
+    <span class="theme-toggle-icon">☀️</span>
+  </label>
+</div>
+
+<style>
+.theme-toggle {
+  display: inline-block;
+}
+
+.theme-toggle-checkbox {
+  display: none;
+}
+
+.theme-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 20px;
+  background-color: var(--bg-tertiary);
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.theme-toggle-slider {
+  width: 36px;
+  height: 20px;
+  background-color: var(--accent-primary);
+  border-radius: 20px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.theme-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: var(--transition);
+}
+
+.theme-toggle-checkbox:checked + .theme-toggle-label .theme-toggle-slider::before {
+  transform: translateX(16px);
+}
+
+.theme-toggle-icon {
+  font-size: 14px;
+  user-select: none;
+}
+</style>

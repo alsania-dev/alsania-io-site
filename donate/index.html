@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Alsania - Donate to Sovereign Technology | Alsania</title>
+    <meta name="description" content="Support Alsania's mission to build sovereign, ethical technology. Your donation helps fund open-source development, community resources, and infrastructure.">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GYKRZLYBXQ');
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <style>
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .donation-option {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .donation-option.featured {
+            border: 2px solid var(--accent-primary);
+            transform: scale(1.05);
+            position: relative;
+        }
+        
+        .donation-option.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .donation-option:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+        
+        .donation-option.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .donation-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin: 20px 0;
+        }
+        
+        .paypal-button {
+            background: #0070BA;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .paypal-button:hover {
+            background: #005EA6;
+            transform: translateY(-2px);
+        }
+        
+        .custom-amount {
+            background: var(--bg-tertiary);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .custom-input {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        
+        .currency-symbol {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            border: 2px solid var(--border-color);
+            border-right: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .amount-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        .what-we-do {
+            background: var(--bg-tertiary);
+            padding: 60px 0;
+            border-radius: var(--border-radius);
+            margin-top: 60px;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .impact-item {
+            text-align: center;
+            padding: 25px;
+        }
+        
+        .impact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Support Alsania</h1>
+                <p>
+                    Your donation helps fund open-source development, community resources, and infrastructure 
+                    for sovereign technology. Together, we're building tools that empower, not extract.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Options -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Choose Your Contribution</h2>
+            
+            <div class="donation-options">
+                <div class="donation-option">
+                    <h3>Community Supporter</h3>
+                    <p>Help cover basic infrastructure and hosting costs</p>
+                    <div class="donation-amount">$10</div>
+                    <p>One-time contribution</p>
+                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                        <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_10">
+                        <button type="submit" class="paypal-button">
+                            <span style="font-weight: bold;">Pay</span>Pal
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="donation-option featured">
+                    <h3>Sustaining Member</h3>
+                    <p>Fund ongoing development and community initiatives</p>
+                    <div class="donation-amount">$25</div>
+                    <p>One-time contribution</p>
+                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                        <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_25">
+                        <button type="submit" class="paypal-button">
+                            <span style="font-weight: bold;">Pay</span>Pal
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="donation-option">
+                    <h3>Visionary Backer</h3>
+                    <p>Enable ambitious projects and long-term sustainability</p>
+                    <div class="donation-amount">$100</div>
+                    <p>One-time contribution</p>
+                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                        <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_100">
+                        <button type="submit" class="paypal-button">
+                            <span style="font-weight: bold;">Pay</span>Pal
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Custom Amount -->
+            <div class="custom-amount">
+                <h3>Custom Amount</h3>
+                <p>Choose your own donation amount via PayPal</p>
+                
+                <div class="custom-input">
+                    <span class="currency-symbol">$</span>
+                    <input type="number" class="amount-input" id="custom-amount" min="1" max="1000" step="1" value="50" placeholder="Enter amount">
+                </div>
+                
+                <form action="https://www.paypal.com/donate" method="post" target="_blank" id="custom-form">
+                    <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_CUSTOM">
+                    <input type="hidden" name="amount" id="paypal-amount" value="50">
+                    <button type="submit" class="paypal-button" style="background: linear-gradient(135deg, #0070BA, #003087);">
+                        <span style="font-weight: bold;">Pay</span>Pal Custom Donation
+                    </button>
+                </form>
+                
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px;">
+                    All donations are one-time. We don't offer recurring subscriptions to keep things simple.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Your Support Enables -->
+    <section class="what-we-do">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--accent-primary); margin-bottom: 40px;">What Your Support Enables</h2>
+            
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <span class="impact-icon">🚀</span>
+                    <h4>Open Source Development</h4>
+                    <p>Funding for Nyx, DevCon, ScrypGen, and other open-source projects</p>
+                </div>
+                
+                <div class="impact-item">
+                    <span class="impact-icon">🛡️</span>
+                    <h4>Infrastructure & Security</h4>
+                    <p>Servers, domains, SSL certificates, and security audits</p>
+                </div>
+                
+                <div class="impact-item">
+                    <span class="impact-icon">📚</span>
+                    <h4>Documentation & Education</h4>
+                    <p>Tutorials, guides, and educational resources for the community</p>
+                </div>
+                
+                <div class="impact-item">
+                    <span class="impact-icon">🌍</span>
+                    <h4>Community Initiatives</h4>
+                    <p>Events, hackathons, and outreach programs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Transparency & Values</h2>
+            
+            <div class="ecosystem-grid">
+                <div class="ecosystem-item">
+                    <h3>100% Open Finance</h3>
+                    <p>We publish quarterly reports on how donations are used. No hidden expenses, no executive salaries.</p>
+                </div>
+                
+                <div class="ecosystem-item">
+                    <h3>No Corporate Funding</h3>
+                    <p>We refuse venture capital and corporate investment to maintain our independence and values.</p>
+                </div>
+                
+                <div class="ecosystem-item">
+                    <h3>Community Driven</h3>
+                    <p>Major funding decisions are discussed with our community. You have a voice in how resources are used.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.1rem;">
+                    <strong>Direct PayPal:</strong> You can also send directly to our PayPal account at: 
+                    <span style="color: var(--accent-primary); font-family: var(--font-mono);">[Your PayPal Email Here]</span>
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
+                    Replace [Your PayPal Email Here] with your actual PayPal email address
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alternative Support -->
+    <section class="section" style="background: var(--bg-tertiary);">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--accent-primary); margin-bottom: 40px;">Other Ways to Support</h2>
+            
+            <div class="ecosystem-grid">
+                <div class="ecosystem-item">
+                    <h3>🛍️ Buy Merchandise</h3>
+                    <p>Support through our official merchandise store. Wear your values.</p>
+                    <a href="/dashery/" class="alsania-btn secondary">Shop Merch</a>
+                </div>
+                
+                <div class="ecosystem-item">
+                    <h3>💻 Contribute Code</h3>
+                    <p>Help build Alsania projects on GitHub. Every line of code helps.</p>
+                    <a href="https://github.com/alsania-dev" class="alsania-btn secondary" target="_blank" rel="noopener">Contribute</a>
+                </div>
+                
+                <div class="ecosystem-item">
+                    <h3>📣 Spread the Word</h3>
+                    <p>Share Alsania with your network. Follow us on social media and join discussions.</p>
+                    <a href="https://twitter.com/alsania_io" class="alsania-btn secondary" target="_blank" rel="noopener">Share</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/loadComponents.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update custom amount for PayPal
+            const amountInput = document.getElementById('custom-amount');
+            const paypalAmount = document.getElementById('paypal-amount');
+            const customForm = document.getElementById('custom-form');
+            
+            if (amountInput && paypalAmount) {
+                amountInput.addEventListener('input', function() {
+                    const value = Math.max(1, Math.min(1000, parseInt(this.value) || 1));
+                    this.value = value;
+                    paypalAmount.value = value;
+                });
+                
+                amountInput.addEventListener('change', function() {
+                    const value = Math.max(1, Math.min(1000, parseInt(this.value) || 1));
+                    this.value = value;
+                    paypalAmount.value = value;
+                });
+            }
+            
+            // Track donation button clicks
+            document.querySelectorAll('.paypal-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const form = this.closest('form');
+                    const amount = form.querySelector('[name="amount"]') ? form.querySelector('[name="amount"]').value : 'custom';
+                    
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'donation_click', {
+                            'event_category': 'Engagement',
+                            'event_label': `Donation $${amount}`
+                        });
+                    }
+                });
+            });
+            
+            // Add note about PayPal button IDs
+            console.log('Note: Replace YOUR_PAYPAL_BUTTON_ID_* with actual PayPal button IDs');
+            console.log('Also replace [Your PayPal Email Here] with your actual PayPal email');
+        });
+    </script>
+</body>
+</html>

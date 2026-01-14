@@ -1,10 +1,11 @@
 # Alsania.io Redirects
 
 # Store redirects
-/dashery https://mnemonic.dashery.com/ 302
-/redirect/redbubble https://www.redbubble.com/people/alsania-io/shop 302
-/merch /dashery 302
-/shop /dashery 302
+/store/dashery https://mnemonic.dashery.com/ 302
+/store/redbubble https://www.redbubble.com/people/alsania-io/shop 302
+/redirect/redbubble /store/redbubble 302
+/merch /store/dashery 302
+/shop /store/dashery 302
 
 # Legacy redirects (if needed)
 # /old-path /new-path 301

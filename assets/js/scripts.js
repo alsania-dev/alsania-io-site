@@ -17,18 +17,18 @@ async function loadComponent(id, url) {
 document.addEventListener('DOMContentLoaded', async () => {
     // Load components if their containers exist
     if (document.getElementById('header-container')) {
-        await loadComponent('header-container', '/components/header.html');
+        await loadComponent('header-container', '../components/header.html');
     }
     if (document.getElementById('nav-container')) {
-        await loadComponent('nav-container', '/components/nav.html');
+        await loadComponent('nav-container', '../components/nav.html');
     }
     if (document.getElementById('footer-container')) {
-        await loadComponent('footer-container', '/components/footer.html');
+        await loadComponent('footer-container', '../components/footer.html');
     }
     
     // Initialize theme toggle if it exists
     if (document.getElementById('theme-toggle-container')) {
-        await loadComponent('theme-toggle-container', '/components/theme-toggle.html');
+        await loadComponent('theme-toggle-container', '../components/theme-toggle.html');
         initThemeToggle();
     }
     
@@ -139,7 +139,7 @@ function initNyxDownload() {
         }
         
         // Redirect to Nyx page (download happens there)
-        window.location.href = '/utils/nyx/';
+        window.location.href = '../nyx/index.html';
     });
 }
 

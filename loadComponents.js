@@ -17,7 +17,10 @@ function getComponentsBasePath() {
     const protocol = window.location.protocol;
     const pathname = window.location.pathname;
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 
@@ -26,7 +29,10 @@ function getComponentsBasePath() {
         // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
         // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 
@@ -123,9 +129,15 @@ function loadComponent(containerId, componentName) {
                 return;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             log(`Loading ${containerId}: ${componentName}`);
             
+=======
+
+            log(`Loading ${containerId}: ${componentName}`);
+
+>>>>>>> 80f8aa4
 =======
 
             log(`Loading ${containerId}: ${componentName}`);
@@ -175,6 +187,10 @@ function loadComponent(containerId, componentName) {
                     });
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -224,6 +240,10 @@ function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const navMenu = document.querySelector('.alsania-nav');
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -232,6 +252,10 @@ function initMobileMenu() {
         return;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -241,6 +265,10 @@ function initMobileMenu() {
         log('Mobile menu toggled');
     });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -340,7 +368,11 @@ window.alsaniaComponents = {
     getComponentsBasePath,
     debug: DEBUG
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> 80f8aa4
 =======
 };
 >>>>>>> 80f8aa4

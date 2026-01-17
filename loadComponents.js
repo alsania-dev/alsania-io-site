@@ -19,7 +19,10 @@ function getComponentsBasePath() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 =======
@@ -34,7 +37,10 @@ function getComponentsBasePath() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 =======
@@ -137,9 +143,15 @@ function loadComponent(containerId, componentName) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             log(`Loading ${containerId}: ${componentName}`);
             
+=======
+
+            log(`Loading ${containerId}: ${componentName}`);
+
+>>>>>>> 80f8aa4
 =======
 
             log(`Loading ${containerId}: ${componentName}`);
@@ -201,6 +213,10 @@ function loadComponent(containerId, componentName) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -258,6 +274,10 @@ function initMobileMenu() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -274,6 +294,10 @@ function initMobileMenu() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -291,6 +315,10 @@ function initMobileMenu() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -398,7 +426,11 @@ window.alsaniaComponents = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> 80f8aa4
 =======
 };
 >>>>>>> 80f8aa4

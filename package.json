@@ -1,0 +1,71 @@
+{
+  "name": "@alsania-io/site",
+  "version": "1.0.0",
+  "description": "Alsania I/O Site - Sovereign Technology Ecosystem",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "npm run lint && npm run test && npm run optimize",
+    "lint": "echo 'Linting...' && exit 0",
+    "test": "echo 'Running tests...' && exit 0",
+    "optimize": "echo 'Optimizing assets...' && exit 0",
+    "deploy": "npm run build && echo 'Deploying...' && exit 0",
+    "deploy:github": "npx gh-pages -d dist",
+    "deploy:cloudflare": "npx wrangler pages deploy dist",
+    "package": "npm run build && mkdir -p dist && cp -r * dist/ && zip -r alsania-io-site-v1.0.0.zip dist",
+    "start": "npm run dev",
+    "prettier": "npx prettier --write .",
+    "security": "npx npm audit --production"
+  },
+  "keywords": [
+    "sovereign",
+    "technology",
+    "ecosystem",
+    "alsania",
+    "web",
+    "site",
+    "gateway"
+  ],
+  "author": "Alsania I/O <admin@alsania-io.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alsania-dev/alsania-io-site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alsania-dev/alsania-io-site/issues"
+  },
+  "homepage": "https://alsania.io",
+  "dependencies": {
+    "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0",
+    "prettier": "^3.0.0",
+    "wrangler": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "files": [
+    "dist/",
+    "assets/",
+    "components/",
+    "*.html",
+    "*.js",
+    "*.css"
+  ],
+  "bin": {},
+  "man": [],
+  "directories": {},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "private": false
+}

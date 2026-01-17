@@ -16,20 +16,14 @@ function error(...args) {
 function getComponentsBasePath() {
     const protocol = window.location.protocol;
     const pathname = window.location.pathname;
-<<<<<<< HEAD
     
-=======
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     if (protocol === 'file:') {
         // For file:// - build absolute file:// path to components folder
         // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
         // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
-<<<<<<< HEAD
         
-=======
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
         // Find project root by locating 'alsania-io-site'
         const projectRoot = pathname.substring(0, pathname.indexOf('/alsania-io-site') + '/alsania-io-site'.length);
         return 'file://' + projectRoot + '/components';
@@ -51,11 +45,7 @@ const INLINE_COMPONENTS = {
     <nav class="alsania-nav">
       <ul>
         <li><a href="/" class="nav-link">Home</a></li>
-<<<<<<< HEAD
-        <li><a href="/utils/nyx/" class="nav-link">Nyx</a></li>
-=======
         <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
         <li><a href="/shop/" class="nav-link">Shop</a></li>
         <li><a href="/about/" class="nav-link">About</a></li>
         <li><a href="/contact/" class="nav-link">Contact</a></li>
@@ -86,11 +76,7 @@ const INLINE_COMPONENTS = {
     <div class="footer-section">
       <h3>Products</h3>
       <ul>
-<<<<<<< HEAD
-        <li><a href="/utils/nyx/">Nyx</a></li>
-=======
         <li><a href="/tools/nyx/">Nyx</a></li>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
         <li><a href="/tools/devcon/">DevCon</a></li>
         <li><a href="/tools/scrypgen/">ScrypGen</a></li>
         <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
@@ -99,17 +85,10 @@ const INLINE_COMPONENTS = {
     <div class="footer-section">
       <h3>Legal</h3>
       <ul>
-<<<<<<< HEAD
-        <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="/legal/terms.html">Terms of Service</a></li>
-        <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
-        <li><a href="/legal/refund-policy.html">Refund Policy</a></li>
-=======
         <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
         <li><a href="legal/terms.html">Terms of Service</a></li>
         <li><a href="legal/disclaimer.html">Disclaimer</a></li>
         <li><a href="legal/refund-policy.html">Refund Policy</a></li>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
       </ul>
     </div>
     <div class="footer-section">
@@ -122,11 +101,7 @@ const INLINE_COMPONENTS = {
     </div>
   </div>
   <div class="footer-bottom">
-<<<<<<< HEAD
-    <p>&copy; 2024 Alsania. All rights reserved.</p>
-=======
     <p>&copy; 2026 Alsania. All rights reserved.</p>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
   </div>
 </footer>`
 };
@@ -141,15 +116,9 @@ function loadComponent(containerId, componentName) {
                 reject(new Error(`Container #${containerId} not found`));
                 return;
             }
-<<<<<<< HEAD
             
             log(`Loading ${containerId}: ${componentName}`);
             
-=======
-
-            log(`Loading ${containerId}: ${componentName}`);
-
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
             if (window.location.protocol === 'file:') {
                 // Use inline components for file:// protocol
                 if (INLINE_COMPONENTS[componentName]) {
@@ -167,15 +136,9 @@ function loadComponent(containerId, componentName) {
                 // Use fetch for http/https
                 const basePath = getComponentsBasePath();
                 const url = `${basePath}/${componentName}`;
-<<<<<<< HEAD
-                
-                log(`Fetching from ${url}`);
-                
-=======
 
                 log(`Fetching from ${url}`);
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
                 fetch(url)
                     .then(response => {
                         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -199,11 +162,6 @@ function loadComponent(containerId, componentName) {
                         reject(err);
                     });
             }
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
         } catch (err) {
             error(`Failed to load ${containerId}:`, err.message);
             const container = document.getElementById(containerId);
@@ -225,19 +183,6 @@ function initThemeToggle() {
         log('Theme toggle checkbox not found');
         return;
     }
-<<<<<<< HEAD
-    
-    // Get saved theme or default to dark
-    const savedTheme = localStorage.getItem('alsania-theme');
-    const currentTheme = savedTheme || 'dark';
-    
-    // Apply theme
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    themeToggle.checked = currentTheme === 'light';
-    
-    log(`Theme initialized: ${currentTheme} (saved: ${savedTheme || 'none'})`);
-    
-=======
 
     // Get saved theme or default to dark
     const savedTheme = localStorage.getItem('alsania-theme');
@@ -249,7 +194,6 @@ function initThemeToggle() {
 
     log(`Theme initialized: ${currentTheme} (saved: ${savedTheme || 'none'})`);
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     // Add change listener
     themeToggle.addEventListener('change', () => {
         const newTheme = themeToggle.checked ? 'light' : 'dark';
@@ -263,30 +207,15 @@ function initThemeToggle() {
 function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const navMenu = document.querySelector('.alsania-nav');
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     if (!mobileMenuBtn || !navMenu) {
         log('Mobile menu elements not found');
         return;
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     mobileMenuBtn.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         mobileMenuBtn.classList.toggle('active');
         log('Mobile menu toggled');
     });
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
@@ -296,25 +225,6 @@ function initMobileMenu() {
     });
 }
 
-<<<<<<< HEAD
-// Fix links for file:// protocol
-function fixLinksForFileProtocol() {
-    if (window.location.protocol !== 'file:') return;
-    
-    // Get the project root from current pathname
-    const pathname = window.location.pathname;
-    const projectRoot = pathname.substring(0, pathname.indexOf('/alsania-io-site') + '/alsania-io-site'.length);
-    
-    // Fix all navigation links
-    document.querySelectorAll('a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('/') && !href.startsWith('//')) {
-            // Convert absolute path to file:// URL
-            link.href = 'file://' + projectRoot + href + (href.endsWith('/') ? 'index.html' : href.endsWith('.html') ? '' : '/index.html');
-        }
-    });
-    
-=======
 // Redirect mapping for file:// protocol
 const REDIRECTS = {
     '/dashery': 'https://mnemonic.dashery.com/',
@@ -353,27 +263,12 @@ function fixLinksForFileProtocol() {
         }
     });
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     log('Fixed links for file:// protocol');
 }
 
 // Main initialization
 function initComponents() {
     log('Initializing components...');
-<<<<<<< HEAD
-    
-    // Load components in parallel
-    const promises = [];
-    
-    if (document.getElementById('header-container')) {
-        promises.push(loadComponent('header-container', 'header.html'));
-    }
-    
-    if (document.getElementById('footer-container')) {
-        promises.push(loadComponent('footer-container', 'footer.html'));
-    }
-    
-=======
 
     // Load components in parallel
     const promises = [];
@@ -386,24 +281,16 @@ function initComponents() {
         promises.push(loadComponent('footer-container', 'footer.html'));
     }
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
     // Wait for all components to load
     Promise.all(promises)
         .then(() => {
             // Initialize interactive features
             initThemeToggle();
             initMobileMenu();
-<<<<<<< HEAD
-            
-            // Fix links for file:// protocol
-            fixLinksForFileProtocol();
-            
-=======
 
             // Fix links for file:// protocol
             fixLinksForFileProtocol();
 
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
             log('All components initialized successfully');
         })
         .catch(err => {
@@ -424,8 +311,4 @@ window.alsaniaComponents = {
     reload: initComponents,
     getComponentsBasePath,
     debug: DEBUG
-<<<<<<< HEAD
-};
-=======
-};
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
+}

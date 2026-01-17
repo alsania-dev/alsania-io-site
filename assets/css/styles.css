@@ -250,7 +250,11 @@ a:hover {
 /* ===== Hero Section ===== */
 .hero {
     background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+<<<<<<< HEAD
     padding: 60px 0;
+=======
+    padding: 100px 0;
+>>>>>>> 80f8aa4
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -387,15 +391,24 @@ a:hover {
 .footer {
     background-color: var(--bg-tertiary);
     border-top: 1px solid var(--border-color);
+<<<<<<< HEAD
     padding: 2rem 0 1rem;
+=======
+    padding: 3rem 0 1rem;
+>>>>>>> 80f8aa4
     margin-top: auto;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+<<<<<<< HEAD
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+=======
+    gap: 2rem;
+    margin-bottom: 2rem;
+>>>>>>> 80f8aa4
 }
 
 .footer-section h3 {

@@ -16,13 +16,19 @@ function error(...args) {
 function getComponentsBasePath() {
     const protocol = window.location.protocol;
     const pathname = window.location.pathname;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 80f8aa4
 
     if (protocol === 'file:') {
         // For file:// - build absolute file:// path to components folder
         // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
         // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
+<<<<<<< HEAD
         
+=======
+>>>>>>> 80f8aa4
 
         // Find project root by locating 'alsania-io-site'
         const projectRoot = pathname.substring(0, pathname.indexOf('/alsania-io-site') + '/alsania-io-site'.length);
@@ -116,9 +122,15 @@ function loadComponent(containerId, componentName) {
                 reject(new Error(`Container #${containerId} not found`));
                 return;
             }
+<<<<<<< HEAD
             
             log(`Loading ${containerId}: ${componentName}`);
             
+=======
+
+            log(`Loading ${containerId}: ${componentName}`);
+
+>>>>>>> 80f8aa4
             if (window.location.protocol === 'file:') {
                 // Use inline components for file:// protocol
                 if (INLINE_COMPONENTS[componentName]) {
@@ -162,6 +174,10 @@ function loadComponent(containerId, componentName) {
                         reject(err);
                     });
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
         } catch (err) {
             error(`Failed to load ${containerId}:`, err.message);
             const container = document.getElementById(containerId);
@@ -207,15 +223,27 @@ function initThemeToggle() {
 function initMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const navMenu = document.querySelector('.alsania-nav');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
     if (!mobileMenuBtn || !navMenu) {
         log('Mobile menu elements not found');
         return;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
     mobileMenuBtn.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         mobileMenuBtn.classList.toggle('active');
         log('Mobile menu toggled');
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
@@ -311,4 +339,8 @@ window.alsaniaComponents = {
     reload: initComponents,
     getComponentsBasePath,
     debug: DEBUG
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> 80f8aa4

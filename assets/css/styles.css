@@ -252,7 +252,11 @@ a:hover {
     background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     padding: 60px 0;
+=======
+    padding: 100px 0;
+>>>>>>> 80f8aa4
 =======
     padding: 100px 0;
 >>>>>>> 80f8aa4
@@ -397,7 +401,11 @@ a:hover {
     border-top: 1px solid var(--border-color);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     padding: 2rem 0 1rem;
+=======
+    padding: 3rem 0 1rem;
+>>>>>>> 80f8aa4
 =======
     padding: 3rem 0 1rem;
 >>>>>>> 80f8aa4
@@ -412,8 +420,13 @@ a:hover {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+=======
+    gap: 2rem;
+    margin-bottom: 2rem;
+>>>>>>> 80f8aa4
 =======
     gap: 2rem;
     margin-bottom: 2rem;

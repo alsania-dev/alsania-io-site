@@ -18,7 +18,10 @@ function getComponentsBasePath() {
     const pathname = window.location.pathname;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 =======
@@ -30,7 +33,10 @@ function getComponentsBasePath() {
         // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
+=======
+>>>>>>> 80f8aa4
 =======
 >>>>>>> 80f8aa4
 =======
@@ -130,9 +136,15 @@ function loadComponent(containerId, componentName) {
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             log(`Loading ${containerId}: ${componentName}`);
             
+=======
+
+            log(`Loading ${containerId}: ${componentName}`);
+
+>>>>>>> 80f8aa4
 =======
 
             log(`Loading ${containerId}: ${componentName}`);
@@ -188,6 +200,10 @@ function loadComponent(containerId, componentName) {
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -241,6 +257,10 @@ function initMobileMenu() {
     const navMenu = document.querySelector('.alsania-nav');
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -253,6 +273,10 @@ function initMobileMenu() {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -266,6 +290,10 @@ function initMobileMenu() {
     });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80f8aa4
 =======
 
 >>>>>>> 80f8aa4
@@ -369,7 +397,11 @@ window.alsaniaComponents = {
     debug: DEBUG
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> 80f8aa4
 =======
 };
 >>>>>>> 80f8aa4

@@ -1,84 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>404 Not Found · Alsania</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --brand-neon: #39ff14;
-  --brand-accent: #7aff59;
-  --brand-bg1: #000814;
-  --brand-bg2: #001a33;
-  --panel-bg: rgba(0, 20, 40, 0.55);
-  --panel-border: rgba(57, 255, 20, 0.25);
-  font-family: 'Rajdhani', sans-serif;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle at center, var(--brand-bg2), var(--brand-bg1));
-  position: relative;
-  color: var(--brand-neon);
-  font-family: 'Rajdhani', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container {
-  position: relative;
-  z-index: 10;
-  width: 90%;
-  max-width: 550px;
-  text-align: center;
-  padding: 40px;
-  border-radius: 18px;
-  background: var(--panel-bg);
-  backdrop-filter: blur(12px);
-  border: 1.5px solid var(--panel-border);
-  box-shadow: 0 0 25px rgba(57, 255, 20, 0.15);
-}
-h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 5rem;
-  text-shadow: 0 0 15px var(--brand-neon);
-}
-p {
-  margin-top: 15px;
-  font-size: 1.2rem;
-  opacity: 0.85;
-}
-a {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  background: var(--brand-neon);
-  border: none;
-  color: #000;
-  font-family: 'Orbitron';
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 0 12px var(--brand-accent);
-}
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found · Alsania</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-neon: #39ff14;
+        --brand-accent: #7aff59;
+        --brand-bg1: #000814;
+        --brand-bg2: #001a33;
+        --panel-bg: rgba(0, 20, 40, 0.55);
+        --panel-border: rgba(57, 255, 20, 0.25);
+        font-family: "Rajdhani", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        overflow: hidden;
+        background: radial-gradient(
+          circle at center,
+          var(--brand-bg2),
+          var(--brand-bg1)
+        );
+        position: relative;
+        color: var(--brand-neon);
+        font-family: "Rajdhani", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        position: relative;
+        z-index: 10;
+        width: 90%;
+        max-width: 550px;
+        text-align: center;
+        padding: 40px;
+        border-radius: 18px;
+        background: var(--panel-bg);
+        backdrop-filter: blur(12px);
+        border: 1.5px solid var(--panel-border);
+        box-shadow: 0 0 25px rgba(57, 255, 20, 0.15);
+      }
+      h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 5rem;
+        text-shadow: 0 0 15px var(--brand-neon);
+      }
+      p {
+        margin-top: 15px;
+        font-size: 1.2rem;
+        opacity: 0.85;
+      }
+      a {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        background: var(--brand-neon);
+        border: none;
+        color: #000;
+        font-family: "Orbitron";
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 0 12px var(--brand-accent);
+      }
+    </style>
+  </head>
+  <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
-<div class="container">
-  <h1>404</h1>
-  <p>The signal was lost. This page does not exist in our dimension.</p>
-  <a href="/">Return to Base</a>
-</div>
+    <div class="container">
+      <h1>404</h1>
+      <p>The signal was lost. This page does not exist in our dimension.</p>
+      <a href="/">Return to Base</a>
+    </div>
 
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
     <!-- Component Loader -->
     <script src="../../../../../loadComponents.js"></script>
-</body>
+  </body>
 </html>

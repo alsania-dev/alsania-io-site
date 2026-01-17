@@ -36,7 +36,7 @@ Welcome to Nyx! This guide will help you get started in just a few minutes.
 Nyx works with:
 
 - ✅ DeepSeek
-- ✅ Google Gemini  
+- ✅ Google Gemini
 - ✅ Perplexity
 - ✅ GitHub Copilot
 - ✅ ChatGPT
@@ -76,4 +76,4 @@ If you're a developer or want to customize Nyx, you can:
 
 **Enjoy automating your workflow with Nyx!** 🚀
 
-*Built with ❤️ by the Alsania community*
+_Built with ❤️ by the Alsania community_

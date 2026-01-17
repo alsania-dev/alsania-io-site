@@ -2,158 +2,163 @@
 // Maintains Alsania branding while adding comprehensive site structure
 
 class AlsaniaNavigation {
-    constructor() {
-        this.currentPage = 'explorer';
-        this.userRole = 'public'; // 'public' or 'admin'
-        this.init();
-    }
+  constructor() {
+    this.currentPage = "explorer";
+    this.userRole = "public"; // 'public' or 'admin'
+    this.init();
+  }
 
-    init() {
-        this.createNavigationStructure();
-        this.bindEvents();
-        this.loadUserPreferences();
-    }
+  init() {
+    this.createNavigationStructure();
+    this.bindEvents();
+    this.loadUserPreferences();
+  }
 
-    createNavigationStructure() {
-        const navigation = {
-            public: [
-                {
-                    id: 'explorer',
-                    title: 'Explorer',
-                    icon: 'fas fa-search',
-                    url: '#explorer',
-                    description: 'Search blocks, transactions, addresses'
-                },
-                {
-                    id: 'domains',
-                    title: 'Domains',
-                    icon: 'fas fa-globe',
-                    url: 'domain.html',
-                    description: 'Browse .alsania domains'
-                },
-                {
-                    id: 'nfts',
-                    title: 'NFTs',
-                    icon: 'fas fa-image',
-                    url: '#nfts',
-                    description: 'Explore NFT collections'
-                },
-                {
-                    id: 'profile',
-                    title: 'My Profile',
-                    icon: 'fas fa-user',
-                    url: '#profile',
-                    description: 'Manage your Alsania profile',
-                    requiresAuth: true
-                }
-            ],
-            admin: [
-                {
-                    id: 'dashboard',
-                    title: 'Admin Dashboard',
-                    icon: 'fas fa-tachometer-alt',
-                    url: 'admin/dashboard.html',
-                    description: 'System overview and analytics'
-                },
-                {
-                    id: 'users',
-                    title: 'User Management',
-                    icon: 'fas fa-users',
-                    url: 'admin/users.html',
-                    description: 'Manage user accounts and permissions'
-                },
-                {
-                    id: 'domains-admin',
-                    title: 'Domain Admin',
-                    icon: 'fas fa-globe',
-                    url: 'admin/domains.html',
-                    description: 'Manage domain registrations'
-                },
-                {
-                    id: 'analytics',
-                    title: 'Analytics',
-                    icon: 'fas fa-chart-bar',
-                    url: 'admin/analytics.html',
-                    description: 'View site statistics and metrics'
-                }
-            ]
-        };
+  createNavigationStructure() {
+    const navigation = {
+      public: [
+        {
+          id: "explorer",
+          title: "Explorer",
+          icon: "fas fa-search",
+          url: "#explorer",
+          description: "Search blocks, transactions, addresses",
+        },
+        {
+          id: "domains",
+          title: "Domains",
+          icon: "fas fa-globe",
+          url: "domain.html",
+          description: "Browse .alsania domains",
+        },
+        {
+          id: "nfts",
+          title: "NFTs",
+          icon: "fas fa-image",
+          url: "#nfts",
+          description: "Explore NFT collections",
+        },
+        {
+          id: "profile",
+          title: "My Profile",
+          icon: "fas fa-user",
+          url: "#profile",
+          description: "Manage your Alsania profile",
+          requiresAuth: true,
+        },
+      ],
+      admin: [
+        {
+          id: "dashboard",
+          title: "Admin Dashboard",
+          icon: "fas fa-tachometer-alt",
+          url: "admin/dashboard.html",
+          description: "System overview and analytics",
+        },
+        {
+          id: "users",
+          title: "User Management",
+          icon: "fas fa-users",
+          url: "admin/users.html",
+          description: "Manage user accounts and permissions",
+        },
+        {
+          id: "domains-admin",
+          title: "Domain Admin",
+          icon: "fas fa-globe",
+          url: "admin/domains.html",
+          description: "Manage domain registrations",
+        },
+        {
+          id: "analytics",
+          title: "Analytics",
+          icon: "fas fa-chart-bar",
+          url: "admin/analytics.html",
+          description: "View site statistics and metrics",
+        },
+      ],
+    };
 
-        this.navigation = navigation;
-    }
+    this.navigation = navigation;
+  }
 
-    renderNavigation(role = 'public') {
-        const navItems = this.navigation[role];
-        const navContainer = document.querySelector('.main-nav .nav-menu') || 
-                            document.querySelector('.mobile-drawer .drawer-menu');
+  renderNavigation(role = "public") {
+    const navItems = this.navigation[role];
+    const navContainer =
+      document.querySelector(".main-nav .nav-menu") ||
+      document.querySelector(".mobile-drawer .drawer-menu");
 
-        if (!navContainer) return;
+    if (!navContainer) return;
 
-        navContainer.innerHTML = navItems.map(item => `
+    navContainer.innerHTML = navItems
+      .map(
+        (item) => `
             <li>
                 <a href="${item.url}" 
-                   class="nav-link ${item.id === this.currentPage ? 'active' : ''}"
+                   class="nav-link ${item.id === this.currentPage ? "active" : ""}"
                    data-page="${item.id}"
                    title="${item.description}">
                     <i class="${item.icon}"></i>
                     <span>${item.title}</span>
                 </a>
             </li>
-        `).join('');
-    }
+        `,
+      )
+      .join("");
+  }
 
-    navigateTo(pageId) {
-        this.currentPage = pageId;
-        
-        // Update active states
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.toggle('active', link.dataset.page === pageId);
-        });
+  navigateTo(pageId) {
+    this.currentPage = pageId;
 
-        // Load page content
-        this.loadPageContent(pageId);
-        
-        // Update URL without reload
-        history.pushState({ page: pageId }, '', `#${pageId}`);
-    }
+    // Update active states
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.classList.toggle("active", link.dataset.page === pageId);
+    });
 
-    loadPageContent(pageId) {
-        const contentContainer = document.getElementById('content-container');
-        if (!contentContainer) return;
+    // Load page content
+    this.loadPageContent(pageId);
 
-        // Show loading state
-        contentContainer.innerHTML = `
+    // Update URL without reload
+    history.pushState({ page: pageId }, "", `#${pageId}`);
+  }
+
+  loadPageContent(pageId) {
+    const contentContainer = document.getElementById("content-container");
+    if (!contentContainer) return;
+
+    // Show loading state
+    contentContainer.innerHTML = `
             <div class="loading-state">
                 <div class="spinner"></div>
                 <p>Loading ${this.getPageTitle(pageId)}...</p>
             </div>
         `;
 
-        // Simulate loading (replace with actual content loading)
-        setTimeout(() => {
-            this.renderPageContent(pageId);
-        }, 300);
-    }
+    // Simulate loading (replace with actual content loading)
+    setTimeout(() => {
+      this.renderPageContent(pageId);
+    }, 300);
+  }
 
-    renderPageContent(pageId) {
-        const contentContainer = document.getElementById('content-container');
-        
-        const pages = {
-            explorer: this.renderExplorerDashboard(),
-            domains: this.renderDomainsPage(),
-            nfts: this.renderNFTsPage(),
-            profile: this.renderProfilePage(),
-            dashboard: this.renderAdminDashboard(),
-            users: this.renderAdminUsers(),
-            'domains-admin': this.renderAdminDomains(),
-            analytics: this.renderAdminAnalytics()
-        };
+  renderPageContent(pageId) {
+    const contentContainer = document.getElementById("content-container");
 
-        contentContainer.innerHTML = pages[pageId] || this.render404();
-    }
+    const pages = {
+      explorer: this.renderExplorerDashboard(),
+      domains: this.renderDomainsPage(),
+      nfts: this.renderNFTsPage(),
+      profile: this.renderProfilePage(),
+      dashboard: this.renderAdminDashboard(),
+      users: this.renderAdminUsers(),
+      "domains-admin": this.renderAdminDomains(),
+      analytics: this.renderAdminAnalytics(),
+    };
 
-    renderExplorerDashboard() {
-        return `
+    contentContainer.innerHTML = pages[pageId] || this.render404();
+  }
+
+  renderExplorerDashboard() {
+    return `
             <div class="dashboard-container alsania-theme">
                 <div class="dashboard-header">
                     <h1><i class="fas fa-cube"></i> Alsania Explorer</h1>
@@ -232,10 +237,10 @@ class AlsaniaNavigation {
                 </div>
             </div>
         `;
-    }
+  }
 
-    renderDomainsPage() {
-        return `
+  renderDomainsPage() {
+    return `
             <div class="domains-container alsania-theme">
                 <div class="domains-header">
                     <h1><i class="fas fa-globe"></i> Alsania Domains</h1>
@@ -260,10 +265,10 @@ class AlsaniaNavigation {
                 </div>
             </div>
         `;
-    }
+  }
 
-    renderProfilePage() {
-        return `
+  renderProfilePage() {
+    return `
             <div class="profile-container alsania-theme">
                 <div class="profile-header">
                     <div class="profile-avatar">
@@ -299,65 +304,65 @@ class AlsaniaNavigation {
                 </div>
             </div>
         `;
+  }
+
+  getPageTitle(pageId) {
+    const titles = {
+      explorer: "Explorer",
+      domains: "Domains",
+      nfts: "NFTs",
+      profile: "Profile",
+      dashboard: "Admin Dashboard",
+      users: "User Management",
+      "domains-admin": "Domain Admin",
+      analytics: "Analytics",
+    };
+    return titles[pageId] || "Page";
+  }
+
+  bindEvents() {
+    // Navigation clicks
+    document.addEventListener("click", (e) => {
+      if (e.target.matches(".nav-link[data-page]")) {
+        e.preventDefault();
+        this.navigateTo(e.target.dataset.page);
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector(".mobile-toggle");
+    const mobileDrawer = document.querySelector(".mobile-drawer");
+    const closeDrawer = document.querySelector(".close-drawer");
+
+    if (mobileToggle && mobileDrawer) {
+      mobileToggle.addEventListener("click", () => {
+        mobileDrawer.classList.add("open");
+      });
+
+      closeDrawer.addEventListener("click", () => {
+        mobileDrawer.classList.remove("open");
+      });
     }
 
-    getPageTitle(pageId) {
-        const titles = {
-            explorer: 'Explorer',
-            domains: 'Domains',
-            nfts: 'NFTs',
-            profile: 'Profile',
-            dashboard: 'Admin Dashboard',
-            users: 'User Management',
-            'domains-admin': 'Domain Admin',
-            analytics: 'Analytics'
-        };
-        return titles[pageId] || 'Page';
+    // Handle browser back/forward
+    window.addEventListener("popstate", (e) => {
+      if (e.state && e.state.page) {
+        this.navigateTo(e.state.page);
+      }
+    });
+  }
+
+  loadUserPreferences() {
+    // Load saved navigation preferences
+    const savedPage = localStorage.getItem("alsania-current-page");
+    if (savedPage) {
+      this.currentPage = savedPage;
     }
-
-    bindEvents() {
-        // Navigation clicks
-        document.addEventListener('click', (e) => {
-            if (e.target.matches('.nav-link[data-page]')) {
-                e.preventDefault();
-                this.navigateTo(e.target.dataset.page);
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileToggle = document.querySelector('.mobile-toggle');
-        const mobileDrawer = document.querySelector('.mobile-drawer');
-        const closeDrawer = document.querySelector('.close-drawer');
-
-        if (mobileToggle && mobileDrawer) {
-            mobileToggle.addEventListener('click', () => {
-                mobileDrawer.classList.add('open');
-            });
-
-            closeDrawer.addEventListener('click', () => {
-                mobileDrawer.classList.remove('open');
-            });
-        }
-
-        // Handle browser back/forward
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.page) {
-                this.navigateTo(e.state.page);
-            }
-        });
-    }
-
-    loadUserPreferences() {
-        // Load saved navigation preferences
-        const savedPage = localStorage.getItem('alsania-current-page');
-        if (savedPage) {
-            this.currentPage = savedPage;
-        }
-    }
+  }
 }
 
 // Initialize navigation system
-document.addEventListener('DOMContentLoaded', () => {
-    const nav = new AlsaniaNavigation();
-    nav.renderNavigation();
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = new AlsaniaNavigation();
+  nav.renderNavigation();
 });

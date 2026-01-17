@@ -1,399 +1,500 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyx Unified - Premium Browser Extension | Coming Soon | Alsania</title>
-    <meta name="description" content="Nyx Unified is the premium version of Nyx with advanced features: team collaboration, custom tool creation, priority support, and enterprise deployment options.">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Nyx Unified - Premium Browser Extension | Coming Soon | Alsania
+    </title>
+    <meta
+      name="description"
+      content="Nyx Unified is the premium version of Nyx with advanced features: team collaboration, custom tool creation, priority support, and enterprise deployment options."
+    />
+
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-GYKRZLYBXQ');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <link rel="stylesheet" href="/assets/css/main.css">
-=======
+    <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    =======
     <link rel="stylesheet" href="../../assets/css/styles.css" />
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
-=======
+    >>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript
+    functionality and assets) =======
     <link rel="stylesheet" href="../../assets/css/styles.css" />
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <link rel="stylesheet" href="../../assets/css/styles.css" />
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <link rel="stylesheet" href="../../assets/css/styles.css" />
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <link rel="stylesheet" href="../../assets/css/styles.css" />
->>>>>>> 80f8aa4
-    
+    >>>>>>> 80f8aa4
+
     <style>
-        .unified-hero {
-            background: linear-gradient(135deg, #0B0014, #2B1A5A);
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .unified-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-        
-        .premium-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #00E5FF, #00FF9C);
-            color: #0B0014;
-            padding: 10px 25px;
-            border-radius: 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin: 20px 0;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 50px 0;
-        }
-        
-        .comparison-card {
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .comparison-card.premium {
-            border: 2px solid #00E5FF;
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
-            position: relative;
-            transform: scale(1.05);
-        }
-        
-        .comparison-card.premium::before {
-            content: 'RECOMMENDED';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #00E5FF;
-            color: #0B0014;
-            padding: 5px 15px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-        
-        .comparison-card h3 {
-            text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .feature-list {
-            list-style: none;
-        }
-        
-        .feature-list li {
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-secondary);
-        }
-        
-        .feature-list.premium li::before {
-            color: #00FF9C;
-        }
-        
-        .feature-list li.excluded::before {
-            content: '✗';
-            color: var(--accent-danger);
-        }
-        
-        .pricing-card {
-            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
-            border-radius: var(--border-radius);
-            padding: 40px;
-            text-align: center;
-            border: 2px solid var(--accent-primary);
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .price {
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00E5FF, #00FF9C);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 20px 0;
-        }
-        
-        .price-period {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
+      .unified-hero {
+        background: linear-gradient(135deg, #0b0014, #2b1a5a);
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .unified-hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 229, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 8s ease-in-out infinite;
+      }
+
+      .premium-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #00e5ff, #00ff9c);
+        color: #0b0014;
+        padding: 10px 25px;
+        border-radius: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 20px 0;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 50px 0;
+      }
+
+      .comparison-card {
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        padding: 30px;
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .comparison-card.premium {
+        border: 2px solid #00e5ff;
+        box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2);
+        position: relative;
+        transform: scale(1.05);
+      }
+
+      .comparison-card.premium::before {
+        content: "RECOMMENDED";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #00e5ff;
+        color: #0b0014;
+        padding: 5px 15px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .comparison-card h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .feature-list {
+        list-style: none;
+      }
+
+      .feature-list li {
+        margin-bottom: 15px;
+        padding-left: 25px;
+        position: relative;
+      }
+
+      .feature-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--accent-secondary);
+      }
+
+      .feature-list.premium li::before {
+        color: #00ff9c;
+      }
+
+      .feature-list li.excluded::before {
+        content: "✗";
+        color: var(--accent-danger);
+      }
+
+      .pricing-card {
+        background: linear-gradient(
+          135deg,
+          var(--bg-tertiary),
+          var(--bg-secondary)
+        );
+        border-radius: var(--border-radius);
+        padding: 40px;
+        text-align: center;
+        border: 2px solid var(--accent-primary);
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .price {
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #00e5ff, #00ff9c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 20px 0;
+      }
+
+      .price-period {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section class="unified-hero">
-        <div class="container">
-            <div class="logo-section">
-                <div class="project-logo" style="font-size: 4rem; margin-bottom: 20px;">🚀</div>
-                <h1>Nyx Unified</h1>
-                <p class="nyx-tagline" style="color: #00E5FF;">Premium Edition - Beyond Automation</p>
-                <div class="premium-badge">Premium</div>
-                <div class="status-badge">Coming Q2 2025</div>
-            </div>
+      <div class="container">
+        <div class="logo-section">
+          <div
+            class="project-logo"
+            style="font-size: 4rem; margin-bottom: 20px"
+          >
+            🚀
+          </div>
+          <h1>Nyx Unified</h1>
+          <p class="nyx-tagline" style="color: #00e5ff">
+            Premium Edition - Beyond Automation
+          </p>
+          <div class="premium-badge">Premium</div>
+          <div class="status-badge">Coming Q2 2025</div>
         </div>
+      </div>
     </section>
 
     <!-- Project Description -->
     <section class="section">
-        <div class="container">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h2 style="color: #00E5FF; margin-bottom: 30px;">Enterprise-Grade Automation</h2>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;">
-                    Nyx Unified takes the core Nyx experience and adds professional features for teams, organizations, 
-                    and power users. Built for collaboration, security, and scale while maintaining the simplicity 
-                    that makes Nyx accessible to everyone.
-                </p>
-            </div>
-            
-            <!-- Comparison -->
-            <div>
-                <h3 style="text-align: center; margin-bottom: 40px;">Nyx vs Nyx Unified</h3>
-                <div class="comparison-grid">
-                    <!-- Standard Nyx -->
-                    <div class="comparison-card">
-                        <h3>Nyx Standard</h3>
-                        <p style="text-align: center; margin-bottom: 25px; color: var(--text-muted);">Free & Open Source</p>
-                        <ul class="feature-list">
-                            <li>13+ AI platform integrations</li>
-                            <li>Basic MCP tool execution</li>
-                            <li>Single-user workflow</li>
-                            <li>Community support</li>
-                            <li>Automatic tool detection</li>
-                            <li>Theme support</li>
-                            <li class="excluded">Team collaboration</li>
-                            <li class="excluded">Custom tool creation</li>
-                            <li class="excluded">Priority support</li>
-                            <li class="excluded">Enterprise deployment</li>
-                        </ul>
-                        <div style="text-align: center; margin-top: 30px;">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <a href="/utils/nyx/" class="alsania-btn secondary">Get Standard</a>
-=======
-                            <a href="/tools/nyx/" class="alsania-btn secondary">Get Standard</a>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
-=======
-                            <a href="/tools/nyx/" class="alsania-btn secondary">Get Standard</a>
->>>>>>> 80f8aa4
-=======
-                            <a href="/tools/nyx/" class="alsania-btn secondary">Get Standard</a>
->>>>>>> 80f8aa4
-=======
-                            <a href="/tools/nyx/" class="alsania-btn secondary">Get Standard</a>
->>>>>>> 80f8aa4
-=======
-                            <a href="/tools/nyx/" class="alsania-btn secondary">Get Standard</a>
->>>>>>> 80f8aa4
-                        </div>
-                    </div>
-                    
-                    <!-- Nyx Unified -->
-                    <div class="comparison-card premium">
-                        <h3>Nyx Unified</h3>
-                        <p style="text-align: center; margin-bottom: 25px; color: #00FF9C;">Premium Features</p>
-                        <ul class="feature-list premium">
-                            <li><strong>Everything in Standard</strong></li>
-                            <li>Team collaboration & sharing</li>
-                            <li>Custom tool creation studio</li>
-                            <li>Priority email & chat support</li>
-                            <li>Enterprise deployment options</li>
-                            <li>Advanced security & audit logs</li>
-                            <li>SAML/SSO integration</li>
-                            <li>Custom branding & white-labeling</li>
-                            <li>Advanced analytics dashboard</li>
-                            <li>Dedicated account manager</li>
-                        </ul>
-                        <div style="text-align: center; margin-top: 30px;">
-                            <button class="alsania-btn" onclick="document.getElementById('waitlist-form').scrollIntoView({behavior: 'smooth'})">Join Waitlist</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Enterprise Features -->
-            <div style="margin: 80px 0;">
-                <h3 style="text-align: center; color: #00E5FF; margin-bottom: 40px;">Enterprise Features</h3>
-                <div class="ecosystem-grid">
-                    <div class="ecosystem-item">
-                        <h3>👥 Team Collaboration</h3>
-                        <p>Share tool configurations, workflow templates, and automation patterns across your organization. Role-based access control and permission management.</p>
-                    </div>
-                    <div class="ecosystem-item">
-                        <h3>🔧 Custom Tool Studio</h3>
-                        <p>Visual drag-and-drop interface for creating custom MCP tools without coding. Connect APIs, databases, and internal systems with natural language prompts.</p>
-                    </div>
-                    <div class="ecosystem-item">
-                        <h3>🛡️ Advanced Security</h3>
-                        <p>SAML/SSO integration, audit logging, compliance reporting, data encryption at rest and in transit. SOC 2 Type II compliant infrastructure.</p>
-                    </div>
-                    <div class="ecosystem-item">
-                        <h3>📊 Analytics Dashboard</h3>
-                        <p>Track team usage, automation ROI, efficiency gains, and tool performance. Export reports and integrate with your existing analytics stack.</p>
-                    </div>
-                    <div class="ecosystem-item">
-                        <h3>🏢 White-Label Deployment</h3>
-                        <p>Deploy Nyx Unified with your company's branding, colors, and domain. Custom terms of service and privacy policy integration.</p>
-                    </div>
-                    <div class="ecosystem-item">
-                        <h3>📞 Priority Support</h3>
-                        <p>Dedicated support channel, 24-hour response time SLA, direct access to engineering team, and quarterly business reviews.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Pricing Preview -->
-            <div style="background: var(--bg-tertiary); padding: 60px 0; border-radius: var(--border-radius);">
-                <div class="container">
-                    <div class="pricing-card">
-                        <h3>Early Access Pricing</h3>
-                        <p>Special launch pricing for early adopters</p>
-                        <div class="price">$29<span style="font-size: 1.5rem;">/month</span></div>
-                        <p class="price-period">per user • annual billing available</p>
-                        
-                        <div style="margin: 30px 0;">
-                            <ul class="feature-list" style="text-align: left;">
-                                <li>All Unified features included</li>
-                                <li>Up to 50 team members</li>
-                                <li>Unlimited custom tools</li>
-                                <li>Priority support included</li>
-                                <li>30-day free trial</li>
-                            </ul>
-                        </div>
-                        
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px;">
-                            Volume discounts available for 50+ users. Non-profit and educational discounts.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Waitlist -->
-            <div id="waitlist-form" style="text-align: center; margin-top: 60px;">
-                <h3>Get Early Access & Launch Pricing</h3>
-                <p>Join the waitlist to be notified when Nyx Unified launches and get special early adopter pricing.</p>
-                
-                <form class="waitlist-form" style="max-width: 500px; margin: 30px auto;">
-                    <input type="email" placeholder="work@email.com" required>
-                    <button type="submit" class="alsania-btn">Join Unified Waitlist</button>
-                </form>
-                
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 20px;">
-                    Early access includes special pricing, direct feature input, and onboarding assistance.
-                </p>
-            </div>
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center">
+          <h2 style="color: #00e5ff; margin-bottom: 30px">
+            Enterprise-Grade Automation
+          </h2>
+          <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px">
+            Nyx Unified takes the core Nyx experience and adds professional
+            features for teams, organizations, and power users. Built for
+            collaboration, security, and scale while maintaining the simplicity
+            that makes Nyx accessible to everyone.
+          </p>
         </div>
+
+        <!-- Comparison -->
+        <div>
+          <h3 style="text-align: center; margin-bottom: 40px">
+            Nyx vs Nyx Unified
+          </h3>
+          <div class="comparison-grid">
+            <!-- Standard Nyx -->
+            <div class="comparison-card">
+              <h3>Nyx Standard</h3>
+              <p
+                style="
+                  text-align: center;
+                  margin-bottom: 25px;
+                  color: var(--text-muted);
+                "
+              >
+                Free & Open Source
+              </p>
+              <ul class="feature-list">
+                <li>13+ AI platform integrations</li>
+                <li>Basic MCP tool execution</li>
+                <li>Single-user workflow</li>
+                <li>Community support</li>
+                <li>Automatic tool detection</li>
+                <li>Theme support</li>
+                <li class="excluded">Team collaboration</li>
+                <li class="excluded">Custom tool creation</li>
+                <li class="excluded">Priority support</li>
+                <li class="excluded">Enterprise deployment</li>
+              </ul>
+              <div style="text-align: center; margin-top: 30px">
+                <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD
+                <a href="/utils/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                =======
+                <a href="/tools/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                >>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with
+                JavaScript functionality and assets) =======
+                <a href="/tools/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                >>>>>>> 80f8aa4 =======
+                <a href="/tools/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                >>>>>>> 80f8aa4 =======
+                <a href="/tools/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                >>>>>>> 80f8aa4 =======
+                <a href="/tools/nyx/" class="alsania-btn secondary"
+                  >Get Standard</a
+                >
+                >>>>>>> 80f8aa4
+              </div>
+            </div>
+
+            <!-- Nyx Unified -->
+            <div class="comparison-card premium">
+              <h3>Nyx Unified</h3>
+              <p
+                style="text-align: center; margin-bottom: 25px; color: #00ff9c"
+              >
+                Premium Features
+              </p>
+              <ul class="feature-list premium">
+                <li><strong>Everything in Standard</strong></li>
+                <li>Team collaboration & sharing</li>
+                <li>Custom tool creation studio</li>
+                <li>Priority email & chat support</li>
+                <li>Enterprise deployment options</li>
+                <li>Advanced security & audit logs</li>
+                <li>SAML/SSO integration</li>
+                <li>Custom branding & white-labeling</li>
+                <li>Advanced analytics dashboard</li>
+                <li>Dedicated account manager</li>
+              </ul>
+              <div style="text-align: center; margin-top: 30px">
+                <button
+                  class="alsania-btn"
+                  onclick="
+                    document
+                      .getElementById('waitlist-form')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  Join Waitlist
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise Features -->
+        <div style="margin: 80px 0">
+          <h3 style="text-align: center; color: #00e5ff; margin-bottom: 40px">
+            Enterprise Features
+          </h3>
+          <div class="ecosystem-grid">
+            <div class="ecosystem-item">
+              <h3>👥 Team Collaboration</h3>
+              <p>
+                Share tool configurations, workflow templates, and automation
+                patterns across your organization. Role-based access control and
+                permission management.
+              </p>
+            </div>
+            <div class="ecosystem-item">
+              <h3>🔧 Custom Tool Studio</h3>
+              <p>
+                Visual drag-and-drop interface for creating custom MCP tools
+                without coding. Connect APIs, databases, and internal systems
+                with natural language prompts.
+              </p>
+            </div>
+            <div class="ecosystem-item">
+              <h3>🛡️ Advanced Security</h3>
+              <p>
+                SAML/SSO integration, audit logging, compliance reporting, data
+                encryption at rest and in transit. SOC 2 Type II compliant
+                infrastructure.
+              </p>
+            </div>
+            <div class="ecosystem-item">
+              <h3>📊 Analytics Dashboard</h3>
+              <p>
+                Track team usage, automation ROI, efficiency gains, and tool
+                performance. Export reports and integrate with your existing
+                analytics stack.
+              </p>
+            </div>
+            <div class="ecosystem-item">
+              <h3>🏢 White-Label Deployment</h3>
+              <p>
+                Deploy Nyx Unified with your company's branding, colors, and
+                domain. Custom terms of service and privacy policy integration.
+              </p>
+            </div>
+            <div class="ecosystem-item">
+              <h3>📞 Priority Support</h3>
+              <p>
+                Dedicated support channel, 24-hour response time SLA, direct
+                access to engineering team, and quarterly business reviews.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Preview -->
+        <div
+          style="
+            background: var(--bg-tertiary);
+            padding: 60px 0;
+            border-radius: var(--border-radius);
+          "
+        >
+          <div class="container">
+            <div class="pricing-card">
+              <h3>Early Access Pricing</h3>
+              <p>Special launch pricing for early adopters</p>
+              <div class="price">
+                $29<span style="font-size: 1.5rem">/month</span>
+              </div>
+              <p class="price-period">per user • annual billing available</p>
+
+              <div style="margin: 30px 0">
+                <ul class="feature-list" style="text-align: left">
+                  <li>All Unified features included</li>
+                  <li>Up to 50 team members</li>
+                  <li>Unlimited custom tools</li>
+                  <li>Priority support included</li>
+                  <li>30-day free trial</li>
+                </ul>
+              </div>
+
+              <p
+                style="
+                  color: var(--text-muted);
+                  font-size: 0.9rem;
+                  margin-top: 20px;
+                "
+              >
+                Volume discounts available for 50+ users. Non-profit and
+                educational discounts.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Waitlist -->
+        <div id="waitlist-form" style="text-align: center; margin-top: 60px">
+          <h3>Get Early Access & Launch Pricing</h3>
+          <p>
+            Join the waitlist to be notified when Nyx Unified launches and get
+            special early adopter pricing.
+          </p>
+
+          <form
+            class="waitlist-form"
+            style="max-width: 500px; margin: 30px auto"
+          >
+            <input type="email" placeholder="work@email.com" required />
+            <button type="submit" class="alsania-btn">
+              Join Unified Waitlist
+            </button>
+          </form>
+
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.9rem;
+              margin-top: 20px;
+            "
+          >
+            Early access includes special pricing, direct feature input, and
+            onboarding assistance.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
     <!-- JavaScript -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD
     <script src="/assets/js/main.js"></script>
-=======
-<<<<<<<< HEAD:utils/nyx-unified/index.html
+    ======= <<<<<<<< HEAD:utils/nyx-unified/index.html
     <script src="/assets/js/main.js"></script>
-========
+    ========
     <script src="../../assets/js/scripts.js"></script>
->>>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets):tools/nyx-unified/index.html
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
-=======
+    >>>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript
+    functionality and assets):tools/nyx-unified/index.html >>>>>>> 80f8aa4 (Add
+    Nyx and ScrypGen landing pages with JavaScript functionality and assets)
+    =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
+    >>>>>>> 80f8aa4
     <script src="../../loadComponents.js"></script>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const waitlistForm = document.querySelector('.waitlist-form');
-            if (waitlistForm) {
-                waitlistForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = this.querySelector('input[type="email"]').value;
-                    
-                    if (email && email.includes('@')) {
-                        alert('Thanks! We\'ll contact you with Nyx Unified launch details and early access pricing. 🚀');
-                        this.reset();
-                        
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'nyx_unified_waitlist_signup', {
-                                'event_category': 'Engagement',
-                                'event_label': 'Nyx Unified Waitlist'
-                            });
-                        }
-                    }
+      document.addEventListener("DOMContentLoaded", function () {
+        const waitlistForm = document.querySelector(".waitlist-form");
+        if (waitlistForm) {
+          waitlistForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+
+            if (email && email.includes("@")) {
+              alert(
+                "Thanks! We'll contact you with Nyx Unified launch details and early access pricing. 🚀",
+              );
+              this.reset();
+
+              if (typeof gtag !== "undefined") {
+                gtag("event", "nyx_unified_waitlist_signup", {
+                  event_category: "Engagement",
+                  event_label: "Nyx Unified Waitlist",
                 });
+              }
             }
-        });
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

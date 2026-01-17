@@ -1,293 +1,339 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrypGen - Natural Language to Script Generator | Coming Soon | Alsania</title>
-    <meta name="description" content="ScrypGen converts natural language descriptions into working scripts. Describe what you need in plain English, get Python, JavaScript, Bash, and more.">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ScrypGen - Natural Language to Script Generator | Coming Soon | Alsania
+    </title>
+    <meta
+      name="description"
+      content="ScrypGen converts natural language descriptions into working scripts. Describe what you need in plain English, get Python, JavaScript, Bash, and more."
+    />
+
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-GYKRZLYBXQ');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../utils/css/main.css">
-=======
-    <link rel="stylesheet" href="../../assets/css/styles.css">
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
-=======
-    <link rel="stylesheet" href="../../assets/css/styles.css">
->>>>>>> 80f8aa4
-=======
-    <link rel="stylesheet" href="../../assets/css/styles.css">
->>>>>>> 80f8aa4
-=======
-    <link rel="stylesheet" href="../../assets/css/styles.css">
->>>>>>> 80f8aa4
-=======
-    <link rel="stylesheet" href="../../assets/css/styles.css">
->>>>>>> 80f8aa4
-    
+    <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD
+    <link rel="stylesheet" href="../utils/css/main.css" />
+    =======
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    >>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript
+    functionality and assets) =======
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    >>>>>>> 80f8aa4 =======
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    >>>>>>> 80f8aa4 =======
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    >>>>>>> 80f8aa4 =======
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    >>>>>>> 80f8aa4
+
     <style>
-        .scrypgen-hero {
-            background: linear-gradient(135deg, #001a33, #000814);
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-logo {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-        
-        .nyx-tagline {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            margin: 15px 0 30px 0;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            background: var(--accent-secondary);
-            color: var(--bg-primary);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-        
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .language-tag {
-            background: var(--bg-secondary);
-            padding: 15px;
-            text-align: center;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .language-tag:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-3px);
-        }
-        
-        .use-case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .use-case {
-            background: var(--bg-secondary);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .use-case:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-5px);
-        }
-        
-        .waitlist-form {
-            display: flex;
-            gap: 10px;
-            max-width: 500px;
-            margin: 30px auto;
-        }
-        
-        .waitlist-form input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
+      .scrypgen-hero {
+        background: linear-gradient(135deg, #001a33, #000814);
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-logo {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+
+      .nyx-tagline {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.3rem;
+        margin: 15px 0 30px 0;
+      }
+
+      .status-badge {
+        display: inline-block;
+        background: var(--accent-secondary);
+        color: var(--bg-primary);
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+
+      .language-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .language-tag {
+        background: var(--bg-secondary);
+        padding: 15px;
+        text-align: center;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .language-tag:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-3px);
+      }
+
+      .use-case-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+      }
+
+      .use-case {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .use-case:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-5px);
+      }
+
+      .waitlist-form {
+        display: flex;
+        gap: 10px;
+        max-width: 500px;
+        margin: 30px auto;
+      }
+
+      .waitlist-form input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section class="scrypgen-hero">
-        <div class="container">
-            <div class="logo-section">
-                <div class="project-logo">🔮</div>
-                <h1>ScrypGen</h1>
-                <p class="nyx-tagline">Natural Language to Script Generator</p>
-                <div class="status-badge">Alpha Testing</div>
-            </div>
+      <div class="container">
+        <div class="logo-section">
+          <div class="project-logo">🔮</div>
+          <h1>ScrypGen</h1>
+          <p class="nyx-tagline">Natural Language to Script Generator</p>
+          <div class="status-badge">Alpha Testing</div>
         </div>
+      </div>
     </section>
 
     <!-- Project Description -->
     <section class="section">
-        <div class="container">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h2 style="color: var(--accent-primary); margin-bottom: 30px;">Describe. Generate. Execute.</h2>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;">
-                    Stop searching for code snippets or struggling with syntax. Describe what you need in plain English, 
-                    and ScrypGen generates working scripts in your chosen language. Perfect for automation, data processing, 
-                    file management, and system administration tasks.
-                </p>
-            </div>
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center">
+          <h2 style="color: var(--accent-primary); margin-bottom: 30px">
+            Describe. Generate. Execute.
+          </h2>
+          <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px">
+            Stop searching for code snippets or struggling with syntax. Describe
+            what you need in plain English, and ScrypGen generates working
+            scripts in your chosen language. Perfect for automation, data
+            processing, file management, and system administration tasks.
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Supported Languages -->
-    <section class="section" style="background: var(--bg-tertiary);">
-        <div class="container">
-            <h2 style="text-align: center; color: var(--accent-primary); margin-bottom: 40px;">Supported Languages</h2>
-            <div class="language-grid">
-                <div class="language-tag">Python 🐍</div>
-                <div class="language-tag">JavaScript 🟡</div>
-                <div class="language-tag">Bash 🔧</div>
-                <div class="language-tag">PowerShell ⚙️</div>
-                <div class="language-tag">Ruby 💎</div>
-                <div class="language-tag">PHP 🐘</div>
-                <div class="language-tag">Go 🐹</div>
-                <div class="language-tag">Rust 🦀</div>
-            </div>
+    <section class="section" style="background: var(--bg-tertiary)">
+      <div class="container">
+        <h2
+          style="
+            text-align: center;
+            color: var(--accent-primary);
+            margin-bottom: 40px;
+          "
+        >
+          Supported Languages
+        </h2>
+        <div class="language-grid">
+          <div class="language-tag">Python 🐍</div>
+          <div class="language-tag">JavaScript 🟡</div>
+          <div class="language-tag">Bash 🔧</div>
+          <div class="language-tag">PowerShell ⚙️</div>
+          <div class="language-tag">Ruby 💎</div>
+          <div class="language-tag">PHP 🐘</div>
+          <div class="language-tag">Go 🐹</div>
+          <div class="language-tag">Rust 🦀</div>
         </div>
+      </div>
     </section>
 
     <!-- Use Cases -->
     <section class="section">
-        <div class="container">
-            <h2 style="text-align: center; color: var(--accent-primary); margin-bottom: 40px;">What You Can Build</h2>
-            <div class="use-case-grid">
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">🤖 Automation</h3>
-                    <p>Automate repetitive tasks, file operations, and system administration with simple descriptions.</p>
-                </div>
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">📊 Data Processing</h3>
-                    <p>Generate scripts for CSV processing, data transformation, and batch operations.</p>
-                </div>
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">🔐 System Admin</h3>
-                    <p>Create scripts for server management, log analysis, and system monitoring.</p>
-                </div>
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">🧪 Testing</h3>
-                    <p>Generate test scripts and automation frameworks quickly without syntax struggles.</p>
-                </div>
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">🌐 Integration</h3>
-                    <p>Generate API integration scripts and webhooks for connecting your tools.</p>
-                </div>
-                <div class="use-case">
-                    <h3 style="color: var(--accent-primary);">⚡ Quick Scripts</h3>
-                    <p>Get working scripts instantly without learning language syntax.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2
+          style="
+            text-align: center;
+            color: var(--accent-primary);
+            margin-bottom: 40px;
+          "
+        >
+          What You Can Build
+        </h2>
+        <div class="use-case-grid">
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">🤖 Automation</h3>
+            <p>
+              Automate repetitive tasks, file operations, and system
+              administration with simple descriptions.
+            </p>
+          </div>
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">📊 Data Processing</h3>
+            <p>
+              Generate scripts for CSV processing, data transformation, and
+              batch operations.
+            </p>
+          </div>
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">🔐 System Admin</h3>
+            <p>
+              Create scripts for server management, log analysis, and system
+              monitoring.
+            </p>
+          </div>
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">🧪 Testing</h3>
+            <p>
+              Generate test scripts and automation frameworks quickly without
+              syntax struggles.
+            </p>
+          </div>
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">🌐 Integration</h3>
+            <p>
+              Generate API integration scripts and webhooks for connecting your
+              tools.
+            </p>
+          </div>
+          <div class="use-case">
+            <h3 style="color: var(--accent-primary)">⚡ Quick Scripts</h3>
+            <p>
+              Get working scripts instantly without learning language syntax.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Waitlist -->
-    <section class="section" style="background: var(--bg-tertiary);">
-        <div class="container">
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <h2 style="color: var(--accent-primary); margin-bottom: 20px;">Join the Alpha Test</h2>
-                <p style="margin-bottom: 30px; color: var(--text-secondary);">
-                    Be among the first to use ScrypGen. Get early access, direct feedback influence, and premium features during alpha.
-                </p>
-                
-                <form class="waitlist-form">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        autocomplete="email" 
-                        required 
-                        aria-label="Email for ScrypGen alpha access"
-                    />
-                    <button type="submit" class="alsania-btn">Get Access</button>
-                </form>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">
-                    We'll email you when alpha testing starts. Unsubscribe anytime.
-                </p>
-            </div>
+    <section class="section" style="background: var(--bg-tertiary)">
+      <div class="container">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center">
+          <h2 style="color: var(--accent-primary); margin-bottom: 20px">
+            Join the Alpha Test
+          </h2>
+          <p style="margin-bottom: 30px; color: var(--text-secondary)">
+            Be among the first to use ScrypGen. Get early access, direct
+            feedback influence, and premium features during alpha.
+          </p>
+
+          <form class="waitlist-form">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+              aria-label="Email for ScrypGen alpha access"
+            />
+            <button type="submit" class="alsania-btn">Get Access</button>
+          </form>
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.9rem;
+              margin-top: 15px;
+            "
+          >
+            We'll email you when alpha testing starts. Unsubscribe anytime.
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
     <!-- JavaScript -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD <<<<<<< HEAD
     <script src="../utils/js/main.js"></script>
-=======
+    =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript functionality and assets)
-=======
+    >>>>>>> 80f8aa4 (Add Nyx and ScrypGen landing pages with JavaScript
+    functionality and assets) =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
-=======
+    >>>>>>> 80f8aa4 =======
     <script src="../../assets/js/scripts.js"></script>
->>>>>>> 80f8aa4
+    >>>>>>> 80f8aa4
     <script src="../../loadComponents.js"></script>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle waitlist form
-            const waitlistForm = document.querySelector('.waitlist-form');
-            if (waitlistForm) {
-                waitlistForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = this.querySelector('input[type="email"]').value;
-                    
-                    if (email && email.includes('@')) {
-                        alert('Thanks! You\'re on the ScrypGen alpha list. We\'ll email you soon. 🔮');
-                        this.reset();
-                        
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'scrypgen_waitlist_signup', {
-                                'event_category': 'Engagement',
-                                'event_label': 'ScrypGen Waitlist'
-                            });
-                        }
-                    }
+      document.addEventListener("DOMContentLoaded", function () {
+        // Handle waitlist form
+        const waitlistForm = document.querySelector(".waitlist-form");
+        if (waitlistForm) {
+          waitlistForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+
+            if (email && email.includes("@")) {
+              alert(
+                "Thanks! You're on the ScrypGen alpha list. We'll email you soon. 🔮",
+              );
+              this.reset();
+
+              if (typeof gtag !== "undefined") {
+                gtag("event", "scrypgen_waitlist_signup", {
+                  event_category: "Engagement",
+                  event_label: "ScrypGen Waitlist",
                 });
+              }
             }
-        });
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

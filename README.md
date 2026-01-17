@@ -5,10 +5,12 @@ The official website for Alsania - a sovereign technology ecosystem built for cr
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js v18+ (for development)
 - Any modern web browser
 
 ### Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/alsania-dev/alsania-io-site.git
@@ -19,6 +21,7 @@ npm install
 ```
 
 ### Development
+
 ```bash
 # Start local development server
 npm run dev
@@ -27,6 +30,7 @@ npm run dev
 ```
 
 ### Production Build
+
 ```bash
 # Build for production
 npm run build
@@ -60,6 +64,7 @@ npm run build
 ## 🔧 Features
 
 ### Core Components
+
 - **Header**: Navigation with theme toggle
 - **Footer**: Site information and links
 - **Hero Sections**: Customizable hero banners
@@ -67,6 +72,7 @@ npm run build
 - **Responsive Grid**: Adaptive layout system
 
 ### Implemented Features
+
 - **Component-based Architecture**: Modular HTML components
 - **Theme System**: Dark/light mode with CSS variables
 - **Responsive Design**: Mobile-first approach
@@ -76,6 +82,7 @@ npm run build
 - **Cross-platform Compatibility**: Works with file:// and web protocols
 
 ### Unused but Implemented Features
+
 - **Modal System**: Available in CSS but not actively used
 - **Social Media Integration**: Ready for expansion
 - **Multi-language Support**: Structure prepared for i18n
@@ -83,16 +90,21 @@ npm run build
 ## 📖 Documentation
 
 ### Component Usage
+
 All components are loaded via `loadComponents.js` which handles both file:// and web protocols.
 
 ### Theme System
+
 The site uses CSS variables for theming:
+
 - Dark theme (default)
 - Light theme (toggleable)
 - Customizable colors and spacing
 
 ### Analytics
+
 Google Analytics is integrated with event tracking for:
+
 - Page views
 - Component interactions
 - Form submissions
@@ -108,6 +120,7 @@ Google Analytics is integrated with event tracking for:
 We welcome contributions from the community! Please follow our [Code of Conduct](legal/code-of-conduct.html) and submit pull requests.
 
 ### Development Guidelines
+
 - Use semantic HTML
 - Follow BEM CSS methodology
 - Write accessible, performant code
@@ -130,22 +143,26 @@ This project is licensed under the MIT License - see the [LICENSE](legal/license
 ## 📞 Support
 
 For support, please contact:
-- Email: support@alsania-io.com
+
+- Email: admin@alsania-io.com
 - GitHub Issues: https://github.com/alsania-dev/alsania-io-site/issues
 
 ## 🏗️ Deployment
 
 ### GitHub Pages
+
 ```bash
 npm run deploy:github
 ```
 
 ### Cloudflare Pages
+
 ```bash
 npm run deploy:cloudflare
 ```
 
 ### Standalone
+
 Simply copy the files to any static web host.
 
 ---

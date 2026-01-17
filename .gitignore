@@ -1,4 +1,9 @@
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
-ads.txt
 googleanalyticstags.txt
+node_modules/
+package-lock.json
+package.json
+src/
+tsconfig.json
+yarn.lock

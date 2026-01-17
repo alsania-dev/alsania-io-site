@@ -37,12 +37,12 @@
   },
   "homepage": "https://alsania.io",
   "dependencies": {
-    "serve": "^14.2.1"
+    "serve": "^14.2.5"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",
-    "prettier": "^3.0.0",
-    "wrangler": "^3.0.0"
+    "prettier": "^3.8.0",
+    "wrangler": "^4.59.2"
   },
   "engines": {
     "node": ">=18.0.0",

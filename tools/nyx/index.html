@@ -1,285 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nyx - Browser Extension for AI Automation | Alsania</title>
-    <meta name="description" content="Nyx browser extension integrates tools with 13+ AI platforms. Automate your workflow with DeepSeek, Gemini, Perplexity, GitHub Copilot, and more.">
+    <meta
+      name="description"
+      content="Nyx browser extension integrates tools with 13+ AI platforms. Automate your workflow with DeepSeek, Gemini, Perplexity, GitHub Copilot, and more."
+    />
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-GYKRZLYBXQ');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
     </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Main Site CSS -->
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
 
     <!-- Nyx Page CSS -->
-    <link rel="stylesheet" href="assets/css/nyx.css">
+    <link rel="stylesheet" href="assets/css/nyx.css" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
-</head>
-<body>
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico" />
+  </head>
+  <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
     <!-- Nyx Header/Hero -->
     <header class="nyx-header">
-        <div class="container">
-            <div class="logo-section">
-                <img src="assets/img/logo_symbol_512x512.png" alt="Nyx Logo" class="nyx-logo-img">
-                <h1 class="nyx-title">NYX</h1>
-                <p class="nyx-tagline">Where Automation Meets Tranquility</p>
-            </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-            <div class="nyx-badges">
-                <img src="https://img.shields.io/badge/Version-1.0.0-brightgreen" alt="Version 1.0.0">
-                <img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT License">
-                <img src="https://img.shields.io/badge/Status-Active-success" alt="Active">
-                <img src="https://img.shields.io/badge/Browser-Chrome%2FEdge-4285F4" alt="Chrome/Edge">
-            </div>
-
-            <img src="https://raw.githubusercontent.com/alsania-dev/nyx/main/chrome-extension/public/Cover5.jpg" alt="Nyx Interface Preview" class="nyx-hero-img">
-
-            <div class="nyx-cta">
-                <button id="nyx-download-btn" class="nyx-btn nyx-btn-primary">
-                    <span class="btn-icon">⬇️</span> Download Nyx Package
-                </button>
-                <a href="#features" class="nyx-btn nyx-btn-secondary">Learn More</a>
-            </div>
+      <div class="container">
+        <div class="logo-section">
+          <img
+            src="assets/img/logo_symbol_512x512.png"
+            alt="Nyx Logo"
+            class="nyx-logo-img"
+          />
+          <h1 class="nyx-title">NYX</h1>
+          <p class="nyx-tagline">Where Automation Meets Tranquility</p>
         </div>
+
+        <div class="nyx-badges">
+          <img
+            src="https://img.shields.io/badge/Version-1.0.0-brightgreen"
+            alt="Version 1.0.0"
+          />
+          <img
+            src="https://img.shields.io/badge/License-MIT-blue"
+            alt="MIT License"
+          />
+          <img
+            src="https://img.shields.io/badge/Status-Active-success"
+            alt="Active"
+          />
+          <img
+            src="https://img.shields.io/badge/Browser-Chrome%2FEdge-4285F4"
+            alt="Chrome/Edge"
+          />
+        </div>
+
+        <img
+          src="https://raw.githubusercontent.com/alsania-dev/nyx/main/chrome-extension/public/Cover5.jpg"
+          alt="Nyx Interface Preview"
+          class="nyx-hero-img"
+        />
+
+        <div class="nyx-cta">
+          <button id="nyx-download-btn" class="nyx-btn nyx-btn-primary">
+            <span class="btn-icon">⬇️</span> Download Nyx Package
+          </button>
+          <a href="#features" class="nyx-btn nyx-btn-secondary">Learn More</a>
+        </div>
+      </div>
     </header>
 
     <!-- What is Nyx Section -->
     <section class="nyx-section" id="what-is-nyx">
-        <div class="container">
-            <h2 class="nyx-section-title">What is Nyx?</h2>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
-                <p>Nyx is a powerful browser extension that integrates Model Context Protocol (MCP) tools directly with your favorite AI platforms.</p>
-                <p>Execute MCP tools from within AI conversations, enhancing both free and paid web-based AI assistants with real-time automation capabilities.</p>
-            </div>
+      <div class="container">
+        <h2 class="nyx-section-title">What is Nyx?</h2>
+        <div
+          style="
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+          "
+        >
+          <p>
+            Nyx is a powerful browser extension that integrates Model Context
+            Protocol (MCP) tools directly with your favorite AI platforms.
+          </p>
+          <p>
+            Execute MCP tools from within AI conversations, enhancing both free
+            and paid web-based AI assistants with real-time automation
+            capabilities.
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Supported Platforms -->
     <section class="nyx-section nyx-section-alt" id="platforms">
-        <div class="container">
-            <h2 class="nyx-section-title">Supported Platforms</h2>
-            <div class="nyx-platforms">
-                <span class="nyx-platform">Google Gemini</span>
-                <span class="nyx-platform">Perplexity</span>
-                <span class="nyx-platform">Grok</span>
-                <span class="nyx-platform">Google AI Studio</span>
-                <span class="nyx-platform">OpenRouter Chat</span>
-                <span class="nyx-platform">DeepSeek</span>
-                <span class="nyx-platform">T3 Chat</span>
-                <span class="nyx-platform">GitHub Copilot</span>
-                <span class="nyx-platform">Mistral AI</span>
-                <span class="nyx-platform">Kimi</span>
-                <span class="nyx-platform">Qwen Chat</span>
-                <span class="nyx-platform">Z Chat</span>
-                <span class="nyx-platform">ChatGPT</span>
-            </div>
+      <div class="container">
+        <h2 class="nyx-section-title">Supported Platforms</h2>
+        <div class="nyx-platforms">
+          <span class="nyx-platform">Google Gemini</span>
+          <span class="nyx-platform">Perplexity</span>
+          <span class="nyx-platform">Grok</span>
+          <span class="nyx-platform">Google AI Studio</span>
+          <span class="nyx-platform">OpenRouter Chat</span>
+          <span class="nyx-platform">DeepSeek</span>
+          <span class="nyx-platform">T3 Chat</span>
+          <span class="nyx-platform">GitHub Copilot</span>
+          <span class="nyx-platform">Mistral AI</span>
+          <span class="nyx-platform">Kimi</span>
+          <span class="nyx-platform">Qwen Chat</span>
+          <span class="nyx-platform">Z Chat</span>
+          <span class="nyx-platform">ChatGPT</span>
         </div>
+      </div>
     </section>
 
     <!-- Key Features -->
     <section class="nyx-section" id="features">
-        <div class="container">
-            <h2 class="nyx-section-title">Key Features</h2>
-            <div class="nyx-features">
-                <div class="nyx-feature">
-                    <h3>🎯 Multiple AI Platforms</h3>
-                    <p>Works with 13+ AI platforms including DeepSeek, Gemini, Perplexity, GitHub Copilot, and more.</p>
-                </div>
-                <div class="nyx-feature">
-                    <h3>🔍 Automatic Tool Detection</h3>
-                    <p>Automatically detects MCP tool calls in AI responses for instant execution.</p>
-                </div>
-                <div class="nyx-feature">
-                    <h3>⚡ One-Click Execution</h3>
-                    <p>Execute MCP tools with a single click and see results integrated back into your conversation.</p>
-                </div>
-                <div class="nyx-feature">
-                    <h3>🤖 Auto-Execute Mode</h3>
-                    <p>Enable automatic execution of detected tools for fully autonomous workflows.</p>
-                </div>
-                <div class="nyx-feature">
-                    <h3>🎨 Theme Support</h3>
-                    <p>Automatically adapts to dark and light modes of your AI platform.</p>
-                </div>
-                <div class="nyx-feature">
-                    <h3>💾 Persistent Settings</h3>
-                    <p>Remembers your sidebar position, size, and preferences across sessions.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="nyx-section-title">Key Features</h2>
+        <div class="nyx-features">
+          <div class="nyx-feature">
+            <h3>🎯 Multiple AI Platforms</h3>
+            <p>
+              Works with 13+ AI platforms including DeepSeek, Gemini,
+              Perplexity, GitHub Copilot, and more.
+            </p>
+          </div>
+          <div class="nyx-feature">
+            <h3>🔍 Automatic Tool Detection</h3>
+            <p>
+              Automatically detects MCP tool calls in AI responses for instant
+              execution.
+            </p>
+          </div>
+          <div class="nyx-feature">
+            <h3>⚡ One-Click Execution</h3>
+            <p>
+              Execute MCP tools with a single click and see results integrated
+              back into your conversation.
+            </p>
+          </div>
+          <div class="nyx-feature">
+            <h3>🤖 Auto-Execute Mode</h3>
+            <p>
+              Enable automatic execution of detected tools for fully autonomous
+              workflows.
+            </p>
+          </div>
+          <div class="nyx-feature">
+            <h3>🎨 Theme Support</h3>
+            <p>
+              Automatically adapts to dark and light modes of your AI platform.
+            </p>
+          </div>
+          <div class="nyx-feature">
+            <h3>💾 Persistent Settings</h3>
+            <p>
+              Remembers your sidebar position, size, and preferences across
+              sessions.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Download Package Section -->
     <section class="nyx-section nyx-section-alt" id="download">
-        <div class="container">
-            <h2 class="nyx-section-title">Simple Download Package</h2>
+      <div class="container">
+        <h2 class="nyx-section-title">Simple Download Package</h2>
 
-            <div class="download-package">
-                <h3>Everything You Need in One Zip</h3>
-                <p>We've packaged Nyx with a simple configuration and setup guide so you can get started in minutes, even if you're not technical.</p>
+        <div class="download-package">
+          <h3>Everything You Need in One Zip</h3>
+          <p>
+            We've packaged Nyx with a simple configuration and setup guide so
+            you can get started in minutes, even if you're not technical.
+          </p>
 
-                <div class="package-features">
-                    <div class="package-feature">
-                        <span class="icon">📦</span>
-                        <h4>Complete Extension</h4>
-                        <p>All files included, ready to install</p>
-                    </div>
-                    <div class="package-feature">
-                        <span class="icon">⚙️</span>
-                        <h4>Simple Config</h4>
-                        <p>Pre-configured for easy setup</p>
-                    </div>
-                    <div class="package-feature">
-                        <span class="icon">📖</span>
-                        <h4>Visual Guide</h4>
-                        <p>Screenshot instructions included</p>
-                    </div>
-                    <div class="package-feature">
-                        <span class="icon">🔄</span>
-                        <h4>Auto Updates</h4>
-                        <p>Built-in update notification</p>
-                    </div>
-                </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-                <div class="nyx-cta">
-                    <button id="nyx-download-package-btn" class="nyx-btn nyx-btn-primary" style="font-size: 1.2rem; padding: 20px 50px;">
-                        <span class="btn-icon">🚀</span> Download Nyx Package (v1.0.0)
-                    </button>
-                </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--nyx-text); opacity: 0.8;">
-                    Zip file includes: Extension files, configuration, setup guide, and license. No GitHub knowledge required.
-                </p>
+          <div class="package-features">
+            <div class="package-feature">
+              <span class="icon">📦</span>
+              <h4>Complete Extension</h4>
+              <p>All files included, ready to install</p>
             </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-=======
-
->>>>>>> 80f8aa4
-            <!-- Quick Start -->
-            <div style="margin-top: 60px;">
-                <h3 style="text-align: center; color: var(--nyx-accent); margin-bottom: 30px;">Quick Start (3 Steps)</h3>
-                <div class="nyx-features" style="grid-template-columns: repeat(3, 1fr);">
-                    <div class="nyx-feature">
-                        <h3>1. Download & Extract</h3>
-                        <p>Download the zip and extract to any folder</p>
-                    </div>
-                    <div class="nyx-feature">
-                        <h3>2. Install in Browser</h3>
-                        <p>Go to chrome://extensions, enable Developer Mode, click "Load Unpacked"</p>
-                    </div>
-                    <div class="nyx-feature">
-                        <h3>3. Start Using</h3>
-                        <p>Visit any supported AI platform and start automating</p>
-                    </div>
-                </div>
+            <div class="package-feature">
+              <span class="icon">⚙️</span>
+              <h4>Simple Config</h4>
+              <p>Pre-configured for easy setup</p>
             </div>
+            <div class="package-feature">
+              <span class="icon">📖</span>
+              <h4>Visual Guide</h4>
+              <p>Screenshot instructions included</p>
+            </div>
+            <div class="package-feature">
+              <span class="icon">🔄</span>
+              <h4>Auto Updates</h4>
+              <p>Built-in update notification</p>
+            </div>
+          </div>
+
+          <div class="nyx-cta">
+            <button
+              id="nyx-download-package-btn"
+              class="nyx-btn nyx-btn-primary"
+              style="font-size: 1.2rem; padding: 20px 50px"
+            >
+              <span class="btn-icon">🚀</span> Download Nyx Package (v1.0.0)
+            </button>
+          </div>
+
+          <p
+            style="
+              margin-top: 20px;
+              font-size: 0.9rem;
+              color: var(--nyx-text);
+              opacity: 0.8;
+            "
+          >
+            Zip file includes: Extension files, configuration, setup guide, and
+            license. No GitHub knowledge required.
+          </p>
         </div>
+
+        <!-- Quick Start -->
+        <div style="margin-top: 60px">
+          <h3
+            style="
+              text-align: center;
+              color: var(--nyx-accent);
+              margin-bottom: 30px;
+            "
+          >
+            Quick Start (3 Steps)
+          </h3>
+          <div
+            class="nyx-features"
+            style="grid-template-columns: repeat(3, 1fr)"
+          >
+            <div class="nyx-feature">
+              <h3>1. Download & Extract</h3>
+              <p>Download the zip and extract to any folder</p>
+            </div>
+            <div class="nyx-feature">
+              <h3>2. Install in Browser</h3>
+              <p>
+                Go to chrome://extensions, enable Developer Mode, click "Load
+                Unpacked"
+              </p>
+            </div>
+            <div class="nyx-feature">
+              <h3>3. Start Using</h3>
+              <p>Visit any supported AI platform and start automating</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Quick Start Code -->
     <section class="nyx-section">
-        <div class="container">
-            <h2 class="nyx-section-title">For Developers</h2>
-            <div class="nyx-code">
-                <code># Install and run MCPNyx server<br>
-npx -y @alsania-io/mcpnyx@latest --config ./config.json --outputTransport sse<br><br>
-# Connect Nyx extension to your local server<br>
-# Open extension settings → Enter: http://localhost:3055<br>
-# Start executing MCP tools directly from AI platforms</code>
-            </div>
-            <p style="text-align: center; margin-top: 20px;">
-                Advanced users can customize MCP servers, tool configurations, and integration settings.
-            </p>
+      <div class="container">
+        <h2 class="nyx-section-title">For Developers</h2>
+        <div class="nyx-code">
+          <code
+            ># Install and run MCPNyx server<br />
+            npx -y @alsania-io/mcpnyx@latest --config ./config.json
+            --outputTransport sse<br /><br />
+            # Connect Nyx extension to your local server<br />
+            # Open extension settings → Enter: http://localhost:3055<br />
+            # Start executing MCP tools directly from AI platforms</code
+          >
         </div>
+        <p style="text-align: center; margin-top: 20px">
+          Advanced users can customize MCP servers, tool configurations, and
+          integration settings.
+        </p>
+      </div>
     </section>
 
     <!-- Footer Component -->
@@ -288,63 +308,24 @@ npx -y @alsania-io/mcpnyx@latest --config ./config.json --outputTransport sse<br
     <!-- Site JavaScript -->
     <script src="../../assets/js/scripts.js"></script>
     <script src="../../loadComponents.js"></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-    <!-- Nyx Page JavaScript -->
-    <script src="assets/js/nyx.js"></script>
-    
-=======
 
     <!-- Nyx Page JavaScript -->
     <script src="assets/js/nyx.js"></script>
 
->>>>>>> 80f8aa4
-=======
-
-    <!-- Nyx Page JavaScript -->
-    <script src="assets/js/nyx.js"></script>
-
->>>>>>> 80f8aa4
-=======
-
-    <!-- Nyx Page JavaScript -->
-    <script src="assets/js/nyx.js"></script>
-
->>>>>>> 80f8aa4
-=======
-
-    <!-- Nyx Page JavaScript -->
-    <script src="assets/js/nyx.js"></script>
-
->>>>>>> 80f8aa4
     <script>
-        // Link both download buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainDownloadBtn = document.getElementById('nyx-download-btn');
-            const packageDownloadBtn = document.getElementById('nyx-download-package-btn');
+      // Link both download buttons
+      document.addEventListener("DOMContentLoaded", function () {
+        const mainDownloadBtn = document.getElementById("nyx-download-btn");
+        const packageDownloadBtn = document.getElementById(
+          "nyx-download-package-btn",
+        );
 
-            if (mainDownloadBtn && packageDownloadBtn) {
-                packageDownloadBtn.addEventListener('click', function() {
-                    mainDownloadBtn.click();
-                });
-            }
-        });
+        if (mainDownloadBtn && packageDownloadBtn) {
+          packageDownloadBtn.addEventListener("click", function () {
+            mainDownloadBtn.click();
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-</html>
-=======
->>>>>>> 80f8aa4
-=======
->>>>>>> 80f8aa4
-=======
->>>>>>> 80f8aa4
-=======
->>>>>>> 80f8aa4

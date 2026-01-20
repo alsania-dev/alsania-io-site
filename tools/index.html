@@ -1,383 +1,494 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tools - Alsania | Nyx, DevCon & Sovereign Software</title>
-    <meta name="description" content="Download Alsania's sovereign tools: Nyx browser extension, DevCon VSCode extension, and other open-source software for creators and developers.">
-    
+    <meta
+      name="description"
+      content="Download Alsania's sovereign tools: Nyx browser extension, DevCon VSCode extension, and other open-source software for creators and developers."
+    />
+
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-GYKRZLYBXQ');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS -->
-    <link rel="stylesheet" href="../utils/css/main.css">
-    
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
     <style>
-        .tool-hero {
-            text-align: center;
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-        }
-        
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin: 60px 0;
-        }
-        
-        .tool-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .tool-card.featured {
-            border: 2px solid var(--accent-primary);
-            transform: scale(1.05);
-            position: relative;
-        }
-        
-        .tool-card.featured::before {
-            content: 'FEATURED';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-primary);
-            color: white;
-            padding: 5px 20px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        
-        .tool-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .tool-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        
-        .tool-icon {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            display: block;
-        }
-        
-        .tool-actions {
-            margin-top: auto;
-            padding-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .platform-badges {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .platform-badge {
-            background: var(--bg-tertiary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        .download-stats {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .download-stats::before {
-            content: '↓';
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-        
-        .coming-soon-section {
-            background: var(--bg-tertiary);
-            padding: 60px 0;
-            border-radius: var(--border-radius);
-            margin: 80px 0;
-        }
-        
-        .version-info {
-            background: rgba(0, 212, 255, 0.1);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            border-left: 3px solid var(--accent-primary);
-        }
+      .tool-hero {
+        text-align: center;
+        padding: 80px 0;
+        background: linear-gradient(
+          135deg,
+          var(--bg-secondary),
+          var(--bg-tertiary)
+        );
+      }
+
+      .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin: 60px 0;
+      }
+
+      .tool-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 40px;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tool-card.featured {
+        border: 2px solid var(--accent-primary);
+        transform: scale(1.05);
+        position: relative;
+      }
+
+      .tool-card.featured::before {
+        content: "FEATURED";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-primary);
+        color: white;
+        padding: 5px 20px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .tool-card:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .tool-card.featured:hover {
+        transform: scale(1.05) translateY(-5px);
+      }
+
+      .tool-icon {
+        font-size: 3rem;
+        margin-bottom: 25px;
+        display: block;
+      }
+
+      .tool-actions {
+        margin-top: auto;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .platform-badges {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .platform-badge {
+        background: var(--bg-tertiary);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      .download-stats {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .download-stats::before {
+        content: "↓";
+        color: var(--accent-primary);
+        font-weight: bold;
+      }
+
+      .coming-soon-section {
+        background: var(--bg-tertiary);
+        padding: 60px 0;
+        border-radius: var(--border-radius);
+        margin: 80px 0;
+      }
+
+      .version-info {
+        background: rgba(0, 212, 255, 0.1);
+        padding: 15px;
+        border-radius: var(--border-radius);
+        margin: 20px 0;
+        border-left: 3px solid var(--accent-primary);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header Component -->
     <div id="header-container"></div>
 
     <!-- Hero Section -->
     <section class="tool-hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Alsania Tools</h1>
-                <p>
-                    Download our sovereign software designed for creators, developers, and anyone who values
-                    privacy, transparency, and user control. All tools are open-source and respect your autonomy.
-                </p>
-            </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Alsania Tools</h1>
+          <p>
+            Download our sovereign software designed for creators, developers,
+            and anyone who values privacy, transparency, and user control. All
+            tools are open-source and respect your autonomy.
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Featured Tools -->
     <section class="section">
-        <div class="container">
-            <h2 class="section-title">Available Now</h2>
-            <p class="text-center mb-4">These tools are ready to download and use today. No waiting, no subscriptions.</p>
-            
-            <div class="tool-grid">
-                <!-- Nyx Browser Extension -->
-                <div class="tool-card featured">
-                    <span class="tool-icon">🔮</span>
-                    <h3>Nyx Browser Extension</h3>
-                    <p>A powerful browser extension that integrates MCP tools with AI platforms. Connect AI assistants to your workflow across 13+ platforms including DeepSeek, Gemini, and GitHub Copilot.</p>
-                    
-                    <div class="platform-badges">
-                        <span class="platform-badge">Chrome</span>
-                        <span class="platform-badge">Firefox</span>
-                        <span class="platform-badge">Edge</span>
-                    </div>
-                    
-                    <div class="version-info">
-                        <strong>Latest Version:</strong> v1.0.0<br>
-                        <strong>Release Date:</strong> December 2024<br>
-                        <strong>License:</strong> MIT Open Source
-                    </div>
-                    
-                    <div class="tool-actions">
-                        <a href="/downloads/nyx-setup-guide.md" class="alsania-btn" download>
-                            📥 Download Nyx
-                        </a>
-                        <a href="#nyx-features" class="alsania-btn secondary">View Features</a>
-                        <div class="download-stats">500+ downloads</div>
-                    </div>
-                </div>
-                
-                <!-- Official Merchandise -->
-                <div class="tool-card">
-                    <span class="tool-icon">👕</span>
-                    <h3>Official Merchandise</h3>
-                    <p>Show your support for sovereign technology with official Alsania merchandise. High-quality designs that represent the movement and help fund our open-source development.</p>
-                    
-                    <div class="platform-badges">
-                        <span class="platform-badge">Dashery</span>
-                        <span class="platform-badge">Redbubble</span>
-                    </div>
-                    
-                    <div class="version-info">
-                        <strong>Store Type:</strong> Print-on-demand<br>
-                        <strong>Shipping:</strong> Worldwide<br>
-                        <strong>Quality:</strong> Premium materials
-                    </div>
-                    
-                    <div class="tool-actions">
-                        <a href="/dashery/" class="alsania-btn">Shop on Dashery</a>
-                        <a href="/redirect/redbubble" class="alsania-btn secondary">Browse Redbubble</a>
-                    </div>
-                </div>
-                
-                <!-- Community Designs -->
-                <div class="tool-card">
-                    <span class="tool-icon">🎨</span>
-                    <h3>Community Designs</h3>
-                    <p>Additional designs and creative merchandise from our community artists. Support independent creators while wearing your beliefs and spreading awareness about sovereign technology.</p>
-                    
-                    <div class="platform-badges">
-                        <span class="platform-badge">Community</span>
-                        <span class="platform-badge">Independent</span>
-                        <span class="platform-badge">Artist-made</span>
-                    </div>
-                    
-                    <div class="version-info">
-                        <strong>Artists:</strong> 15+ contributors<br>
-                        <strong>Designs:</strong> 50+ available<br>
-                        <strong>Royalties:</strong> Artists receive 70%
-                    </div>
-                    
-                    <div class="tool-actions">
-                        <a href="/redirect/redbubble" class="alsania-btn">Browse Community Designs</a>
-                        <a href="/contact/" class="alsania-btn secondary">Submit Your Design</a>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Available Now</h2>
+        <p class="text-center mb-4">
+          These tools are ready to download and use today. No waiting, no
+          subscriptions.
+        </p>
+
+        <div class="tool-grid">
+          <!-- Nyx Browser Extension -->
+          <div class="tool-card featured">
+            <span class="tool-icon">🔮</span>
+            <h3>Nyx Browser Extension</h3>
+            <p>
+              A powerful browser extension that integrates MCP tools with AI
+              platforms. Connect AI assistants to your workflow across 13+
+              platforms including DeepSeek, Gemini, and GitHub Copilot.
+            </p>
+
+            <div class="platform-badges">
+              <span class="platform-badge">Chrome</span>
+              <span class="platform-badge">Firefox</span>
+              <span class="platform-badge">Edge</span>
             </div>
+
+            <div class="version-info">
+              <strong>Latest Version:</strong> v1.0.0<br />
+              <strong>Release Date:</strong> December 2024<br />
+              <strong>License:</strong> MIT Open Source
+            </div>
+
+            <div class="tool-actions">
+              <a
+                href="downloads/nyx-setup-guide.md"
+                class="alsania-btn"
+                download
+              >
+                📥 Download Nyx
+              </a>
+              <a href="#nyx-features" class="alsania-btn secondary"
+                >View Features</a
+              >
+              <div class="download-stats">500+ downloads</div>
+            </div>
+          </div>
+
+          <!-- Official Merchandise -->
+          <div class="tool-card">
+            <span class="tool-icon">👕</span>
+            <h3>Official Merchandise</h3>
+            <p>
+              Show your support for sovereign technology with official Alsania
+              merchandise. High-quality designs that represent the movement and
+              help fund our open-source development.
+            </p>
+
+            <div class="platform-badges">
+              <span class="platform-badge">Dashery</span>
+              <span class="platform-badge">Redbubble</span>
+            </div>
+
+            <div class="version-info">
+              <strong>Store Type:</strong> Print-on-demand<br />
+              <strong>Shipping:</strong> Worldwide<br />
+              <strong>Quality:</strong> Premium materials
+            </div>
+
+            <div class="tool-actions">
+              <a href="/dashery/" class="alsania-btn">Shop on Dashery</a>
+              <a href="/redirect/redbubble" class="alsania-btn secondary"
+                >Browse Redbubble</a
+              >
+            </div>
+          </div>
+
+          <!-- Community Designs -->
+          <div class="tool-card">
+            <span class="tool-icon">🎨</span>
+            <h3>Community Designs</h3>
+            <p>
+              Additional designs and creative merchandise from our community
+              artists. Support independent creators while wearing your beliefs
+              and spreading awareness about sovereign technology.
+            </p>
+
+            <div class="platform-badges">
+              <span class="platform-badge">Community</span>
+              <span class="platform-badge">Independent</span>
+              <span class="platform-badge">Artist-made</span>
+            </div>
+
+            <div class="version-info">
+              <strong>Artists:</strong> 15+ contributors<br />
+              <strong>Designs:</strong> 50+ available<br />
+              <strong>Royalties:</strong> Artists receive 70%
+            </div>
+
+            <div class="tool-actions">
+              <a href="/shop/" class="alsania-btn">Browse Community Designs</a>
+              <a href="/contact/" class="alsania-btn secondary"
+                >Submit Your Design</a
+              >
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Nyx Features -->
-    <section id="nyx-features" class="section" style="background: var(--bg-tertiary);">
-        <div class="container">
-            <h2 class="section-title">Nyx Extension Features</h2>
-            
-            <div class="ecosystem-grid">
-                <div class="ecosystem-item">
-                    <h3>🔌 Multi-AI Platform Support</h3>
-                    <p>Works with Claude, ChatGPT, Gemini, DeepSeek, GitHub Copilot, and 8+ other AI platforms. One extension for all your AI workflows.</p>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>🛠️ MCP Tool Integration</h3>
-                    <p>Connect AI assistants to your local tools via Model Context Protocol. Filesystem access, code execution, browser automation, and more.</p>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>🔒 Privacy First</h3>
-                    <p>No data collection, no tracking, no telemetry. All processing happens locally. Your conversations stay yours.</p>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>⚡ Performance Optimized</h3>
-                    <p>Lightweight extension with minimal resource usage. Won't slow down your browser or affect other extensions.</p>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>🔧 Customizable Interface</h3>
-                    <p>Adjust the interface to match your workflow. Show/hide tools, rearrange panels, customize hotkeys.</p>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>📚 Comprehensive Documentation</h3>
-                    <p>Clear setup guides, tutorials, and troubleshooting. Active community support on Discord and GitHub.</p>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="/downloads/nyx-setup-guide.md" class="alsania-btn" download style="font-size: 1.1rem; padding: 15px 40px;">
-                    📥 Download Nyx Extension
-                </a>
-                <p style="color: var(--text-muted); margin-top: 15px;">
-                    Free and open-source. Works on Chrome, Firefox, and Edge.
-                </p>
-            </div>
+    <section
+      id="nyx-features"
+      class="section"
+      style="background: var(--bg-tertiary)"
+    >
+      <div class="container">
+        <h2 class="section-title">Nyx Extension Features</h2>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>🔌 Multi-AI Platform Support</h3>
+            <p>
+              Works with Claude, ChatGPT, Gemini, DeepSeek, GitHub Copilot, and
+              8+ other AI platforms. One extension for all your AI workflows.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🛠️ MCP Tool Integration</h3>
+            <p>
+              Connect AI assistants to your local tools via Model Context
+              Protocol. Filesystem access, code execution, browser automation,
+              and more.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🔒 Privacy First</h3>
+            <p>
+              No data collection, no tracking, no telemetry. All processing
+              happens locally. Your conversations stay yours.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>⚡ Performance Optimized</h3>
+            <p>
+              Lightweight extension with minimal resource usage. Won't slow down
+              your browser or affect other extensions.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🔧 Customizable Interface</h3>
+            <p>
+              Adjust the interface to match your workflow. Show/hide tools,
+              rearrange panels, customize hotkeys.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>📚 Comprehensive Documentation</h3>
+            <p>
+              Clear setup guides, tutorials, and troubleshooting. Active
+              community support on Discord and GitHub.
+            </p>
+          </div>
         </div>
+
+        <div style="text-align: center; margin-top: 40px">
+          <a
+            href="downloads/nyx-setup-guide.md"
+            class="alsania-btn"
+            download
+            style="font-size: 1.1rem; padding: 15px 40px"
+          >
+            📥 Download Nyx Extension
+          </a>
+          <p style="color: var(--text-muted); margin-top: 15px">
+            Free and open-source. Works on Chrome, Firefox, and Edge.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Coming Soon Tools -->
     <section class="coming-soon-section">
-        <div class="container">
-            <h2 class="section-title">Coming Soon</h2>
-            <p class="text-center mb-4">These tools are in development. Join the waitlist to be notified when they launch.</p>
-            
-            <div class="ecosystem-grid">
-                <div class="ecosystem-item">
-                    <h3>DevCon (VSCode Extension)</h3>
-                    <p>AI assistant integrated directly into VSCode. Get context-aware coding assistance, documentation lookup, and intelligent code completion.</p>
-                    <span class="status-badge">In Development</span>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>ScrypGen</h3>
-                    <p>Natural language to script generator. Describe what you need in plain English, get working scripts in Python, JavaScript, Bash, and more.</p>
-                    <span class="status-badge">Alpha Testing</span>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>Nyx Unified (Premium)</h3>
-                    <p>Enhanced version of Nyx with advanced features: team collaboration, custom tool creation, priority support, and enterprise deployment options.</p>
-                    <span class="status-badge">Coming Q2 2025</span>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="/#waitlist" class="alsania-btn">Join Waitlist for New Tools</a>
-            </div>
+      <div class="container">
+        <h2 class="section-title">Coming Soon</h2>
+        <p class="text-center mb-4">
+          These tools are in development. Join the waitlist to be notified when
+          they launch.
+        </p>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>DevCon (VSCode Extension)</h3>
+            <p>
+              AI assistant integrated directly into VSCode. Get context-aware
+              coding assistance, documentation lookup, and intelligent code
+              completion.
+            </p>
+            <span class="status-badge">In Development</span>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>ScrypGen</h3>
+            <p>
+              Natural language to script generator. Describe what you need in
+              plain English, get working scripts in Python, JavaScript, Bash,
+              and more.
+            </p>
+            <span class="status-badge">Alpha Testing</span>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>Nyx Unified (Premium)</h3>
+            <p>
+              Enhanced version of Nyx with advanced features: team
+              collaboration, custom tool creation, priority support, and
+              enterprise deployment options.
+            </p>
+            <span class="status-badge">Coming Q2 2025</span>
+          </div>
         </div>
+
+        <div style="text-align: center; margin-top: 40px">
+          <a href="/#waitlist" class="alsania-btn"
+            >Join Waitlist for New Tools</a
+          >
+        </div>
+      </div>
     </section>
 
     <!-- Support & Community -->
     <section class="section">
-        <div class="container">
-            <h2 class="section-title">Support & Community</h2>
-            
-            <div class="ecosystem-grid">
-                <div class="ecosystem-item">
-                    <h3>📚 Documentation</h3>
-                    <p>Comprehensive guides, tutorials, and API documentation for all Alsania tools. Learn how to make the most of our software.</p>
-                    <a href="/downloads/nyx-setup-guide.md" class="alsania-btn secondary">Read Documentation</a>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>🐛 Issue Tracking</h3>
-                    <p>Found a bug or have a feature request? Report issues on GitHub where our community can help and track progress.</p>
-                    <a href="https://github.com/alsania-dev" class="alsania-btn secondary" target="_blank" rel="noopener">GitHub Issues</a>
-                </div>
-                
-                <div class="ecosystem-item">
-                    <h3>💬 Community Help</h3>
-                    <p>Get help from other users and the development team on our Discord server. Share tips, ask questions, and collaborate.</p>
-                    <a href="https://discord.gg/alsania" class="alsania-btn secondary" target="_blank" rel="noopener">Join Discord</a>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">Support & Community</h2>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>📚 Documentation</h3>
+            <p>
+              Comprehensive guides, tutorials, and API documentation for all
+              Alsania tools. Learn how to make the most of our software.
+            </p>
+            <a href="downloads/nyx-setup-guide.md" class="alsania-btn secondary"
+              >Read Documentation</a
+            >
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🐛 Issue Tracking</h3>
+            <p>
+              Found a bug or have a feature request? Report issues on GitHub
+              where our community can help and track progress.
+            </p>
+            <a
+              href="https://github.com/alsania-dev"
+              class="alsania-btn secondary"
+              target="_blank"
+              rel="noopener"
+              >GitHub Issues</a
+            >
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>💬 Community Help</h3>
+            <p>
+              Get help from other users and the development team on our Discord
+              server. Share tips, ask questions, and collaborate.
+            </p>
+            <a
+              href="https://discord.gg/alsania"
+              class="alsania-btn secondary"
+              target="_blank"
+              rel="noopener"
+              >Join Discord</a
+            >
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
     <!-- JavaScript -->
-    <script src="/utils/js/main.js"></script>
+    <script src="../assets/js/scripts.js"></script>
     <script src="../loadComponents.js"></script>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track tool download clicks
-            document.querySelectorAll('[download]').forEach(link => {
-                link.addEventListener('click', function() {
-                    const toolName = this.closest('.tool-card') ? this.closest('.tool-card').querySelector('h3').textContent : 'Unknown Tool';
-                    
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'tool_download', {
-                            'event_category': 'Downloads',
-                            'event_label': toolName
-                        });
-                    }
-                });
-            });
-            
-            // Add download confirmation
-            const downloadBtn = document.querySelector('[download]');
-            if (downloadBtn && downloadBtn.textContent.includes('Download')) {
-                downloadBtn.addEventListener('click', function(e) {
-                    // For now, just track - in production, this would trigger actual download
-                    console.log('Download initiated for:', this.getAttribute('href'));
-                });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Track tool download clicks
+        document.querySelectorAll("[download]").forEach((link) => {
+          link.addEventListener("click", function () {
+            const toolName = this.closest(".tool-card")
+              ? this.closest(".tool-card").querySelector("h3").textContent
+              : "Unknown Tool";
+
+            if (typeof gtag !== "undefined") {
+              gtag("event", "tool_download", {
+                event_category: "Downloads",
+                event_label: toolName,
+              });
             }
+          });
         });
+
+        // Add download confirmation
+        const downloadBtn = document.querySelector("[download]");
+        if (downloadBtn && downloadBtn.textContent.includes("Download")) {
+          downloadBtn.addEventListener("click", function (e) {
+            // For now, just track - in production, this would trigger actual download
+            console.log("Download initiated for:", this.getAttribute("href"));
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

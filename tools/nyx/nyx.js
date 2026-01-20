@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initPlatformAnimation();
     initFeatureHover();
     initMobileMenu();
-    
+
     // Track analytics events
     initAnalytics();
-    
+
     // Smooth scrolling for anchor links
     initSmoothScroll();
 });
@@ -21,7 +21,7 @@ function initDownloadButton() {
     if (downloadBtn) {
         downloadBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             // Track download attempt
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'nyx_download_click', {
@@ -29,27 +29,27 @@ function initDownloadButton() {
                     'event_label': 'Nyx Download Button'
                 });
             }
-            
+
             // Show loading state
             const originalText = downloadBtn.textContent;
             downloadBtn.textContent = 'Preparing Download...';
             downloadBtn.disabled = true;
-            
+
             // Simulate download delay (in production, this would be real file download)
             setTimeout(() => {
                 // Create and trigger download
-                const zipUrl = '/downloads/nyx-package.zip'; // This should be the actual zip file
+                const zipUrl = 'assets/downloads/nyx-package.zip'; // This should be the actual zip file
                 const link = document.createElement('a');
                 link.href = zipUrl;
                 link.download = 'nyx-extension.zip';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                
+
                 // Restore button
                 downloadBtn.textContent = originalText;
                 downloadBtn.disabled = false;
-                
+
                 // Show success message
                 showDownloadSuccess();
             }, 1000);
@@ -74,7 +74,7 @@ function initFeatureHover() {
         feature.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-5px) scale(1.02)';
         });
-        
+
         feature.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
@@ -109,9 +109,9 @@ function initAnalytics() {
             }
         });
     }, { threshold: 0.3 });
-    
+
     sections.forEach(section => observer.observe(section));
-    
+
     // Track feature clicks
     document.querySelectorAll('.nyx-feature').forEach(feature => {
         feature.addEventListener('click', function() {
@@ -124,7 +124,7 @@ function initAnalytics() {
             }
         });
     });
-    
+
     // Track platform clicks
     document.querySelectorAll('.nyx-platform').forEach(platform => {
         platform.addEventListener('click', function() {
@@ -146,7 +146,7 @@ function initSmoothScroll() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
@@ -173,7 +173,7 @@ function showDownloadSuccess() {
             <button class="notification-close">&times;</button>
         </div>
     `;
-    
+
     // Add styles
     notification.style.cssText = `
         position: fixed;
@@ -187,14 +187,14 @@ function showDownloadSuccess() {
         z-index: 1000;
         animation: slideIn 0.3s ease;
     `;
-    
+
     const content = notification.querySelector('.notification-content');
     content.style.cssText = `
         display: flex;
         align-items: center;
         gap: 15px;
     `;
-    
+
     // Close button
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.style.cssText = `
@@ -205,12 +205,12 @@ function showDownloadSuccess() {
         cursor: pointer;
         margin-left: auto;
     `;
-    
+
     closeBtn.addEventListener('click', () => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
     });
-    
+
     // Add keyframe animations
     const style = document.createElement('style');
     style.textContent = `
@@ -224,7 +224,7 @@ function showDownloadSuccess() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Add to page and auto-remove after 5 seconds
     document.body.appendChild(notification);
     setTimeout(() => {
@@ -238,10 +238,11 @@ function showDownloadSuccess() {
 // Platform compatibility check
 function checkBrowserCompatibility() {
     const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    const isFireFox = /FireFox/.test(navigator.userAgent);
     const isEdge = /Edg/.test(navigator.userAgent);
     const isOpera = /OPR/.test(navigator.userAgent);
-    
-    if (!isChrome && !isEdge && !isOpera) {
+
+    if (!isChrome && !isFireFox && !isEdge && !isOpera) {
         showBrowserWarning();
     }
 }
@@ -250,7 +251,7 @@ function showBrowserWarning() {
     const warning = document.createElement('div');
     warning.className = 'browser-warning';
     warning.innerHTML = `
-        <p>⚠️ Nyx works best with Chrome, Edge, or other Chromium-based browsers.</p>
+        <p>⚠️ Nyx works best with Chrome, FireFox, Edge, or other Chromium-based browsers.</p>
     `;
     warning.style.cssText = `
         background: rgba(255, 193, 7, 0.1);
@@ -261,7 +262,7 @@ function showBrowserWarning() {
         color: #ffc107;
         text-align: center;
     `;
-    
+
     const hero = document.querySelector('.nyx-header');
     if (hero) {
         hero.parentNode.insertBefore(warning, hero.nextSibling);

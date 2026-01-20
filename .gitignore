@@ -7,3 +7,6 @@ package.json
 src/
 tsconfig.json
 yarn.lock
+.vscode/
+.env
+.instructions

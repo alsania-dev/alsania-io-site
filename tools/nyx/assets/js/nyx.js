@@ -38,7 +38,7 @@ function initDownloadButton() {
       // Simulate download delay (in production, this would be real file download)
       setTimeout(() => {
         // Create and trigger download
-        const zipUrl = "/downloads/nyx-package.zip"; // This should be the actual zip file
+        const zipUrl = "assets/downloads/nyx-package.zip"; // This should be the actual zip file
         const link = document.createElement("a");
         link.href = zipUrl;
         link.download = "nyx-extension.zip";

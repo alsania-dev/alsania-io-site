@@ -16,7 +16,7 @@ function error(...args) {
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
   const pathname = window.location.pathname;
-  if (protocol === "file:") {
+  if (protocol === "file//:") {
     // For file:// - build absolute file:// path to components folder
     // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
     // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html

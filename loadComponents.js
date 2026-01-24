@@ -23,21 +23,21 @@ function getComponentsBasePath() {
     // Find project root by locating 'alsania-io-site'
     const projectRoot = pathname.substring(
       0,
-      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
+      pathname.indexOf("/home/sigma/Desktop/echo-lab/alsania-io-site") + "/home/sigma/Desktop/echo-lab/alsania-io-site".length,
     );
     return "file://" + projectRoot + "/components";
   } else {
     // For http/https - use absolute path from root
-    return "/components";
+    return "components";
   }
 }
 
 // Inline component content for file:// protocol fallback
 const INLINE_COMPONENTS = {
-  "header.html": `<header class="alsania-header">
+  "components/header.html": `<header class="alsania-header">
   <div class="nav-container">
     <a href="/" class="alsania-logo">
-      <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 5%;">
         <span class="logo-text" style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #00d4ff, #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ALSANIA</span>
       </div>
     </a>
@@ -66,7 +66,7 @@ const INLINE_COMPONENTS = {
     </div>
   </div>
 </header>`,
-  "footer.html": `<footer class="alsania-footer">
+  "components/footer.html": `<footer class="alsania-footer">
   <div class="footer-content">
     <div class="footer-section">
       <h3>Alsania</h3>
@@ -75,10 +75,10 @@ const INLINE_COMPONENTS = {
     <div class="footer-section">
       <h3>Products</h3>
       <ul>
-        <li><a href="/tools/nyx/">Nyx</a></li>
-        <li><a href="/tools/devcon/">DevCon</a></li>
-        <li><a href="/tools/scrypgen/">ScrypGen</a></li>
-        <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
+        <li><a href="tools/nyx/">Nyx</a></li>
+        <li><a href="tools/devcon/">DevCon</a></li>
+        <li><a href="tools/scrypgen/">ScrypGen</a></li>
+        <li><a href="tools/nyx-unified/">Nyx Unified</a></li>
       </ul>
     </div>
     <div class="footer-section">
@@ -93,9 +93,9 @@ const INLINE_COMPONENTS = {
     <div class="footer-section">
       <h3>Connect</h3>
       <ul>
-        <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
-        <li><a href="https://github.com" target="_blank">GitHub</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        <li><a href="https://twitter.com/sigmasauer07" target="_blank">Twitter</a></li>
+        <li><a href="https://github.com/alsania-dev" target="_blank">GitHub</a></li>
+        <li><a href="contact/">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -154,7 +154,7 @@ function loadComponent(containerId, componentName) {
           })
           .catch((err) => {
             error(`Failed to load ${containerId}:`, err.message);
-            container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
+            container.innerHTML = `<div style="color: #ff6b6b; padding: 5%; border: 2% solid #ff6b6b; background: rgba(255, 107, 107, 0.3); border-radius: 5%;">
                             <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
                             <small style="color: #999;">Check browser console (F12) for more details</small>
                         </div>`;
@@ -165,7 +165,7 @@ function loadComponent(containerId, componentName) {
       error(`Failed to load ${containerId}:`, err.message);
       const container = document.getElementById(containerId);
       if (container) {
-        container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
+        container.innerHTML = `<div style="color: #ff6b6b; padding: 5%; border: 2% solid #ff6b6b; background: rgba(255, 107, 107, 0.3); border-radius: 5%;">
                     <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
                     <small style="color: #999;">Check browser console (F12) for more details</small>
                 </div>`;
@@ -177,14 +177,14 @@ function loadComponent(containerId, componentName) {
 
 // Initialize theme toggle
 function initThemeToggle() {
-  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggle = document.getElementById("components/theme-toggle");
   if (!themeToggle) {
     log("Theme toggle checkbox not found");
     return;
   }
 
   // Get saved theme or default to dark
-  const savedTheme = localStorage.getItem("alsania-theme");
+  const savedTheme = localStorage.getItem("assets/css/glass-theme");
   const currentTheme = savedTheme || "dark";
 
   // Apply theme
@@ -240,7 +240,7 @@ function fixLinksForFileProtocol() {
   const pathname = window.location.pathname;
   const projectRoot = pathname.substring(
     0,
-    pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
+    pathname.indexOf("/home/sigma/Desktop/echo-lab/alsania-io-site") + "/alsania-io-site".length,
   );
 
   // Fix all navigation links
@@ -279,11 +279,11 @@ function initComponents() {
   const promises = [];
 
   if (document.getElementById("header-container")) {
-    promises.push(loadComponent("header-container", "header.html"));
+    promises.push(loadComponent("header-container", "components/header.html"));
   }
 
   if (document.getElementById("footer-container")) {
-    promises.push(loadComponent("footer-container", "footer.html"));
+    promises.push(loadComponent("footer-container", "components/footer.html"));
   }
 
   // Wait for all components to load

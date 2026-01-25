@@ -164,7 +164,7 @@ function loadComponent(containerId, componentName) {
       error(`Failed to load ${containerId}:`, err.message);
       const container = document.getElementById(containerId);
       if (container) {
-        container.innerHTML = `<div style="color: #ff6b6b; padding: 5%; border: 2% solid #ff6b6b; background: rgba(255, 107, 107, 0.3); border-radius: 5%;">
+        container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.3); border-radius: 5px;">
                     <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
                     <small style="color: #999;">Check browser console (F12) for more details</small>
                 </div>`;

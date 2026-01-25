@@ -75,10 +75,10 @@ const INLINE_COMPONENTS = {
     <div class="footer-section">
       <h3>Products</h3>
       <ul>
-        <li><a href="tools/nyx/">Nyx</a></li>
-        <li><a href="tools/devcon/">DevCon</a></li>
-        <li><a href="tools/scrypgen/">ScrypGen</a></li>
-        <li><a href="tools/nyx-unified/">Nyx Unified</a></li>
+        <li><a href="/tools/nyx/">Nyx</a></li>
+        <li><a href="/tools/devcon/">DevCon</a></li>
+        <li><a href="/tools/scrypgen/">ScrypGen</a></li>
+        <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
       </ul>
     </div>
     <div class="footer-section">

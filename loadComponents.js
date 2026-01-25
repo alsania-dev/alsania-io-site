@@ -19,7 +19,6 @@ function getComponentsBasePath() {
   if (protocol === "file:") {
     // For file:// - build absolute file:// path to components folder
     // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
-    // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
     const projectRoot = pathname.substring(
       0,
       pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,

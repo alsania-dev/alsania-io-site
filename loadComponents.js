@@ -16,14 +16,14 @@ function error(...args) {
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
   const pathname = window.location.pathname;
-  if (protocol === "file//:") {
+  if (protocol === "file:") {
     // For file:// - build absolute file:// path to components folder
     // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
     // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
     // Find project root by locating 'alsania-io-site'
     const projectRoot = pathname.substring(
       0,
-      pathname.indexOf("/home/sigma/Desktop/echo-lab/alsania-io-site") + "/home/sigma/Desktop/echo-lab/alsania-io-site".length,
+      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
     );
     return "file://" + projectRoot + "/components";
   } else {

@@ -95,7 +95,7 @@ const INLINE_COMPONENTS = {
       <ul>
         <li><a href="https://twitter.com/sigmasauer07" target="_blank">Twitter</a></li>
         <li><a href="https://github.com/alsania-dev" target="_blank">GitHub</a></li>
-        <li><a href="contact/">Contact</a></li>
+        <li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
   </div>

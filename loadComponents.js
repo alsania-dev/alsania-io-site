@@ -176,7 +176,7 @@ function loadComponent(containerId, componentName) {
 
 // Initialize theme toggle
 function initThemeToggle() {
-  const themeToggle = document.getElementById("components/theme-toggle");
+  const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) {
     log("Theme toggle checkbox not found");
     return;

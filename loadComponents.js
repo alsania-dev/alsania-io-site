@@ -28,7 +28,7 @@ function getComponentsBasePath() {
     return "file://" + projectRoot + "/components";
   } else {
     // For http/https - use absolute path from root
-    return "components";
+    return "/components";
   }
 }
 

@@ -36,7 +36,7 @@ const INLINE_COMPONENTS = {
   "components/header.html": `<header class="alsania-header">
   <div class="nav-container">
     <a href="/" class="alsania-logo">
-      <div style="display: flex; align-items: center; gap: 5%;">
+      <div style="display: flex; align-items: center; gap: 10px;">
         <span class="logo-text" style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #00d4ff, #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ALSANIA</span>
       </div>
     </a>

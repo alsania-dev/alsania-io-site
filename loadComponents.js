@@ -184,7 +184,7 @@ function initThemeToggle() {
   }
 
   // Get saved theme or default to dark
-  const savedTheme = localStorage.getItem("assets/css/glass-theme");
+  const savedTheme = localStorage.getItem("alsania-theme");
   const currentTheme = savedTheme || "dark";
 
   // Apply theme

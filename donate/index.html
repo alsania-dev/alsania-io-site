@@ -395,8 +395,19 @@
                 color: var(--accent-primary);
                 font-family: var(--font-mono);
               "
-              >sigma.sauer07@gmail.com</span
-            >
+              id="paypal-email"
+              data-user="sigma.sauer07"
+              data-domain="gmail.com"
+            ></span>
+            <script>
+              // Obfuscate email to prevent scraping
+              const emailEl = document.getElementById('paypal-email');
+              if (emailEl) {
+                const user = emailEl.dataset.user;
+                const domain = emailEl.dataset.domain;
+                emailEl.textContent = `${user}@${domain}`;
+              }
+            </script>
           </p>
           <p
             style="

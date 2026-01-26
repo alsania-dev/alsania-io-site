@@ -227,10 +227,20 @@ function initMobileMenu() {
 
 // Redirect mapping for file:// protocol
 const REDIRECTS = {
-  "/dashery": "https://mnemonic.dashery.com/",
-  "/redbubble": "https://www.redbubble.com/people/AlsaniaArt/shop",
+  "/dashery": { url: "https://mnemonic.dashery.com/", requiresConsent: true },
+  "/redbubble": { url: "https://www.redbubble.com/people/AlsaniaArt/shop", requiresConsent: true },
   "/merch": "shop/index.html",
 };
+
+// Add consent check before external redirects
+function handleRedirect(path) {
+  const redirect = REDIRECTS[path];
+  if (redirect.requiresConsent) {
+    const consent = confirm("This link redirects to an external platform. Your data may be tracked. Continue?");
+    if (!consent) return;
+  }
+  window.location.href = redirect.url || redirect;
+}
 
 // Fix links for file:// protocol
 function fixLinksForFileProtocol() {

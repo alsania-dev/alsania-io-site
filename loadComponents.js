@@ -36,21 +36,10 @@ const INLINE_COMPONENTS = {
   <div class="nav-container">
     <a href="/" class="alsania-logo">
       <div class="logo-container">
-        <span class="logo-text">
-          ALSANIA
-        </span>
+        <img src="/assets/img/icons/logo_full_1024.png" alt="Alsania Logo" class="logo-image">
       </div>
     </a>
-    <nav class="alsania-nav">
-      <ul>
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
-        <li><a href="/shop/" class="nav-link">Shop</a></li>
-        <li><a href="/about/" class="nav-link">About</a></li>
-        <li><a href="/contact/" class="nav-link">Contact</a></li>
-        <li><a href="/donate/" class="nav-link">Support</a></li>
-      </ul>
-    </nav>
+    <div id="nav-container"></div>
     <div class="header-right">
       <div id="theme-toggle-container"></div>
       <button class="mobile-menu" aria-label="Menu">
@@ -59,6 +48,16 @@ const INLINE_COMPONENTS = {
     </div>
   </div>
 </header>`,
+  "components/nav.html": `<nav class="alsania-nav">
+  <ul>
+    <li><a href="/" class="nav-link">Home</a></li>
+    <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
+    <li><a href="/shop/" class="nav-link">Shop</a></li>
+    <li><a href="/about/" class="nav-link">About</a></li>
+    <li><a href="/contact/" class="nav-link">Contact</a></li>
+    <li><a href="/donate/" class="nav-link">Support</a></li>
+  </ul>
+</nav>`,
   "components/footer.html": `<footer class="footer">
   <div class="footer-container">
     <div class="footer-grid">
@@ -145,10 +144,6 @@ function loadComponent(containerId, componentName) {
         if (INLINE_COMPONENTS[componentName]) {
           container.innerHTML = INLINE_COMPONENTS[componentName];
           log(`✓ ${containerId} loaded from inline`);
-          setTimeout(() => {
-            initThemeToggle();
-            initMobileMenu();
-          }, 0);
           resolve(container);
         } else {
           throw new Error(`Inline component not found: ${componentName}`);
@@ -168,10 +163,6 @@ function loadComponent(containerId, componentName) {
           .then((html) => {
             container.innerHTML = html;
             log(`✓ ${containerId} loaded successfully`);
-            setTimeout(() => {
-              initThemeToggle();
-              initMobileMenu();
-            }, 0);
             resolve(container);
           })
           .catch((err) => {
@@ -254,7 +245,7 @@ const REDIRECTS = {
   "/merch": "shop/index.html",
 };
 
-// Fix links for file:// protocol
+// Fix links and images for file:// protocol
 function fixLinksForFileProtocol() {
   if (window.location.protocol !== "file:") return;
 
@@ -262,7 +253,7 @@ function fixLinksForFileProtocol() {
   const pathname = window.location.pathname;
   const projectRoot = pathname.substring(
     0,
-    pathname.indexOf("/home/sigma/Desktop/echo-lab/alsania-io-site") + "/alsania-io-site".length,
+    pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
   );
 
   // Fix all navigation links
@@ -290,26 +281,43 @@ function fixLinksForFileProtocol() {
     }
   });
 
-  log("Fixed links for file:// protocol");
+  // Fix image sources
+  document.querySelectorAll("img").forEach((img) => {
+    const src = img.getAttribute("src");
+    if (!src) return;
+
+    // Convert absolute paths to file:// URLs
+    if (src.startsWith("/") && !src.startsWith("//")) {
+      img.src = "file://" + projectRoot + src;
+    }
+  });
+
+  log("Fixed links and images for file:// protocol");
 }
 
 // Main initialization
 function initComponents() {
   log("Initializing components...");
 
-  // Load components in parallel
-  const promises = [];
-
+  // Load header first
+  let headerPromise = Promise.resolve();
   if (document.getElementById("header-container")) {
-    promises.push(loadComponent("header-container", "components/header.html"));
+    headerPromise = loadComponent("header-container", "components/header.html");
   }
 
-  if (document.getElementById("footer-container")) {
-    promises.push(loadComponent("footer-container", "components/footer.html"));
-  }
-
-  // Wait for all components to load
-  Promise.all(promises)
+  headerPromise
+    .then(() => {
+      // Now load nav into the header
+      if (document.getElementById("nav-container")) {
+        return loadComponent("nav-container", "components/nav.html");
+      }
+    })
+    .then(() => {
+      // Now load footer
+      if (document.getElementById("footer-container")) {
+        return loadComponent("footer-container", "components/footer.html");
+      }
+    })
     .then(() => {
       // Initialize interactive features
       initThemeToggle();

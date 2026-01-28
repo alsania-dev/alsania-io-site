@@ -151,12 +151,17 @@ a:hover {
 
 /* ===== Header Component ===== */
 .alsania-header {
-  background-color: var(--bg-secondary);
+  background: rgba(26, 31, 46, 0.3);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1000;
   padding: 1rem 0;
+}
+
+[data-theme="light"] .alsania-header {
+  background: rgba(245, 247, 250, 0.3);
 }
 
 .nav-container {
@@ -175,21 +180,14 @@ a:hover {
   gap: 10px;
 }
 
-.logo-text {
-  font-family: "Orbitron", sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logo-image {
+  height: 60px;
+  width: auto;
+  transition: var(--transition);
 }
 
-.alsania-logo:hover .logo-text {
-  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.alsania-logo:hover .logo-image {
+  transform: scale(1.05);
 }
 
 .alsania-nav ul {

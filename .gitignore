@@ -10,3 +10,12 @@ yarn.lock
 .vscode/
 .env
 .instructions
+/Makefile
+/MAKEFILE_README.md
+/package.json
+/package-lock.json
+AGENTS.md
+alsania-code.md
+.gitignore
+.vscode
+.codacy

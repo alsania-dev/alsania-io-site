@@ -35,8 +35,10 @@ const INLINE_COMPONENTS = {
   "components/header.html": `<header class="alsania-header">
   <div class="nav-container">
     <a href="/" class="alsania-logo">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span class="logo-text" style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #00d4ff, #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ALSANIA</span>
+      <div class="logo-container">
+        <span class="logo-text">
+          ALSANIA
+        </span>
       </div>
     </a>
     <nav class="alsania-nav">
@@ -50,55 +52,77 @@ const INLINE_COMPONENTS = {
       </ul>
     </nav>
     <div class="header-right">
-      <div id="theme-toggle-container">
-        <div class="theme-toggle">
-          <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox" aria-label="Toggle dark/light mode">
-          <label for="theme-toggle" class="theme-toggle-label">
-            <span class="theme-toggle-icon">🌙</span>
-            <span class="theme-toggle-slider"></span>
-            <span class="theme-toggle-icon">☀️</span>
-          </label>
-        </div>
-      </div>
-      <button class="mobile-menu">☰</button>
+      <div id="theme-toggle-container"></div>
+      <button class="mobile-menu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>`,
-  "components/footer.html": `<footer class="alsania-footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3>Alsania</h3>
-      <p>Building sovereign technology for the future.</p>
+  "components/footer.html": `<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-section">
+        <h3>Alsania</h3>
+        <p>
+          Sovereign technology ecosystem. Built for creators, owned by no one,
+          open to everyone.
+        </p>
+        <div class="social-links">
+          <a
+            href="https://github.com/alsania-dev"
+            title="GitHub"
+            target="_blank"
+            rel="noopener"
+            >⚡</a
+          >
+          <a
+            href="https://twitter.com/alsania-io"
+            title="Twitter"
+            target="_blank"
+            rel="noopener"
+            >🐦</a
+          >
+          <a
+            href="https://discord.gg/alsania-io"
+            title="Discord"
+            target="_blank"
+            rel="noopener"
+            >💬</a
+          >
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Live Projects</h3>
+        <ul>
+          <li><a href="/tools/nyx/">Nyx Extension</a></li>
+          <li><a href="/shop/">Official Merch</a></li>
+          <li><a href="/redbubble">Redbubble Store</a></li>
+          <li><a href="/dashery">Dashery Store</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Coming Soon</h3>
+        <ul>
+          <li><a href="/tools/devcon/">DevCon (VSCode)</a></li>
+          <li><a href="/tools/scrypgen/">ScrypGen</a></li>
+          <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
+          <li><a href="/aed/">Enhanced Domains</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/legal/terms.html">Terms of Service</a></li>
+          <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
+          <li><a href="/legal/refund-policy.html">Refund Policy</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-section">
-      <h3>Products</h3>
-      <ul>
-        <li><a href="/tools/nyx/">Nyx</a></li>
-        <li><a href="/tools/devcon/">DevCon</a></li>
-        <li><a href="/tools/scrypgen/">ScrypGen</a></li>
-        <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <p>© 2025 Alsania I/O. All rights reserved. Built with purpose.</p>
     </div>
-    <div class="footer-section">
-      <h3>Legal</h3>
-      <ul>
-        <li><a href="legal/privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="legal/terms.html">Terms of Service</a></li>
-        <li><a href="legal/disclaimer.html">Disclaimer</a></li>
-        <li><a href="legal/refund-policy.html">Refund Policy</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h3>Connect</h3>
-      <ul>
-        <li><a href="https://twitter.com/sigmasauer07" target="_blank">Twitter</a></li>
-        <li><a href="https://github.com/alsania-dev" target="_blank">GitHub</a></li>
-        <li><a href="/contact/">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Alsania. All rights reserved.</p>
   </div>
 </footer>`,
 };

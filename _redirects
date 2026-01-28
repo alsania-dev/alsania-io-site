@@ -8,10 +8,10 @@
 /mnemonic /shop/index.html 302
 
 # Legal page redirects
-/legal/disclaimer /legal/disclaimer.html 301
-/legal/privacy /legal/privacy-policy.html 301
-/legal/terms /legal/terms.html 301
-/legal/cookies /legal/disclaimer.html 301
+/disclaimer /legal/disclaimer.html 301
+/privacy /legal/privacy-policy.html 301
+/terms /legal/terms.html 301
+/cookies /legal/disclaimer.html 301
 
 # Legacy redirects (if needed)
 # /old-path /new-path 301

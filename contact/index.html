@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Contact Alsania - Get in Touch | Sovereign Technology Ecosystem
+    </title>
+    <meta
+      name="description"
+      content="Contact the Alsania team for inquiries, partnerships, support, or media requests. We're here to help with sovereign technology solutions."
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
+    <style>
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .contact-method {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: var(--border-radius);
+        text-align: center;
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+      }
+
+      .contact-method:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-5px);
+      }
+
+      .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .contact-email {
+        font-size: 1.2rem;
+        color: var(--accent-primary);
+        word-break: break-all;
+      }
+
+      .response-time {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Contact Alsania</h1>
+          <p>
+            Get in touch with our team for inquiries, partnerships, support, or
+            media requests.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">How to Reach Us</h2>
+
+        <div class="contact-grid">
+          <div class="contact-method">
+            <span class="contact-icon">📧</span>
+            <h3>General Inquiries</h3>
+            <p>For general questions, partnerships, and media requests:</p>
+            <a href="mailto:admin@alsania-io.com" class="contact-email"
+              >admin@alsania-io.com</a
+            >
+            <p class="response-time">Response time: 24-48 hours</p>
+          </div>
+
+          <div class="contact-method">
+            <span class="contact-icon">🛠️</span>
+            <h3>Technical Support</h3>
+            <p>For help with Nyx, DevCon, or other Alsania products:</p>
+            <a href="mailto:support@alsania-io.com" class="contact-email"
+              >support@alsania-io.com</a
+            >
+            <p class="response-time">Response time: 48 hours</p>
+          </div>
+
+          <div class="contact-method">
+            <span class="contact-icon">💼</span>
+            <h3>Business & Partnerships</h3>
+            <p>
+              For enterprise inquiries, custom solutions, and collaborations:
+            </p>
+            <a href="mailto:partnerships@alsania-io.com" class="contact-email"
+              >partnerships@alsania-io.com</a
+            >
+            <p class="response-time">Response time: 48 hours</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section" style="background: var(--bg-tertiary)">
+      <div class="container">
+        <h2 class="section-title">Send a Message</h2>
+
+        <div style="max-width: 600px; margin: 0 auto">
+          <form
+            id="contact-form"
+            class="waitlist-form"
+            style="flex-direction: column; align-items: stretch"
+          >
+            <div style="margin-bottom: 20px">
+              <label
+                for="contact-name"
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  color: var(--text-primary);
+                "
+                >Name</label
+              >
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="Your name"
+                required
+                style="width: 100%"
+              />
+            </div>
+
+            <div style="margin-bottom: 20px">
+              <label
+                for="contact-email"
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  color: var(--text-primary);
+                "
+                >Email</label
+              >
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                style="width: 100%"
+              />
+            </div>
+
+            <div style="margin-bottom: 20px">
+              <label
+                for="contact-subject"
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  color: var(--text-primary);
+                "
+                >Subject</label
+              >
+              <select
+                id="contact-subject"
+                name="subject"
+                required
+                style="
+                  width: 100%;
+                  padding: 1rem;
+                  border-radius: var(--border-radius);
+                  border: 2px solid var(--border-color);
+                  background-color: var(--bg-primary);
+                  color: var(--text-primary);
+                "
+              >
+                <option value="">Select a topic</option>
+                <option value="general">General Inquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="partnership">Partnership Opportunity</option>
+                <option value="media">Media Request</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 20px">
+              <label
+                for="contact-message"
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  color: var(--text-primary);
+                "
+                >Message</label
+              >
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="Your message here..."
+                rows="6"
+                required
+                style="width: 100%"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="alsania-btn" style="width: 100%">
+              Send Message
+            </button>
+          </form>
+
+          <div id="contact-message" class="form-message"></div>
+
+          <p
+            style="
+              text-align: center;
+              margin-top: 30px;
+              color: var(--text-muted);
+              font-size: 0.9rem;
+            "
+          >
+            We typically respond within 24-48 hours. For urgent matters, please
+            include "URGENT" in your subject line.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Join Our Community</h2>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>GitHub</h3>
+            <p>
+              Explore our open-source projects, contribute code, report issues,
+              or request features.
+            </p>
+            <a
+              href="https://github.com/alsania-dev"
+              class="alsania-btn secondary"
+              target="_blank"
+              rel="noopener"
+              >Visit GitHub</a
+            >
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>Twitter</h3>
+            <p>
+              Follow us for announcements, updates, and discussions about
+              sovereign technology.
+            </p>
+            <a
+              href="https://twitter.com/alsania_io"
+              class="alsania-btn secondary"
+              target="_blank"
+              rel="noopener"
+              >Follow on Twitter</a
+            >
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>Discord</h3>
+            <p>
+              Join our community of builders, creators, and thinkers shaping the
+              future of technology.
+            </p>
+            <a
+              href="https://discord.gg/alsania"
+              class="alsania-btn secondary"
+              target="_blank"
+              rel="noopener"
+              >Join Discord</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../loadComponents.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contact-form");
+        const messageDiv = document.getElementById("contact-message");
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("contact-name").value;
+            const email = document.getElementById("contact-email").value;
+            const subject = document.getElementById("contact-subject").value;
+            const message = document.getElementById("contact-message").value;
+
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+              showMessage("Please fill in all fields.", "error");
+              return;
+            }
+
+            if (!email.includes("@")) {
+              showMessage("Please enter a valid email address.", "error");
+              return;
+            }
+
+            // In a real implementation, this would send to a backend
+            // For now, we'll simulate success
+            showMessage(
+              "Message sent! We'll respond within 24-48 hours. Thank you!",
+              "success",
+            );
+            contactForm.reset();
+
+            // Track contact form submission
+            if (typeof gtag !== "undefined") {
+              gtag("event", "contact_form_submit", {
+                event_category: "Engagement",
+                event_label: subject,
+              });
+            }
+          });
+        }
+
+        function showMessage(text, type) {
+          if (messageDiv) {
+            messageDiv.textContent = text;
+            messageDiv.className = "form-message " + type;
+            messageDiv.style.display = "block";
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+              messageDiv.style.display = "none";
+            }, 5000);
+          }
+        }
+
+        // Add basic textarea styling
+        const textarea = document.querySelector("textarea");
+        if (textarea) {
+          textarea.style.cssText = `
+          padding: 1rem;
+          border-radius: var(--border-radius);
+          border: 2px solid var(--border-color);
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+          font-family: var(--font-body);
+          resize: vertical;
+          transition: var(--transition);
+        `;
+
+          textarea.addEventListener("focus", function () {
+            this.style.borderColor = "var(--accent-primary)";
+          });
+
+          textarea.addEventListener("blur", function () {
+            this.style.borderColor = "var(--border-color)";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

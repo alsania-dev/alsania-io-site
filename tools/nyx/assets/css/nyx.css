@@ -158,10 +158,18 @@ body {
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-space);
   cursor: pointer;
   border: none;
+  gap: 8px;
+}
+
+.nyx-btn img {
+  height: 24px;
+  width: auto;
 }
 
 .nyx-btn-primary {
@@ -187,6 +195,19 @@ body {
   background: rgba(0, 246, 255, 0.1);
   transform: translateY(-3px);
   box-shadow: 0 4px 20px rgba(0, 246, 255, 0.3);
+}
+
+/* Firefox button specific styling */
+.nyx-btn-firefox {
+  background: linear-gradient(135deg, #E66000 0%, #FF9500 100%);
+  color: white;
+  border: none;
+}
+
+.nyx-btn-firefox:hover {
+  background: linear-gradient(135deg, #CC5500 0%, #E68500 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(230, 96, 0, 0.6);
 }
 
 /* ===== Sections ===== */
@@ -271,6 +292,27 @@ body {
 .nyx-feature p {
   position: relative;
   z-index: 1;
+}
+
+/* Platform download buttons in features */
+.platform-download-btn {
+  margin-top: 15px !important;
+  padding: 10px 20px !important;
+  background: var(--nyx-gradient) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: var(--nyx-dark) !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: var(--font-space) !important;
+  font-size: 0.9rem !important;
+  width: 100% !important;
+}
+
+.platform-download-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 20px rgba(0, 246, 255, 0.4) !important;
 }
 
 /* ===== Platforms ===== */
@@ -362,6 +404,17 @@ body {
   margin-bottom: 10px;
 }
 
+/* Firefox addon image */
+.firefox-addon-img {
+  height: 60px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.firefox-addon-img:hover {
+  transform: scale(1.05);
+}
+
 /* ===== Footer ===== */
 .nyx-footer {
   background: var(--nyx-purple);
@@ -396,6 +449,37 @@ body {
   color: var(--nyx-accent);
 }
 
+/* ===== Browser Compatibility Messages ===== */
+.browser-warning,
+.firefox-message {
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 20px 0;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.browser-warning {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid #ffc107;
+  color: #ffc107;
+}
+
+.firefox-message {
+  background: rgba(0, 246, 255, 0.1);
+  border: 1px solid #00F6FF;
+  color: #00F6FF;
+}
+
+.browser-warning a,
+.firefox-message a {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .nyx-title {
@@ -423,6 +507,10 @@ body {
   .package-features {
     grid-template-columns: 1fr;
   }
+
+  .nyx-features {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -441,5 +529,13 @@ body {
   .nyx-platform {
     padding: 8px 16px;
     font-size: 0.85rem;
+  }
+
+  .download-package {
+    padding: 20px;
+  }
+
+  .nyx-badges img {
+    height: 16px;
   }
 }

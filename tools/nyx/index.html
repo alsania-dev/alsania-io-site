@@ -71,8 +71,12 @@
             alt="Active"
           />
           <img
-            src="https://img.shields.io/badge/Browser-Chrome%2FEdge-4285F4"
-            alt="Chrome/Edge"
+            src="https://img.shields.io/badge/Browser-Chrome%2FEdge%2FFirefox-4285F4"
+            alt="Chrome/Edge/Firefox"
+          />
+          <img
+            src="https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6"
+            alt="Windows | macOS | Linux"
           />
         </div>
 
@@ -86,6 +90,10 @@
           <button id="nyx-download-btn" class="nyx-btn nyx-btn-primary">
             <span class="btn-icon">⬇️</span> Download Nyx Package
           </button>
+          <a href="https://addons.mozilla.org/en-US/firefox/addon/nyx-aegis/" target="_blank" rel="noopener" class="nyx-btn nyx-btn-secondary">
+            <img src="../../assets/img/promo/get-the-addon-small.webp" alt="Get Nyx for Firefox" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+            Firefox Addon
+          </a>
           <a href="#features" class="nyx-btn nyx-btn-secondary">Learn More</a>
         </div>
       </div>
@@ -111,6 +119,9 @@
             Execute MCP tools from within AI conversations, enhancing both free
             and paid web-based AI assistants with real-time automation
             capabilities.
+          </p>
+          <p style="margin-top: 20px; color: var(--nyx-accent); font-weight: 600;">
+            Now available for Chrome, Edge, <strong>and Firefox</strong>!
           </p>
         </div>
       </div>
@@ -194,43 +205,43 @@
         <h2 class="nyx-section-title">Simple Download Package</h2>
 
         <div class="download-package">
-          <h3>Everything You Need in One Zip</h3>
+          <h3>Everything You Need in One Package</h3>
           <p>
-            We've packaged Nyx with a simple configuration and setup guide so
-            you can get started in minutes, even if you're not technical.
+            We've packaged Nyx with platform-specific setup scripts and guides
+            so you can get started in minutes, even if you're not technical.
           </p>
 
           <div class="package-features">
             <div class="package-feature">
-              <span class="icon">📦</span>
-              <h4>Complete Extension</h4>
-              <p>All files included, ready to install</p>
+              <span class="icon">🪟</span>
+              <h4>Windows Package</h4>
+              <p>Batch scripts, desktop shortcut</p>
+              <button class="platform-download-btn" data-platform="windows" style="margin-top: 10px; padding: 8px 16px; background: var(--nyx-gradient); border: none; border-radius: 4px; color: var(--nyx-dark); font-weight: 600; cursor: pointer;">
+                Download for Windows
+              </button>
             </div>
             <div class="package-feature">
-              <span class="icon">⚙️</span>
-              <h4>Simple Config</h4>
-              <p>Pre-configured for easy setup</p>
+              <span class="icon">🍎</span>
+              <h4>macOS Package</h4>
+              <p>Shell scripts, .command launchers</p>
+              <button class="platform-download-btn" data-platform="macos" style="margin-top: 10px; padding: 8px 16px; background: var(--nyx-gradient); border: none; border-radius: 4px; color: var(--nyx-dark); font-weight: 600; cursor: pointer;">
+                Download for macOS
+              </button>
             </div>
             <div class="package-feature">
-              <span class="icon">📖</span>
-              <h4>Visual Guide</h4>
-              <p>Screenshot instructions included</p>
-            </div>
-            <div class="package-feature">
-              <span class="icon">🔄</span>
-              <h4>Auto Updates</h4>
-              <p>Built-in update notification</p>
+              <span class="icon">🐧</span>
+              <h4>Linux Package</h4>
+              <p>Shell scripts, desktop entry</p>
+              <button class="platform-download-btn" data-platform="linux" style="margin-top: 10px; padding: 8px 16px; background: var(--nyx-gradient); border: none; border-radius: 4px; color: var(--nyx-dark); font-weight: 600; cursor: pointer;">
+                Download for Linux
+              </button>
             </div>
           </div>
 
-          <div class="nyx-cta">
-            <button
-              id="nyx-download-package-btn"
-              class="nyx-btn nyx-btn-primary"
-              style="font-size: 1.2rem; padding: 20px 50px"
-            >
-              <span class="btn-icon">🚀</span> Download Nyx Package (v1.0.0)
-            </button>
+          <div class="nyx-cta" style="margin-top: 40px;">
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/nyx-aegis/" target="_blank" rel="noopener" style="display: inline-block;">
+              <img src="../../assets/img/promo/get-the-addon.webp" alt="Get Nyx for Firefox" style="height: 60px;">
+            </a>
           </div>
 
           <p
@@ -241,8 +252,8 @@
               opacity: 0.8;
             "
           >
-            Zip file includes: Extension files, configuration, setup guide, and
-            license. No Coding knowledge required.
+            Each package includes: Extension files, configuration, setup guide, and
+            license. No coding knowledge required.
           </p>
         </div>
 
@@ -263,13 +274,13 @@
           >
             <div class="nyx-feature">
               <h3>1. Download & Extract</h3>
-              <p>Download the zip and extract to any folder</p>
+              <p>Download your platform package and extract to any folder</p>
             </div>
             <div class="nyx-feature">
               <h3>2. Install in Browser</h3>
               <p>
-                Go to chrome://extensions, enable Developer Mode, click "Load
-                Unpacked"
+                Install extension in Chrome/Edge/Firefox<br>
+                <small>Chrome: chrome://extensions → Load unpacked</small>
               </p>
             </div>
             <div class="nyx-feature">
@@ -325,6 +336,27 @@
             mainDownloadBtn.click();
           });
         }
+
+        // Platform download buttons
+        document.querySelectorAll('.platform-download-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const platform = this.getAttribute('data-platform');
+            const zipFiles = {
+              windows: '/tools/nyx/downloads/win-nyx-v1.0.0.zip',
+              macos: '/tools/nyx/downloads/mac-nyx-v1.0.0.zip',
+              linux: '/tools/nyx/downloads/linux-nyx-v1.0.0.zip'
+            };
+            
+            if (zipFiles[platform]) {
+              const link = document.createElement('a');
+              link.href = zipFiles[platform];
+              link.download = `nyx-${platform}.zip`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }
+          });
+        });
       });
     </script>
   </body>

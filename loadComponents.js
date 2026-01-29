@@ -12,31 +12,13 @@ function error(...args) {
   console.error("[Components]", ...args);
 }
 
-// Calculate correct path to components based on current page
-function getComponentsBasePath() {
-  const protocol = window.location.protocol;
-  const pathname = window.location.pathname;
-  if (protocol === "file:") {
-    // For file:// - build absolute file:// path to components folder
-    // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
-    const projectRoot = pathname.substring(
-      0,
-      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
-    );
-    return "file://" + projectRoot + "/components";
-  } else {
-    // For http/https - use absolute path from root
-    return "/components";
-  }
-}
-
-// Inline component content for file:// protocol fallback
+// Inline components for file:// protocol support
 const INLINE_COMPONENTS = {
   "components/header.html": `<header class="alsania-header">
   <div class="nav-container">
     <a href="/" class="alsania-logo">
       <div class="logo-container">
-        <img src="/assets/img/icons/logo_full_1024.png" alt="Alsania Logo" class="logo-image">
+        <img src="/assets/img/icons/wordmark_1023x214.png" alt="Alsania Logo">
       </div>
     </a>
     <div id="nav-container"></div>
@@ -58,6 +40,73 @@ const INLINE_COMPONENTS = {
     <li><a href="/donate/" class="nav-link">Support</a></li>
   </ul>
 </nav>`,
+  "components/theme-toggle.html": `<div class="theme-toggle">
+  <input
+    type="checkbox"
+    id="theme-toggle"
+    class="theme-toggle-checkbox"
+    aria-label="Toggle dark/light mode"
+  />
+  <label for="theme-toggle" class="theme-toggle-label">
+    <span class="theme-toggle-icon">🌙</span>
+    <span class="theme-toggle-slider"></span>
+    <span class="theme-toggle-icon">☀️</span>
+  </label>
+</div>
+
+<style>
+  .theme-toggle {
+    display: inline-block;
+  }
+
+  .theme-toggle-checkbox {
+    display: none;
+  }
+
+  .theme-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 20px;
+    background-color: var(--bg-tertiary);
+    position: relative;
+    border: 1px solid var(--border-color);
+  }
+
+  .theme-toggle-slider {
+    width: 36px;
+    height: 20px;
+    background-color: var(--accent-primary);
+    border-radius: 20px;
+    position: relative;
+    transition: var(--transition);
+  }
+
+  .theme-toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: var(--transition);
+  }
+
+  .theme-toggle-checkbox:checked
+    + .theme-toggle-label
+    .theme-toggle-slider::before {
+    transform: translateX(16px);
+  }
+
+  .theme-toggle-icon {
+    font-size: 14px;
+    user-select: none;
+  }
+</style>`,
   "components/footer.html": `<footer class="footer">
   <div class="footer-container">
     <div class="footer-grid">
@@ -103,7 +152,7 @@ const INLINE_COMPONENTS = {
       <div class="footer-section">
         <h3>Coming Soon</h3>
         <ul>
-          <li><a href="/tools/devcon/">DevCon (VSCode)</a></li>
+          <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
           <li><a href="/tools/scrypgen/">ScrypGen</a></li>
           <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
           <li><a href="/aed/">Enhanced Domains</a></li>
@@ -125,6 +174,23 @@ const INLINE_COMPONENTS = {
   </div>
 </footer>`,
 };
+
+// Calculate correct path to components based on current page
+function getComponentsBasePath() {
+  const protocol = window.location.protocol;
+  const pathname = window.location.pathname;
+  if (protocol === "file:") {
+    // For file:// - build absolute file:// path to components folder
+    const projectRoot = pathname.substring(
+      0,
+      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
+    );
+    return "file://" + projectRoot + "/components";
+  } else {
+    // For http/https - use absolute path from root
+    return "/components";
+  }
+}
 
 // Load a single component
 function loadComponent(containerId, componentName) {
@@ -310,6 +376,15 @@ function initComponents() {
       // Now load nav into the header
       if (document.getElementById("nav-container")) {
         return loadComponent("nav-container", "components/nav.html");
+      }
+    })
+    .then(() => {
+      // Now load theme toggle
+      if (document.getElementById("theme-toggle-container")) {
+        return loadComponent(
+          "theme-toggle-container",
+          "components/theme-toggle.html",
+        );
       }
     })
     .then(() => {

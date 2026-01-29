@@ -1,6 +1,5 @@
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
-googleanalyticstags.txt
 node_modules/
 package-lock.json
 package.json
@@ -14,8 +13,5 @@ yarn.lock
 /MAKEFILE_README.md
 /package.json
 /package-lock.json
-AGENTS.md
-alsania-code.md
-.gitignore
 .vscode
 .codacy

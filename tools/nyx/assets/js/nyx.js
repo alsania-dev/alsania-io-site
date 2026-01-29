@@ -45,13 +45,13 @@ function initPlatformDownloads() {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       const platform = this.getAttribute('data-platform');
-      downloadPlatformPackage(platform);
+      downloadPlatformPackage(platform, this); // Pass the button element
     });
   });
 }
 
 // Download specific platform package
-function downloadPlatformPackage(platform) {
+function downloadPlatformPackage(platform, buttonElement) {
   const platformNames = {
     windows: "Windows",
     macos: "macOS",
@@ -72,27 +72,45 @@ function downloadPlatformPackage(platform) {
     });
   }
 
-  // Show loading state
-  const originalText = event.target.textContent;
-  event.target.textContent = "Downloading...";
-  event.target.disabled = true;
+  // Get the button that was clicked
+  const button = buttonElement || document.querySelector(`.platform-download-btn[data-platform="${platform}"]`);
+  
+  if (button) {
+    // Show loading state
+    const originalText = button.textContent;
+    button.textContent = "Downloading...";
+    button.disabled = true;
 
-  // Create and trigger download
-  setTimeout(() => {
-    const link = document.createElement('a');
-    link.href = zipFiles[platform];
-    link.download = `nyx-${platform}.zip`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Create and trigger download
+    setTimeout(() => {
+      const link = document.createElement('a');
+      link.href = zipFiles[platform];
+      link.download = `nyx-${platform}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-    // Restore button
-    event.target.textContent = originalText;
-    event.target.disabled = false;
+      // Restore button
+      button.textContent = originalText;
+      button.disabled = false;
 
-    // Show success message
-    showDownloadSuccess(platformNames[platform]);
-  }, 500);
+      // Show success message
+      showDownloadSuccess(platformNames[platform]);
+    }, 500);
+  } else {
+    // No button found, just trigger download
+    setTimeout(() => {
+      const link = document.createElement('a');
+      link.href = zipFiles[platform];
+      link.download = `nyx-${platform}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Show success message
+      showDownloadSuccess(platformNames[platform]);
+    }, 500);
+  }
 }
 
 // Show platform selection dialog
@@ -219,7 +237,7 @@ function showPlatformSelection() {
   dialog.querySelectorAll('.platform-option').forEach(option => {
     option.addEventListener('click', function() {
       const platform = this.getAttribute('data-platform');
-      downloadPlatformPackage(platform);
+      downloadPlatformPackage(platform, null); // Pass null for button element
       document.body.removeChild(dialog);
       document.head.removeChild(style);
     });

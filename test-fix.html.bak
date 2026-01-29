@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fixes - Alsania</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="loadComponents.js"></script>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <main class="container" style="padding: 40px; margin-top: 40px;">
+        <h1>Test Page for Fixes</h1>
+        
+        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>Logo Size Test</h2>
+            <p>The logo above should be properly sized (60px height, max-width: 300px).</p>
+            <p>Check that it's not oversized and maintains aspect ratio.</p>
+        </div>
+        
+        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>Download Links Test</h2>
+            <p>Test download links (simulated):</p>
+            <div style="display: flex; gap: 20px; margin-top: 20px;">
+                <button onclick="testDownload('windows')" class="alsania-btn">Test Windows Download</button>
+                <button onclick="testDownload('macos')" class="alsania-btn secondary">Test macOS Download</button>
+                <button onclick="testDownload('linux')" class="alsania-btn secondary">Test Linux Download</button>
+            </div>
+            <div id="download-test-result" style="margin-top: 20px; padding: 10px; background: var(--bg-tertiary); border-radius: 4px; display: none;"></div>
+        </div>
+        
+        <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>Path Analysis</h2>
+            <p id="path-info">Loading path info...</p>
+            <button onclick="analyzePaths()" class="alsania-btn">Analyze Paths</button>
+        </div>
+    </main>
+    
+    <div id="footer-container"></div>
+    
+    <script>
+        function testDownload(platform) {
+            const getBasePath = () => {
+                if (window.location.hostname === 'alsania-dev.github.io') {
+                    return '/alsania-io-site';
+                }
+                return '';
+            };
+            
+            const basePath = getBasePath();
+            const zipFiles = {
+                windows: basePath + '/tools/nyx/downloads/win-nyx-v1.0.0.zip',
+                macos: basePath + '/tools/nyx/downloads/mac-nyx-v1.0.0.zip',
+                linux: basePath + '/tools/nyx/downloads/linux-nyx-v1.0.0.zip'
+            };
+            
+            const resultDiv = document.getElementById('download-test-result');
+            const url = zipFiles[platform];
+            
+            resultDiv.innerHTML = `
+                <strong>Platform:</strong> ${platform}<br>
+                <strong>Base Path:</strong> "${basePath}"<br>
+                <strong>Full URL:</strong> "${url}"<br>
+                <strong>Status:</strong> ${url ? '✓ Path constructed' : '✗ Missing path'}
+            `;
+            resultDiv.style.display = 'block';
+            
+            console.log(`Test download for ${platform}:`, url);
+        }
+        
+        function analyzePaths() {
+            const info = document.getElementById('path-info');
+            const data = {
+                hostname: window.location.hostname,
+                protocol: window.location.protocol,
+                pathname: window.location.pathname,
+                href: window.location.href,
+                'window.ALSANIA_BASE_PATH': window.ALSANIA_BASE_PATH || '(not set)'
+            };
+            
+            let html = '<strong>Current Location Analysis:</strong><br>';
+            for (const [key, value] of Object.entries(data)) {
+                html += `<strong>${key}:</strong> ${value}<br>`;
+            }
+            
+            // Check if on GitHub Pages
+            const isGitHubPages = window.location.hostname === 'alsania-dev.github.io';
+            html += `<br><strong>GitHub Pages Detected:</strong> ${isGitHubPages ? '✓ YES' : '✗ NO'}<br>`;
+            
+            // Expected base path
+            const expectedBasePath = isGitHubPages ? '/alsania-io-site' : '';
+            html += `<strong>Expected Base Path:</strong> "${expectedBasePath}"`;
+            
+            info.innerHTML = html;
+        }
+        
+        // Run analysis on load
+        document.addEventListener('DOMContentLoaded', analyzePaths);
+    </script>
+</body>
+</html>

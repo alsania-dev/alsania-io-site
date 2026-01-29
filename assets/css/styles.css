@@ -183,6 +183,7 @@ a:hover {
 .logo-image {
   height: 60px;
   width: auto;
+  max-width: 300px;
   transition: var(--transition);
 }
 

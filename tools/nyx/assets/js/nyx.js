@@ -58,10 +58,19 @@ function downloadPlatformPackage(platform, buttonElement) {
     linux: "Linux"
   };
 
+  // Get base path for GitHub Pages
+  const getBasePath = () => {
+    if (window.location.hostname === 'alsania-dev.github.io') {
+      return '/alsania-io-site';
+    }
+    return '';
+  };
+  
+  const basePath = getBasePath();
   const zipFiles = {
-    windows: "/tools/nyx/downloads/win-nyx-v1.0.0.zip",
-    macos: "/tools/nyx/downloads/mac-nyx-v1.0.0.zip",
-    linux: "/tools/nyx/downloads/linux-nyx-v1.0.0.zip"
+    windows: basePath + "/tools/nyx/downloads/win-nyx-v1.0.0.zip",
+    macos: basePath + "/tools/nyx/downloads/mac-nyx-v1.0.0.zip",
+    linux: basePath + "/tools/nyx/downloads/linux-nyx-v1.0.0.zip"
   };
 
   // Track platform download

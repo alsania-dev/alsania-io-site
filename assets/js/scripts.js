@@ -1,39 +1,12 @@
 // Alsania Main JavaScript
-// Component loader and site functionality
-
-// Load components
-async function loadComponent(id, url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to load ${url}`);
-    const html = await response.text();
-    document.getElementById(id).innerHTML = html;
-  } catch (error) {
-    console.error(`Error loading component ${id}:`, error);
-  }
-}
+// Site functionality (components loaded by loadComponents.js)
 
 // Load all components when DOM is ready
+// Components are loaded by loadComponents.js, which has better path handling
+// This file only handles interactive functionality
 document.addEventListener("DOMContentLoaded", async () => {
-  // Load components if their containers exist
-  if (document.getElementById("header-container")) {
-    await loadComponent("header-container", "../components/header.html");
-  }
-  if (document.getElementById("nav-container")) {
-    await loadComponent("nav-container", "../components/nav.html");
-  }
-  if (document.getElementById("footer-container")) {
-    await loadComponent("footer-container", "../components/footer.html");
-  }
-
-  // Initialize theme toggle if it exists
-  if (document.getElementById("theme-toggle-container")) {
-    await loadComponent(
-      "theme-toggle-container",
-      "../components/theme-toggle.html",
-    );
-    initThemeToggle();
-  }
+  // Initialize theme toggle if it exists (component loaded by loadComponents.js)
+  initThemeToggle();
 
   // Initialize mobile menu
   initMobileMenu();

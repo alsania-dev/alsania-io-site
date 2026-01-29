@@ -179,22 +179,61 @@ const INLINE_COMPONENTS = {
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
   const hostname = window.location.hostname;
-  const pathname = window.location.pathname;
   
   if (protocol === "file:") {
     // For file:// - build absolute file:// path to components folder
+    const pathname = window.location.pathname;
     const projectRoot = pathname.substring(
       0,
       pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
     );
     return "file://" + projectRoot + "/components";
-  } else if (hostname === "alsania-dev.github.io") {
-    // GitHub Pages - add repository name
-    return "/alsania-io-site/components";
   } else {
-    // Cloudflare Pages or custom domain - use root path
-    return "/components";
+    // For web - use the same base path logic as fix-paths.js
+    let basePath = '';
+    if (hostname === 'alsania-dev.github.io') {
+      basePath = '/alsania-io-site';
+    }
+    return basePath + '/components';
   }
+}
+
+// Get the base path for fixing URLs (same logic as fix-paths.js)
+function getBasePath() {
+  const hostname = window.location.hostname;
+  if (hostname === 'alsania-dev.github.io') {
+    return '/alsania-io-site';
+  }
+  return '';
+}
+
+// Fix paths in HTML string before inserting into DOM
+function fixPathsInHtml(html) {
+  const basePath = getBasePath();
+  if (!basePath) return html; // No fixing needed if at root
+  
+  log(`Fixing paths in HTML with basePath: ${basePath}`);
+  
+  // Simple regex-based replacement for common patterns
+  // This is simpler than parsing HTML
+  let fixedHtml = html;
+  
+  // Fix src attributes
+  fixedHtml = fixedHtml.replace(
+    /src="\/([^\/][^"]*)"/g,
+    `src="${basePath}/$1"`
+  );
+  
+  // Fix href attributes (for internal links)
+  fixedHtml = fixedHtml.replace(
+    /href="\/([^\/][^"]*)"/g,
+    `href="${basePath}/$1"`
+  );
+  
+  log(`HTML before fix sample: ${html.substring(0, 200)}...`);
+  log(`HTML after fix sample: ${fixedHtml.substring(0, 200)}...`);
+  
+  return fixedHtml;
 }
 
 // Load a single component
@@ -221,8 +260,11 @@ function loadComponent(containerId, componentName) {
         }
       } else {
         // Use fetch for http/https
-        const basePath = getComponentsBasePath();
-        const url = `${basePath}/${componentName}`;
+        // Handle relative paths (e.g., "../components/header.html")
+        let url;
+        if (componentName.startsWith("../")) {
+          // For ../components/header.html, we want to go up from components folder
+          // Actually, ../components means 
 
         log(`Fetching from ${url}`);
 
@@ -232,7 +274,9 @@ function loadComponent(containerId, componentName) {
             return response.text();
           })
           .then((html) => {
-            container.innerHTML = html;
+            // Fix paths in the HTML before inserting it
+            const fixedHtml = fixPathsInHtml(html);
+            container.innerHTML = fixedHtml;
             log(`✓ ${containerId} loaded successfully`);
             resolve(container);
           })
@@ -373,14 +417,14 @@ function initComponents() {
   // Load header first
   let headerPromise = Promise.resolve();
   if (document.getElementById("header-container")) {
-    headerPromise = loadComponent("header-container", "components/header.html");
+    headerPromise = loadComponent("header-container", "../components/header.html");
   }
 
   headerPromise
     .then(() => {
       // Now load nav into the header
       if (document.getElementById("nav-container")) {
-        return loadComponent("nav-container", "components/nav.html");
+        return loadComponent("nav-container", "../components/nav.html");
       }
     })
     .then(() => {
@@ -388,14 +432,14 @@ function initComponents() {
       if (document.getElementById("theme-toggle-container")) {
         return loadComponent(
           "theme-toggle-container",
-          "components/theme-toggle.html",
+          "../components/theme-toggle.html",
         );
       }
     })
     .then(() => {
       // Now load footer
       if (document.getElementById("footer-container")) {
-        return loadComponent("footer-container", "components/footer.html");
+        return loadComponent("footer-container", "../components/footer.html");
       }
     })
     .then(() => {

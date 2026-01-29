@@ -83,11 +83,54 @@
     console.log(`Alsania path fix applied. Base: ${basePath || '(root)'}`);
   }
   
+  // Function to fix newly added elements
+  function fixNewElements(mutations) {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        // Check added nodes
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            // Fix links in added nodes
+            if (node.matches('a[href]')) {
+              fixAttribute(node, 'href');
+            }
+            // Fix images in added nodes
+            if (node.matches('img[src]')) {
+              fixAttribute(node, 'src');
+            }
+            // Fix links and images within added nodes
+            node.querySelectorAll?.('a[href]').forEach(link => fixAttribute(link, 'href'));
+            node.querySelectorAll?.('img[src]').forEach(img => fixAttribute(img, 'src'));
+          }
+        });
+      }
+    }
+  }
+  
+  // Set up MutationObserver for dynamically added content
+  function setupMutationObserver() {
+    if (!basePath) return; // No need if we're at root
+    
+    const observer = new MutationObserver(fixNewElements);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    if (window.ALSANIA_DEBUG) {
+      console.log('MutationObserver set up for dynamic content');
+    }
+  }
+  
   // Run when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixAllPaths);
+    document.addEventListener('DOMContentLoaded', () => {
+      fixAllPaths();
+      setupMutationObserver();
+    });
   } else {
     fixAllPaths();
+    setupMutationObserver();
   }
   
   // Export for debugging

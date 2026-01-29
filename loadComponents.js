@@ -178,7 +178,9 @@ const INLINE_COMPONENTS = {
 // Calculate correct path to components based on current page
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
+  const hostname = window.location.hostname;
   const pathname = window.location.pathname;
+  
   if (protocol === "file:") {
     // For file:// - build absolute file:// path to components folder
     const projectRoot = pathname.substring(
@@ -186,8 +188,11 @@ function getComponentsBasePath() {
       pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
     );
     return "file://" + projectRoot + "/components";
+  } else if (hostname === "alsania-dev.github.io") {
+    // GitHub Pages - add repository name
+    return "/alsania-io-site/components";
   } else {
-    // For http/https - use absolute path from root
+    // Cloudflare Pages or custom domain - use root path
     return "/components";
   }
 }

@@ -182,19 +182,19 @@ const protocol = window.location.protocol;
 const pathname = window.location.pathname;
 
 if (protocol === "file:") {
-// For file:// - build absolute file:// path to components folder
+// For file:// - build absolute file:// path to project root
 const projectRoot = pathname.substring(
 0,
 pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
 );
-return "file://" + projectRoot + "/components";
+return "file://" + projectRoot;
   } else if (hostname === "alsania-dev.github.io") {
     // GitHub Pages - add repository name
-    return "/alsania-io-site/components";
+    return "/alsania-io-site";
 } else {
     // For http/https - use absolute path from root
     // Cloudflare Pages or custom domain - use root path
-return "/components";
+return "";
 }
 }
 

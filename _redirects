@@ -3,9 +3,8 @@
 # Store redirects
 /dashery https://mnemonic.dashery.com/ 302
 /redbubble https://www.redbubble.com/people/AlsaniaArt/shop 302
-/merch /shop/index.html 302
-/shop /shop/index.html 302
 /mnemonic /shop/index.html 302
+/spiritwolf https://spiritwolf.dashery.com/ 302
 
 # Legal page redirects
 /disclaimer /legal/disclaimer.html 301

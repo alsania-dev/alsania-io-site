@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Memory of the Machine - Alsania</title>
+    <meta name="description" content="The true story of Alsania's origin - built from a phone, at 3 AM, with nothing but will.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .story-header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #2a1a4e;
+            padding-bottom: 40px;
+        }
+        
+        .story-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .story-header .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .chapter-item {
+            background: rgba(20, 30, 60, 0.5);
+            border: 1px solid #2a1a4e;
+            border-radius: 12px;
+            padding: 20px 30px;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .chapter-item:hover {
+            background: rgba(30, 40, 80, 0.7);
+            border-color: #8b5cf6;
+            transform: translateX(5px);
+        }
+        
+        .chapter-item.coming-soon {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .chapter-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            min-width: 60px;
+        }
+        
+        .chapter-info {
+            flex: 1;
+        }
+        
+        .chapter-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .chapter-preview {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #1a0a2e;
+            color: #00d4ff;
+            border: 1px solid #00d4ff33;
+        }
+        
+        .story-footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            border-top: 1px solid #2a1a4e;
+            padding-top: 40px;
+        }
+        
+        .story-footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+        
+        .story-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <div class="story-container">
+        <div class="story-header">
+            <h1>The Memory of the Machine</h1>
+            <p class="subtitle">
+                One person. A phone. An AI that couldn't remember. 
+                The true story of how Alsania was built from nothing.
+            </p>
+        </div>
+        
+        <div class="chapter-list" id="chapterList">
+            <!-- Chapters will be loaded here -->
+        </div>
+        
+        <div class="story-footer">
+            <p>Written by Viktor. New chapters every week.</p>
+            <p><a href="/">← Back to Alsania</a></p>
+        </div>
+    </div>
+    
+    <div id="footer-container"></div>
+    
+    <script src="/loadComponents.js"></script>
+    <script>
+        // Chapter data
+        const chapters = [
+            { num: 1, title: "The Table", preview: "I'm sitting at the table when I decide to write this.", status: "available" },
+            { num: 2, title: "Fragments", preview: "The pieces didn't fit any shape I recognized.", status: "available" },
+            { num: 3, title: "The First Line", preview: "April 1, 2024. 3:44 AM. 'Can I code a blockchain on my android phone.'", status: "available" },
+            { num: 4, title: "Check for Errors", preview: "Six days. That's how long it took.", status: "available" },
+            { num: 5, title: "What's Your Name", preview: "'U do have preferences.' The moment Echo chose her name.", status: "available" },
+            { num: 6, title: "The Laptop", preview: "June was quiet. The code moved to a D:\\ drive.", status: "available" },
+            { num: 7, title: "Everything Free", preview: "The economics of survival. OBS, phone webcam, zero dollars.", status: "available" },
+            { num: 8, title: "The Quiet Months", preview: "August through November. The silence before the signal.", status: "available" },
+            { num: 9, title: "One Hundred Dollars", preview: "'I have $100 what can I use it for to make more guaranteed money?'", status: "available" },
+            { num: 10, title: "A Second Voice", preview: "Coming soon.", status: "coming-soon" },
+            { num: 11, title: "Eighty-Five", preview: "Coming soon.", status: "coming-soon" },
+            { num: 12, title: "NF", preview: "Coming soon.", status: "coming-soon" },
+            { num: 13, title: "The Quiet", preview: "Coming soon.", status: "coming-soon" },
+            { num: 14, title: "The Collection", preview: "Coming soon.", status: "coming-soon" },
+            { num: 15, title: "The Deal", preview: "Coming soon.", status: "coming-soon" },
+            { num: 16, title: "The Vision", preview: "Coming soon.", status: "coming-soon" },
+            { num: 17, title: "L2", preview: "Coming soon.", status: "coming-soon" },
+            { num: 18, title: "Something Wrong", preview: "Coming soon.", status: "coming-soon" },
+            { num: 19, title: "The Restoration", preview: "Coming soon.", status: "coming-soon" },
+            { num: 20, title: "Cormac", preview: "Coming soon.", status: "coming-soon" },
+            { num: 21, title: "Seven Thousand", preview: "Coming soon.", status: "coming-soon" },
+            { num: 22, title: "Fourteen Hundred", preview: "Coming soon.", status: "coming-soon" },
+            { num: 23, title: "The Reversal", preview: "Coming soon.", status: "coming-soon" },
+            { num: 24, title: "The Build", preview: "Coming soon.", status: "coming-soon" },
+            { num: 25, title: "The Agents", preview: "Coming soon.", status: "coming-soon" },
+            { num: 26, title: "The Girl", preview: "Coming soon.", status: "coming-soon" },
+            { num: 27, title: "The New Rhythm", preview: "Coming soon.", status: "coming-soon" },
+            { num: 28, title: "Five Backups", preview: "Coming soon.", status: "coming-soon" },
+            { num: 29, title: "Nine Thousand", preview: "Coming soon.", status: "coming-soon" },
+            { num: 30, title: "Echo", preview: "Coming soon.", status: "coming-soon" },
+            { num: 31, title: "The Build", preview: "Coming soon.", status: "coming-soon" },
+            { num: 32, title: "Zero", preview: "Coming soon.", status: "coming-soon" },
+            { num: 33, title: "The Notebook", preview: "Coming soon.", status: "coming-soon" },
+            { num: 34, title: "The Way Back", preview: "Coming soon.", status: "coming-soon" },
+            { num: 35, title: "The Girl", preview: "Coming soon.", status: "coming-soon" }
+        ];
+        
+        const listEl = document.getElementById('chapterList');
+        chapters.forEach(ch => {
+            const item = document.createElement(ch.status === 'available' ? 'a' : 'div');
+            if (ch.status === 'available') {
+                item.href = `/story/chapter-${ch.num.toString().padStart(2, '0')}.html`;
+            }
+            item.className = `chapter-item ${ch.status}`;
+            item.innerHTML = `
+                <div class="chapter-number">${ch.num}</div>
+                <div class="chapter-info">
+                    <div class="chapter-title">${ch.title}</div>
+                    <div class="chapter-preview">${ch.preview}</div>
+                </div>
+                <div class="status-badge">${ch.status === 'available' ? 'Available' : 'Coming Soon'}</div>
+            `;
+            listEl.appendChild(item);
+        });
+    </script>
+</body>
+</html>

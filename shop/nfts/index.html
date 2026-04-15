@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sigma's NFT Gallery | Alsania Collections</title>
+    <meta
+      name="description"
+      content="Explore Sigma's NFT collection across multiple marketplaces. View, admire, and purchase NFTs from the Alsania ecosystem."
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+
+    <!-- NFT Gallery Styles -->
+    <link rel="stylesheet" href="assets/css/nft-gallery.css" />
+  </head>
+  <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="nft-gallery-hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Sigma's NFT Gallery</h1>
+          <p>
+            Explore my curated NFT collection across multiple blockchains and marketplaces.
+            Each piece tells a story in the Alsania ecosystem.
+          </p>
+          <div class="wallet-address">
+            Current Wallet: <span id="current-wallet">Loading...</span>
+            <br>
+            <small><a href="#wallet-input" id="change-wallet-link">Change wallet</a></small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Controls -->
+    <section class="gallery-controls">
+      <div class="container">
+        <div class="controls-container">
+          <div class="control-group">
+            <span class="control-label">Chain:</span>
+            <div class="chain-selector" id="chain-selector">
+              <!-- Chains will be dynamically added -->
+            </div>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Filter:</span>
+            <div class="filter-selector" id="filter-selector">
+              <!-- Filters will be dynamically added -->
+            </div>
+          </div>
+
+          <input 
+            type="text" 
+            class="search-box" 
+            placeholder="Search NFTs by name, collection, or description..."
+            id="nft-search"
+            autocomplete="off"
+          />
+
+          <button class="alsania-btn small" id="refresh-btn" title="Refresh collection">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+      <div class="container">
+        <div class="stats-container">
+          <div class="stat-item">
+            <span class="stat-value" id="total-nfts">0</span>
+            <span class="stat-label">Total NFTs</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="active-filter">All</span>
+            <span class="stat-label">Active Filter</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="current-chain">Ethereum</span>
+            <span class="stat-label">Current Chain</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="visible-nfts">0</span>
+            <span class="stat-label">Currently Showing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NFT Grid -->
+    <section class="section">
+      <div class="container">
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-state">
+          <div class="loading-spinner"></div>
+          <p>Loading NFT collection from wallet...</p>
+          <p class="form-notes">Using demo mode with sample NFTs</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <div class="empty-state-icon">🖼️</div>
+          <h3>No NFTs Found</h3>
+          <p id="empty-state-message">This wallet doesn't appear to have any NFTs on the selected chain.</p>
+          <a href="#wallet-input" class="alsania-btn secondary">Try another wallet</a>
+          <button class="alsania-btn small" id="try-demo-btn" style="margin-top: 10px;">
+            Load Demo NFTs Instead
+          </button>
+        </div>
+
+        <!-- NFT Grid -->
+        <div id="nft-grid" class="nft-grid" style="display: none;">
+          <!-- NFTs will be dynamically inserted here -->
+        </div>
+
+        <!-- Load More Button -->
+        <div id="load-more-container" style="display: none; text-align: center; margin-top: 40px;">
+          <button class="alsania-btn secondary" id="load-more-btn">
+            Load More NFTs
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wallet Input Section -->
+    <section id="wallet-input" class="wallet-input-section">
+      <div class="container">
+        <div class="wallet-form">
+          <h3>View Another Wallet</h3>
+          <p>Enter any Ethereum wallet address to view its NFT collection:</p>
+          
+          <div class="wallet-input-group">
+            <input 
+              type="text" 
+              placeholder="0x..." 
+              id="wallet-address-input"
+              pattern="^0x[a-fA-F0-9]{40}$"
+              title="Enter a valid Ethereum address starting with 0x"
+            />
+            <button class="alsania-btn" id="load-wallet-btn">
+              <span class="btn-icon">🔍</span>
+              Load NFT Gallery
+            </button>
+          </div>
+          
+          <div class="quick-wallets" style="margin-top: 20px;">
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">
+              Quick wallets to test:
+            </p>
+            <div class="quick-wallet-buttons">
+              <button class="quick-wallet-btn" data-address="0x742d35Cc6634C0532925a3b844Bc9e8F5A5C6bF3">
+                Example Wallet 1
+              </button>
+              <button class="quick-wallet-btn" data-address="0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B">
+                Example Wallet 2
+              </button>
+              <button class="quick-wallet-btn" data-address="0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326">
+                Example Wallet 3
+              </button>
+            </div>
+          </div>
+          
+          <p class="form-notes">
+            Privacy note: This only reads public blockchain data. No private keys needed.
+            <br>
+            <a href="#" id="use-my-wallet">Use my connected wallet instead</a> | 
+            <a href="#" id="use-demo-mode">Use demo mode</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" style="background: var(--bg-tertiary)">
+      <div class="container">
+        <h2 style="text-align: center; color: var(--accent-primary); margin-bottom: 40px;">
+          How This NFT Gallery Works
+        </h2>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>🔗 Wallet Integration</h3>
+            <p>
+              Enter any Ethereum wallet address to view its NFT collection across multiple chains.
+              Uses public blockchain APIs for real-time data.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🛒 Marketplace Links</h3>
+            <p>
+              Each NFT shows purchase links to major marketplaces: OpenSea, Rarible, Blur, and LooksRare.
+              Direct access to buy/sell listings.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🔍 Advanced Filtering</h3>
+            <p>
+              Filter by category (art, collectibles, PFPs), search by name/description,
+              and switch between different blockchain networks.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>📱 Mobile Optimized</h3>
+            <p>
+              Fully responsive design that works perfectly on desktop, tablet, and mobile devices.
+              Clean, fast-loading interface.
+            </p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <h3 style="color: var(--accent-secondary); margin-bottom: 20px;">
+            Ready to Showcase Your NFTs?
+          </h3>
+          <p style="max-width: 800px; margin: 0 auto 30px;">
+            This gallery can be customized for any Ethereum wallet. Want your own branded NFT gallery?
+            Contact us to discuss custom development and integration.
+          </p>
+          <a href="/contact" class="alsania-btn">Contact for Custom Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../loadComponents.js"></script>
+    <script src="assets/js/nft-utils.js"></script>
+    <script src="assets/js/nft-gallery.js"></script>
+  </body>
+</html>

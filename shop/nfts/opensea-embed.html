@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mnemonic NFT Gallery | OpenSea Embed</title>
+    <meta
+      name="description"
+      content="Browse Sigma's NFT collection on OpenSea. All marketplace links included."
+    />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-GYKRZLYBXQ');
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+
+    <style>
+      .embed-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .embed-hero {
+        text-align: center;
+        padding: 40px 0;
+        margin-bottom: 30px;
+      }
+      
+      .instructions {
+        background: var(--bg-tertiary);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        margin-top: 30px;
+        border: 1px solid var(--border-color);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="embed-hero">
+      <div class="container">
+        <h1>Mnemonic NFT Gallery</h1>
+        <p>Powered by OpenSea • Auto-updates with your collection</p>
+        <div class="wallet-info" style="margin-top: 20px; padding: 10px 20px; background: rgba(0,212,255,0.1); border-radius: var(--border-radius); display: inline-block;">
+          Wallet: <code>0x78dB...3F43</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- OpenSea Embed -->
+    <section class="section">
+      <div class="container">
+        <div class="embed-container">
+          <!-- ONE LINE OF CODE SOLUTION -->
+          <iframe 
+            src="https://opensea.io/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43?embed=true"
+            width="100%" 
+            height="800" 
+            frameborder="0" 
+            allowfullscreen
+            style="border-radius: var(--border-radius); border: 1px solid var(--border-color);"
+          ></iframe>
+          
+          <div class="instructions">
+            <h3>✨ How This Works</h3>
+            <p>This embed shows <strong>all NFTs in your wallet</strong> automatically:</p>
+            <ul>
+              <li>✅ Auto-updates when you get new NFTs</li>
+              <li>✅ Shows marketplace links (OpenSea, looksrare, etc.)</li>
+              <li>✅ Filters out most spam (OpenSea does this)</li>
+              <li>✅ Mobile responsive</li>
+              <li>✅ Zero maintenance - it just works</li>
+            </ul>
+            <p><strong>To feature other users:</strong> They connect wallet → Shows their NFTs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternative: Collection-specific view -->
+    <section class="section" style="background: var(--bg-tertiary);">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Collection-Specific Views</h2>
+        <p style="text-align: center; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Want to show only specific collections? Use these embeds:
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <div style="background: var(--bg-secondary); padding: 20px; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+            <h3>Alsania Genesis Collection</h3>
+            <iframe 
+              src="https://opensea.io/collection/alsania-genesis?embed=true"
+              width="100%" 
+              height="400" 
+              frameborder="0"
+              style="border-radius: 8px; margin-top: 15px;"
+            ></iframe>
+          </div>
+          
+          <div style="background: var(--bg-secondary); padding: 20px; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+            <h3>Add Another Collection</h3>
+            <p>Get collection URL from OpenSea, replace below:</p>
+            <code style="display: block; background: var(--bg-tertiary); padding: 10px; border-radius: 5px; margin: 10px 0; font-size: 0.9rem;">
+              https://opensea.io/collection/COLLECTION-NAME?embed=true
+            </code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="../../assets/js/scripts.js"></script>
+    <script src="../../loadComponents.js"></script>
+    
+    <script>
+      // Track embed views
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'opensea_embed_view', {
+            event_category: 'NFT Gallery',
+            event_label: 'OpenSea Embed Loaded'
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mnemonic NFT Gallery | URL-Based</title>
+    <meta name="description" content="Add NFTs by pasting OpenSea URLs - simple.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    
+    <style>
+        .add-form {
+            background: var(--bg-tertiary);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .url-input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: monospace;
+        }
+        
+        .nft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .nft-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .nft-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+    
+    <section class="section">
+        <div class="container">
+            <h1 style="text-align: center;">NFT Gallery</h1>
+            <p style="text-align: center; color: var(--text-secondary);">
+                Add NFTs by pasting OpenSea URLs
+            </p>
+            
+            <!-- Add NFT Form -->
+            <div class="add-form">
+                <h3>Add New NFT</h3>
+                <p>When you list an NFT on OpenSea, paste the URL here:</p>
+                <input type="text" class="url-input" placeholder="https://opensea.io/assets/ethereum/0x.../123" id="opensea-url">
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="alsania-btn" onclick="addNFT()">Add NFT</button>
+                    <button class="alsania-btn secondary" onclick="loadExample()">Load Example</button>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 15px;">
+                    Works with OpenSea, Rarible, Blur URLs. The page will remember your NFTs.
+                </p>
+            </div>
+            
+            <!-- NFT Display -->
+            <div id="nft-container">
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <p>No NFTs added yet. Paste an OpenSea URL above.</p>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div style="background: var(--bg-tertiary); padding: 20px; border-radius: var(--border-radius); margin-top: 40px;">
+                <h3>How This Works</h3>
+                <ol style="color: var(--text-secondary); margin-left: 20px;">
+                    <li>List NFT on OpenSea/Rarible/Blur</li>
+                    <li>Copy the marketplace URL</li>
+                    <li>Paste it in the form above</li>
+                    <li>NFT appears here with buy link</li>
+                </ol>
+                <p><strong>For other users:</strong> They send you their marketplace URL, you paste it here.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="../../assets/js/scripts.js"></script>
+    <script src="../../loadComponents.js"></script>
+    
+    <script>
+        // Simple storage for NFTs
+        let nfts = JSON.parse(localStorage.getItem('mnemonic_nfts') || '[]');
+        
+        // Render NFTs on load
+        document.addEventListener('DOMContentLoaded', renderNFTs);
+        
+        function addNFT() {
+            const url = document.getElementById('opensea-url').value.trim();
+            if (!url) return alert('Please enter a URL');
+            
+            // Extract info from URL (simplified)
+            const nft = {
+                id: 'nft-' + Date.now(),
+                url: url,
+                name: 'NFT from ' + new Date().toLocaleDateString(),
+                added: new Date().toISOString().split('T')[0]
+            };
+            
+            // Try to get better name from URL
+            if (url.includes('opensea.io/assets/')) {
+                const parts = url.split('/');
+                nft.name = 'OpenSea NFT #' + (parts[parts.length - 1] || '?');
+            }
+            
+            nfts.push(nft);
+            localStorage.setItem('mnemonic_nfts', JSON.stringify(nfts));
+            document.getElementById('opensea-url').value = '';
+            renderNFTs();
+            alert('NFT added! It will appear in the gallery.');
+        }
+        
+        function loadExample() {
+            document.getElementById('opensea-url').value = 
+                'https://opensea.io/assets/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/1';
+        }
+        
+        function renderNFTs() {
+            const container = document.getElementById('nft-container');
+            if (!container) return;
+            
+            if (nfts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                        <p>No NFTs added yet. Paste an OpenSea URL above.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="nft-grid">';
+            
+            nfts.forEach(nft => {
+                // Simple marketplace detection
+                let marketplace = 'Marketplace';
+                let icon = '🔗';
+                if (nft.url.includes('opensea.io')) {
+                    marketplace = 'OpenSea'; 
+                    icon = '🌊';
+                } else if (nft.url.includes('rarible.com')) {
+                    marketplace = 'Rarible'; 
+                    icon = '🖼️';
+                } else if (nft.url.includes('blur.io')) {
+                    marketplace = 'Blur'; 
+                    icon = '🌀';
+                }
+                
+                html += `
+                    <div class="nft-card">
+                        <div style="font-size: 3rem; margin-bottom: 15px;">${icon}</div>
+                        <h3>${nft.name}</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Listed on ${marketplace}<br>
+                            Added: ${nft.added}
+                        </p>
+                        <a href="${nft.url}" target="_blank" class="alsania-btn small" style="margin-top: 15px;">
+                            View on ${marketplace}
+                        </a>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        // Optional: Clear button for testing
+        function clearNFTs() {
+            if (confirm('Clear all NFTs?')) {
+                localStorage.removeItem('mnemonic_nfts');
+                nfts = [];
+                renderNFTs();
+            }
+        }
+    </script>
+</body>
+</html>

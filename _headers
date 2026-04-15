@@ -1,0 +1,44 @@
+# Cloudflare Pages Headers
+# https://developers.cloudflare.com/pages/platform/headers/
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# CORS for assets
+/assets/*
+  Access-Control-Allow-Origin: *
+
+# Component files
+/components/*
+  Access-Control-Allow-Origin: *
+
+# Don't cache HTML (cache assets)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cache assets for 1 year
+/assets/**/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache images for 1 month
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.webp
+  Cache-Control: public, max-age=2592000
+
+# Cache CSS/JS for 1 year
+*.css
+*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Don't cache API/JSON
+*.json
+  Cache-Control: no-cache, no-store, must-revalidate

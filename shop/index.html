@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alsania Merchandise - Official Stores | Dashery & Redbubble</title>
+    <meta
+      name="description"
+      content="Shop official Alsania merchandise on Dashery and Redbubble. Support sovereign technology with apparel, accessories, and community designs."
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-GYKRZLYBXQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-GYKRZLYBXQ");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
+    <style>
+      .store-directory {
+        text-align: center;
+        padding: 80px 0;
+        background: linear-gradient(
+          135deg,
+          var(--bg-secondary),
+          var(--bg-tertiary)
+        );
+      }
+
+      .store-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        margin: 60px 0;
+      }
+
+      .store-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 40px 30px;
+        text-align: center;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .store-card:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .store-icon {
+        font-size: 3rem;
+        margin-bottom: 25px;
+        display: block;
+      }
+
+      .store-features {
+        list-style: none;
+        margin: 25px 0;
+        padding-left: 0;
+        text-align: left;
+        width: 100%;
+      }
+
+      .store-features li {
+        padding: 8px 0;
+        color: var(--text-secondary);
+        position: relative;
+        padding-left: 25px;
+      }
+
+      .store-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--accent-secondary);
+        font-weight: bold;
+      }
+
+      .redirect-note {
+        background: var(--bg-tertiary);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        margin: 30px 0;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="store-directory">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Alsania Merchandise</h1>
+          <p>
+            Support sovereign technology by shopping official Alsania
+            merchandise. Every purchase helps fund our open-source development
+            and community initiatives.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Directory -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Official Stores</h2>
+        <p class="text-center" style="max-width: 800px; margin: 0 auto 40px">
+          Choose your preferred store platform. Both offer high-quality Alsania
+          merchandise with different product selections and design options.
+        </p>
+
+        <div class="store-cards">
+          <!-- Dashery Store -->
+          <div class="store-card">
+            <span class="store-icon">🛍️</span>
+            <h3>Dashery Store</h3>
+            <p>
+              Official Alsania merchandise with curated designs and premium
+              products.
+            </p>
+
+            <ul class="store-features">
+              <li>Officially licensed designs</li>
+              <li>Premium product quality</li>
+              <li>Direct support for Alsania development</li>
+              <li>New designs added regularly</li>
+              <li>Worldwide shipping</li>
+            </ul>
+
+            <div style="margin-top: auto; padding-top: 30px">
+              <a
+                href="/dashery"
+                class="alsania-btn"
+                target="_blank"
+                rel="noopener"
+                >Visit Dashery Store</a
+              >
+            </div>
+          </div>
+
+          <!-- Redbubble Store -->
+          <div class="store-card">
+            <span class="store-icon">🎨</span>
+            <h3>Redbubble Store</h3>
+            <p>
+              Community-designed merchandise with a wider range of products and
+              artists.
+            </p>
+
+            <ul class="store-features">
+              <li>Community artist designs</li>
+              <li>70% royalties to artists</li>
+              <li>Wider product selection</li>
+              <li>Independent creator support</li>
+              <li>Global print-on-demand</li>
+            </ul>
+
+            <div style="margin-top: auto; padding-top: 30px">
+              <a href="/redbubble" class="alsania-btn secondary"
+                >Visit Redbubble Store</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="redirect-note">
+          <p>
+            <strong>Note:</strong> These links use our redirect system. You'll
+            be taken to the official stores on their respective platforms.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How Your Purchase Helps -->
+    <section class="section" style="background: var(--bg-tertiary)">
+      <div class="container">
+        <h2
+          style="
+            text-align: center;
+            color: var(--accent-primary);
+            margin-bottom: 40px;
+          "
+        >
+          How Your Purchase Helps
+        </h2>
+
+        <div class="ecosystem-grid">
+          <div class="ecosystem-item">
+            <h3>🚀 Funds Development</h3>
+            <p>
+              Proceeds from Dashery sales directly fund Alsania's open-source
+              projects like Nyx, DevCon, and ScrypGen.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🎨 Supports Artists</h3>
+            <p>
+              Redbubble purchases provide 70% royalties to community artists who
+              create Alsania designs.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🌍 Spreads Awareness</h3>
+            <p>
+              Every item worn is a conversation starter about sovereign
+              technology and ethical innovation.
+            </p>
+          </div>
+
+          <div class="ecosystem-item">
+            <h3>🛡️ Builds Independence</h3>
+            <p>
+              Merchandise sales reduce reliance on donations and corporate
+              funding, keeping us independent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto">
+          <h2 style="color: var(--accent-primary); margin-bottom: 20px">
+            Get New Design Alerts
+          </h2>
+          <p style="margin-bottom: 30px">
+            Sign up to be notified when new merchandise designs launch on either
+            store.
+          </p>
+
+          <form class="waitlist-form">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+              aria-label="Email for new design alerts"
+            />
+            <button type="submit" class="alsania-btn">Get Alerts</button>
+          </form>
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.9rem;
+              margin-top: 15px;
+            "
+          >
+            We'll only email about new merchandise. No spam, unsubscribe
+            anytime.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../loadComponents.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Track store link clicks
+        document.querySelectorAll(".store-card a").forEach((link) => {
+          link.addEventListener("click", function () {
+            const storeName =
+              this.closest(".store-card").querySelector("h3").textContent;
+
+            if (typeof gtag !== "undefined") {
+              gtag("event", "store_visit", {
+                event_category: "Engagement",
+                event_label: storeName,
+              });
+            }
+          });
+        });
+
+        // Simple newsletter form
+        const newsletterForm = document.querySelector(".waitlist-form");
+        if (newsletterForm) {
+          newsletterForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            if (emailInput && emailInput.value.includes("@")) {
+              alert("Thanks! We'll notify you about new designs.");
+              emailInput.value = "";
+
+              if (typeof gtag !== "undefined") {
+                gtag("event", "merch_newsletter_signup", {
+                  event_category: "Engagement",
+                  event_label: "Dashery Page",
+                });
+              }
+            } else {
+              alert("Please enter a valid email address.");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

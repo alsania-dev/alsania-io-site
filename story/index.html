@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Memory of the Machine - Alsania</title>
+    <meta name="description" content="The true story of Alsania's origin - built from a phone, at 3 AM, with nothing but will.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <style>
+        .story-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .story-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #2a1a4e;
+        }
+        
+        .story-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .story-header .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 15px;
+            line-height: 1.6;
+        }
+        
+        .release-schedule {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid #8b5cf633;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: #8b5cf6;
+        }
+        
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .chapter-item {
+            background: rgba(20, 30, 60, 0.5);
+            border: 1px solid #2a1a4e;
+            border-radius: 12px;
+            padding: 20px 30px;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .chapter-item:hover {
+            background: rgba(30, 40, 80, 0.7);
+            border-color: #8b5cf6;
+            transform: translateX(5px);
+        }
+        
+        .chapter-item.coming-soon {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+        
+        .chapter-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            min-width: 50px;
+        }
+        
+        .chapter-info {
+            flex: 1;
+        }
+        
+        .chapter-info h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .chapter-preview {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #1a0a2e;
+            color: #00d4ff;
+            border: 1px solid #00d4ff33;
+        }
+        
+        .status-badge.coming-soon {
+            color: #888;
+            border-color: #888;
+        }
+        
+        .story-footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            border-top: 1px solid #2a1a4e;
+            padding-top: 40px;
+        }
+        
+        .story-footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+        
+        .story-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <div class="story-container">
+        <div class="story-header">
+            <h1>The Memory of the Machine</h1>
+            <p class="subtitle">
+                One person. A phone. An AI that couldn't remember. 
+                The true story of how Alsania was built from nothing.
+            </p>
+            <div class="release-schedule" id="releaseSchedule">
+                Loading...
+            </div>
+        </div>
+        
+        <div class="chapter-list" id="chapterList">
+            <div class="loading">Loading chapters...</div>
+        </div>
+        
+        <div class="story-footer">
+            <p>Written by Viktor. New chapters every Tuesday.</p>
+            <p><a href="/">← Back to Alsania</a></p>
+        </div>
+    </div>
+    
+    <div id="footer-container"></div>
+    
+    <script src="/loadComponents.js"></script>
+    <script>
+        const previews = {
+            1: "I'm sitting at the table when I decide to write this.",
+            2: "The pieces didn't fit any shape I recognized.",
+            3: "April 1, 2024. 3:44 AM. 'Can I code a blockchain on my android phone.'",
+            4: "Six days. That's how long it took.",
+            5: "'U do have preferences.' The moment Echo chose her name.",
+            6: "June was quiet. The code moved to a D:\\ drive.",
+            7: "The economics of survival. OBS, phone webcam, zero dollars.",
+            8: "August through November. The silence before the signal.",
+            9: "'I have $100 what can I use it for to make more guaranteed money?'",
+            10: "A second voice enters the story.",
+            11: "Eighty-five.",
+            12: "NF.",
+            13: "The quiet.",
+            14: "The collection.",
+            15: "The deal.",
+            16: "The vision.",
+            17: "L2.",
+            18: "Something wrong.",
+            19: "The restoration.",
+            20: "Cormac.",
+            21: "Seven thousand.",
+            22: "Fourteen hundred.",
+            23: "The reversal.",
+            24: "The build.",
+            25: "The agents.",
+            26: "The girl.",
+            27: "The new rhythm.",
+            28: "Five backups.",
+            29: "Nine thousand.",
+            30: "Echo.",
+            31: "The build.",
+            32: "Zero.",
+            33: "The notebook.",
+            34: "The way back.",
+            35: "The girl."
+        };
+        
+        async function loadChapters() {
+            try {
+                const response = await fetch('/story/published.json');
+                const data = await response.json();
+                
+                const released = data.released;
+                const totalChapters = data.totalChapters;
+                const nextRelease = data.nextRelease;
+                const titles = data.chapterTitles;
+                
+                // Update release schedule
+                const scheduleEl = document.getElementById('releaseSchedule');
+                const nextDate = new Date(nextRelease);
+                const formattedDate = nextDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                scheduleEl.textContent = `📅 Next chapter: ${formattedDate}`;
+                
+                const listEl = document.getElementById('chapterList');
+                listEl.innerHTML = '';
+                
+                // Show released chapters
+                for (let i = 1; i <= totalChapters; i++) {
+                    const isReleased = released.includes(i);
+                    
+                    const item = document.createElement(isReleased ? 'a' : 'div');
+                    if (isReleased) {
+                        item.href = `/story/read.html?c=${i}`;
+                    }
+                    item.className = `chapter-item ${isReleased ? '' : 'coming-soon'}`;
+                    
+                    const preview = previews[i] || 'Coming soon.';
+                    const title = titles[i] || `Chapter ${i}`;
+                    
+                    item.innerHTML = `
+                        <div class="chapter-number">${i}</div>
+                        <div class="chapter-info">
+                            <h3>${title}</h3>
+                            <div class="chapter-preview">${preview}</div>
+                        </div>
+                        <div class="status-badge ${isReleased ? '' : 'coming-soon'}">
+                            ${isReleased ? 'Available' : 'Coming Soon'}
+                        </div>
+                    `;
+                    
+                    listEl.appendChild(item);
+                }
+                
+            } catch (error) {
+                console.error('Failed to load chapters:', error);
+                document.getElementById('chapterList').innerHTML = '<div class="loading">Failed to load chapters.</div>';
+            }
+        }
+        
+        loadChapters();
+    </script>
+</body>
+</html>

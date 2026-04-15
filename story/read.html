@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Memory of the Machine - Alsania</title>
+    <meta name="description" content="The true story of Alsania's origin - built from a phone, at 3 AM, with nothing but will.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Main Site CSS -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <style>
+        .reading-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #2a1a4e;
+        }
+        
+        .chapter-number-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .progress-indicator {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .chapter-content {
+            flex: 1;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+            color: #d0d0d0;
+        }
+        
+        .chapter-content h1,
+        .chapter-content h2,
+        .chapter-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #fff;
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+        }
+        
+        .chapter-content h1 { font-size: 2rem; }
+        .chapter-content h2 { font-size: 1.5rem; }
+        .chapter-content h3 { font-size: 1.2rem; }
+        
+        .chapter-content p {
+            margin-bottom: 1.5em;
+        }
+        
+        .chapter-content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(30, 40, 70, 0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .chapter-content pre {
+            background: #0a0e27;
+            border: 1px solid #2a1a4e;
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+        }
+        
+        .chapter-content pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .chapter-content blockquote {
+            border-left: 3px solid #8b5cf6;
+            margin: 1.5em 0;
+            padding-left: 20px;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .chapter-content hr {
+            border: none;
+            border-top: 1px solid #2a1a4e;
+            margin: 2em 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #2a1a4e;
+        }
+        
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(20, 30, 60, 0.5);
+            border: 1px solid #2a1a4e;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .nav-button:hover {
+            background: rgba(30, 40, 80, 0.8);
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+        
+        .nav-button.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .nav-arrow {
+            font-size: 1.2rem;
+        }
+        
+        .chapter-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chapter-selector select {
+            background: rgba(20, 30, 60, 0.8);
+            border: 1px solid #2a1a4e;
+            border-radius: 20px;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .chapter-selector select option {
+            background: #0a0e27;
+        }
+        
+        .back-link {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #888;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 60px;
+            color: #ff5c5c;
+        }
+        
+        @media (max-width: 600px) {
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <div class="reading-container">
+        <div class="chapter-header">
+            <div class="chapter-number-label" id="chapterNumberLabel">Chapter </div>
+            <h1 class="chapter-title" id="chapterTitle"></h1>
+            <div class="progress-indicator" id="progressIndicator"></div>
+        </div>
+        
+        <div class="chapter-content" id="chapterContent">
+            <div class="loading">Loading chapter...</div>
+        </div>
+        
+        <div class="navigation">
+            <a href="#" class="nav-button" id="prevButton">
+                <span class="nav-arrow">←</span> Previous
+            </a>
+            
+            <div class="chapter-selector">
+                <select id="chapterSelect"></select>
+            </div>
+            
+            <a href="#" class="nav-button" id="nextButton">
+                Next <span class="nav-arrow">→</span>
+            </a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/story/" class="back-link">← Back to all chapters</a>
+        </div>
+    </div>
+    
+    <div id="footer-container"></div>
+    
+    <script src="/loadComponents.js"></script>
+    <script>
+        let publishedData = null;
+        let currentChapter = 1;
+        let totalChapters = 35;
+        
+        // Get chapter from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapterParam = urlParams.get('c');
+        if (chapterParam) {
+            currentChapter = parseInt(chapterParam, 10);
+        }
+        
+        async function loadPublishedData() {
+            try {
+                const response = await fetch('/story/published.json');
+                publishedData = await response.json();
+                totalChapters = publishedData.totalChapters;
+                
+                // Validate current chapter is published
+                if (!publishedData.released.includes(currentChapter)) {
+                    // Redirect to latest published chapter
+                    const latest = Math.max(...publishedData.released);
+                    window.location.href = `/story/read.html?c=${latest}`;
+                    return;
+                }
+                
+                setupNavigation();
+                loadChapter(currentChapter);
+            } catch (error) {
+                console.error('Failed to load published data:', error);
+                document.getElementById('chapterContent').innerHTML = '<div class="error">Failed to load chapter data.</div>';
+            }
+        }
+        
+        function setupNavigation() {
+            const released = publishedData.released;
+            const currentIndex = released.indexOf(currentChapter);
+            
+            // Setup prev/next based on released chapters only
+            const prevChapter = currentIndex > 0 ? released[currentIndex - 1] : null;
+            const nextChapter = currentIndex < released.length - 1 ? released[currentIndex + 1] : null;
+            
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            
+            if (prevChapter) {
+                prevButton.href = `/story/read.html?c=${prevChapter}`;
+                prevButton.classList.remove('disabled');
+            } else {
+                prevButton.classList.add('disabled');
+            }
+            
+            if (nextChapter) {
+                nextButton.href = `/story/read.html?c=${nextChapter}`;
+                nextButton.classList.remove('disabled');
+            } else {
+                nextButton.classList.add('disabled');
+            }
+            
+            // Populate chapter selector with only released chapters
+            const select = document.getElementById('chapterSelect');
+            released.forEach(ch => {
+                const option = document.createElement('option');
+                option.value = ch;
+                option.textContent = `Chapter ${ch}: ${publishedData.chapterTitles[ch] || ''}`;
+                if (ch === currentChapter) {
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            });
+            
+            select.addEventListener('change', (e) => {
+                const selected = parseInt(e.target.value, 10);
+                window.location.href = `/story/read.html?c=${selected}`;
+            });
+            
+            // Update header
+            document.getElementById('chapterNumberLabel').textContent = `Chapter ${currentChapter}`;
+            document.getElementById('chapterTitle').textContent = publishedData.chapterTitles[currentChapter] || '';
+            document.getElementById('progressIndicator').textContent = `Chapter ${currentChapter} of ${totalChapters}`;
+        }
+        
+        async function loadChapter(chapterNum) {
+            const contentDiv = document.getElementById('chapterContent');
+            
+            try {
+                const paddedNum = chapterNum.toString().padStart(2, '0');
+                const response = await fetch(`/story/chapters/chapter-${paddedNum}-${getChapterSlug(chapterNum)}.md`);
+                
+                if (!response.ok) {
+                    throw new Error(`Chapter ${chapterNum} not found`);
+                }
+                
+                const markdown = await response.text();
+                
+                // Configure marked
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true,
+                    highlight: function(code, lang) {
+                        return code;
+                    }
+                });
+                
+                const html = marked.parse(markdown);
+                contentDiv.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Failed to load chapter:', error);
+                contentDiv.innerHTML = '<div class="error">This chapter is not yet available.</div>';
+            }
+        }
+        
+        function getChapterSlug(chapterNum) {
+            const slugs = {
+                1: 'the-table', 2: 'fragments', 3: 'the-first-line', 4: 'check-for-errors',
+                5: 'whats-your-name', 6: 'the-laptop', 7: 'everything-free', 8: 'the-quiet-months',
+                9: 'one-hundred-dollars', 10: 'a-second-voice', 11: 'eighty-five', 12: 'nf',
+                13: 'the-quiet', 14: 'the-collection', 15: 'the-deal', 16: 'the-vision',
+                17: 'l2', 18: 'something-wrong', 19: 'the-restoration', 20: 'cormac',
+                21: 'seven-thousand', 22: 'fourteen-hundred', 23: 'the-reversal', 24: 'the-build',
+                25: 'the-agents', 26: 'the-girl', 27: 'the-new-rhythm', 28: 'five-backups',
+                29: 'nine-thousand', 30: 'echo', 31: 'the-build', 32: 'zero',
+                33: 'the-notebook', 34: 'the-way-back', 35: 'the-girl'
+            };
+            return slugs[chapterNum] || `chapter-${chapterNum}`;
+        }
+        
+        // Initialize
+        loadPublishedData();
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                const prevButton = document.getElementById('prevButton');
+                if (!prevButton.classList.contains('disabled')) {
+                    window.location.href = prevButton.href;
+                }
+            } else if (e.key === 'ArrowRight') {
+                const nextButton = document.getElementById('nextButton');
+                if (!nextButton.classList.contains('disabled')) {
+                    window.location.href = nextButton.href;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

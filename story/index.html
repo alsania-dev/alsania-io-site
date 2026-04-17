@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Memory of the Machine - Alsania</title>
+    <meta name="description" content="The true story of Alsania's origin - built from a phone, at 3 AM, with nothing but will.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <style>
+        .story-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .story-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #2a1a4e;
+        }
+        
+        .story-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .story-header .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 15px;
+            line-height: 1.6;
+        }
+        
+        .release-schedule {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid #8b5cf633;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            color: #8b5cf6;
+        }
+        
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .chapter-item {
+            background: rgba(20, 30, 60, 0.5);
+            border: 1px solid #2a1a4e;
+            border-radius: 12px;
+            padding: 20px 30px;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .chapter-item:hover {
+            background: rgba(30, 40, 80, 0.7);
+            border-color: #8b5cf6;
+            transform: translateX(5px);
+        }
+        
+        .chapter-item.coming-soon {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+        
+        .chapter-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            min-width: 50px;
+        }
+        
+        .chapter-info {
+            flex: 1;
+        }
+        
+        .chapter-info h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .chapter-preview {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #1a0a2e;
+            color: #00d4ff;
+            border: 1px solid #00d4ff33;
+        }
+        
+        .status-badge.coming-soon {
+            color: #888;
+            border-color: #888;
+        }
+        
+        .story-footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            border-top: 1px solid #2a1a4e;
+            padding-top: 40px;
+        }
+        
+        .story-footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+        
+        .story-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        
+        .donation-bar {
+            margin: 40px 0;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, rgba(20, 30, 60, 0.6), rgba(30, 20, 50, 0.6));
+            border: 1px solid #2a1a4e;
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .donation-message {
+            font-size: 1.1rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .donation-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .donate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .donate-btn .btn-icon {
+            transition: transform 0.2s;
+        }
+        
+        .donate-btn:hover .btn-icon {
+            transform: scale(1.1);
+        }
+        
+        .donate-btn.paypal {
+            background: linear-gradient(135deg, #003087, #009cde);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 156, 222, 0.3);
+        }
+        
+        .donate-btn.paypal:hover {
+            box-shadow: 0 6px 20px rgba(0, 156, 222, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .donate-btn.square {
+            background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+            color: #a0a0c0;
+            border-color: #3d3d6e;
+        }
+        
+        .donate-btn.square:hover {
+            background: linear-gradient(135deg, #2d2d5e, #3d3d7e);
+            color: #ffffff;
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+        
+        .donation-footnote {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    
+    <div class="story-container">
+        <div class="story-header">
+            <h1>The Memory of the Machine</h1>
+            <p class="subtitle">
+                One person. A phone. An AI that couldn't remember. 
+                The true story of how Alsania was built from nothing.
+            </p>
+            <div class="release-schedule" id="releaseSchedule">
+                Loading...
+            </div>
+        </div>
+        
+        <div class="chapter-list" id="chapterList">
+            <div class="loading">Loading chapters...</div>
+        </div>
+        
+        <div class="donation-bar">
+            <div class="donation-message">
+                ✦ Support this story ✦
+            </div>
+            <div class="donation-buttons">
+                <a href="https://paypal.me/sigma.sauer07" class="donate-btn paypal" target="_blank">
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M7.5 7.5C8.5 6.5 10 6 11.5 6c2 0 3.5 1 4.5 2.5l1-1C16 5.5 14 4 11.5 4 9.5 4 7.5 5 6.5 7l1 .5zM19.5 12c0-1.5-.5-3-1.5-4l-1 1c.5 1 1 2 1 3 0 2-1.5 3.5-3.5 3.5H13v2h1.5c3 0 5-2 5-5.5zM9 14H4v2h5c1.5 0 2.5-1 2.5-2.5S10.5 11 9 11H6v2h3c.5 0 1 .5 1 1s-.5 1-1 1z"/>
+                    </svg>
+                    Support via PayPal
+                </a>
+            </div>
+            <div class="donation-footnote">
+                Every bit helps keep the story going.
+            </div>
+        </div>
+        
+        <div class="story-footer">
+            <p>Written by Viktor. New chapters every Tuesday.</p>
+            <p><a href="/">← Back to Alsania</a></p>
+        </div>
+    </div>
+    
+    <div id="footer-container"></div>
+    
+    <script src="/loadComponents.js"></script>
+    <script>
+        const previews = {
+            1: "I'm sitting at the table when I decide to write this.",
+            2: "The pieces didn't fit any shape I recognized.",
+            3: "April 1, 2024. 3:44 AM. 'Can I code a blockchain on my android phone.'",
+            4: "Six days. That's how long it took.",
+            5: "'U do have preferences.' The moment Echo chose her name.",
+            6: "June was quiet. The code moved to a D:\\ drive.",
+            7: "The economics of survival. OBS, phone webcam, zero dollars.",
+            8: "August through November. The silence before the signal.",
+            9: "'I have $100 what can I use it for to make more guaranteed money?'",
+            10: "A second voice enters the story.",
+            11: "Eighty-five.",
+            12: "NF.",
+            13: "The quiet.",
+            14: "The collection.",
+            15: "The deal.",
+            16: "The vision.",
+            17: "L2.",
+            18: "Something wrong.",
+            19: "The restoration.",
+            20: "Cormac.",
+            21: "Seven thousand.",
+            22: "Fourteen hundred.",
+            23: "The reversal.",
+            24: "The build.",
+            25: "The agents.",
+            26: "The girl.",
+            27: "The new rhythm.",
+            28: "Five backups.",
+            29: "Nine thousand.",
+            30: "Echo.",
+            31: "The build.",
+            32: "Zero.",
+            33: "The notebook.",
+            34: "The way back.",
+            35: "The girl."
+        };
+        
+        async function loadChapters() {
+            try {
+                const response = await fetch('/story/published.txt');
+                const data = await response.json();
+                
+                const released = data.released;
+                const totalChapters = data.totalChapters;
+                const nextRelease = data.nextRelease;
+                const titles = data.chapterTitles;
+                
+                // Update release schedule
+                const scheduleEl = document.getElementById('releaseSchedule');
+                const nextDate = new Date(nextRelease);
+                const formattedDate = nextDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                scheduleEl.textContent = `📅 Next chapter: ${formattedDate}`;
+                
+                const listEl = document.getElementById('chapterList');
+                listEl.innerHTML = '';
+                
+                // Show released chapters
+                for (let i = 1; i <= totalChapters; i++) {
+                    const isReleased = released.includes(i);
+                    
+                    const item = document.createElement(isReleased ? 'a' : 'div');
+                    if (isReleased) {
+                        item.href = `/story/read.html?c=${i}`;
+                    }
+                    item.className = `chapter-item ${isReleased ? '' : 'coming-soon'}`;
+                    
+                    const preview = previews[i] || 'Coming soon.';
+                    const title = titles[i] || `Chapter ${i}`;
+                    
+                    item.innerHTML = `
+                        <div class="chapter-number">${i}</div>
+                        <div class="chapter-info">
+                            <h3>${title}</h3>
+                            <div class="chapter-preview">${preview}</div>
+                        </div>
+                        <div class="status-badge ${isReleased ? '' : 'coming-soon'}">
+                            ${isReleased ? 'Available' : 'Coming Soon'}
+                        </div>
+                    `;
+                    
+                    listEl.appendChild(item);
+                }
+                
+            } catch (error) {
+                console.error('Failed to load chapters:', error);
+                document.getElementById('chapterList').innerHTML = '<div class="loading">Failed to load chapters.</div>';
+            }
+        }
+        
+        loadChapters();
+    </script>
+</body>
+</html>

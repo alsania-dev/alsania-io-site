@@ -216,7 +216,7 @@
         
         async function loadChapters() {
             try {
-                const response = await fetch('/story/published.json');
+                const response = await fetch('/story/published.txt');
                 const data = await response.json();
                 
                 const released = data.released;

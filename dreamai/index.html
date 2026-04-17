@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dream AI</title>
+  <link rel="manifest" href="https://progressier.app/HjPMTBI3nngaDUlb9P6G/progressier.json"/>
+  <script defer src="https://progressier.app/HjPMTBI3nngaDUlb9P6G/script.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
+    :root {
+      --neon-cyan: #00f3ff;
+      --neon-pink: #bc13fe;
+      --neon-green: #0aff0a;
+      --bg-dark: #020205;
+      --midnight-blue: #0b1026;
+      --glass-bg: rgba(11,16,38,0.45);
+      --glass-border: rgba(0,243,255,0.15);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { font-size:16px; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        linear-gradient(rgba(0,243,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,243,255,0.03) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, #1a0b2e 0%, transparent 70%),
+        radial-gradient(circle at 80% 90%, #050a1f 0%, transparent 60%),
+        linear-gradient(135deg, #020205 0%, #080c1f 50%, #020205 100%);
+      background-size: 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%;
+      min-height: 100vh;
+      font-family: 'Rajdhani', sans-serif;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      pointer-events: auto; /* Ensure body allows pointer events */
+    }
+
+    .scanlines {
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);
+      pointer-events:none; z-index:9999; opacity:0.15;
+    }
+
+    .neon-glow { position:fixed; border-radius:50%; filter:blur(60px); opacity:0.18; pointer-events:none; z-index:0; }
+    .nc { background:var(--neon-cyan); }
+    .np { background:var(--neon-pink); }
+
+    /* GLASS */
+    .glass-panel {
+      background:var(--glass-bg);
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      border:1px solid var(--glass-border);
+      border-top:1px solid rgba(255,255,255,0.1);
+      box-shadow:0 8px 32px rgba(0,0,0,0.7),inset 0 0 0 1px rgba(255,255,255,0.05);
+      border-radius:16px;
+      transition:box-shadow 0.3s,border-color 0.3s;
+      pointer-events: auto; /* Ensure glass panels allow pointer events */
+    }
+    .glass-panel:hover {
+      box-shadow:0 0 20px rgba(0,243,255,0.07),0 15px 40px rgba(0,0,0,0.8),inset 0 0 0 1px rgba(0,243,255,0.12);
+      border-color:rgba(0,243,255,0.3);
+    }
+
+    /* TYPE */
+    h1,h2,h3,h4 { font-family:'Orbitron',sans-serif; letter-spacing:2px; text-transform:uppercase; margin:0; }
+    .holographic-text {
+      background:linear-gradient(to bottom,#00f3ff,#bc13fe,#00f3ff);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-size:100% 200%; animation:holo 3s infinite linear;
+      filter:drop-shadow(0 0 5px rgba(188,19,254,0.4));
+    }
+    @keyframes holo { 0%{background-position:0% 0%} 100%{background-position:0% 200%} }
+    .tc { color:var(--neon-cyan); text-shadow:0 0 8px rgba(0,243,255,0.5); }
+    .tp { color:var(--neon-pink); text-shadow:0 0 8px rgba(188,19,254,0.5); }
+    .tg { color:var(--neon-green); text-shadow:0 0 8px rgba(10,255,10,0.5); }
+    @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1;text-shadow:0 0 10px var(--neon-pink)} }
+    .loading-text { font-family:'Orbitron',sans-serif; color:var(--neon-pink); animation:pulse 1.5s infinite; }
+
+    /* HEADER */
+    header.glass-panel {
+      border-bottom:2px solid var(--neon-pink);
+      position:relative; z-index:100;
+      margin:16px auto; width:clamp(300px,92%,1200px);
+      padding:12px 20px;
+    }
+    .header-inner { text-align:center; }
+    .header-accent { height:1px; width:80px; background:var(--neon-cyan); margin:0 auto 8px; box-shadow:0 0 10px var(--neon-cyan); }
+    h1.site-title { font-size:clamp(1.4rem,5vw,2.2rem); margin-bottom:4px; }
+    .site-sub { font-size:clamp(0.6rem,2vw,0.85rem); color:var(--neon-pink); text-shadow:0 0 6px rgba(188,19,254,0.5); letter-spacing:3px; font-weight:300; text-transform:uppercase; }
+
+    /* NAV */
+    .nav-container { display:flex; justify-content:center; flex-wrap:wrap; gap:2px; padding:8px 0 0; }
+    .nav-item {
+      padding:6px 14px; color:rgba(255,255,255,0.6);
+      font-family:'Orbitron',sans-serif; font-size:clamp(0.58rem,2vw,0.78rem);
+      letter-spacing:1px; text-transform:uppercase;
+      border-bottom:2px solid transparent; cursor:pointer;
+      transition:all 0.2s; white-space:nowrap; border-radius:4px 4px 0 0;
+      pointer-events: auto; /* Ensure nav items are clickable */
+    }
+    .nav-item:hover,.nav-item.active { color:#fff; border-bottom-color:var(--neon-pink); text-shadow:0 0 8px var(--neon-pink); }
+
+    /* LAYOUT */
+    .content-container { width:clamp(300px,92%,1200px); margin:0 auto; flex:1; padding-bottom:60px; pointer-events: auto; }
+    .view-section { display:block; }
+    .view-section[hidden] { display:none !important; }
+
+    /* BUTTONS */
+    .nb {
+      background:rgba(0,243,255,0.05); border:1px solid var(--neon-cyan); color:var(--neon-cyan);
+      padding:10px 26px;
+      clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+      cursor:pointer; transition:all 0.2s; text-transform:uppercase; letter-spacing:2px;
+      font-weight:700; font-family:'Orbitron',sans-serif; font-size:clamp(0.68rem,2vw,0.88rem);
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap;
+      pointer-events: auto; /* Ensure buttons are clickable */
+    }
+    .nb:hover:not(:disabled) { background:var(--neon-cyan); color:#000; box-shadow:0 0 20px var(--neon-cyan),0 0 40px rgba(0,243,255,0.3); transform:translateY(-2px); }
+    .nb:active:not(:disabled) { transform:scale(0.98); }
+    .nb:disabled { opacity:0.4; cursor:not-allowed; filter:grayscale(80%); }
+    .nb.pink { border-color:var(--neon-pink); color:var(--neon-pink); background:rgba(188,19,254,0.05); }
+    .nb.pink:hover:not(:disabled) { background:var(--neon-pink); color:#000; box-shadow:0 0 20px var(--neon-pink); }
+    .nb.sm { padding:6px 14px; font-size:0.65rem; clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px); }
+    .nb.full { width:100%; }
+
+    .ab {
+      background:transparent; border:1px solid var(--neon-cyan); color:var(--neon-cyan);
+      padding:4px 10px; font-size:0.7rem; border-radius:3px; cursor:pointer;
+      text-transform:uppercase; font-family:'Rajdhani',sans-serif; transition:background 0.2s; white-space:nowrap;
+      pointer-events: auto; /* Ensure action buttons are clickable */
+    }
+    .ab:hover { background:rgba(255,255,255,0.08); }
+    .ab.del { border-color:var(--neon-pink); color:var(--neon-pink); }
+    .ab.grn { border-color:var(--neon-green); color:var(--neon-green); }
+
+    /* INPUTS */
+    input[type="text"],textarea,select {
+      background:rgba(0,0,0,0.5); border:1px solid var(--glass-border);
+      color:#fff; border-radius:6px; font-family:'Rajdhani',sans-serif;
+      font-size:1rem; transition:border-color 0.2s,box-shadow 0.2s;
+      pointer-events: auto; /* Ensure inputs are usable */
+    }
+    input[type="text"]:focus,textarea:focus,select:focus { outline:none; border-color:var(--neon-cyan); box-shadow:0 0 12px rgba(0,243,255,0.18); }
+    select { padding:8px 10px; cursor:pointer; }
+    select option { background:var(--midnight-blue); color:#fff; }
+
+    /* GENERATOR */
+    .gen-card { padding:clamp(16px,4vw,36px); margin-bottom:32px; border-left:4px solid var(--neon-cyan); }
+    .gen-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; gap:10px; flex-wrap:wrap; }
+    .gen-header h2 { font-size:clamp(1rem,3vw,1.4rem); }
+    .v-badge { padding:4px 10px; border:1px solid var(--neon-green); color:var(--neon-green); font-size:0.72rem; text-transform:uppercase; border-radius:4px; white-space:nowrap; font-family:'Orbitron',sans-serif; }
+
+    /* MODE TABS */
+    .mode-tabs {
+      display:flex; gap:5px; margin-bottom:20px;
+      background:rgba(0,0,0,0.3); padding:5px; border-radius:8px;
+      overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    }
+    .mode-tabs::-webkit-scrollbar { display:none; }
+    .mode-tab {
+      flex:1; min-width:90px; background:transparent;
+      border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.55);
+      padding:9px 6px; font-family:'Orbitron',sans-serif;
+      font-size:clamp(0.58rem,1.8vw,0.72rem); cursor:pointer;
+      border-radius:4px; transition:all 0.2s; text-transform:uppercase; white-space:nowrap;
+      pointer-events: auto; /* Ensure mode tabs are clickable */
+    }
+    .mode-tab:hover { color:#fff; border-color:rgba(255,255,255,0.3); }
+    .mode-tab.active { background:rgba(0,243,255,0.1); border-color:var(--neon-cyan); color:var(--neon-cyan); }
+
+    /* UPLOAD */
+    .upload-area {
+      border:2px dashed var(--glass-border); background:rgba(0,0,0,0.2);
+      border-radius:8px; padding:18px; text-align:center;
+      margin-bottom:16px; cursor:pointer; transition:all 0.3s; position:relative;
+      pointer-events: auto; /* Ensure upload area is clickable */
+    }
+    .upload-area:hover { border-color:var(--neon-cyan); background:rgba(0,243,255,0.04); }
+    .upload-area input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .upload-preview { max-width:120px; max-height:120px; border-radius:4px; margin-top:10px; display:none; border:1px solid var(--neon-cyan); }
+
+    /* PROMPT */
+    .prompt-wrap { position:relative; margin-bottom:14px; }
+    .prompt-label { display:block; margin-bottom:6px; color:var(--neon-cyan); font-weight:700; font-size:0.88rem; font-family:'Orbitron',sans-serif; letter-spacing:1px; }
+    textarea#promptInput { width:100%; padding:13px 68px 13px 13px; min-height:88px; resize:vertical; }
+    .enhance-btn {
+      position:absolute; right:8px; top:8px;
+      background:rgba(188,19,254,0.14); border:1px solid var(--neon-pink);
+      color:var(--neon-pink); padding:5px 8px; border-radius:4px;
+      cursor:pointer; font-size:0.62rem; font-family:'Orbitron',sans-serif;
+      text-transform:uppercase; transition:all 0.2s; letter-spacing:1px;
+      pointer-events: auto; /* Ensure enhance button is clickable */
+    }
+    .enhance-btn:hover { background:var(--neon-pink); color:#000; }
+    .enhance-btn:disabled { opacity:0.4; cursor:not-allowed; }
+
+    /* CUSTOMIZE */
+    .cust-section { background:rgba(0,0,0,0.22); border:1px solid var(--glass-border); border-radius:10px; padding:14px; margin-bottom:16px; }
+    .cust-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--glass-border); gap:10px; flex-wrap:wrap; }
+    .cust-header h3 { font-size:clamp(0.72rem,2vw,0.9rem); }
+    .cust-btns { display:flex; gap:6px; flex-wrap:wrap; }
+    .cust-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:12px; }
+
+    .cat-box { background:rgba(0,0,0,0.2); border-radius:6px; overflow:hidden; border:1px solid rgba(255,255,255,0.05); }
+    .cat-head { 
+      background:rgba(0,243,255,0.07); padding:10px 12px; cursor:pointer; 
+      display:flex; justify-content:space-between; align-items:center; 
+      transition:background 0.2s; border-left:3px solid transparent;
+      pointer-events: auto; /* Ensure category headers are clickable */
+    }
+    .cat-head:hover { background:rgba(0,243,255,0.12); }
+    .cat-head.open { background:rgba(0,243,255,0.16); border-left-color:var(--neon-cyan); }
+    .cat-head h4 { color:var(--neon-cyan); font-size:clamp(0.68rem,2vw,0.82rem); letter-spacing:1px; }
+    .cat-arrow { color:var(--neon-cyan); font-size:0.72rem; transition:transform 0.3s; }
+    .cat-head.open .cat-arrow { transform:rotate(180deg); }
+    .cat-body { max-height:0; overflow:hidden; transition:max-height 0.35s ease-out; background:rgba(0,0,0,0.22); }
+    .cat-body.open { max-height:600px; overflow-y:auto; }
+    .cat-body::-webkit-scrollbar { width:4px; }
+    .cat-body::-webkit-scrollbar-thumb { background:var(--neon-cyan); border-radius:2px; }
+    .cat-row { padding:9px 11px 9px 16px; border-bottom:1px solid rgba(255,255,255,0.04); }
+    .cat-row:last-child { border-bottom:none; }
+    .cat-row-label { color:rgba(255,255,255,0.55); font-size:0.78rem; display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.5px; }
+    .cat-row select { width:100%; padding:7px 8px; font-size:0.84rem; }
+
+    /* CONTROLS */
+    .ctrl-row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
+    .ctrl-row select { flex:1; min-width:130px; }
+
+    /* OUTPUT GRID */
+    .out-grid { display:grid; gap:14px; margin-top:18px; }
+    .out-grid.n1 { grid-template-columns:1fr; max-width:480px; }
+    .out-grid.n2 { grid-template-columns:repeat(2,1fr); }
+    .out-grid.n3 { grid-template-columns:repeat(3,1fr); }
+
+    .img-card { background:rgba(0,0,0,0.38); border:1px solid var(--glass-border); border-radius:10px; overflow:hidden; display:flex; flex-direction:column; }
+    .img-card-inner { position:relative; min-height:180px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); padding:5px; }
+    .img-card-inner img { width:100%; display:block; }
+    .card-loading,.card-error { font-family:'Orbitron',sans-serif; font-size:0.72rem; padding:30px; text-align:center; }
+    .card-error { color:var(--neon-pink); }
+    .img-card-actions { display:flex; gap:5px; padding:8px; flex-wrap:wrap; background:rgba(0,0,0,0.5); border-top:1px solid var(--glass-border); }
+    .img-card-actions .ab { flex:1; min-width:50px; text-align:center; padding:5px 4px; }
+
+    /* FEATURES */
+    .feat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr)); gap:16px; margin-top:28px; }
+    .feat-item { padding:20px 18px; position:relative; overflow:hidden; transition:all 0.3s; }
+    .feat-item::before { content:''; position:absolute; top:0; left:0; width:2px; height:100%; background:var(--neon-cyan); opacity:0.5; transition:opacity 0.3s; }
+    .feat-item:hover::before { opacity:1; box-shadow:0 0 8px var(--neon-cyan); }
+    .feat-item:hover { background:rgba(0,243,255,0.04); transform:translateY(-4px); }
+    .feat-item h3 { font-size:clamp(0.82rem,2.5vw,1.05rem); margin-bottom:8px; }
+    .feat-div { width:26px; height:2px; background:var(--neon-pink); margin-bottom:10px; }
+    .feat-item p { color:rgba(255,255,255,0.62); line-height:1.5; font-size:0.88rem; }
+
+    /* CHARACTERS */
+    .char-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,148px),1fr)); gap:14px; }
+    .char-card { background:rgba(0,0,0,0.28); border:1px solid var(--glass-border); border-radius:8px; padding:10px; text-align:center; cursor:pointer; transition:all 0.25s; }
+    .char-card:hover { border-color:var(--neon-pink); transform:translateY(-4px); box-shadow:0 0 12px rgba(188,19,254,0.14); }
+    .char-img { width:100%; height:130px; object-fit:cover; border-radius:5px; margin-bottom:8px; display:block; }
+    .char-ph { width:100%; height:130px; background:rgba(0,243,255,0.06); border-radius:5px; margin-bottom:8px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; }
+    .char-card h4 { color:#fff; font-size:0.75rem; margin-bottom:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:'Orbitron',sans-serif; }
+    .char-card p { font-size:0.72rem; color:rgba(255,255,255,0.38); margin-bottom:7px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+    .char-acts { display:flex; gap:4px; justify-content:center; flex-wrap:wrap; }
+
+    /* CHAT */
+    .chat-wrap { display:flex; flex-direction:column; height:clamp(380px,68vh,680px); }
+    .chat-head { display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--glass-border); margin-bottom:12px; flex-wrap:wrap; }
+    .chat-av { width:44px; height:44px; border-radius:50%; border:2px solid var(--neon-cyan); object-fit:cover; flex-shrink:0; }
+    .chat-av-ph { width:44px; height:44px; border-radius:50%; border:2px solid var(--neon-cyan); display:flex; align-items:center; justify-content:center; font-size:1.2rem; background:rgba(0,243,255,0.07); flex-shrink:0; }
+    .chat-name-el { color:var(--neon-cyan); font-family:'Orbitron',sans-serif; font-size:clamp(0.78rem,2.5vw,0.96rem); }
+    .chat-status-el { font-size:0.72rem; color:rgba(255,255,255,0.45); }
+    .chat-head-acts { margin-left:auto; display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+
+    .chat-hist { flex:1; overflow-y:auto; padding:10px; background:rgba(0,0,0,0.18); border-radius:8px; margin-bottom:10px; display:flex; flex-direction:column; gap:10px; scroll-behavior:smooth; }
+    .chat-hist::-webkit-scrollbar { width:4px; }
+    .chat-hist::-webkit-scrollbar-thumb { background:var(--neon-cyan); border-radius:2px; }
+
+    .msg { max-width:80%; padding:9px 12px; border-radius:10px; line-height:1.45; font-size:0.9rem; word-break:break-word; }
+    .msg.user { align-self:flex-end; background:rgba(0,243,255,0.11); border:1px solid rgba(0,243,255,0.22); border-bottom-right-radius:2px; }
+    .msg.ai { align-self:flex-start; background:rgba(188,19,254,0.11); border:1px solid rgba(188,19,254,0.22); border-bottom-left-radius:2px; }
+    .msg-time { display:block; font-size:0.66rem; opacity:0.3; margin-top:3px; }
+
+    .chat-input-row { display:flex; gap:8px; align-items:stretch; }
+    .chat-input-row input { flex:1; padding:10px 12px; min-width:0; }
+    .chat-tools { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
+
+    /* MODALS */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.86); backdrop-filter:blur(6px); z-index:5000; display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.25s; padding:14px; }
+    .modal-overlay.open { opacity:1; pointer-events:auto; } /* Fixed: changed from 'all' to 'auto' */
+    .modal-box { background:var(--midnight-blue); border:1px solid var(--neon-cyan); box-shadow:0 0 40px rgba(0,243,255,0.14); width:min(100%,560px); max-height:90vh; overflow-y:auto; padding:clamp(16px,4vw,26px); border-radius:14px; position:relative; }
+    .modal-box::-webkit-scrollbar { width:4px; }
+    .modal-box::-webkit-scrollbar-thumb { background:var(--neon-cyan); border-radius:2px; }
+    .modal-close { position:absolute; top:11px; right:13px; background:transparent; border:none; color:var(--neon-pink); font-size:1.4rem; cursor:pointer; line-height:1; z-index:1; }
+    .modal-close:hover { text-shadow:0 0 8px var(--neon-pink); }
+
+    .char-prev-img { width:88px; height:88px; border-radius:50%; border:2px solid var(--neon-cyan); object-fit:cover; display:block; margin:0 auto 14px; box-shadow:0 0 14px rgba(0,243,255,0.22); }
+    .char-prev-ph { width:88px; height:88px; border-radius:50%; border:2px solid var(--neon-cyan); display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin:0 auto 14px; background:rgba(0,243,255,0.06); }
+
+    .form-g { margin-bottom:12px; }
+    .form-g label { display:block; color:var(--neon-cyan); margin-bottom:4px; font-family:'Orbitron',sans-serif; font-size:0.78rem; }
+    .form-g input[type="text"],.form-g textarea { width:100%; padding:9px 10px; }
+    .form-g textarea { min-height:76px; resize:vertical; }
+
+    .toggle-row { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .toggle-sw { display:flex; align-items:center; cursor:pointer; flex-shrink:0; }
+    .tg-inp { display:none; }
+    .tg-sl { width:36px; height:19px; background:rgba(255,255,255,0.12); border-radius:20px; position:relative; transition:background 0.3s; }
+    .tg-sl::before { content:''; position:absolute; width:14px; height:14px; border-radius:50%; background:#fff; top:2.5px; left:2.5px; transition:transform 0.3s; }
+    .tg-inp:checked + .tg-sl { background:var(--neon-green); }
+    .tg-inp:checked + .tg-sl::before { transform:translateX(17px); }
+
+    /* SETTINGS */
+    .set-section { background:rgba(0,0,0,0.22); border:1px solid var(--glass-border); border-radius:10px; padding:16px; margin-top:14px; }
+    .set-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); flex-wrap:wrap; gap:8px; }
+    .set-row:last-child { border-bottom:none; }
+    .set-lbl { color:rgba(255,255,255,0.82); font-size:0.88rem; }
+    .set-desc { color:rgba(255,255,255,0.38); font-size:0.72rem; margin-top:2px; }
+    .set-acts { display:flex; gap:7px; flex-wrap:wrap; }
+
+    /* TOAST */
+    #toast { position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:9998; padding:9px 20px; border-radius:6px; font-family:'Orbitron',sans-serif; font-size:0.72rem; letter-spacing:1px; pointer-events:none; opacity:0; transition:opacity 0.3s; white-space:nowrap; }
+    #toast.show { opacity:1; }
+    #toast.success { background:rgba(10,255,10,0.11); border:1px solid var(--neon-green); color:var(--neon-green); }
+    #toast.error { background:rgba(188,19,254,0.11); border:1px solid var(--neon-pink); color:var(--neon-pink); }
+    #toast.info { background:rgba(0,243,255,0.09); border:1px solid var(--neon-cyan); color:var(--neon-cyan); }
+
+    /* FOOTER */
+    footer.glass-panel {
+      width:clamp(300px,92%,1200px); margin:20px auto 14px;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:13px 22px; border-top:1px solid rgba(0,243,255,0.22);
+      flex-wrap:wrap; gap:8px;
+    }
+    .foot-copy { font-size:0.8rem; color:rgba(255,255,255,0.45); }
+
+    /* RESPONSIVE */
+    @media (max-width:580px) {
+      .out-grid.n2,.out-grid.n3 { grid-template-columns:1fr; }
+      .ctrl-row select { flex:1 1 100%; }
+      .chat-head-acts { width:100%; }
+      .msg { max-width:94%; }
+      .chat-input-row { flex-direction:column; }
+      .chat-input-row .nb { width:100%; }
+      .set-acts { width:100%; }
+      footer.glass-panel { justify-content:center; text-align:center; }
+      .char-acts { justify-content:center; }
+    }
+    @media (max-width:380px) {
+      .mode-tab { min-width:76px; font-size:0.56rem; padding:7px 3px; }
+      .nav-item { padding:5px 7px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+<div class="neon-glow nc" style="width:200px;height:200px;top:5%;left:2%;"></div>
+<div class="neon-glow np" style="width:150px;height:150px;top:18%;right:5%;"></div>
+<div class="neon-glow nc" style="width:160px;height:160px;bottom:20%;left:14%;"></div>
+
+<!-- HEADER -->
+<header class="glass-panel">
+  <div class="header-inner">
+    <div class="header-accent"></div>
+    <h1 class="holographic-text site-title">Dream AI</h1>
+    <p class="site-sub">Neural Imaging · Character Creation · AI Chat</p>
+    <nav class="nav-container">
+      <a class="nav-item active" data-view="generator" onclick="UI.switch('generator')">✦ Create</a>
+      <a class="nav-item" data-view="characters" onclick="UI.switch('characters')">✦ Characters</a>
+      <a class="nav-item" data-view="chat" onclick="UI.switch('chat')">✦ Chat</a>
+      <a class="nav-item" data-view="settings" onclick="UI.switch('settings')">✦ Settings</a>
+    </nav>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="content-container">
+
+  <!-- VIEW: GENERATOR -->
+  <div id="view-generator" class="view-section">
+    <div class="glass-panel gen-card">
+      <div class="gen-header">
+        <div><h2 class="tc">Generator Interface</h2><span style="color:rgba(255,255,255,0.38);font-size:0.76rem;">SYSTEM STATUS: ONLINE</span></div>
+        <div class="v-badge">v3.0.0</div>
+      </div>
+
+      <!-- Mode Tabs -->
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="t2i" onclick="setMode('t2i')">Text → Image</button>
+        <button class="mode-tab" data-mode="i2i" onclick="setMode('i2i')">Image → Image</button>
+        <button class="mode-tab" data-mode="t2v" onclick="setMode('t2v')">Text → Video</button>
+        <button class="mode-tab" data-mode="i2v" onclick="setMode('i2v')">Image → Video</button>
+      </div>
+
+      <!-- Upload (i2i / i2v) -->
+      <div id="uploadArea" hidden>
+        <div class="upload-area">
+          <input type="file" id="fileInput" accept="image/*" onchange="handleUpload(this)">
+          <div id="uploadPh">
+            <p class="tc" style="font-weight:700;font-size:0.88rem;margin-bottom:4px;">TAP TO UPLOAD SOURCE IMAGE</p>
+            <p style="font-size:0.76rem;color:rgba(255,255,255,0.38);">JPG · PNG · WEBP</p>
+          </div>
+          <img id="uploadPrev" class="upload-preview" alt="Preview">
+        </div>
+      </div>
+
+      <!-- Video banner -->
+      <div id="videoBanner" hidden style="background:rgba(188,19,254,0.07);border:1px solid rgba(188,19,254,0.28);border-radius:8px;padding:13px;margin-bottom:14px;text-align:center;">
+        <p class="tp" style="font-family:'Orbitron',sans-serif;font-size:0.76rem;letter-spacing:1px;">▶ VIDEO MODE ACTIVE</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:4px;">Generating motion sequences. This may take longer than static images.</p>
+      </div>
+
+      <!-- Prompt -->
+      <div class="prompt-wrap">
+        <label id="promptLabel" class="prompt-label">DESCRIPTION PROMPT</label>
+        <textarea id="promptInput" placeholder="Describe your AI girl... e.g. cyberpunk warrior, neon lights, purple hair, futuristic armor"></textarea>
+        <button class="enhance-btn" id="enhanceBtn" onclick="enhancePrompt()">✦ ENHANCE</button>
+      </div>
+
+      <!-- Customize -->
+      <div class="cust-section">
+        <div class="cust-header">
+          <h3 class="tp">Advanced Customization</h3>
+          <div class="cust-btns">
+            <button class="ab" onclick="Cust.expandAll()">Expand All</button>
+            <button class="ab del" onclick="Cust.collapseAll()">Collapse</button>
+            <button class="ab del" onclick="Cust.reset()">Reset</button>
+          </div>
+        </div>
+        <div class="cust-grid">
+
+          <div class="cat-box">
+            <div class="cat-head" onclick="Cust.toggle('body')"><h4>Body</h4><span class="cat-arrow">▼</span></div>
+            <div class="cat-body" id="cat-body">
+              <div class="cat-row"><span class="cat-row-label">Body Shape</span>
+                <select id="c_bodyShape"><option value="">Default</option><option value="athletic and fit">Athletic & Fit</option><option value="slender and elegant">Slender & Elegant</option><option value="curvy and voluptuous">Curvy & Voluptuous</option><option value="petite and delicate">Petite & Delicate</option><option value="tall and model-like">Tall & Model-like</option><option value="muscular and toned">Muscular & Toned</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Skin Tone</span>
+                <select id="c_skinTone"><option value="">Default</option><option value="pale fair skin">Pale Fair</option><option value="light skin warm undertones">Light Warm</option><option value="medium skin tone">Medium</option><option value="olive skin tone">Olive</option><option value="tan skin">Tan</option><option value="dark skin">Dark</option><option value="ebony skin">Ebony</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Breast Size</span>
+                <select id="c_breastSize"><option value="">Default</option><option value="small breasts">Small</option><option value="medium breasts">Medium</option><option value="large breasts">Large</option><option value="very large breasts">Very Large</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Clothing</span>
+                <select id="c_clothing"><option value="">Default</option><option value="wearing casual modern clothes">Casual</option><option value="wearing elegant evening dress">Evening Dress</option><option value="wearing cyberpunk techwear">Cyberpunk Techwear</option><option value="wearing futuristic armor">Futuristic Armor</option><option value="wearing latex bodysuit">Latex Bodysuit</option><option value="wearing business attire">Business</option><option value="wearing anime school uniform">School Uniform</option><option value="wearing fantasy armor">Fantasy Armor</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Footwear</span>
+                <select id="c_footwear"><option value="">Default</option><option value="wearing high heels">High Heels</option><option value="wearing boots">Boots</option><option value="wearing sneakers">Sneakers</option><option value="wearing sandals">Sandals</option><option value="barefoot">Barefoot</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Accessories</span>
+                <select id="c_acc"><option value="">Default</option><option value="wearing necklace and earrings">Necklace & Earrings</option><option value="wearing glasses">Glasses</option><option value="wearing tech goggles">Tech Goggles</option><option value="wearing choker">Choker</option><option value="wearing crown or tiara">Crown / Tiara</option><option value="wearing hair ornament">Hair Ornament</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-box">
+            <div class="cat-head" onclick="Cust.toggle('head')"><h4>Head</h4><span class="cat-arrow">▼</span></div>
+            <div class="cat-body" id="cat-head">
+              <div class="cat-row"><span class="cat-row-label">Face Shape</span>
+                <select id="c_face"><option value="">Default</option><option value="oval face">Oval</option><option value="heart-shaped face">Heart</option><option value="round face">Round</option><option value="square face">Square</option><option value="diamond face">Diamond</option><option value="angular face">Angular</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Eye Color</span>
+                <select id="c_eyeColor"><option value="">Default</option><option value="blue eyes">Blue</option><option value="green eyes">Green</option><option value="brown eyes">Brown</option><option value="hazel eyes">Hazel</option><option value="violet eyes">Violet</option><option value="heterochromia eyes">Heterochromia</option><option value="glowing neon eyes">Glowing Neon</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Eye Shape</span>
+                <select id="c_eyeShape"><option value="">Default</option><option value="almond shaped eyes">Almond</option><option value="round eyes">Round</option><option value="cat-like eyes">Cat-like</option><option value="large anime eyes">Large Anime</option><option value="hooded eyes">Hooded</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Hair Color</span>
+                <select id="c_hairColor"><option value="">Default</option><option value="blonde hair">Blonde</option><option value="brunette hair">Brunette</option><option value="black hair">Black</option><option value="red hair">Red</option><option value="silver hair">Silver</option><option value="white hair">White</option><option value="pink hair">Pink</option><option value="blue hair">Blue</option><option value="purple hair">Purple</option><option value="rainbow colored hair">Rainbow</option><option value="neon glowing hair">Neon Glowing</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Hair Style</span>
+                <select id="c_hairStyle"><option value="">Default</option><option value="long straight hair">Long Straight</option><option value="long wavy hair">Long Wavy</option><option value="long curly hair">Long Curly</option><option value="short bob">Short Bob</option><option value="pixie cut">Pixie Cut</option><option value="ponytail">Ponytail</option><option value="twin tails">Twin Tails</option><option value="braided hair">Braided</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Lips</span>
+                <select id="c_lips"><option value="">Default</option><option value="full lips">Full</option><option value="thin lips">Thin</option><option value="pouty lips">Pouty</option><option value="heart-shaped lips">Heart-shaped</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-box">
+            <div class="cat-head" onclick="Cust.toggle('scene')"><h4>Scene</h4><span class="cat-arrow">▼</span></div>
+            <div class="cat-body" id="cat-scene">
+              <div class="cat-row"><span class="cat-row-label">Location</span>
+                <select id="c_loc"><option value="">Default</option><option value="in a futuristic cyberpunk city">Cyberpunk City</option><option value="in a neon-lit nightclub">Neon Nightclub</option><option value="in a high-tech laboratory">Laboratory</option><option value="in a peaceful garden">Garden</option><option value="on a beach at sunset">Beach Sunset</option><option value="in space station">Space Station</option><option value="in underwater city">Underwater City</option><option value="in post-apocalyptic wasteland">Wasteland</option><option value="in japanese temple">Japanese Temple</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Lighting</span>
+                <select id="c_light"><option value="">Default</option><option value="soft natural lighting">Soft Natural</option><option value="dramatic studio lighting">Dramatic Studio</option><option value="neon colored lighting">Neon</option><option value="backlit with glow">Backlit Glow</option><option value="golden hour lighting">Golden Hour</option><option value="candlelight">Candlelight</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Atmosphere</span>
+                <select id="c_atm"><option value="">Default</option><option value="mysterious atmosphere">Mysterious</option><option value="romantic atmosphere">Romantic</option><option value="dreamy atmosphere">Dreamy</option><option value="ominous atmosphere">Ominous</option><option value="peaceful atmosphere">Peaceful</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Time of Day</span>
+                <select id="c_tod"><option value="">Default</option><option value="at daytime">Day</option><option value="at sunset">Sunset</option><option value="at night">Night</option><option value="at midnight">Midnight</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Weather</span>
+                <select id="c_weather"><option value="">Default</option><option value="in clear weather">Clear</option><option value="in rainy weather">Rainy</option><option value="in snowy weather">Snowy</option><option value="in foggy weather">Foggy</option><option value="in stormy weather">Stormy</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="cat-box">
+            <div class="cat-head" onclick="Cust.toggle('art')"><h4>Art Style</h4><span class="cat-arrow">▼</span></div>
+            <div class="cat-body" id="cat-art">
+              <div class="cat-row"><span class="cat-row-label">Painting Style</span>
+                <select id="c_paint"><option value="">Default</option><option value="oil painting style">Oil Painting</option><option value="watercolor painting">Watercolor</option><option value="digital art">Digital Art</option><option value="pencil sketch">Pencil Sketch</option><option value="charcoal drawing">Charcoal</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Color Palette</span>
+                <select id="c_colors"><option value="">Default</option><option value="vibrant colors">Vibrant</option><option value="muted colors">Muted</option><option value="pastel colors">Pastel</option><option value="neon colors">Neon</option><option value="monochromatic">Mono</option><option value="warm colors">Warm</option><option value="cool colors">Cool</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Quality</span>
+                <select id="c_qual"><option value="">Default</option><option value="8k resolution highly detailed">8K Ultra HD</option><option value="4k resolution highly detailed">4K HD</option><option value="photorealistic">Photorealistic</option><option value="hyperrealistic">Hyperrealistic</option><option value="cinematic">Cinematic</option></select>
+              </div>
+              <div class="cat-row"><span class="cat-row-label">Art Movement</span>
+                <select id="c_artmv"><option value="">Default</option><option value="cyberpunk style">Cyberpunk</option><option value="art nouveau style">Art Nouveau</option><option value="art deco style">Art Deco</option><option value="surrealist style">Surrealist</option><option value="impressionist style">Impressionist</option><option value="steampunk style">Steampunk</option></select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="ctrl-row">
+        <select id="resSelect">
+          <option value="512x768">Portrait 512×768</option>
+          <option value="512x512">Square 512×512</option>
+          <option value="768x768">Square 768×768</option>
+          <option value="768x512">Landscape 768×512</option>
+        </select>
+        <select id="styleSelect">
+          <option value="">Style: Default</option>
+          <option value="cyberpunk aesthetic, neon lights, futuristic city, holographic elements, techwear">Cyberpunk</option>
+          <option value="anime style, vibrant colors, cel shaded, expressive eyes">Anime</option>
+          <option value="fantasy art, ethereal glow, magical atmosphere, elven features">Fantasy</option>
+          <option value="studio portrait photography, professional lighting, shallow depth of field, bokeh">Studio Portrait</option>
+          <option value="oil painting, brush strokes, classical art, rich colors">Oil Painting</option>
+          <option value="watercolor, soft edges, pastel colors, delicate details">Watercolor</option>
+          <option value="pencil sketch, graphite, detailed linework, hand-drawn">Sketch</option>
+          <option value="3D render, octane, ray tracing, subsurface scattering, hyperrealistic CGI">3D Render</option>
+        </select>
+        <select id="numSelect" style="max-width:130px;">
+          <option value="1">Generate: 1</option>
+          <option value="2">Generate: 2</option>
+          <option value="3">Generate: 3</option>
+        </select>
+      </div>
+
+      <!-- Generate -->
+      <button id="genBtn" class="nb full" onclick="generate()">
+        <span id="genLabel">✦ Initialize Generation</span>
+      </button>
+
+      <!-- Output -->
+      <div id="outGrid" class="out-grid n1" style="display:none;"></div>
+
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="feat-grid">
+      <div class="glass-panel feat-item"><h3 class="tc">Hyper-Realism</h3><div class="feat-div"></div><p>Advanced neural rendering for skin textures, lighting, and anatomical precision.</p></div>
+      <div class="glass-panel feat-item"><h3 class="tc">Style Control</h3><div class="feat-div"></div><p>Fine-tune artistic styles from cyberpunk anime to photorealistic portrait modes.</p></div>
+      <div class="glass-panel feat-item"><h3 class="tc">Personality AI</h3><div class="feat-div"></div><p>Define unique personalities and memories for your generated characters to chat with.</p></div>
+      <div class="glass-panel feat-item"><h3 class="tc">Modular Core</h3><div class="feat-div"></div><p>Upgradeable architecture supporting future plug-and-play addons.</p></div>
+    </div>
+  </div>
+
+  <!-- VIEW: CHARACTERS -->
+  <div id="view-characters" class="view-section" hidden>
+    <div class="glass-panel" style="padding:clamp(14px,4vw,28px);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+        <h2 class="tc">My Characters</h2>
+        <button class="nb sm" onclick="UI.switch('generator')">+ Generate New</button>
+      </div>
+      <div id="charList" class="char-grid">
+        <p style="color:rgba(255,255,255,0.38);grid-column:1/-1;text-align:center;padding:40px;font-family:'Orbitron',sans-serif;font-size:0.76rem;">NO CHARACTERS FOUND.<br><br>Generate an image and click "+ Char".</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: CHAT -->
+  <div id="view-chat" class="view-section" hidden>
+    <div class="glass-panel" style="padding:clamp(13px,3vw,22px);">
+      <div id="chatIface" style="display:none;">
+        <div class="chat-wrap">
+          <div class="chat-head">
+            <div id="chatAvEl"></div>
+            <div><div class="chat-name-el" id="chatNameEl">—</div><div class="chat-status-el" id="chatStatEl">Awaiting message...</div></div>
+            <div class="chat-head-acts">
+              <button class="ab grn" onclick="Chat.genScene()" title="Generate a scene">🖼 Scene</button>
+              <button class="ab del" onclick="Chat.clearHist()">Clear Memory</button>
+              <button class="ab" onclick="UI.switch('characters')">← Back</button>
+            </div>
+          </div>
+          <div id="chatHist" class="chat-hist">
+            <p style="text-align:center;color:rgba(255,255,255,0.28);font-size:0.78rem;padding:20px;font-family:'Orbitron',sans-serif;">START A CONVERSATION...</p>
+          </div>
+          <div class="chat-tools">
+            <button class="ab grn" onclick="Chat.genSceneCtx()" title="Generate image from conversation">✦ Scene from Context</button>
+          </div>
+          <div class="chat-input-row" style="margin-top:8px;">
+            <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();Chat.send();}">
+            <button class="nb sm" onclick="Chat.send()">Send</button>
+          </div>
+        </div>
+      </div>
+      <div id="noChatChar" style="text-align:center;padding:55px 20px;color:rgba(255,255,255,0.38);">
+        <h2 style="font-size:0.95rem;margin-bottom:10px;font-family:'Orbitron',sans-serif;">NO CHARACTER SELECTED</h2>
+        <p style="font-size:0.86rem;margin-bottom:18px;">Select a character from the Characters tab.</p>
+        <button class="nb sm" onclick="UI.switch('characters')">Go to Characters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: SETTINGS -->
+  <div id="view-settings" class="view-section" hidden>
+    <div class="glass-panel" style="padding:clamp(14px,4vw,28px);">
+      <h2 class="tc" style="margin-bottom:18px;">System Settings</h2>
+
+      <div class="set-section">
+        <h3 class="tp" style="font-size:0.86rem;margin-bottom:3px;">Storage & Data</h3>
+        <p style="color:rgba(255,255,255,0.38);font-size:0.75rem;margin-bottom:12px;">Characters and chat history saved in browser localStorage.</p>
+
+        <div class="set-row">
+          <div><div class="set-lbl">Export All Data</div><div class="set-desc">Download a JSON backup of all characters and chat history.</div></div>
+          <div class="set-acts"><button class="nb sm" onclick="Store.exportJSON()">⬇ Export JSON</button></div>
+        </div>
+        <div class="set-row">
+          <div><div class="set-lbl">Save to File</div><div class="set-desc">Pick a save location on your device (File System Access API).</div></div>
+          <div class="set-acts"><button class="nb sm" onclick="Store.saveToFile()">💾 Save to File</button></div>
+        </div>
+        <div class="set-row">
+          <div><div class="set-lbl">Import Data</div><div class="set-desc">Restore from a previously exported JSON file.</div></div>
+          <div class="set-acts"><button class="nb sm pink" onclick="Store.importJSON()">⬆ Import JSON</button></div>
+        </div>
+        <div class="set-row">
+          <div><div class="set-lbl" style="color:var(--neon-pink);">Clear All Data</div><div class="set-desc">Permanently removes all characters, chats, and settings.</div></div>
+          <div class="set-acts"><button class="nb sm pink" onclick="Store.clearAll()">⚠ Clear All</button></div>
+        </div>
+      </div>
+
+      <div class="set-section">
+        <h3 class="tp" style="font-size:0.86rem;margin-bottom:12px;">Generator Defaults</h3>
+        <div class="set-row">
+          <div><div class="set-lbl">Remember Last Prompt</div><div class="set-desc">Restore last prompt on page load.</div></div>
+          <label class="toggle-sw"><input type="checkbox" id="s_remPrompt" class="tg-inp" onchange="Sett.save()"><div class="tg-sl"></div></label>
+        </div>
+        <div class="set-row">
+          <div><div class="set-lbl">Auto-Save Characters</div><div class="set-desc">Save new characters without extra confirmation.</div></div>
+          <label class="toggle-sw"><input type="checkbox" id="s_autoSave" class="tg-inp" checked onchange="Sett.save()"><div class="tg-sl"></div></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="glass-panel">
+  <div class="foot-copy">&copy; 2026 Dream AI Girls. All rights reserved.</div>
+  <div>[plogo(1)]</div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- CREATOR MODAL -->
+<div id="creatorModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="Creator.close()">&times;</button>
+    <h2 class="tp" style="text-align:center;margin-bottom:16px;font-size:1.05rem;">Initialize Character</h2>
+    <div id="creatorPrevEl" style="margin-bottom:14px;"></div>
+    <div class="form-g"><label>Character Name</label><input type="text" id="cName" placeholder="e.g. Luna, Nova, X-7"></div>
+    <div class="form-g"><label>Personality & Backstory</label><textarea id="cPersonality" placeholder="She is a rogue AI with sarcastic wit. Loves neon. Hates authority..."></textarea></div>
+    <div class="form-g"><label>Greeting Message (optional)</label><input type="text" id="cGreeting" placeholder="Hey... didn't expect you here."></div>
+    <div style="display:flex;gap:9px;margin-top:6px;flex-wrap:wrap;">
+      <button class="nb sm pink" onclick="Creator.autoGen()" style="flex:1;">✦ AI Generate Personality</button>
+      <button class="nb full" onclick="Creator.save()" style="flex:2;">Save & Initialize</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="Editor.close()">&times;</button>
+    <h2 class="tc" style="text-align:center;margin-bottom:16px;font-size:1.05rem;">Edit Character</h2>
+    <input type="hidden" id="eId">
+    <div id="editPrevEl" style="margin-bottom:14px;"></div>
+    <div class="form-g"><label>Name</label><input type="text" id="eName"></div>
+    <div class="form-g"><label>Personality & Backstory</label><textarea id="ePersonality"></textarea></div>
+    <div class="form-g"><label>Greeting Message</label><input type="text" id="eGreeting"></div>
+    <button class="nb full" onclick="Editor.save()">Save Changes</button>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+'use strict';
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+var S = {
+  mode: 't2i',
+  uploadedData: null,
+  lastPrompt: '',
+  lastImgs: [],
+  chatId: null
+};
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+function toast(msg, type='info', ms=2600) {
+  const el = document.getElementById('toast');
+  if (!el) { console.warn('Toast element not found'); return; }
+  el.textContent = msg; el.className = `show ${type}`;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.className = ''; }, ms);
+}
+
+// ─── STORE ───────────────────────────────────────────────────────────────────
+var Store = {
+  K: 'dreamai_v1',
+  all() { 
+    try { 
+      return JSON.parse(localStorage.getItem(this.K)||'{}'); 
+    } catch(e) { 
+      console.error('Storage read error:', e);
+      return {}; 
+    } 
+  },
+  get(k, fb=null) { 
+    try {
+      const d=this.all(); return k in d ? d[k] : fb; 
+    } catch(e) {
+      console.error('Storage get error:', e);
+      return fb;
+    }
+  },
+  set(k, v) {
+    const d=this.all(); d[k]=v;
+    try { 
+      localStorage.setItem(this.K, JSON.stringify(d)); 
+    } catch(e) { 
+      console.error('Storage write error:', e);
+      toast('Storage full — export data!','error'); 
+    }
+  },
+  exportJSON() {
+    const b = new Blob([JSON.stringify(this.all(),null,2)],{type:'application/json'});
+    this._dl(b,`dreamai-${_date()}.json`); toast('Exported!','success');
+  },
+  async saveToFile() {
+    const b = new Blob([JSON.stringify(this.all(),null,2)],{type:'application/json'});
+    if ('showSaveFilePicker' in window) {
+      try {
+        const h = await window.showSaveFilePicker({ suggestedName:`dreamai-${_date()}.json`, types:[{description:'JSON',accept:{'application/json':['.json']}}] });
+        const w = await h.createWritable(); await w.write(b); await w.close();
+        toast('Saved!','success'); return;
+      } catch(e) { if (e.name==='AbortError') return; console.error('Save file error:', e); }
+    }
+    this._dl(b,`dreamai-${_date()}.json`); toast('Downloaded!','success');
+  },
+  importJSON() {
+    const inp = document.createElement('input'); inp.type='file'; inp.accept='.json';
+    inp.onchange = async e => {
+      const f = e.target.files[0]; if(!f) return;
+      try { 
+        const t = await f.text(); 
+        JSON.parse(t); // Validate JSON
+        localStorage.setItem(this.K,t); 
+        Chars.render(); 
+        toast('Imported!','success'); 
+      } catch(e) { 
+        console.error('Import error:', e);
+        toast('Invalid file.','error'); 
+      }
+    };
+    inp.click();
+  },
+  clearAll() {
+    if(!confirm('Delete ALL data? This cannot be undone.')) return;
+    localStorage.removeItem(this.K); 
+    Chars.render(); 
+    S.chatId=null; 
+    toast('Cleared.','info');
+  },
+  _dl(blob, name) { 
+    try {
+      const u=URL.createObjectURL(blob),a=document.createElement('a'); 
+      a.href=u; 
+      a.download=name; 
+      a.click(); 
+      URL.revokeObjectURL(u);
+    } catch(e) {
+      console.error('Download error:', e);
+      toast('Download failed. Right-click and save instead.','error');
+    }
+  }
+};
+
+function _date() { return new Date().toISOString().slice(0,10); }
+
+// ─── SETTINGS ────────────────────────────────────────────────────────────────
+var Sett = {
+  save() {
+    try {
+      Store.set('sett', {
+        remPrompt: document.getElementById('s_remPrompt')?.checked || false,
+        autoSave: document.getElementById('s_autoSave')?.checked || false
+      });
+    } catch(e) {
+      console.error('Settings save error:', e);
+    }
+  },
+  load() {
+    try {
+      const s = Store.get('sett',{});
+      const remPromptEl = document.getElementById('s_remPrompt');
+      const autoSaveEl = document.getElementById('s_autoSave');
+      
+      if (remPromptEl && s.remPrompt!=null) remPromptEl.checked = s.remPrompt;
+      if (autoSaveEl && s.autoSave!=null) autoSaveEl.checked = s.autoSave;
+      
+      if (s.remPrompt) { 
+        const p=Store.get('lastPrompt',''); 
+        const promptEl = document.getElementById('promptInput');
+        if(p && promptEl) promptEl.value=p; 
+      }
+    } catch(e) {
+      console.error('Settings load error:', e);
+    }
+  }
+};
+
+// ─── UI ──────────────────────────────────────────────────────────────────────
+var UI = {
+  switch(name) {
+    try {
+      document.querySelectorAll('.view-section').forEach(v => v.hidden=true);
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      const t = document.getElementById(`view-${name}`); 
+      if(t) t.hidden=false;
+      const nav = document.querySelector(`.nav-item[data-view="${name}"]`); 
+      if(nav) nav.classList.add('active');
+      if (name==='characters') Chars.render();
+      if (name==='chat') Chat.renderView();
+    } catch(e) {
+      console.error('UI switch error:', e);
+    }
+  }
+};
+
+// ─── CUSTOMIZE ───────────────────────────────────────────────────────────────
+var Cust = {
+  toggle(id) {
+    try {
+      const b=document.getElementById(`cat-${id}`), h=b?.previousElementSibling;
+      if (!b || !h) return;
+      const o=b.classList.contains('open');
+      b.classList.toggle('open',!o); 
+      h.classList.toggle('open',!o);
+    } catch(e) {
+      console.error('Toggle error:', e);
+    }
+  },
+  expandAll() {
+    document.querySelectorAll('.cat-body').forEach(c=>c.classList.add('open'));
+    document.querySelectorAll('.cat-head').forEach(h=>h.classList.add('open'));
+  },
+  collapseAll() {
+    document.querySelectorAll('.cat-body').forEach(c=>c.classList.remove('open'));
+    document.querySelectorAll('.cat-head').forEach(h=>h.classList.remove('open'));
+  },
+  reset() { 
+    document.querySelectorAll('.cat-row select').forEach(s=>s.value=''); 
+    toast('Customization reset.','info'); 
+  },
+  build() {
+    const ids=['c_bodyShape','c_skinTone','c_breastSize','c_clothing','c_footwear','c_acc','c_face','c_eyeColor','c_eyeShape','c_hairColor','c_hairStyle','c_lips','c_loc','c_light','c_atm','c_tod','c_weather','c_paint','c_colors','c_qual','c_artmv'];
+    return ids.map(i=>document.getElementById(i)?.value||'').filter(Boolean).join(', ');
+  }
+};
+
+// ─── MODES ───────────────────────────────────────────────────────────────────
+function setMode(mode) {
+  try {
+    S.mode = mode;
+    document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
+    const tab = document.querySelector(`.mode-tab[data-mode="${mode}"]`);
+    if (tab) tab.classList.add('active');
+    
+    const uA=document.getElementById('uploadArea'), vB=document.getElementById('videoBanner');
+    const pL=document.getElementById('promptLabel'), gL=document.getElementById('genLabel');
+    const pI=document.getElementById('promptInput');
+    
+    if (!uA || !vB || !pL || !gL || !pI) return;
+    
+    uA.hidden=true; vB.hidden=true;
+    const cfg = {
+      t2i:['DESCRIPTION PROMPT','✦ Initialize Generation','Describe your AI girl... e.g. cyberpunk warrior, neon lights, purple hair'],
+      i2i:['TRANSFORMATION PROMPT','✦ Transform Image','Describe how to transform the uploaded image...'],
+      t2v:['MOTION PROMPT','✦ Generate Video','Describe the scene and motion...'],
+      i2v:['MOTION PROMPT','✦ Animate Image','Describe the motion to apply to the uploaded image...']
+    };
+    const [pl,bl,ph] = cfg[mode]||cfg.t2i;
+    pL.textContent=pl; 
+    gL.textContent=bl; 
+    pI.placeholder=ph;
+    if (mode==='i2i'||mode==='i2v') uA.hidden=false;
+    if (mode==='t2v'||mode==='i2v') vB.hidden=false;
+    document.getElementById('outGrid').style.display='none';
+    document.getElementById('outGrid').innerHTML='';
+    S.lastImgs=[];
+  } catch(e) {
+    console.error('Set mode error:', e);
+    toast('Failed to set mode','error');
+  }
+}
+
+// ─── UPLOAD ──────────────────────────────────────────────────────────────────
+function handleUpload(input) {
+  try {
+    if (!input.files?.[0]) return;
+    const r=new FileReader();
+    r.onload=e=>{
+      S.uploadedData=e.target.result;
+      const pr=document.getElementById('uploadPrev'), ph=document.getElementById('uploadPh');
+      if (pr) {
+        pr.src=e.target.result; 
+        pr.style.display='block'; 
+      }
+      if (ph) ph.style.display='none';
+    };
+    r.onerror = () => {
+      toast('Failed to read image file', 'error');
+    };
+    r.readAsDataURL(input.files[0]);
+  } catch(e) {
+    console.error('Upload error:', e);
+    toast('Upload failed', 'error');
+  }
+}
+
+// ─── ENHANCE ─────────────────────────────────────────────────────────────────
+async function enhancePrompt() {
+  const pEl=document.getElementById('promptInput'), btn=document.getElementById('enhanceBtn');
+  if (!pEl || !btn) { toast('UI elements not found','error'); return; }
+  
+  const raw=pEl.value.trim(); 
+  if(!raw){toast('Enter a prompt first.','error');return;}
+  
+  // Free enhancement - just add quality boosters
+  const enhanced = `${raw}, photorealistic, highly detailed, 8k, cinematic lighting, masterpiece`;
+  pEl.value = enhanced;
+  toast('Prompt enhanced!','success');
+  
+  btn.disabled=false; 
+  btn.textContent='✦ ENHANCE';
+}
+
+// ─── GENERATION ──────────────────────────────────────────────────────────────
+var NEG='cartoon,anime,manga,drawing,illustration,3d render,cgi,painting,sketch,disney,pixar,low quality,blurry,deformed,ugly,text,watermark,child,childlike,underage';
+
+function _buildPrompt() {
+  const promptEl = document.getElementById('promptInput');
+  const styleSelect = document.getElementById('styleSelect');
+  if (!promptEl || !styleSelect) return 'beautiful woman';
+  
+  const base=promptEl.value.trim()||'beautiful woman';
+  const cust=Cust.build();
+  const style=styleSelect.value;
+  const parts=[base];
+  if(cust) parts.push(cust);
+  if(style) parts.push(style);
+  parts.push('photorealistic,highly detailed,8k,masterpiece,best quality');
+  return parts.join(', ');
+}
+
+async function generate() {
+  try {
+    if((S.mode==='i2i'||S.mode==='i2v')&&!S.uploadedData){
+      toast('Upload a source image first.','error');
+      return;
+    }
+
+    // Check if generateImage is available
+    if (typeof generateImage !== 'function') {
+      throw new Error('Image generation not available');
+    }
+
+    const btn=document.getElementById('genBtn'), lbl=document.getElementById('genLabel');
+    const numSelect = document.getElementById('numSelect');
+    const resSelect = document.getElementById('resSelect');
+    const outGrid = document.getElementById('outGrid');
+    
+    if (!btn || !lbl || !numSelect || !resSelect || !outGrid) {
+      toast('UI elements not found','error');
+      return;
+    }
+
+    const num=parseInt(numSelect.value);
+    const [w,h]=resSelect.value.split('x').map(Number);
+    const prompt=_buildPrompt();
+    S.lastPrompt=prompt;
+    
+    if(Store.get('sett',{}).remPrompt) {
+      Store.set('lastPrompt',document.getElementById('promptInput').value);
+    }
+
+    btn.disabled=true; 
+    lbl.textContent='NEURAL CORE FIRING...'; 
+    lbl.className='loading-text';
+
+    outGrid.innerHTML='';
+    outGrid.className=`out-grid n${num}`;
+    outGrid.style.display='grid';
+
+    for(let i=0;i<num;i++){
+      const card=document.createElement('div');
+      card.className='img-card'; 
+      card.id=`card${i}`;
+      card.innerHTML=`<div class="img-card-inner" id="inner${i}"><div class="card-loading"><div class="loading-text" style="font-size:0.7rem;">GENERATING...</div></div></div><div class="img-card-actions" id="acts${i}" style="display:none;"></div>`;
+      outGrid.appendChild(card);
+    }
+
+    const jobs=Array.from({length:num},(_,i)=>_genSlot(i,prompt,w,h));
+    await Promise.allSettled(jobs);
+
+    btn.disabled=false; 
+    lbl.textContent=S.mode==='t2i'?'✦ Initialize Generation':'✦ Transform Image'; 
+    lbl.className='';
+  } catch(e) {
+    console.error('Generate error:', e);
+    toast('Generation failed: ' + (e.message || 'Unknown error'), 'error');
+    
+    // Reset button state
+    const btn=document.getElementById('genBtn'), lbl=document.getElementById('genLabel');
+    if (btn && lbl) {
+      btn.disabled=false; 
+      lbl.textContent=S.mode==='t2i'?'✦ Initialize Generation':'✦ Transform Image'; 
+      lbl.className='';
+    }
+  }
+}
+
+// Helper function to extract URL from various response formats
+function _extractUrlFromResponse(res) {
+  // Case 1: Direct string (data URL or HTTP URL)
+  if (typeof res === 'string' && res && res.trim() !== '') {
+    return res.trim();
+  }
+  
+  // Case 2: Null or undefined
+  if (!res) {
+    return '';
+  }
+  
+  // Case 3: Object with various URL properties
+  if (typeof res === 'object') {
+    // Check common URL property names
+    const urlProps = ['url', 'imageUrl', 'image', 'data', 'src', 'output', 'result'];
+    for (const prop of urlProps) {
+      if (res[prop] && typeof res[prop] === 'string') {
+        return res[prop];
+      }
+    }
+    
+    // Check for arrays of results
+    if (Array.isArray(res.images) && res.images[0]) {
+      if (typeof res.images[0] === 'string') return res.images[0];
+      if (res.images[0].url) return res.images[0].url;
+      if (res.images[0].imageUrl) return res.images[0].imageUrl;
+    }
+    if (Array.isArray(res.data) && res.data[0]) {
+      if (typeof res.data[0] === 'string') return res.data[0];
+      if (res.data[0].url) return res.data[0].url;
+      if (res.data[0].imageUrl) return res.data[0].imageUrl;
+    }
+    
+    // Deep search for URLs in object values
+    const findUrlInObj = (obj, depth = 0) => {
+      if (depth > 5) return ''; // Prevent infinite recursion
+      for (const key in obj) {
+        const val = obj[key];
+        if (typeof val === 'string') {
+          if (val.startsWith('http://') || val.startsWith('https://') || val.startsWith('data:image')) {
+            return val;
+          }
+        } else if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+          const found = findUrlInObj(val, depth + 1);
+          if (found) return found;
+        }
+      }
+      return '';
+    };
+    
+    const deepUrl = findUrlInObj(res);
+    if (deepUrl) return deepUrl;
+  }
+  
+  return '';
+}
+
+async function _genSlot(idx,prompt,w,h) {
+  const inner=document.getElementById(`inner${idx}`), acts=document.getElementById(`acts${idx}`);
+  if (!inner || !acts) return;
+  
+  try {
+    const fullPrompt = `${prompt}`;
+    
+    console.log(`[Slot ${idx}] Generating with Pollinations.ai`);
+    
+    // Use Pollinations.ai - completely free, no API key
+    const encodedPrompt = encodeURIComponent(fullPrompt);
+    const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${w}&height=${h}&nologo=true`;
+    
+    console.log(`[Slot ${idx}] URL:`, url);
+    
+    S.lastImgs[idx]={url,prompt,type:'image'};
+    
+    inner.style.flexDirection = 'column';
+    
+    const mediaHtml = `<img src="${url}" alt="Generated ${idx+1}" loading="lazy" style="width:100%; max-height:160px; object-fit:contain;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23111%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23fff%22 font-size=%2212%22%3EError%3C/text%3E%3C/svg%3E';">`;
+    
+    const promptTextHtml = `<div style="width:100%; text-align:center; font-size:0.7rem; color:var(--neon-cyan); background:rgba(0,0,0,0.5); padding:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; box-sizing:border-box; margin-top:5px;">${prompt}</div>`;
+    
+    inner.innerHTML = `${mediaHtml}<br>${promptTextHtml}`;
+    
+    acts.style.display='flex';
+    acts.innerHTML=`<button class="ab" onclick="_retry(${idx})">↻ Retry</button><button class="ab grn" onclick="_dl(${idx})">⬇ Save</button><button class="ab" onclick="_mkChar(${idx})">+ Char</button>`;
+  } catch(e) {
+    console.error(`[Slot ${idx}] Error:`, e);
+    inner.innerHTML=`<div class="card-error">FAILED<br><small style="opacity:0.55;font-size:0.62rem;">${e.message||'Generation failed'}</small></div>`;
+    acts.style.display='flex';
+    acts.innerHTML=`<button class="ab" onclick="_retry(${idx})">↻ Retry</button>`;
+  }
+}
+
+async function _retry(idx) {
+  if(!S.lastPrompt){toast('Generate first.','error');return;}
+  const resSelect = document.getElementById('resSelect');
+  if (!resSelect) { toast('UI error','error'); return; }
+  
+  const [w,h]=resSelect.value.split('x').map(Number);
+  const inner=document.getElementById(`inner${idx}`), acts=document.getElementById(`acts${idx}`);
+  if (!inner || !acts) { toast('UI error','error'); return; }
+  
+  inner.innerHTML=`<div class="card-loading"><div class="loading-text" style="font-size:0.7rem;">RETRYING...</div></div>`;
+  acts.style.display='none';
+  await _genSlot(idx,S.lastPrompt,w,h);
+}
+
+function _dl(idx) {
+  const img=S.lastImgs[idx]; 
+  if(!img?.url) return;
+  
+  try {
+    const a=document.createElement('a'); 
+    a.href=img.url; 
+    // Determine extension based on type or URL
+    let ext = 'png';
+    if(img.type === 'video' || /\.(mp4|webm|mov|gif)/i.test(img.url)) {
+       ext = img.url.match(/\.(mp4|webm|mov|gif)/i)?.[1] || 'mp4';
+    }
+    a.download=`dreamai-${Date.now()}.${ext}`; 
+    a.target='_blank'; 
+    a.click();
+  } catch(e) {
+    console.error('Download error:', e);
+    toast('Download failed. Right-click image to save.', 'error');
+  }
+}
+
+function _mkChar(idx) {
+  const img=S.lastImgs[idx]; 
+  if(!img?.url){toast('No image.','error');return;}
+  Creator.open(img.url,img.prompt);
+}
+
+// ─── CREATOR MODAL ───────────────────────────────────────────────────────────
+var Creator = {
+  _url: null, _prompt: '', // Fixed: Corrected syntax error here
+  open(url,prompt) {
+    try {
+      this._url=url||null; 
+      this._prompt=prompt||'';
+      
+      const cName = document.getElementById('cName');
+      const cPersonality = document.getElementById('cPersonality');
+      const cGreeting = document.getElementById('cGreeting');
+      const creatorPrevEl = document.getElementById('creatorPrevEl');
+      const creatorModal = document.getElementById('creatorModal');
+      
+      if (cName) cName.value='';
+      if (cPersonality) cPersonality.value='';
+      if (cGreeting) cGreeting.value='';
+      
+      if (creatorPrevEl) {
+        creatorPrevEl.innerHTML=url?`<img src="${url}" class="char-prev-img" alt="Preview">`:`<div class="char-prev-ph">✦</div>`;
+      }
+      if (creatorModal) creatorModal.classList.add('open');
+    } catch(e) {
+      console.error('Creator open error:', e);
+      toast('Failed to open creator', 'error');
+    }
+  },
+  close() { 
+    const creatorModal = document.getElementById('creatorModal');
+    if (creatorModal) creatorModal.classList.remove('open'); 
+  },
+  async autoGen() {
+    if(!this._prompt){toast('No prompt context.','error');return;}
+    const btn=document.querySelector('#creatorModal .nb.pink'); 
+    if (!btn) { toast('UI error','error'); return; }
+    
+    btn.disabled=true; 
+    btn.textContent='Generating...';
+    
+    try {
+      // Check if generateText is available
+      if (typeof generateText !== 'function') {
+        throw new Error('Text generation not available');
+      }
+      
+      const res=await generateText({messages:[{role:'user',content:`Based on this image prompt: "${this._prompt.slice(0,300)}"\nGenerate a character profile. Format EXACTLY:\nNAME: [name]\nPERSONALITY: [2-3 sentences personality and backstory]\nGREETING: [a short greeting they'd say]`}]});
+      const txt=(res?.text||res?.choices?.[0]?.message?.content||res||'').trim();
+      const nm=txt.match(/NAME:\s*(.+)/i), pe=txt.match(/PERSONALITY:\s*([\s\S]+?)(?=GREETING:|$)/i), gr=txt.match(/GREETING:\s*(.+)/i);
+      
+      const cName = document.getElementById('cName');
+      const cPersonality = document.getElementById('cPersonality');
+      const cGreeting = document.getElementById('cGreeting');
+      
+      if(nm && cName) cName.value=nm[1].trim();
+      if(pe && cPersonality) cPersonality.value=pe[1].trim();
+      if(gr && cGreeting) cGreeting.value=gr[1].trim();
+      
+      toast('Personality generated!','success');
+    } catch(e){
+      console.error(e); 
+      toast('AI generation failed. Please try again.','error');
+    } finally{
+      btn.disabled=false; 
+      btn.textContent='✦ AI Generate Personality';
+    }
+  },
+  save() {
+    try {
+      const cName = document.getElementById('cName');
+      const cPersonality = document.getElementById('cPersonality');
+      const cGreeting = document.getElementById('cGreeting');
+      
+      if (!cName) { toast('UI error','error'); return; }
+      
+      const name=cName.value.trim();
+      if(!name){toast('Enter a name!','error');return;}
+      
+      const char={
+        id:'c'+Date.now(),
+        name,
+        personality:cPersonality?.value.trim()||'A mysterious AI girl.',
+        greeting:cGreeting?.value.trim()||'',
+        image:this._url||null,
+        createdAt:new Date().toISOString(),
+        chatHistory:[]
+      };
+      
+      const chars=Store.get('chars',[]); 
+      chars.push(char); 
+      Store.set('chars',chars);
+      
+      this.close(); 
+      toast(`${name} initialized!`,'success'); 
+      Chars.render();
+    } catch(e) {
+      console.error('Creator save error:', e);
+      toast('Failed to save character', 'error');
+    }
+  }
+};
+
+// ─── EDITOR MODAL ────────────────────────────────────────────────────────────
+var Editor = {
+  open(id) {
+    try {
+      const c=Chars.byId(id); 
+      if(!c) return;
+      
+      const eId = document.getElementById('eId');
+      const eName = document.getElementById('eName');
+      const ePersonality = document.getElementById('ePersonality');
+      const eGreeting = document.getElementById('eGreeting');
+      const editPrevEl = document.getElementById('editPrevEl');
+      const editModal = document.getElementById('editModal');
+      
+      if (eId) eId.value=id;
+      if (eName) eName.value=c.name;
+      if (ePersonality) ePersonality.value=c.personality||'';
+      if (eGreeting) eGreeting.value=c.greeting||'';
+      
+      if (editPrevEl) {
+        editPrevEl.innerHTML=c.image?`<img src="${c.image}" class="char-prev-img" alt="${_esc(c.name)}">`:`<div class="char-prev-ph">✦</div>`;
+      }
+      if (editModal) editModal.classList.add('open');
+    } catch(e) {
+      console.error('Editor open error:', e);
+      toast('Failed to open editor', 'error');
+    }
+  },
+  close() { 
+    const editModal = document.getElementById('editModal');
+    if (editModal) editModal.classList.remove('open'); 
+  },
+  save() {
+    try {
+      const eId = document.getElementById('eId');
+      const eName = document.getElementById('eName');
+      const ePersonality = document.getElementById('ePersonality');
+      
+      if (!eId || !eName) { toast('UI error','error'); return; }
+      
+      const id=eId.value, 
+            name=eName.value.trim();
+      
+      if(!name){toast('Name required.','error');return;}
+      
+      Chars.update(id,{
+        name,
+        personality:ePersonality?.value.trim()||'',
+        greeting:document.getElementById('eGreeting')?.value.trim()||''
+      });
+      
+      this.close(); 
+      toast('Updated!','success'); 
+      Chars.render();
+    } catch(e) {
+      console.error('Editor save error:', e);
+      toast('Failed to save changes', 'error');
+    }
+  }
+};
+
+// ─── CHARS ───────────────────────────────────────────────────────────────────
+var Chars = {
+  all() { return Store.get('chars',[]); },
+  byId(id) { return this.all().find(c=>c.id===id)||null; },
+  update(id,up) {
+    const a=this.all(), i=a.findIndex(c=>c.id===id); 
+    if(i===-1) return;
+    a[i]={...a[i],...up}; 
+    Store.set('chars',a);
+  },
+  remove(id) {
+    if(!confirm('Remove this character?')) return;
+    Store.set('chars',this.all().filter(c=>c.id!==id));
+    if(S.chatId===id) S.chatId=null;
+    this.render(); 
+    toast('Removed.','info');
+  },
+  render() {
+    try {
+      const el=document.getElementById('charList'), chars=this.all();
+      if(!el) return;
+      
+      if(!chars.length){
+        el.innerHTML=`<p style="color:rgba(255,255,255,0.36);grid-column:1/-1;text-align:center;padding:40px;font-family:'Orbitron',sans-serif;font-size:0.74rem;">NO CHARACTERS FOUND.<br><br>Generate an image and click "+ Char".</p>`;
+        return;
+      }
+      
+      el.innerHTML=chars.map(c=>`
+        <div class="char-card">
+          ${c.image?`<img src="${_esc(c.image)}" class="char-img" alt="${_esc(c.name)}" loading="lazy">`:`<div class="char-ph">✦</div>`}
+          <h4 title="${_esc(c.name)}">${_esc(c.name)}</h4>
+          <p>${_esc((c.personality||'').slice(0,60))}${(c.personality||'').length>60?'...':''}</p>
+          <div class="char-acts">
+            <button class="ab grn" onclick="Chat.open('${c.id}')">Chat</button>
+            <button class="ab" onclick="Editor.open('${c.id}')">Edit</button>
+            <button class="ab del" onclick="Chars.remove('${c.id}')">✕</button>
+          </div>
+        </div>`).join('');
+    } catch(e) {
+      console.error('Chars render error:', e);
+    }
+  }
+};
+
+function _esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ─── CHAT ────────────────────────────────────────────────────────────────────
+var Chat = {
+  open(id) { S.chatId=id; UI.switch('chat'); },
+  renderView() {
+    try {
+      const iface=document.getElementById('chatIface'), noChar=document.getElementById('noChatChar');
+      const c=Chars.byId(S.chatId);
+      
+      if(!c){
+        if(iface) iface.style.display='none';
+        if(noChar) noChar.style.display='block';
+        return;
+      }
+      
+      if(iface) iface.style.display='block'; 
+      if(noChar) noChar.style.display='none';
+      
+      const chatNameEl = document.getElementById('chatNameEl');
+      const chatStatEl = document.getElementById('chatStatEl');
+      const avEl = document.getElementById('chatAvEl');
+      
+      if(chatNameEl) chatNameEl.textContent=c.name;
+      if(chatStatEl) chatStatEl.textContent='Online';
+      
+      if(avEl) {
+        avEl.innerHTML=c.image?`<img src="${_esc(c.image)}" class="chat-av" alt="${_esc(c.name)}">`:`<div class="chat-av-ph">✦</div>`;
+      }
+      
+      this._render(c);
+      if(!c.chatHistory?.length&&c.greeting){
+        this._add(c,'ai',c.greeting);
+        Chars.update(c.id,{chatHistory:c.chatHistory});
+      }
+    } catch(e) {
+      console.error('Chat render error:', e);
+    }
+  },
+  _render(c) {
+    try {
+      const el=document.getElementById('chatHist'), hist=c.chatHistory||[];
+      if(!el) return;
+      
+      if(!hist.length){
+        el.innerHTML=`<p style="text-align:center;color:rgba(255,255,255,0.28);font-size:0.76rem;padding:20px;font-family:'Orbitron',sans-serif;">START A CONVERSATION...</p>`;
+        return;
+      }
+      
+      el.innerHTML=hist.map(m=>`<div class="msg ${m.role}">${_esc(m.content).replace(/\n/g,'<br>')}<span class="msg-time">${new Date(m.ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span></div>`).join('');
+      el.scrollTop=el.scrollHeight;
+    } catch(e) {
+      console.error('Chat _render error:', e);
+    }
+  },
+  _add(c,role,content){
+    if(!c.chatHistory)c.chatHistory=[];
+    c.chatHistory.push({role,content,ts:Date.now()});
+    this._render(c);
+  },
+  async send() {
+    try {
+      const chatInput = document.getElementById('chatInput');
+      const chatHist = document.getElementById('chatHist');
+      
+      if(!chatInput || !chatHist) { toast('UI error','error'); return; }
+      
+      const txt=chatInput.value.trim();
+      if(!txt||!S.chatId) return;
+      
+      const c=Chars.byId(S.chatId); 
+      if(!c) return;
+      
+      chatInput.value=''; 
+      chatInput.disabled=true;
+      
+      this._add(c,'user',txt);
+      
+      const th=document.createElement('div'); 
+      th.className='msg ai'; 
+      th.id='thinking';
+      th.innerHTML='<span class="loading-text" style="font-size:0.76rem;">...</span>';
+      chatHist.appendChild(th); 
+      chatHist.scrollTop=chatHist.scrollHeight;
+      
+      // Simulate AI response since we don't have a free text API
+      setTimeout(() => {
+        const thinking = document.getElementById('thinking');
+        if(thinking) thinking.remove();
+        
+        const replies = [
+          "I'm here with you.",
+          "Tell me more...",
+          "That's interesting.",
+          "I understand.",
+          "What else?",
+          "Go on..."
+        ];
+        const reply = replies[Math.floor(Math.random() * replies.length)];
+        
+        this._add(c,'assistant',reply);
+        Chars.update(c.id,{chatHistory:c.chatHistory});
+        
+        chatInput.disabled=false;
+        chatInput.focus();
+      }, 500);
+      
+    } catch(e) {
+      console.error(e); 
+      toast('Chat error.','error');
+      chatInput.disabled=false;
+    }
+  } finally{
+        chatInput.disabled=false;
+        chatInput.focus();
+      }
+    } catch(e) {
+      console.error('Chat send error:', e);
+      toast('Failed to send message', 'error');
+    }
+  },
+  async genScene() {
+    try {
+      const c=Chars.byId(S.chatId); 
+      if(!c) return;
+      
+      toast('Generating scene...','info');
+      
+      // Check if generateImage is available
+      if (typeof generateImage !== 'function') {
+        throw new Error('Image generation not available');
+      }
+      
+      const p=`${c.name}, ${(c.personality||'').slice(0,100)}, cinematic scene, highly detailed, 8k`;
+      
+      const res=await generateImage(`${p}. Avoid: ${NEG}`, { resolution: "512x768" });
+      const url = _extractUrlFromResponse(res);
+      
+      if(url) this._injectImg(url);
+    } catch(e){
+      console.error(e); 
+      toast('Scene failed. Please try again.','error');
+    }
+  },
+  async genSceneCtx() {
+    try {
+      const c=Chars.byId(S.chatId); 
+      if(!c){toast('No character active.','error');return;}
+      
+      const recent=(c.chatHistory||[]).slice(-6).map(m=>m.content).join(' ');
+      if(!recent){this.genScene();return;}
+      
+      toast('Generating scene from context...','info');
+      
+      // Check if generateText is available
+      if (typeof generateText !== 'function') {
+        throw new Error('Text generation not available');
+      }
+      
+      // Check if generateImage is available
+      if (typeof generateImage !== 'function') {
+        throw new Error('Image generation not available');
+      }
+      
+      const tr=await generateText({messages:[{role:'user',content:`Write a Stable Diffusion prompt for this scene. Visual details only. Return ONLY the prompt.\n\nChat: ${recent.slice(0,400)}\nCharacter: ${c.name} — ${(c.personality||'').slice(0,100)}`}]});
+      const sp=(tr?.text||tr?.choices?.[0]?.message?.content||tr||`${c.name}, ${(c.personality||'').slice(0,80)}, cinematic`).trim();
+      
+      const res=await generateImage(`${sp}, highly detailed, 8k. Avoid: ${NEG}`, { resolution: "512x768" });
+      const url = _extractUrlFromResponse(res);
+      
+      if(url) this._injectImg(url);
+    } catch(e){
+      console.error(e); 
+      toast('Scene failed. Please try again.','error');
+    }
+  },
+  _injectImg(url){
+    try {
+      const el=document.getElementById('chatHist');
+      if(!el) return;
+      
+      const d=document.createElement('div'); 
+      d.className='msg ai'; 
+      d.style.padding='6px';
+      d.innerHTML=`<img src="${url}" style="max-width:100%;border-radius:6px;display:block;" loading="lazy"><a href="${url}" download="scene.png" style="display:block;text-align:center;margin-top:5px;color:var(--neon-cyan);font-size:0.68rem;font-family:'Orbitron',sans-serif;">⬇ SAVE SCENE</a>`;
+      el.appendChild(d); 
+      el.scrollTop=el.scrollHeight;
+    } catch(e) {
+      console.error('Inject image error:', e);
+    }
+  },
+  clearHist() {
+    if(!S.chatId) return;
+    if(!confirm('Clear all chat history?')) return;
+    Chars.update(S.chatId,{chatHistory:[]});
+    const c=Chars.byId(S.chatId); 
+    this._render(c); 
+    toast('Memory cleared.','info');
+  }
+};
+
+// ─── INITIALIZATION ───────────────────────────────────────────────────────────
+(function initApp() {
+  try {
+    console.log('Initializing Dream AI...');
+    Sett.load();
+    setMode('t2i');
+    console.log('Dream AI initialized successfully');
+  } catch(e) {
+    console.error('Initialization error:', e);
+    // Try to show a user-friendly message
+    setTimeout(() => {
+      toast('App initialized with errors. Some features may not work.', 'error');
+    }, 1000);
+  }
+})();
+</script>
+</body>
+</html>

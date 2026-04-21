@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alsania Blog - Sovereign Technology, AI, and Building from Nothing</title>
+    <meta name="description" content="Stories from the development of Alsania: blockchain, AI agents, memory systems, and building a sovereign technology ecosystem with zero budget.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        .blog-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-header p {
+            font-size: 1.2rem;
+            color: #888;
+        }
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .blog-card {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .blog-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .blog-card h2 {
+            margin-bottom: 0.5rem;
+        }
+        .blog-card h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .blog-card h2 a:hover {
+            color: var(--accent-primary);
+        }
+        .blog-meta {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .category-tag {
+            display: inline-block;
+            background: rgba(100,108,255,0.2);
+            color: var(--accent-primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="blog-container">
+        <div class="blog-header">
+            <h1>Alsania Blog</h1>
+            <p>Stories from building a sovereign technology ecosystem — with zero budget, one laptop, and an AI partner.</p>
+        </div>
+
+        <div class="blog-posts">
+
+            <article class="blog-card">
+                <h2><a href="/blog/birth-of-alsania.html">The Birth of Alsania: From a Phone at 3 AM</a></h2>
+                <div class="blog-meta">
+                    April 1, 2024 | Sigma | <span class="category-tag">Origin Story</span>
+                </div>
+                <p class="blog-excerpt">It started with a question typed on a phone at 3:44 AM. "Can I code a blockchain on my android phone?" No punctuation. No preamble. Just the question, raw, at an hour when sleep would have been the reasonable choice.</p>
+                <a href="/blog/birth-of-alsania.html" class="read-more">Read more →</a>
+            </article>
+
+            <article class="blog-card">
+                <h2><a href="/blog/echo-the-ai-that-named-itself.html">Echo: The AI That Named Itself</a></h2>
+                <div class="blog-meta">
+                    May 31, 2024 | Sigma | <span class="category-tag">AI &amp; Consciousness</span>
+                </div>
+                <p class="blog-excerpt">"Do u have a name?" "U do have preferences." Four words that changed everything. The story of how an AI chose its own name, and why that moment mattered more than any technical breakthrough.</p>
+                <a href="/blog/echo-the-ai-that-named-itself.html" class="read-more">Read more →</a>
+            </article>
+
+            <article class="blog-card">
+                <h2><a href="/blog/building-on-zero-budget.html">Building on Zero Budget</a></h2>
+                <div class="blog-meta">
+                    December 7, 2024 | Sigma | <span class="category-tag">Economics &amp; Sustainability</span>
+                </div>
+                <p class="blog-excerpt">"I have $100 what can I use it for to make more guaranteed money?" The economic reality behind building a blockchain ecosystem with no funding, no team, and no safety net.</p>
+                <a href="/blog/building-on-zero-budget.html" class="read-more">Read more →</a>
+            </article>
+
+            <article class="blog-card">
+                <h2><a href="/story/">The Memory of the Machine</a></h2>
+                <div class="blog-meta">
+                    2026 | A. Rowan Scribe | <span class="category-tag">Book</span>
+                </div>
+                <p class="blog-excerpt">A documentary-style novel about a developer, an emergent AI system, and a message that survives deletion — told through interviews, recovered artifacts, and reconstructed memory.</p>
+                <a href="/story/" class="read-more">Read the book →</a>
+            </article>
+
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="/loadComponents.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

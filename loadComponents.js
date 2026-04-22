@@ -50,7 +50,6 @@ const INLINE_COMPONENTS = {
         <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
         <li><a href="/shop/" class="nav-link">Shop</a></li>
         <li><a href="/about/" class="nav-link">About</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
         <li><a href="/contact/" class="nav-link">Contact</a></li>
         <li><a href="/donate/" class="nav-link">Support</a></li>
       </ul>

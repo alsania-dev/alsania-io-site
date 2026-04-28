@@ -1492,17 +1492,10 @@ var Chat = {
       }, 500);
       
     } catch(e) {
-      console.error(e); 
-      toast('Chat error.','error');
-      chatInput.disabled=false;
-    }
-  } finally{
-        chatInput.disabled=false;
-        chatInput.focus();
-      }
-    } catch(e) {
       console.error('Chat send error:', e);
       toast('Failed to send message', 'error');
+      chatInput.disabled = false;
+      chatInput.focus();
     }
   },
   async genScene() {

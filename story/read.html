@@ -338,7 +338,9 @@
             
             try {
                 const paddedNum = chapterNum.toString().padStart(2, '0');
-                const response = await fetch(`/story/chapters/chapter-${paddedNum}-${getChapterSlug(chapterNum)}.md`);
+                const title = publishedData.chapterTitles[chapterNum];
+                const slug = title.toLowerCase().replace(/\s+/g, '_');
+                const response = await fetch(`/story/chapters/ch${paddedNum}_${slug}.md`);
                 
                 if (!response.ok) {
                     throw new Error(`Chapter ${chapterNum} not found`);

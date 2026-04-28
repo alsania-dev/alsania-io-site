@@ -300,11 +300,18 @@ function fixLinksForFileProtocol() {
 function initComponents() {
   log("Initializing components...");
 
-  // Load components in parallel
+  // Load components in sequence - nav depends on header
   const promises = [];
 
   if (document.getElementById("header-container")) {
-    promises.push(loadComponent("header-container", "header.html"));
+    promises.push(
+      loadComponent("header-container", "header.html").then(() => {
+        // After header loads, load nav into the nav-container
+        if (document.getElementById("nav-container")) {
+          return loadComponent("nav-container", "nav.html");
+        }
+      })
+    );
   }
 
   if (document.getElementById("footer-container")) {

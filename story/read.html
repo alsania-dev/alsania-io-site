@@ -266,7 +266,7 @@
         async function loadPublishedData() {
             try {
                 const response = await fetch('/story/published.json');
-                publishedData = await response.json();
+                const response = await fetch('/story/published.json');
                 totalChapters = publishedData.totalChapters;
                 
                 // Validate current chapter is published

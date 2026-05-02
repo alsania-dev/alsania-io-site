@@ -230,24 +230,49 @@ function initThemeToggle() {
 // Initialize mobile menu
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu");
-  const navMenu = document.querySelector(".alsania-nav");
-  if (!mobileMenuBtn || !navMenu) {
-    log("Mobile menu elements not found");
+  if (!mobileMenuBtn) {
+    log("Mobile menu button not found");
     return;
   }
-
-  mobileMenuBtn.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-    mobileMenuBtn.classList.toggle("active");
-    log("Mobile menu toggled");
-  });
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-      navMenu.classList.remove("active");
-      mobileMenuBtn.classList.remove("active");
+  
+  // Try to find nav - retry up to 3 times if not loaded yet
+  let attempts = 0;
+  function attachNav() {
+    const navMenu = document.querySelector(".alsania-nav");
+    if (!navMenu) {
+      attempts++;
+      if (attempts < 3) {
+        log(`Nav not found, retry ${attempts}...`);
+        setTimeout(attachNav, 300);
+      } else {
+        log("Mobile menu nav not found after retries");
+      }
+      return;
     }
-  });
+
+    // Remove old listener if any
+    const newBtn = mobileMenuBtn.cloneNode(true);
+    mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+    
+    newBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("active");
+      newBtn.classList.toggle("active");
+      log("Mobile menu toggled");
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navMenu.contains(e.target) && !newBtn.contains(e.target)) {
+        navMenu.classList.remove("active");
+        newBtn.classList.remove("active");
+      }
+    });
+    
+    log("Mobile menu initialized");
+  }
+  
+  attachNav();
 }
 
 // Redirect mapping for file:// protocol

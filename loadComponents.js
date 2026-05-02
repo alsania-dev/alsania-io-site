@@ -241,9 +241,9 @@ function initMobileMenu() {
     const navMenu = document.querySelector(".alsania-nav");
     if (!navMenu) {
       attempts++;
-      if (attempts < 3) {
+      if (attempts < 5) {
         log(`Nav not found, retry ${attempts}...`);
-        setTimeout(attachNav, 300);
+        setTimeout(attachNav, 500);
       } else {
         log("Mobile menu nav not found after retries");
       }

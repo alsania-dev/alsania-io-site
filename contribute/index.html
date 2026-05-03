@@ -14,19 +14,9 @@
     .contribute-hero { text-align:center; padding:4rem 1rem 2rem; }
     .contribute-hero h1 { font-family:'Orbitron',sans-serif; font-size:2.5rem; background:linear-gradient(135deg,#00f3ff,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
     .contribute-hero p { color:#94a3b8; max-width:600px; margin:1rem auto; font-size:1.1rem; line-height:1.6; }
-    .category-filter { display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; margin:2rem 0; }
-    .filter-btn { background:rgba(0,243,255,0.1); border:1px solid rgba(0,243,255,0.3); color:#00f3ff; padding:0.5rem 1.2rem; border-radius:50px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-size:0.9rem; transition:all 0.2s; }
-    .filter-btn:hover,.filter-btn.active { background:rgba(0,243,255,0.25); box-shadow:0 0 15px rgba(0,243,255,0.2); }
-    .referral-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; max-width:1000px; margin:0 auto; padding:0 1rem 4rem; }
-    .referral-card { background:rgba(10,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.5rem; transition:all 0.3s; backdrop-filter:blur(12px); }
-    .referral-card:hover { border-color:rgba(0,243,255,0.4); box-shadow:0 0 25px rgba(0,243,255,0.1); transform:translateY(-2px); }
-    .referral-card h3 { font-family:'Orbitron',sans-serif; font-size:1.2rem; margin:0 0 0.5rem; color:#fff; }
-    .referral-card .badge { display:inline-block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; padding:0.2rem 0.6rem; border-radius:50px; margin-bottom:0.8rem; background:rgba(0,243,255,0.15); color:#00f3ff; }
-    .referral-card p { color:#94a3b8; font-size:0.9rem; line-height:1.5; margin-bottom:1.2rem; }
-    .referral-card .btn { display:inline-block; background:linear-gradient(135deg,#00f3ff,#7c3aed); color:#fff; padding:0.6rem 1.4rem; border-radius:8px; text-decoration:none; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:0.9rem; }
-    .referral-card .btn:hover { box-shadow:0 0 20px rgba(0,243,255,0.4); }
+    .embed-container { max-width:1000px; margin:0 auto; padding:1rem; }
     .footer-note { text-align:center; color:#64748b; padding:0 1rem 3rem; font-size:0.85rem; }
-    .empty-state { text-align:center; padding:3rem; color:#94a3b8; grid-column:1/-1; }
+    .footer-note a { color:#00f3ff; }
   </style>
 </head>
 <body>
@@ -35,44 +25,14 @@
     <h1>Support Alsania for Free</h1>
     <p>Every referral link you use helps fund sovereign AI development. If you're signing up anyway, using our link costs nothing and supports everything we build.</p>
   </section>
-  <div class="category-filter" id="categoryFilter">
-    <button class="filter-btn active" data-category="all">All</button>
-    <button class="filter-btn" data-category="crypto">Crypto</button>
-    <button class="filter-btn" data-category="dev_tools">Dev Tools</button>
-    <button class="filter-btn" data-category="tools">Tools</button>
-    <button class="filter-btn" data-category="free">Free</button>
+  <div class="embed-container">
+    <invitation-user-codes user="ifALpcEPw" layout="grid" dark="true" heading="">
+      <a href="https://invitation.codes">Find and share referral codes on Invitation</a> - the referral community.
+    </invitation-user-codes>
   </div>
-  <div class="referral-grid" id="referralGrid">
-    <div class="empty-state">Loading...</div>
-  </div>
-  <p class="footer-note">Only tools we actually use. No spam. <a href="/contact/" style="color:#00f3ff;">Suggest a link</a>.</p>
+  <p class="footer-note">Only tools we actually use. No spam. <a href="/contact/">Suggest a link</a>.</p>
   <div id="footer-container"></div>
   <script src="/loadComponents.js"></script>
-  <script>
-    let allReferrals = [];
-    async function loadReferrals() {
-      try {
-        const res = await fetch('/data/referrals.json');
-        allReferrals = await res.json();
-        renderCards('all');
-      } catch(e) {
-        document.getElementById('referralGrid').innerHTML = '<div class="empty-state">Could not load links.</div>';
-      }
-    }
-    function renderCards(cat) {
-      const grid = document.getElementById('referralGrid');
-      const filtered = cat === 'all' ? allReferrals : allReferrals.filter(r => r.category === cat || r.type === cat);
-      if(!filtered.length) { grid.innerHTML = '<div class="empty-state">No links yet.</div>'; return; }
-      grid.innerHTML = filtered.map(r => `<div class="referral-card"><span class="badge">${r.type.replace(/_/g,' ')}</span><h3>${r.name}</h3><p>${r.description}</p><a href="${r.link}" target="_blank" rel="noopener sponsored" class="btn">Sign Up \u2192</a></div>`).join('');
-    }
-    document.getElementById('categoryFilter').addEventListener('click', e => {
-      if(e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        renderCards(e.target.dataset.category);
-      }
-    });
-    loadReferrals();
-  </script>
+  <script defer async src="https://invitation.codes/invitation-widgets.js"></script>
 </body>
 </html>

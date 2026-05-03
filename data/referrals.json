@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Coinbase",
+    "description": "Buy and sell crypto. Get $10 in Bitcoin when you sign up and trade $100.",
+    "link": "https://coinbase.com/join/YOUR_REF",
+    "category": "crypto",
+    "type": "signup_bonus"
+  },
+  {
+    "name": "Binance",
+    "description": "The world's largest crypto exchange. Earn up to $100 welcome bonus.",
+    "link": "https://www.binance.com/en/activity/referral-entry?ref=YOUR_REF",
+    "category": "crypto",
+    "type": "signup_bonus"
+  },
+  {
+    "name": "Brave Browser",
+    "description": "Privacy-first browser that pays you in BAT tokens to view ads.",
+    "link": "https://brave.com/YOUR_REF",
+    "category": "tools",
+    "type": "free"
+  },
+  {
+    "name": "Filebase",
+    "description": "Decentralized storage with IPFS. Free 5GB tier.",
+    "link": "https://filebase.com/YOUR_REF",
+    "category": "dev_tools",
+    "type": "free_tier"
+  },
+  {
+    "name": "Pinata",
+    "description": "IPFS pinning and storage. Free 1GB tier for developers.",
+    "link": "https://pinata.cloud/YOUR_REF",
+    "category": "dev_tools",
+    "type": "free_tier"
+  }
+]

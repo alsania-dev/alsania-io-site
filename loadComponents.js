@@ -230,48 +230,33 @@ function initThemeToggle() {
 // Initialize mobile menu
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu");
-  if (!mobileMenuBtn) {
-    log("Mobile menu button not found");
-    return;
-  }
+  if (!mobileMenuBtn) return;
   
-  // Try to find nav - retry up to 3 times if not loaded yet
   let attempts = 0;
+  let attached = false;
   function attachNav() {
+    if (attached) return;
     const navMenu = document.querySelector(".alsania-nav");
     if (!navMenu) {
       attempts++;
-      if (attempts < 5) {
-        log(`Nav not found, retry ${attempts}...`);
-        setTimeout(attachNav, 500);
-      } else {
-        log("Mobile menu nav not found after retries");
-      }
+      if (attempts < 5) { setTimeout(attachNav, 500); }
       return;
     }
-
-    // Remove old listener if any
-    const newBtn = mobileMenuBtn.cloneNode(true);
-    mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
-    
-    newBtn.addEventListener("click", (e) => {
+    attached = true;
+    const btn = document.querySelector(".mobile-menu");
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
       e.stopPropagation();
       navMenu.classList.toggle("active");
-      newBtn.classList.toggle("active");
-      log("Mobile menu toggled");
+      btn.classList.toggle("active");
     });
-    
-    // Close menu when clicking outside
     document.addEventListener("click", (e) => {
-      if (!navMenu.contains(e.target) && !newBtn.contains(e.target)) {
+      if (!navMenu.contains(e.target) && !btn.contains(e.target)) {
         navMenu.classList.remove("active");
-        newBtn.classList.remove("active");
+        btn.classList.remove("active");
       }
     });
-    
-    log("Mobile menu initialized");
   }
-  
   attachNav();
 }
 

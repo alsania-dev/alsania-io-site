@@ -11,31 +11,11 @@
     <div id="nav-container"></div>
     <div class="header-right">
       <div id="theme-toggle-container"></div>
-      <button class="mobile-menu" aria-label="Menu">
+      <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-checkbox" />
+      <label for="mobile-menu-toggle" class="mobile-menu" aria-label="Menu">
         <span></span><span></span><span></span>
-      </button>
+      </label>
     </div>
   </div>
 </header>
-<script>
-(function(){
-  setTimeout(function(){
-    var btn = document.querySelector('.mobile-menu');
-    var nav = document.querySelector('.alsania-nav');
-    if(btn && nav) {
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        nav.classList.toggle('active');
-        btn.classList.toggle('active');
-      });
-      document.addEventListener('click', function(e){
-        if(!nav.contains(e.target) && !btn.contains(e.target)){
-          nav.classList.remove('active');
-          btn.classList.remove('active');
-        }
-      });
-    }
-  }, 1000);
-})();
-</script>
 

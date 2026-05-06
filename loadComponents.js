@@ -77,21 +77,21 @@ const INLINE_COMPONENTS = {
             title="GitHub"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" class="social-icon" /></a
+            ><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
           >
           <a
             href="https://twitter.com/alsania-io"
             title="Twitter / X"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/x-icon.svg" alt="X" class="social-icon" /></a
+            ><img src="/assets/img/web-icons/x-icon.svg" alt="X" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
           >
           <a
             href="https://discord.gg/alsania-io"
             title="Discord"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/discord-icon.svg" alt="Discord" class="social-icon" /></a
+            ><img src="/assets/img/web-icons/discord-icon.svg" alt="Discord" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
           >
         </div>
       </div>

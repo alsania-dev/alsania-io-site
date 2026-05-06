@@ -188,3 +188,4 @@
     display: block;
   }
 }
+.social-icon { width:24px; height:24px; filter:drop-shadow(0 0 6px rgba(0,243,255,0.3)); transition:all 0.2s; } .social-icon:hover { filter:drop-shadow(0 0 12px rgba(0,243,255,0.6)); transform:scale(1.1); }

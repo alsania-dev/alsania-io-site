@@ -37,7 +37,28 @@
     <h1>Claim Free Tokens</h1>
     <p>1 token every 24 hours. Verify once, claim daily. Simple.</p>
   </section>
-  <div class="claim-grid">
+  
+    <div class="info-card" style="background:rgba(10,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:2rem; backdrop-filter:blur(12px); margin-bottom:1.5rem;">
+      <h2 style="font-family:'Orbitron',sans-serif; color:#00f3ff; margin-bottom:1rem;">About the Tokens</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+        <div>
+          <h3 style="color:#00f3ff; margin-bottom:0.5rem;">🛡️ ALSA — Alsania Token</h3>
+          <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6;">
+            Sovereign token with anti-sweeper protocol, human verification, and staking rewards.
+            <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74" target="_blank" style="color:#00f3ff;">0x1630...Eb74</a>
+          </p>
+        </div>
+        <div>
+          <h3 style="color:#00f3ff; margin-bottom:0.5rem;">🐺 SPIRIT — SpiritWolf Token</h3>
+          <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6;">
+            Powers the Spirit Wolf ecosystem — NFTs, games, and community rewards.
+            <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0xec5E56058494F2cb260Fd7D81B15f04872dbC34a" target="_blank" style="color:#00f3ff;">0xec5E...C34a</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="claim-grid">
+
     <div class="claim-card"><span class="badge badge-mainnet">Polygon Mainnet</span><h2>ALSA</h2><div class="amount">1 ALSA/day</div><button class="btn btn-primary" onclick="claim('alsa','mainnet')">Verify & Claim</button><div id="alsa-mainnet-status"></div><div class="notice"><strong>🔒 Deposit:</strong> 0.01 POL one-time stake. <strong>Fully refundable</strong> after 7 days — not a fee.</div></div>
     <div class="claim-card"><span class="badge badge-mainnet">Polygon Mainnet</span><h2>SPIRIT</h2><div class="amount">1 SPIRIT/day</div><button class="btn btn-primary" onclick="claim('spirit','mainnet')">Verify & Claim</button><div id="spirit-mainnet-status"></div><div class="notice"><strong>🔒 Deposit:</strong> Same setup. Stake once, claim daily, refund anytime.</div></div>
     <div class="claim-card"><span class="badge badge-testnet">Amoy Testnet</span><h2>ALSA Test</h2><div class="amount">1 ALSA/day</div><button class="btn btn-primary" onclick="claim('alsa','amoy')">Verify & Claim</button><div id="alsa-amoy-status"></div><div class="notice"><strong>🧪 Testnet:</strong> Free Amoy tokens. Practice here.</div></div>

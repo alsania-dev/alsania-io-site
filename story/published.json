@@ -1,9 +1,17 @@
 {
-  "released": [1, 2, 3, 4],
-  "currentWeek": 4,
-  "nextRelease": "2026-05-12",
+  "released": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "currentWeek": 5,
+  "nextRelease": "2026-05-19",
   "totalChapters": 35,
-  "freePreview": [1],
+  "freePreview": [
+    1
+  ],
   "visibleRecent": 2,
   "chapterTitles": {
     "1": "The Table",

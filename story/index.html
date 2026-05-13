@@ -222,6 +222,29 @@
             color: #666;
             font-style: italic;
         }
+        
+        body {
+            background: linear-gradient(rgba(10, 14, 23, 0.85), rgba(10, 14, 23, 0.85)), url('/story/cover.jpg') center/cover fixed;
+            background-attachment: fixed;
+        }
+        
+        .story-container {
+            background: rgba(10, 14, 23, 0.5);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 60px 30px;
+            margin: 0 auto;
+        }
+        
+        .chapter-item.locked {
+            cursor: pointer;
+            border-color: #8b5cf633;
+        }
+        
+        .chapter-item.locked:hover {
+            border-color: #8b5cf6;
+            background: rgba(40, 20, 60, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -341,19 +364,23 @@
                 const scheduleEl = document.getElementById('releaseSchedule');
                 const nextDate = new Date(nextRelease);
                 const formattedDate = nextDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                scheduleEl.textContent = `📅 Next chapter: ${formattedDate}`;
+                scheduleEl.textContent = `📅 Next free chapter: ${formattedDate}  ·  📖 Full book available now`;
                 
                 const listEl = document.getElementById('chapterList');
                 listEl.innerHTML = '';
                 
                 for (let i = 1; i <= totalChapters; i++) {
                     const isReleased = released.includes(i);
+                    const isLocked = i > 5;
                     
-                    const item = document.createElement(isReleased ? 'a' : 'div');
-                    if (isReleased) {
+                    const item = document.createElement(isReleased && !isLocked ? 'a' : 'a');
+                    if (isReleased && !isLocked) {
                         item.href = `/story/read.html?c=${i}`;
+                    } else {
+                        item.href = 'https://sigmasauer.gumroad.com/l/memory';
+                        item.target = '_blank';
                     }
-                    item.className = `chapter-item ${isReleased ? '' : 'coming-soon'}`;
+                    item.className = `chapter-item ${isReleased && !isLocked ? '' : 'locked'}`;
                     
                     const preview = previews[i] || 'Coming soon.';
                     const title = titles[i] || `Chapter ${i}`;
@@ -364,8 +391,8 @@
                             <h3>${title}</h3>
                             <div class="chapter-preview">${preview}</div>
                         </div>
-                        <div class="status-badge ${isReleased ? '' : 'coming-soon'}">
-                            ${isReleased ? 'Available' : 'Coming Soon'}
+                        <div class="status-badge ${isReleased && !isLocked ? '' : 'coming-soon'}">
+                            ${isReleased && !isLocked ? 'Available' : '📖 Get Full Book'}
                         </div>
                     `;
                     

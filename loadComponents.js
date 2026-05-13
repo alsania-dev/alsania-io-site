@@ -77,21 +77,28 @@ const INLINE_COMPONENTS = {
             title="GitHub"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
+            ><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" style="width:28px;height:28px;" /></a
           >
           <a
-            href="https://twitter.com/alsania-io"
-            title="Twitter / X"
+            href="https://x.com/alsania_io"
+            title="X"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/x-icon.svg" alt="X" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
+            ><img src="/assets/img/web-icons/x-icon.svg" alt="X" style="width:28px;height:28px;" /></a
           >
           <a
-            href="https://discord.gg/alsania-io"
+            href="https://t.me/Alsania_io"
+            title="Telegram"
+            target="_blank"
+            rel="noopener"
+            ><img src="/assets/img/web-icons/telegram-icon.svg" alt="Telegram" style="width:28px;height:28px;" /></a
+          >
+          <a
+            href="https://discord.gg/SaCTgSHqdv"
             title="Discord"
             target="_blank"
             rel="noopener"
-            ><img src="/assets/img/web-icons/discord-icon.svg" alt="Discord" style="width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(0,243,255,0.3))" /></a
+            ><img src="/assets/img/web-icons/discord-icon.svg" alt="Discord" style="width:28px;height:28px;" /></a
           >
         </div>
       </div>

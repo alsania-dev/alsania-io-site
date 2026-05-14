@@ -84,10 +84,13 @@
     async function connect(){
       if(!window.ethereum) return alert('Install MetaMask or Rabby');
       try {
-        await window.ethereum.request({method:'eth_requestAccounts'});
+        const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+        console.log('Available accounts:', accounts);
         provider = new ethers.BrowserProvider(window.ethereum);
-        signer = await provider.getSigner();
-        console.log('Wallet connected:', await signer.getAddress());
+        signer = await provider.getSigner(accounts[0]);
+        const addr = await signer.getAddress();
+        console.log('Wallet connected:', addr);
+        document.querySelectorAll('.wallet-addr').forEach(el => el.textContent = addr.slice(0,6)+'...'+addr.slice(-4));
       } catch(e) {
         console.error('Wallet connect failed:', e);
         alert('Could not connect wallet. Check console.');

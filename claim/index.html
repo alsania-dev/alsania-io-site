@@ -106,11 +106,14 @@
         status.innerHTML = '<div class="status info">Checking...</div>';
         const tc = new ethers.Contract(c.token,ABI,signer);
         const addr = await signer.getAddress();
-        const verified = await tc.isVerifiedHuman(addr);
-        if(!verified) {
-          status.innerHTML = '<div class="status info">Staking 0.01 POL...</div>';
-          const tx = await tc.proveHumanity({value:ethers.parseEther('0.01')});
-          await tx.wait();
+        const isAmoy = c.chain === 80002;
+        if(!isAmoy) {
+          const verified = await tc.isVerifiedHuman(addr);
+          if(!verified) {
+            status.innerHTML = '<div class="status info">Staking 0.01 POL...</div>';
+            const tx = await tc.proveHumanity({value:ethers.parseEther('0.01')});
+            await tx.wait();
+          }
         }
         const fc = new ethers.Contract(c.faucet,['function claim() external'],signer);
         const tx2 = await fc.claim();

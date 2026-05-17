@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALSA Token — Alsania</title>
+  <meta name="description" content="ALSA is the sovereign token of the Alsania ecosystem. Built on Polygon with anti-sweeper protocol, staking rewards, and gasless transactions via the Alsania Paymaster.">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .token-hero { text-align:center; padding:4rem 1rem 2rem; }
+    .token-hero h1 { font-family:'Orbitron',sans-serif; font-size:2.5rem; background:linear-gradient(135deg,#00f3ff,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .token-hero .symbol { font-size:1.2rem; color:#94a3b8; margin-top:0.5rem; }
+    .container { max-width:900px; margin:0 auto; padding:0 1rem 4rem; }
+    .card { background:rgba(10,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:2rem; margin-bottom:1.5rem; backdrop-filter:blur(12px); }
+    .card h2 { font-family:'Orbitron',sans-serif; color:#00f3ff; margin-bottom:1rem; font-size:1.3rem; }
+    .card h3 { color:#e2e8f0; margin-bottom:0.5rem; }
+    .card p, .card li { color:#94a3b8; line-height:1.7; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+    .stat { text-align:center; padding:1.5rem; }
+    .stat .value { font-family:'Orbitron',sans-serif; font-size:2rem; color:#00f3ff; }
+    .stat .label { color:#94a3b8; font-size:0.9rem; margin-top:0.3rem; }
+    .team-section { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .team-links { display:flex; gap:1rem; flex-wrap:wrap; }
+    .team-links a { color:#00f3ff; text-decoration:none; padding:0.5rem 1rem; border:1px solid rgba(0,243,255,0.3); border-radius:8px; font-size:0.9rem; transition:all 0.2s; }
+    .team-links a:hover { background:rgba(0,243,255,0.1); }
+    .contract-address { font-family:monospace; background:rgba(0,0,0,0.3); padding:0.5rem 1rem; border-radius:8px; word-break:break-all; font-size:0.85rem; color:#00f3ff; }
+    .notice { background:rgba(0,243,255,0.05); border:1px solid rgba(0,243,255,0.15); border-radius:12px; padding:1rem; margin-top:1rem; font-size:0.85rem; color:#94a3b8; line-height:1.6; }
+    ul { padding-left:1.5rem; }
+    li { margin-bottom:0.5rem; }
+  </style>
+</head>
+<body>
+  <div id="header-container"></div>
+  <section class="token-hero">
+    <h1>ALSA Token</h1>
+    <p class="symbol">$ALSA · Polygon Mainnet</p>
+  </section>
+  <div class="container">
+    <div class="card">
+      <h2>What is ALSA?</h2>
+      <p>ALSA is the sovereign utility token of the Alsania ecosystem. Built on Polygon for fast, low-cost transactions, ALSA powers staking rewards, governance, and gasless transactions through the Alsania Paymaster. It features a built-in anti-sweeper protocol that protects holders from unauthorized transfers.</p>
+    </div>
+    <div class="grid">
+      <div class="card stat"><div class="value">100M</div><div class="label">Total Supply</div></div>
+      <div class="card stat"><div class="value">10%</div><div class="label">Staking APY</div></div>
+      <div class="card stat"><div class="value">1%</div><div class="label">Paymaster Fee</div></div>
+      <div class="card stat"><div class="value">0.01 POL</div><div class="label">Human Verification Stake</div></div>
+    </div>
+    <div class="card">
+      <h2>Token Utility</h2>
+      <ul>
+        <li><strong>Staking:</strong> Earn 10% APY by staking ALSA tokens</li>
+        <li><strong>Gas Payment:</strong> Pay for transactions with ALSA via the Alsania Paymaster — no POL needed</li>
+        <li><strong>Faucet Claims:</strong> Claim 1 ALSA daily after human verification</li>
+        <li><strong>Governance:</strong> Shape the future of the Alsania ecosystem</li>
+        <li><strong>Anti-Sweeper Protection:</strong> Built-in security that prevents unauthorized token transfers</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Tokenomics</h2>
+      <div class="grid">
+        <div><h3>Supply</h3><p>Fixed supply of 100,000,000 ALSA tokens on Polygon mainnet. No minting. No inflation beyond staking rewards.</p></div>
+        <div><h3>Staking</h3><p>10% annual staking rewards. Stake ALSA to earn passive yield while supporting network security.</p></div>
+        <div><h3>Paymaster</h3><p>1% fee on gas-sponsored transactions. Pay with ALSA or SPIRIT. Zero POL required for end users.</p></div>
+        <div><h3>Verification</h3><p>One-time 0.01 POL stake to prove humanity. Fully refundable after 7 days. Not a fee.</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Technical Details</h2>
+      <p><strong>Network:</strong> Polygon PoS (Chain ID: 137)</p>
+      <p><strong>Token Standard:</strong> ERC-20 with UUPS upgradeability</p>
+      <p><strong>Contract Address:</strong></p>
+      <div class="contract-address">0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74</div>
+      <p style="margin-top:1rem;"><strong>Paymaster Address:</strong></p>
+      <div class="contract-address">0xE3EFB43f96b0738818780F96c3aF5F4bc4f86E56</div>
+      <p style="margin-top:1rem;"><a href="https://polygonscan.com/token/0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74" target="_blank" style="color:#00f3ff;">View on Polygonscan →</a></p>
+    </div>
+    <div class="card">
+      <h2>Team</h2>
+      <div class="team-section">
+        <div>
+          <h3>Sigma</h3>
+          <p style="margin-bottom:0.5rem;">Founder & Lead Developer</p>
+          <p style="font-size:0.9rem;">Architect of the Alsania ecosystem. Builder of the ALSA token, paymaster infrastructure, and sovereign agent framework.</p>
+        </div>
+        <div class="team-links">
+          <a href="https://x.com/sigmasauer07" target="_blank">𝕏 @SigmaSauer07</a>
+          <a href="https://github.com/alsania-dev" target="_blank">GitHub</a>
+          <a href="https://alsania-io.com" target="_blank">Website</a>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Official Channels</h2>
+      <div class="team-links">
+        <a href="https://alsania-io.com" target="_blank">Website</a>
+        <a href="https://x.com/alsania_io" target="_blank">𝕏 @alsania_io</a>
+        <a href="https://discord.gg/SaCTgSHqdv" target="_blank">Discord</a>
+        <a href="https://github.com/alsania-dev" target="_blank">GitHub</a>
+        <a href="https://t.me/Alsania_io" target="_blank">Telegram</a>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Whitepaper</h2>
+      <p>The Alsania Enhanced Domains (AED) whitepaper describes the full vision for sovereign digital identity, of which ALSA is the economic engine.</p>
+      <a href="/docs/aed-whitepaper.pdf" target="_blank" style="color:#00f3ff; display:inline-block; margin-top:0.5rem;">Download Whitepaper (PDF) →</a>
+    </div>
+    <div class="notice">
+      <strong>📧 Official Contact:</strong> admin@alsania-io.com<br>
+      <strong>🔒 Security:</strong> security@alsania-io.com<br>
+      <strong>⚠️ Disclaimer:</strong> ALSA is a utility token for the Alsania ecosystem. It is not an investment vehicle. Staking rewards are subject to change. Always verify contract addresses before interacting.
+    </div>
+  </div>
+  <div id="footer-container"></div>
+  <script src="/loadComponents.js"></script>
+</body>
+</html>

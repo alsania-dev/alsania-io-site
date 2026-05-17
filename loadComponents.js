@@ -51,6 +51,7 @@ const INLINE_COMPONENTS = {
         <li><a href="/shop/" class="nav-link">Shop</a></li>
         <li><a href="/about/" class="nav-link">About</a></li>
         <li><a href="/contact/" class="nav-link">Contact</a></li>
+        <li><a href="/token/" class="nav-link">Token</a></li>
         <li><a href="/claim/" class="nav-link">Claim</a></li>
         <li><a href="/donate/" class="nav-link">Support</a></li>
       </ul>

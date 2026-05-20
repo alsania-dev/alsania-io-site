@@ -36,6 +36,7 @@
     .network-badge.invalid { color: #ef4444; }
     a { color: #00f3ff; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .rpc-status { font-size: 0.7rem; color: #666; margin-top: 5px; }
   </style>
 </head>
 <body>
@@ -73,6 +74,7 @@
       <p><strong>🎲 How to Play:</strong> Start with 1 ALSA or SPIRIT. Guess higher or lower. Each correct guess doubles your payout. Cash out anytime. 2.5% house edge.</p>
       <p><strong>📜 Contract:</strong> <a href="https://polygonscan.com/address/0x9c9B69d52b195241b5EfBAD43d368567a59d8C53" target="_blank">0x9c9B...8C53</a></p>
     </div>
+    <div class="rpc-status" id="rpcStatus"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
@@ -82,8 +84,18 @@
     const SPIRIT = '0xec5E56058494F2cb260Fd7D81B15f04872dbC34a';
     const POLYGON_CHAIN_ID = '0x89';
     
-    let provider, signer, gameContract, userAddress;
+    // Free public RPCs that work with CORS
+    const PUBLIC_RPCS = [
+      'https://polygon.llamarpc.com',
+      'https://rpc-mainnet.maticvigil.com',
+      'https://polygon-rpc.com',
+      'https://rpc.ankr.com/polygon',
+      'https://polygon-mainnet.gateway.tenderly.co'
+    ];
+    
+    let provider, signer, gameContract, userAddress, readProvider;
     let isProcessing = false;
+    let currentRpcIndex = 0;
     
     function showStatus(msg, type) {
       const el = document.getElementById('status');
@@ -96,6 +108,20 @@
         const btn = document.getElementById(id);
         if (btn) btn.disabled = !enabled;
       });
+    }
+    
+    async function getWorkingReadProvider() {
+      for (let i = 0; i < PUBLIC_RPCS.length; i++) {
+        try {
+          const testProvider = new ethers.JsonRpcProvider(PUBLIC_RPCS[i]);
+          await testProvider.getBlockNumber();
+          document.getElementById('rpcStatus').innerHTML = `✅ Using RPC: ${PUBLIC_RPCS[i].split('/')[2]}`;
+          return testProvider;
+        } catch(e) {
+          console.log(`RPC ${i} failed:`, e.message);
+        }
+      }
+      throw new Error('No working RPC found');
     }
     
     async function switchNetwork() {
@@ -140,9 +166,9 @@
     }
     
     async function loadBalances() {
-      if (!signer || !userAddress) return;
-      const alsaContract = new ethers.Contract(ALSA, ['function balanceOf(address) view returns (uint256)'], provider);
-      const spiritContract = new ethers.Contract(SPIRIT, ['function balanceOf(address) view returns (uint256)'], provider);
+      if (!readProvider || !userAddress) return;
+      const alsaContract = new ethers.Contract(ALSA, ['function balanceOf(address) view returns (uint256)'], readProvider);
+      const spiritContract = new ethers.Contract(SPIRIT, ['function balanceOf(address) view returns (uint256)'], readProvider);
       try {
         const alsaBal = await alsaContract.balanceOf(userAddress);
         const spiritBal = await spiritContract.balanceOf(userAddress);
@@ -168,6 +194,9 @@
       provider = new ethers.BrowserProvider(window.ethereum);
       signer = await provider.getSigner();
       userAddress = await signer.getAddress();
+      
+      // Use public RPC for reads to avoid rate limits
+      readProvider = await getWorkingReadProvider();
       
       const abi = [
         'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)',
@@ -220,9 +249,13 @@
     };
     
     async function refreshGame() {
-      if (!gameContract || !userAddress) return;
+      if (!readProvider || !userAddress) return;
       try {
-        const game = await gameContract.getGame(userAddress);
+        const readContract = new ethers.Contract(CONTRACT, [
+          'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)'
+        ], readProvider);
+        
+        const game = await readContract.getGame(userAddress);
         if (!game[0]) {
           document.getElementById('startArea').style.display = 'block';
           document.getElementById('gameArea').style.display = 'none';
@@ -233,19 +266,16 @@
         document.getElementById('streakCount').textContent = streak;
         const tokenSymbol = game[1] == 1 ? 'ALSA' : 'SPIRIT';
         document.getElementById('payoutAmount').textContent = parseFloat(ethers.formatEther(game[5])).toFixed(4) + ' ' + tokenSymbol;
-        
-        // Add warning for high streaks
-        const streakWarning = document.getElementById('streakWarning');
-        if (streakWarning) {
-          if (parseInt(streak) >= 3) {
-            streakWarning.style.display = 'block';
-            streakWarning.innerHTML = '⚠️ <strong>High streak!</strong> Cash out now to secure your ' + parseFloat(ethers.formatEther(game[5])).toFixed(4) + ' ' + tokenSymbol + '!';
-          } else {
-            streakWarning.style.display = 'none';
-          }
-        }
         document.getElementById('startArea').style.display = 'none';
         document.getElementById('gameArea').style.display = 'block';
+        
+        const streakWarning = document.getElementById('streakWarning');
+        if (parseInt(streak) >= 3) {
+          streakWarning.style.display = 'block';
+          streakWarning.innerHTML = '⚠️ <strong>High streak!</strong> Cash out now to secure your ' + parseFloat(ethers.formatEther(game[5])).toFixed(4) + ' ' + tokenSymbol + '!';
+        } else {
+          streakWarning.style.display = 'none';
+        }
       } catch(e) { console.error('Refresh error:', e); }
     }
     
@@ -264,15 +294,21 @@
         const tx = isHigher ? await gameContract.guessHigher() : await gameContract.guessLower();
         await tx.wait();
         
-        const game = await gameContract.getGame(userAddress);
+        // Wait a moment for chain to update
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        await refreshGame();
+        await loadBalances();
+        
+        // Check if game still active
+        const readContract = new ethers.Contract(CONTRACT, [
+          'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)'
+        ], readProvider);
+        const game = await readContract.getGame(userAddress);
         
         if (!game[0]) {
           showStatus('❌ Wrong! Game over. Start a new game.', 'error');
-          await refreshGame();
-          await loadBalances();
         } else {
-          await refreshGame();
-          await loadBalances();
           showStatus('✅ Correct! Streak: ' + game[4], 'success');
         }
       } catch(e) {
@@ -313,7 +349,7 @@
     
     // Auto-refresh every 10 seconds
     setInterval(() => {
-      if (signer && !isProcessing) {
+      if (readProvider && !isProcessing) {
         loadBalances();
         refreshGame();
       }

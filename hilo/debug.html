@@ -98,17 +98,24 @@
                 log('Calling contract...');
                 const game = await contract.getGame(userAddress);
                 
-                log('Raw result: ' + JSON.stringify(game));
-                log('Active: ' + game[0]);
-                log('Token ID: ' + game[1]);
-                log('Bet Amount: ' + ethers.formatEther(game[2]));
-                log('Current Number: ' + game[3]);
-                log('Streak: ' + game[4]);
-                log('Potential Payout: ' + ethers.formatEther(game[5]));
+                // Convert BigInts to strings for display
+                log('Raw result (converted):');
+                log('  active: ' + game[0]);
+                log('  tokenId: ' + game[1]);
+                log('  betAmount: ' + ethers.formatEther(game[2]) + ' tokens');
+                log('  currentNumber: ' + game[3].toString());
+                log('  streak: ' + game[4].toString());
+                log('  potentialPayout: ' + ethers.formatEther(game[5]) + ' tokens');
+                
+                if (game[0]) {
+                    log('🎮 You have an ACTIVE game!');
+                } else {
+                    log('📭 No active game. Start one!');
+                }
                 
             } catch(e) {
                 log('Read error: ' + e.message, true);
-                log('Full error: ' + JSON.stringify(e), true);
+                if (e.info) log('Details: ' + JSON.stringify(e.info), true);
             }
         };
         

@@ -21,6 +21,7 @@
     .btn-higher { background: linear-gradient(135deg, #00f3ff, #0891b2); color: #fff; }
     .btn-lower { background: linear-gradient(135deg, #f59e0b, #b45309); color: #000; }
     .btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; }
+    .btn-approve { background: linear-gradient(135deg, #10b981, #047857); color: #fff; }
     .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; }
     button:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
@@ -36,6 +37,7 @@
     .warning-banner { background: rgba(245,158,11,0.15); border: 1px solid #f59e0b; border-radius: 16px; padding: 12px; margin: 10px 0; color: #fbbf24; font-size: 0.85rem; }
     a { color: #00f3ff; text-decoration: none; }
     hr { border-color: rgba(255,255,255,0.05); margin: 15px 0; }
+    .approve-note { font-size: 0.7rem; color: #6b7280; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -52,7 +54,9 @@
       <option value="alsa">🛡️ ALSA</option>
       <option value="spirit">🐺 SPIRIT</option>
     </select><br><br>
+    <button class="btn-approve" id="approveBtn">✓ APPROVE MAX (ONE-TIME)</button>
     <button class="btn-primary" id="startBtn">▶ START GAME</button>
+    <div class="approve-note">💡 Approve once, play many games. No per-game approval needed.</div>
   </div>
 
   <div class="card" id="gameScreen" style="display:none;">
@@ -99,6 +103,8 @@
   // State
   let provider, signer, gameContract, userAddress;
   let isProcessing = false;
+  let alsaApproved = false;
+  let spiritApproved = false;
 
   // ============================================================
   // UI HELPERS
@@ -110,7 +116,7 @@
   }
 
   function setButtons(enable) {
-    ['startBtn', 'higherBtn', 'lowerBtn', 'cashoutBtn'].forEach(id => {
+    ['startBtn', 'approveBtn', 'higherBtn', 'lowerBtn', 'cashoutBtn'].forEach(id => {
       const btn = document.getElementById(id);
       if (btn) btn.disabled = !enable;
     });
@@ -207,21 +213,61 @@
   }
 
   // ============================================================
-  // GAME ACTIONS
+  // APPROVAL & GAME ACTIONS
   // ============================================================
+  async function approveMax(token) {
+    if (isProcessing) return false;
+    isProcessing = true;
+    setButtons(false);
+    const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
+    try {
+      showStatus(`Approving max ${token.toUpperCase()}... (one-time only)`, 'info');
+      const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
+      const maxAmount = ethers.MaxUint256;
+      const approveTx = await tokenContract.approve(CONTRACT_ADDR, maxAmount);
+      await approveTx.wait();
+      if (token === 'alsa') alsaApproved = true;
+      else spiritApproved = true;
+      showStatus(`✅ ${token.toUpperCase()} approved! You can now play multiple games without re-approving.`, 'success');
+      await loadBalances();
+      return true;
+    } catch(e) {
+      showStatus(`Approval failed: ${e.reason || e.message}`, 'error');
+      return false;
+    } finally {
+      isProcessing = false;
+      setButtons(true);
+    }
+  }
+
+  document.getElementById('approveBtn').onclick = async () => {
+    if (!gameContract) { const ok = await checkNetworkAndConnect(); if (!ok) return; }
+    const token = document.getElementById('tokenSelect').value;
+    await approveMax(token);
+  };
+
   document.getElementById('startBtn').onclick = async () => {
     if (isProcessing) return;
     if (!gameContract) { const ok = await checkNetworkAndConnect(); if (!ok) return; }
+    const token = document.getElementById('tokenSelect').value;
+    const amount = ethers.parseEther('1');
+    
+    // Check if approval needed
+    const isApproved = token === 'alsa' ? alsaApproved : spiritApproved;
+    if (!isApproved) {
+      const wantApprove = confirm(`You haven't approved ${token.toUpperCase()} yet. Approve max once to play multiple games?`);
+      if (wantApprove) {
+        const approved = await approveMax(token);
+        if (!approved) return;
+      } else {
+        showStatus(`Please approve ${token.toUpperCase()} first using the Approve button.`, 'error');
+        return;
+      }
+    }
+    
     isProcessing = true;
     setButtons(false);
-    const token = document.getElementById('tokenSelect').value;
-    const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
-    const amount = ethers.parseEther('1');
     try {
-      showStatus('Approving 1 token...', 'info');
-      const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
-      const approveTx = await tokenContract.approve(CONTRACT_ADDR, amount);
-      await approveTx.wait();
       showStatus('Starting game...', 'info');
       const tx = token === 'alsa' ? await gameContract.startGameAlsa(amount) : await gameContract.startGameSpirit(amount);
       await tx.wait();

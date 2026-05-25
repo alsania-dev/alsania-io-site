@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hi-Lo Game - Alsania</title>
+    <style>
+        body { font-family: 'Space Grotesk', monospace; padding: 20px; background: #0a0a0a; color: #0f0; max-width: 800px; margin: 0 auto; }
+        button { padding: 12px 24px; margin: 5px; background: linear-gradient(135deg,#00f3ff,#7c3aed); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        pre { background: #111; padding: 15px; overflow-x: auto; max-height: 400px; overflow-y: auto; border-radius: 8px; font-size: 12px; }
+        .status { padding: 12px; margin: 10px 0; border-radius: 8px; font-weight: bold; }
+        .error { background: #8b0000; color: #fff; }
+        .success { background: #006400; color: #fff; }
+        .info { background: #1a1a2e; color: #00f3ff; border: 1px solid #00f3ff; }
+        h1 { background: linear-gradient(135deg,#00f3ff,#7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body>
+    <h1>🎲 Hi-Lo Game - Alsania</h1>
+    <div id="status" class="status info">Ready - Connect Wallet to Play</div>
+    <div>
+        <button id="connectBtn">🔌 Connect Wallet</button>
+        <button id="checkBtn" disabled>🔍 Check Game</button>
+        <button id="startBtn" disabled>🎮 Start Game (1 ALSA)</button>
+        <button id="higherBtn" disabled>⬆ Higher</button>
+        <button id="lowerBtn" disabled>⬇ Lower</button>
+        <button id="cashoutBtn" disabled>💰 Cash Out</button>
+    </div>
+    <pre id="output"></pre>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
+    <script>
+        const CONTRACT_ADDR = '0x9c9B69d52b195241b5EfBAD43d368567a59d8C53';
+        const ALSA_ADDR = '0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74';
+        const POLYGON_CHAIN_ID = '0x89';
+        
+        // Multiple fallback RPCs
+        const RPC_LIST = [
+            'https://polygon.llamarpc.com',
+            'https://rpc-mainnet.maticvigil.com',
+            'https://rpc-mainnet.matic.network',
+            'https://rpc.ankr.com/polygon',
+            'https://polygon-mainnet.gateway.tenderly.co'
+        ];
+        
+        let currentRpcIndex = 0;
+        let provider, readProvider, signer, contract, userAddress;
+        let isProcessing = false;
+        
+        function setStatus(msg, type) {
+            const el = document.getElementById('status');
+            el.textContent = msg;
+            el.className = 'status ' + type;
+        }
+        
+        function log(msg) {
+            const pre = document.getElementById('output');
+            pre.textContent += new Date().toLocaleTimeString() + ': ' + msg + '\n';
+            pre.scrollTop = pre.scrollHeight;
+            console.log(msg);
+        }
+        
+        async function getWorkingRpc() {
+            for (let i = 0; i < RPC_LIST.length; i++) {
+                try {
+                    const testProvider = new ethers.JsonRpcProvider(RPC_LIST[i]);
+                    await testProvider.getBlockNumber();
+                    log(`Using RPC: ${RPC_LIST[i]}`);
+                    return new ethers.JsonRpcProvider(RPC_LIST[i]);
+                } catch(e) {
+                    log(`RPC ${i} failed: ${e.message?.slice(0,50)}`);
+                }
+            }
+            throw new Error('No working RPC found');
+        }
+        
+        async function checkNetwork() {
+            if (!window.ethereum) return false;
+            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+            if (chainId !== POLYGON_CHAIN_ID) {
+                setStatus('⚠️ Please switch to Polygon network in MetaMask', 'error');
+                log('Wrong network: ' + chainId + ' (expected ' + POLYGON_CHAIN_ID + ')');
+                return false;
+            }
+            setStatus('✅ On Polygon network', 'success');
+            log('On Polygon network');
+            return true;
+        }
+        
+        document.getElementById('connectBtn').onclick = async () => {
+            try {
+                if (!window.ethereum) {
+                    alert('Please install MetaMask!');
+                    return;
+                }
+                
+                setStatus('Connecting...', 'info');
+                
+                const isPolygon = await checkNetwork();
+                if (!isPolygon) return;
+                
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                log('Connected: ' + userAddress);
+                
+                // Get working read provider
+                readProvider = await getWorkingRpc();
+                
+                // Wallet provider for writes
+                provider = new ethers.BrowserProvider(window.ethereum);
+                signer = await provider.getSigner();
+                
+                const abi = [
+                    'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)',
+                    'function startGameAlsa(uint256)',
+                    'function startGameSpirit(uint256)',
+                    'function guessHigher()', 
+                    'function guessLower()',
+                    'function cashOut()'
+                ];
+                
+                contract = new ethers.Contract(CONTRACT_ADDR, abi, signer);
+                
+                document.getElementById('checkBtn').disabled = false;
+                document.getElementById('startBtn').disabled = false;
+                setStatus('✅ Connected! Click "Check Game"', 'success');
+                
+            } catch(e) {
+                log('Connect error: ' + e.message);
+                setStatus('❌ Connection failed: ' + e.message, 'error');
+            }
+        };
+        
+        document.getElementById('checkBtn').onclick = async () => {
+            if (!readProvider || !userAddress) return;
+            try {
+                setStatus('Checking game...', 'info');
+                log('Checking game for ' + userAddress);
+                
+                const readContract = new ethers.Contract(CONTRACT_ADDR, [
+                    'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)'
+                ], readProvider);
+                
+                const game = await readContract.getGame(userAddress);
+                
+                log(`Game: active=${game[0]}, tokenId=${game[1]}, bet=${ethers.formatEther(game[2])}, number=${game[3]}, streak=${game[4]}, payout=${ethers.formatEther(game[5])}`);
+                
+                if (game[0]) {
+                    setStatus(`🎮 Active game! Streak: ${game[4]}, Payout: ${parseFloat(ethers.formatEther(game[5])).toFixed(4)} tokens`, 'success');
+                    document.getElementById('higherBtn').disabled = false;
+                    document.getElementById('lowerBtn').disabled = false;
+                    document.getElementById('cashoutBtn').disabled = false;
+                    document.getElementById('startBtn').disabled = true;
+                } else {
+                    setStatus('No active game. Start a new game!', 'info');
+                    document.getElementById('higherBtn').disabled = true;
+                    document.getElementById('lowerBtn').disabled = true;
+                    document.getElementById('cashoutBtn').disabled = true;
+                    document.getElementById('startBtn').disabled = false;
+                }
+            } catch(e) {
+                log('Check error: ' + e.message);
+                setStatus('❌ Error checking game - trying to reconnect RPC...', 'error');
+                // Try to get a new working RPC
+                readProvider = await getWorkingRpc();
+            }
+        };
+        
+        document.getElementById('startBtn').onclick = async () => {
+            if (isProcessing) return;
+            isProcessing = true;
+            try {
+                setStatus('Starting game...', 'info');
+                log('Starting game with 1 ALSA...');
+                
+                const amount = ethers.parseEther('1');
+                const tokenContract = new ethers.Contract(ALSA_ADDR, 
+                    ['function approve(address spender, uint256 amount) returns (bool)'], 
+                    signer);
+                
+                log('Approving 1 ALSA...');
+                const approveTx = await tokenContract.approve(CONTRACT_ADDR, amount);
+                await approveTx.wait();
+                log('Approved!');
+                
+                log('Starting game...');
+                const tx = await contract.startGameAlsa(amount);
+                await tx.wait();
+                log('✅ Game started successfully!');
+                setStatus('✅ Game started! Click Check Game', 'success');
+                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                document.getElementById('checkBtn').click();
+            } catch(e) {
+                log('❌ Start error: ' + (e.reason || e.message));
+                setStatus('❌ Failed to start game', 'error');
+            } finally {
+                isProcessing = false;
+            }
+        };
+        
+        document.getElementById('higherBtn').onclick = async () => {
+            if (isProcessing) return;
+            isProcessing = true;
+            try {
+                setStatus('Guessing higher...', 'info');
+                log('Guessing higher...');
+                const tx = await contract.guessHigher();
+                await tx.wait();
+                log('✅ Guess submitted!');
+                setStatus('✅ Guess made! Checking result...', 'success');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                document.getElementById('checkBtn').click();
+            } catch(e) {
+                log('❌ Guess error: ' + (e.reason || e.message));
+                setStatus('❌ Guess failed - game may be over', 'error');
+            } finally {
+                isProcessing = false;
+            }
+        };
+        
+        document.getElementById('lowerBtn').onclick = async () => {
+            if (isProcessing) return;
+            isProcessing = true;
+            try {
+                setStatus('Guessing lower...', 'info');
+                log('Guessing lower...');
+                const tx = await contract.guessLower();
+                await tx.wait();
+                log('✅ Guess submitted!');
+                setStatus('✅ Guess made! Checking result...', 'success');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                document.getElementById('checkBtn').click();
+            } catch(e) {
+                log('❌ Guess error: ' + (e.reason || e.message));
+                setStatus('❌ Guess failed - game may be over', 'error');
+            } finally {
+                isProcessing = false;
+            }
+        };
+        
+        document.getElementById('cashoutBtn').onclick = async () => {
+            if (isProcessing) return;
+            isProcessing = true;
+            try {
+                setStatus('Cashing out...', 'info');
+                log('Cashing out...');
+                const tx = await contract.cashOut();
+                await tx.wait();
+                log('✅ Cashed out successfully!');
+                setStatus('✅ Cashed out!', 'success');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                document.getElementById('checkBtn').click();
+            } catch(e) {
+                log('❌ Cashout error: ' + (e.reason || e.message));
+                setStatus('❌ Cashout failed', 'error');
+            } finally {
+                isProcessing = false;
+            }
+        };
+        
+        window.ethereum?.on('chainChanged', () => location.reload());
+        window.ethereum?.on('accountsChanged', () => location.reload());
+        
+        checkNetwork();
+    </script>
+</body>
+</html>

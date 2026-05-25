@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hi-Lo Test - Wallet Detection</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #0a0a0a; color: #fff; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .connected { background: #0f0; color: #000; }
+        .disconnected { background: #f00; color: #fff; }
+        .warning { background: #ff0; color: #000; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        .network-btn { background: #7c3aed; color: #fff; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Hi-Lo Game - Wallet Test</h1>
+    <div id="walletStatus" class="status disconnected">Checking for wallet...</div>
+    <div id="networkInfo"></div>
+    <div id="accountInfo"></div>
+    <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+    <button id="switchNetworkBtn" onclick="switchToPolygon()" style="display:none;" class="network-btn">Switch to Polygon</button>
+    <button id="refreshBtn" onclick="refreshGame()">Refresh Game</button>
+    <div id="gameInfo"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
+    <script>
+        const CONTRACT = '0x9c9B69d52b195241b5EfBAD43d368567a59d8C53';
+        const ALSA = '0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74';
+        const SPIRIT = '0xec5E56058494F2cb260Fd7D81B15f04872dbC34a';
+        const POLYGON_CHAIN_ID = '0x89';
+        const POLYGON_RPC = 'https://polygon-mainnet.g.alchemy.com/v2/Po7lHw3uoHECvDLjEaLfq7PHzcQiNK5t';
+        
+        let provider, signer, gameContract;
+        
+        function log(msg) {
+            console.log(msg);
+            const div = document.getElementById('gameInfo');
+            div.innerHTML = '<div>' + new Date().toLocaleTimeString() + ': ' + msg + '</div>' + div.innerHTML;
+        }
+        
+        async function switchToPolygon() {
+            log('Switching to Polygon...');
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: POLYGON_CHAIN_ID }]
+                });
+                log('✅ Switched to Polygon! Reloading...');
+                setTimeout(() => location.reload(), 1000);
+            } catch(e) {
+                if (e.code === 4902) {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: POLYGON_CHAIN_ID,
+                                chainName: 'Polygon Mainnet',
+                                nativeCurrency: { name: 'POL', symbol: 'POL', decimals: 18 },
+                                rpcUrls: [POLYGON_RPC],
+                                blockExplorerUrls: ['https://polygonscan.com']
+                            }]
+                        });
+                        log('✅ Added Polygon network! Reloading...');
+                        setTimeout(() => location.reload(), 1000);
+                    } catch(addErr) { log('❌ Failed to add Polygon: ' + addErr.message); }
+                } else { log('❌ Failed to switch: ' + e.message); }
+            }
+        }
+        
+        async function connectWallet() {
+            log('Attempting to connect wallet...');
+            
+            if (!window.ethereum) {
+                log('❌ No Ethereum wallet detected! Please install MetaMask or Rabby.');
+                document.getElementById('walletStatus').innerHTML = '❌ No wallet detected';
+                document.getElementById('walletStatus').className = 'status disconnected';
+                return;
+            }
+            
+            log('✅ Ethereum provider detected');
+            
+            try {
+                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                const isPolygon = chainId === POLYGON_CHAIN_ID;
+                log('Current chain ID: ' + chainId + (isPolygon ? ' (Polygon ✅)' : ' (Wrong network ❌)'));
+                document.getElementById('networkInfo').innerHTML = 'Chain ID: ' + chainId + (isPolygon ? ' (Polygon ✅)' : ' (Wrong network ❌)');
+                
+                if (!isPolygon) {
+                    document.getElementById('switchNetworkBtn').style.display = 'inline-block';
+                    document.getElementById('walletStatus').innerHTML = '⚠️ Wrong Network - Click Switch to Polygon';
+                    document.getElementById('walletStatus').className = 'status warning';
+                    return;
+                }
+                
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                log('Connected account: ' + accounts[0]);
+                document.getElementById('accountInfo').innerHTML = 'Account: ' + accounts[0];
+                
+                provider = new ethers.BrowserProvider(window.ethereum);
+                signer = await provider.getSigner();
+                gameContract = new ethers.Contract(CONTRACT, [
+                    'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)',
+                    'function startGameAlsa(uint256)',
+                    'function startGameSpirit(uint256)',
+                    'function guessHigher()',
+                    'function guessLower()',
+                    'function cashOut()'
+                ], signer);
+                
+                document.getElementById('walletStatus').innerHTML = '✅ Wallet Connected on Polygon';
+                document.getElementById('walletStatus').className = 'status connected';
+                document.getElementById('switchNetworkBtn').style.display = 'none';
+                
+                await refreshGame();
+                
+            } catch(e) {
+                log('❌ Connection error: ' + e.message);
+                document.getElementById('walletStatus').innerHTML = '❌ Connection failed';
+            }
+        }
+        
+        async function refreshGame() {
+            if (!signer) {
+                log('Please connect wallet first');
+                return;
+            }
+            
+            try {
+                const addr = await signer.getAddress();
+                log('Checking game for ' + addr);
+                const game = await gameContract.getGame(addr);
+                log('Game active: ' + game[0] + ', Token: ' + game[1] + ', Streak: ' + game[4] + ', Payout: ' + ethers.formatEther(game[5]));
+                
+                if (game[0]) {
+                    log('🎮 Active game! Streak: ' + game[4] + ', Payout: ' + ethers.formatEther(game[5]));
+                } else {
+                    log('No active game. Click Start Game in main interface.');
+                }
+            } catch(e) {
+                log('Error refreshing: ' + e.message);
+            }
+        }
+        
+        // Auto-detect on page load
+        if (window.ethereum) {
+            log('Wallet detected! Click "Connect Wallet" to connect.');
+            document.getElementById('walletStatus').innerHTML = '🦊 Wallet detected - Click Connect';
+        } else {
+            log('No wallet detected. Please install MetaMask.');
+            document.getElementById('walletStatus').innerHTML = '❌ No MetaMask detected';
+        }
+    </script>
+</body>
+</html>

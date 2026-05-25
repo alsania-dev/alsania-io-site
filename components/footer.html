@@ -53,7 +53,7 @@
 </footer>
 
 <!-- Cookie Consent Banner -->
-<div id="cookie-consent" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 1px solid #333; padding: 15px; text-align: center; z-index: 1000; display: none; font-family: system-ui, -apple-system, sans-serif;">
+<div id="cookie-consent" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 1px solid #333; padding: 15px; text-align: center; z-index: 10000; font-family: system-ui, -apple-system, sans-serif;">
   <p style="margin: 0; font-size: 14px; color: #e5e5e5;">
     🍪 We use cookies to improve your experience. By using our site, you accept our 
     <a href="/legal/privacy-policy.html" style="color: #10b981; text-decoration: none;">Privacy Policy</a>.
@@ -63,12 +63,25 @@
 
 <script>
   (function() {
+    // Check if user has already accepted
     if (!localStorage.getItem('cookies-accepted')) {
-      document.getElementById('cookie-consent').style.display = 'block';
+      // Show the banner
+      var banner = document.getElementById('cookie-consent');
+      if (banner) {
+        banner.style.display = 'block';
+      }
     }
-    document.getElementById('accept-cookies').onclick = function() {
-      localStorage.setItem('cookies-accepted', 'true');
-      document.getElementById('cookie-consent').style.display = 'none';
-    };
+    
+    // Handle accept button
+    var acceptBtn = document.getElementById('accept-cookies');
+    if (acceptBtn) {
+      acceptBtn.onclick = function() {
+        localStorage.setItem('cookies-accepted', 'true');
+        var banner = document.getElementById('cookie-consent');
+        if (banner) {
+          banner.style.display = 'none';
+        }
+      };
+    }
   })();
 </script>

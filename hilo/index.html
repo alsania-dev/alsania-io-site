@@ -38,6 +38,7 @@
     a { color: #00f3ff; text-decoration: none; }
     hr { border-color: rgba(255,255,255,0.05); margin: 15px 0; }
     .approve-note { font-size: 0.7rem; color: #6b7280; margin-top: 10px; }
+    .contract-balance { font-size: 0.7rem; color: #94a3b8; margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 16px; }
   </style>
 </head>
 <body>
@@ -57,6 +58,7 @@
     <button class="btn-approve" id="approveBtn">✓ APPROVE MAX (ONE-TIME)</button>
     <button class="btn-primary" id="startBtn">▶ START GAME</button>
     <div class="approve-note">💡 Approve once, play many games. No per-game approval needed.</div>
+    <div class="contract-balance" id="contractBalance">📊 Contract Balance: —</div>
   </div>
 
   <div class="card" id="gameScreen" style="display:none;">
@@ -89,7 +91,7 @@
   const SPIRIT_ADDR = '0xec5E56058494F2cb260Fd7D81B15f04872dbC34a';
   const POLYGON_CHAIN_ID = '0x89';
 
-  // ABI (minimal, verified from Polygonscan)
+  // ABI
   const GAME_ABI = [
     'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)',
     'function startGameAlsa(uint256)',
@@ -98,13 +100,15 @@
     'function guessLower()',
     'function cashOut()'
   ];
-  const ERC20_ABI = ['function balanceOf(address) view returns (uint256)', 'function approve(address,uint256) returns (bool)'];
+  const ERC20_ABI = [
+    'function balanceOf(address) view returns (uint256)',
+    'function approve(address,uint256) returns (bool)',
+    'function allowance(address,address) view returns (uint256)'
+  ];
 
   // State
   let provider, signer, gameContract, userAddress;
   let isProcessing = false;
-  let alsaApproved = false;
-  let spiritApproved = false;
 
   // ============================================================
   // UI HELPERS
@@ -120,6 +124,54 @@
       const btn = document.getElementById(id);
       if (btn) btn.disabled = !enable;
     });
+  }
+
+  // ============================================================
+  // CHECK IF APPROVED (REAL ON-CHAIN CHECK)
+  // ============================================================
+  async function isTokenApproved(token) {
+    if (!signer || !userAddress) return false;
+    const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
+    const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
+    const allowance = await tokenContract.allowance(userAddress, CONTRACT_ADDR);
+    const minRequired = ethers.parseEther('1'); // Need at least 1 token for a bet
+    return allowance >= minRequired;
+  }
+
+  async function updateApprovalStatus() {
+    const token = document.getElementById('tokenSelect').value;
+    const approved = await isTokenApproved(token);
+    const approveBtn = document.getElementById('approveBtn');
+    if (approved) {
+      approveBtn.textContent = '✓ ALREADY APPROVED';
+      approveBtn.disabled = true;
+      approveBtn.style.opacity = '0.6';
+    } else {
+      approveBtn.textContent = `✓ APPROVE MAX (ONE-TIME)`;
+      approveBtn.disabled = false;
+      approveBtn.style.opacity = '1';
+    }
+  }
+
+  // ============================================================
+  // CONTRACT BALANCE DISPLAY
+  // ============================================================
+  async function updateContractBalance() {
+    if (!provider) return;
+    try {
+      const alsaContract = new ethers.Contract(ALSA_ADDR, ERC20_ABI, provider);
+      const spiritContract = new ethers.Contract(SPIRIT_ADDR, ERC20_ABI, provider);
+      const alsaBalance = await alsaContract.balanceOf(CONTRACT_ADDR);
+      const spiritBalance = await spiritContract.balanceOf(CONTRACT_ADDR);
+      const alsaF = parseFloat(ethers.formatEther(alsaBalance)).toFixed(2);
+      const spiritF = parseFloat(ethers.formatEther(spiritBalance)).toFixed(2);
+      document.getElementById('contractBalance').innerHTML = `📊 Contract Balance: 🛡️ ${alsaF} ALSA | 🐺 ${spiritF} SPIRIT`;
+      if (alsaBalance < ethers.parseEther('10')) {
+        document.getElementById('contractBalance').style.color = '#f87171';
+      } else {
+        document.getElementById('contractBalance').style.color = '#94a3b8';
+      }
+    } catch(e) { console.warn('Contract balance error:', e); }
   }
 
   // ============================================================
@@ -164,7 +216,7 @@
   }
 
   // ============================================================
-  // BALANCES & GAME STATE (USING WALLET PROVIDER)
+  // BALANCES & GAME STATE
   // ============================================================
   async function loadBalances() {
     if (!provider || !userAddress) return;
@@ -193,7 +245,7 @@
       }
       const number = game[3].toString();
       const streak = game[4].toString();
-      const tokenId = game[1]; // 1=ALSA, 2=SPIRIT
+      const tokenId = game[1];
       const payoutRaw = game[5];
       const payoutFormatted = parseFloat(ethers.formatEther(payoutRaw)).toFixed(4);
       const tokenSymbol = tokenId == 1 ? 'ALSA' : 'SPIRIT';
@@ -226,10 +278,9 @@
       const maxAmount = ethers.MaxUint256;
       const approveTx = await tokenContract.approve(CONTRACT_ADDR, maxAmount);
       await approveTx.wait();
-      if (token === 'alsa') alsaApproved = true;
-      else spiritApproved = true;
       showStatus(`✅ ${token.toUpperCase()} approved! You can now play multiple games without re-approving.`, 'success');
       await loadBalances();
+      await updateApprovalStatus();
       return true;
     } catch(e) {
       showStatus(`Approval failed: ${e.reason || e.message}`, 'error');
@@ -252,13 +303,13 @@
     const token = document.getElementById('tokenSelect').value;
     const amount = ethers.parseEther('1');
     
-    // Check if approval needed
-    const isApproved = token === 'alsa' ? alsaApproved : spiritApproved;
-    if (!isApproved) {
+    // Check if approved on-chain
+    const approved = await isTokenApproved(token);
+    if (!approved) {
       const wantApprove = confirm(`You haven't approved ${token.toUpperCase()} yet. Approve max once to play multiple games?`);
       if (wantApprove) {
-        const approved = await approveMax(token);
-        if (!approved) return;
+        const approvedSuccess = await approveMax(token);
+        if (!approvedSuccess) return;
       } else {
         showStatus(`Please approve ${token.toUpperCase()} first using the Approve button.`, 'error');
         return;
@@ -316,6 +367,11 @@
     setButtons(true);
   };
 
+  // Token selector change - update approval status display
+  document.getElementById('tokenSelect').onchange = () => {
+    updateApprovalStatus();
+  };
+
   // ============================================================
   // INIT
   // ============================================================
@@ -324,7 +380,9 @@
     if (ok) {
       await loadBalances();
       await refreshGame();
-      setInterval(() => { if (!isProcessing) { loadBalances(); refreshGame(); } }, 8000);
+      await updateApprovalStatus();
+      await updateContractBalance();
+      setInterval(() => { if (!isProcessing) { loadBalances(); refreshGame(); updateContractBalance(); } }, 8000);
     }
   })();
 </script>

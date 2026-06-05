@@ -39,6 +39,7 @@
     hr { border-color: rgba(255,255,255,0.05); margin: 15px 0; }
     .approve-note { font-size: 0.7rem; color: #6b7280; margin-top: 10px; }
     .contract-balance { font-size: 0.7rem; color: #94a3b8; margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 16px; }
+    .faucet-link { color: #fbbf24; }
   </style>
 </head>
 <body>
@@ -78,6 +79,11 @@
     Start with 1 ALSA or SPIRIT. Each correct guess doubles your payout.<br>
     Cash out BEFORE you guess wrong. 2.5% house edge.<br>
     <a href="https://polygonscan.com/address/0x9c9B69d52b195241b5EfBAD43d368567a59d8C53" target="_blank">📜 Contract</a>
+    <hr>
+    <strong>💧 FREE TOKENS</strong><br>
+    Get free ALSA and SPIRIT tokens to play:<br>
+    <a href="/claim/" target="_blank" class="faucet-link">🛡️ Alsania Faucet</a> | 
+    <a href="https://spiritwolf3397.github.io/claim/" target="_blank" class="faucet-link">🐺 SpiritWolf Faucet</a>
   </div>
 </div>
 
@@ -134,7 +140,7 @@
     const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
     const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
     const allowance = await tokenContract.allowance(userAddress, CONTRACT_ADDR);
-    const minRequired = ethers.parseEther('1'); // Need at least 1 token for a bet
+    const minRequired = ethers.parseEther('1');
     return allowance >= minRequired;
   }
 
@@ -303,7 +309,6 @@
     const token = document.getElementById('tokenSelect').value;
     const amount = ethers.parseEther('1');
     
-    // Check if approved on-chain
     const approved = await isTokenApproved(token);
     if (!approved) {
       const wantApprove = confirm(`You haven't approved ${token.toUpperCase()} yet. Approve max once to play multiple games?`);
@@ -367,7 +372,6 @@
     setButtons(true);
   };
 
-  // Token selector change - update approval status display
   document.getElementById('tokenSelect').onchange = () => {
     updateApprovalStatus();
   };

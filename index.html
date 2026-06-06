@@ -7,7 +7,7 @@
     <title>Alsania – Sovereign Technology Ecosystem</title>
     <meta
       name="description"
-      content="Join the waitlist for Alsania's sovereign technology ecosystem. Get notified when Nyx, DevCon, ScrypGen and other projects launch."
+      content="Alsania is a sovereign technology ecosystem for creators and innovators. Own your identity, control your data, and build with tools that respect your sovereignty."
     />
 
     <!-- Google Analytics -->
@@ -37,6 +37,14 @@
     
     <!-- Path fix for GitHub Pages -->
     <script src="assets/js/fix-paths.js"></script>
+    <style>
+      .about-content p {
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+      }
+      .mt-3 { margin-top: 1.5rem; }
+      .text-center { text-align: center; }
+    </style>
   </head>
   <body>
     <!-- Header Component -->
@@ -58,6 +66,29 @@
             <a href="/tools/nyx/" class="alsania-btn secondary" id="download-nyx"
             >Try Nyx Now</a
             >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Alsania Section -->
+    <section class="section" style="background: var(--bg-secondary);">
+      <div class="container">
+        <h2 class="section-title">What is Alsania?</h2>
+        <div class="about-content">
+          <p>Alsania is a sovereign technology ecosystem built for creators, innovators, and visionaries who believe technology should empower individuals, not corporations. We're building tools that respect your sovereignty - from the Nyx browser extension that gives AI real hands, to our token system that rewards participation, to our memory systems that give AI lasting identity.</p>
+          
+          <p>Unlike platforms that trap your data and control your experience, Alsania puts you in charge. Own your identity through AED domains. Control your data through encrypted systems. Build with tools that don't lock you in. Every project we build is designed to be open, modular, and owned by the community - not by us.</p>
+          
+          <p>Started on a phone at 3 AM with a single question - "Can I code a blockchain on my android phone?" - Alsania has grown into a full ecosystem with thousands of users, live products, and a vision for a better internet. What began as a late-night experiment became a movement. Today, we're building AI agents that remember conversations, browser extensions that automate repetitive tasks, and blockchain systems that put sovereignty first.</p>
+          
+          <p>We don't have venture capital. We don't have a corporate board. We have a small team of dedicated builders, a community of early adopters, and a belief that technology should work for people - not the other way around. Every line of code, every project, every update comes from a place of purpose, not profit.</p>
+          
+          <p>The Alsania ecosystem includes the Nyx browser extension (used by thousands across 13+ AI platforms), the Echo memory system (persistent AI identity), ALSA and SPIRIT tokens (community-driven economies), the hi-lo game (play with real tokens), and the AED domain system (your identity on-chain). And we're just getting started.</p>
+          
+          <div class="text-center mt-3">
+            <a href="/story/" class="alsania-btn secondary">Read Our Full Story →</a>
+            <a href="/blog/" class="alsania-btn" style="margin-left: 1rem;">Visit Our Blog →</a>
           </div>
         </div>
       </div>
@@ -206,46 +237,7 @@
       <div id="footer-container"></div>
 
       <!-- JavaScript -->
-      <!-- <script src="assets/js/scripts.js"></script> -->
       <script src="loadComponents.js"></script>
-      <!-- <script>
-        // Additional analytics for waitlist tracking
-        document.addEventListener("DOMContentLoaded", function () {
-          // Track waitlist section visibility
-          const waitlistSection = document.getElementById("waitlist");
-          if (waitlistSection && typeof gtag !== "undefined") {
-            const observer = new IntersectionObserver(
-              (entries) => {
-                entries.forEach((entry) => {
-                  if (entry.isIntersecting) {
-                    gtag("event", "waitlist_section_view", {
-                      event_category: "Engagement",
-                      event_label: "Waitlist Section Visible",
-                    });
-                    observer.unobserve(entry.target);
-                  }
-                });
-              },
-              { threshold: 0.5 },
-            );
-            observer.observe(waitlistSection);
-          }
-
-          // Track project clicks
-          document.querySelectorAll(".ecosystem-item a").forEach((link) => {
-            link.addEventListener("click", function () {
-              const projectName =
-                this.closest(".ecosystem-item").querySelector("h3").textContent;
-              if (typeof gtag !== "undefined") {
-                gtag("event", "project_click", {
-                  event_category: "Engagement",
-                  event_label: projectName,
-                });
-              }
-            });
-          });
-        });
-      </script> -->
     </section>
   </body>
 </html>

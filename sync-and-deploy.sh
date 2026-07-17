@@ -67,18 +67,12 @@ else
     exit 1
 fi
 
-# Step 4: Deploy to Cloudflare Pages
-echo -e "\n${BLUE}☁️ Deploying to Cloudflare Pages...${NC}"
-npx wrangler pages deploy dist --project-name=alsania-io-site
-
-if [ $? -eq 0 ]; then
-    echo -e "\n${GREEN}✅ Deployment successful!${NC}"
-    echo -e "\n${BLUE}Your site should be live at:${NC}"
-    echo "  https://alsania-io.com"
-    echo "  https://alsania-dev.github.io/alsania-io-site/"
-    echo -e "\n${YELLOW}Note:${NC} It may take a few minutes for changes to propagate."
-    echo -e "${YELLOW}Note:${NC} Cloudflare cache might need purging if changes don't appear."
-else
-    echo -e "\n${RED}❌ Deployment failed${NC}"
-    exit 1
-fi
+# Step 4: Cloudflare Pages auto-deploys from GitHub
+# No manual wrangler step needed - Cloudflare Pages auto-deploys on push to main
+echo -e "\n${BLUE}☁️ Cloudflare Pages auto-deployment triggered by GitHub push${NC}"
+echo -e "\n${GREEN}✅ Sync and push complete!${NC}"
+echo -e "\n${BLUE}Your site should be live at:${NC}"
+echo "  https://alsania-io.com"
+echo "  https://alsania-dev.github.io/alsania-io-site/"
+echo -e "\n${YELLOW}Note:${NC} It may take 1-2 minutes for Cloudflare Pages to build and deploy."
+echo -e "${YELLOW}Note:${NC} Cloudflare cache might need purging if changes don't appear immediately."

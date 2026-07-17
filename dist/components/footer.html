@@ -70,7 +70,8 @@
 </div>
 
 <script>
-  (function() {
+  // Cookie consent - wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
     var banner = document.getElementById('cookie-consent');
     var acceptBtn = document.getElementById('accept-cookies');
     var rejectBtn = document.getElementById('reject-cookies');
@@ -86,29 +87,28 @@
 
     // Handle Accept All
     if (acceptBtn) {
-      acceptBtn.onclick = function() {
+      acceptBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         localStorage.setItem('cookie-consent', 'accepted');
         if (banner) banner.style.display = 'none';
-        // Enable analytics and other cookies here if needed
         console.log('Cookies accepted');
-      };
+      });
     }
 
     // Handle Reject All
     if (rejectBtn) {
-      rejectBtn.onclick = function() {
+      rejectBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         localStorage.setItem('cookie-consent', 'rejected');
         if (banner) banner.style.display = 'none';
-        // Disable non-essential cookies here if needed
         console.log('Cookies rejected');
-      };
+      });
     }
 
-    // Handle Manage Settings (shows preferences modal - simple version for now)
+    // Handle Manage Settings
     if (settingsBtn) {
-      settingsBtn.onclick = function() {
-        // For now, just show an alert with options
-        // In a full implementation, this would open a preferences modal
+      settingsBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         var choice = confirm(
           'Cookie Settings\n\n' +
           'Essential cookies are required for basic site functionality.\n' +
@@ -122,7 +122,7 @@
           localStorage.setItem('cookie-consent', 'rejected');
           if (banner) banner.style.display = 'none';
         }
-      };
+      });
     }
-  })();
+  });
 </script>

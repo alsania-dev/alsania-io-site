@@ -1,4 +1,5 @@
 // Path fix for GitHub Pages and Cloudflare Pages
+// v1.0.1 - Added version comment to trigger deployment
 (function() {
   'use strict';
   
@@ -19,5 +20,5 @@
     });
   }
   
-  console.log('[fix-paths] Loaded successfully');
+  console.log('[fix-paths] Loaded successfully v1.0.1');
 })();

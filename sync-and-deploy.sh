@@ -34,8 +34,13 @@ rsync -av --delete \
   --exclude='node_modules/' \
   ./ dist/
 
+# Explicitly copy loadComponents.js to ensure it's updated
+cp loadComponents.js dist/
+cp assets/js/scripts.js dist/assets/js/
+cp assets/js/fix-paths.js dist/assets/js/
+
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ Files synced to dist/${NC}"
+    echo -e "${GREEN}✓ Files synced to dist/ (including loadComponents.js)${NC}"
 else
     echo -e "${RED}❌ Sync failed${NC}"
     exit 1
@@ -68,7 +73,6 @@ else
 fi
 
 # Step 4: Cloudflare Pages auto-deploys from GitHub
-# No manual wrangler step needed - Cloudflare Pages auto-deploys on push to main
 echo -e "\n${BLUE}☁️ Cloudflare Pages auto-deployment triggered by GitHub push${NC}"
 echo -e "\n${GREEN}✅ Sync and push complete!${NC}"
 echo -e "\n${BLUE}Your site should be live at:${NC}"

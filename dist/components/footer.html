@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="footer-grid">
       <div class="footer-section">
-        <h3>Alsania</h3>
+        <h3>Alsania I/O</h3>
         <p>
           Sovereign technology ecosystem. Built for creators, owned by no one,
           open to everyone.
@@ -10,6 +10,8 @@
         <div class="social-links">
           <a href="https://github.com/alsania-dev" title="GitHub" target="_blank" rel="noopener"><img
               src="/assets/img/web-icons/github-icon.svg" alt="GitHub" /></a>
+          <a href="https://x.com/sigmasauer07" title="X" target="_blank" rel="noopener"><img
+              src="/assets/img/web-icons/x-icon.svg" alt="X" /></a>
           <a href="https://t.me/Alsania_io" title="Telegram" target="_blank" rel="noopener"><img
               src="/assets/img/web-icons/telegram-icon.svg" alt="Telegram" /></a>
           <a href="https://discord.gg/SaCTgSHqdv" title="Discord" target="_blank" rel="noopener"><img
@@ -21,8 +23,9 @@
         <ul>
           <li><a href="/tools/nyx/">Nyx Extension</a></li>
           <li><a href="/shop/">Official Merch</a></li>
-          <li><a href="/redbubble">Redbubble Store</a></li>
-          <li><a href="/dashery">Dashery Store</a></li>
+          <li><a href="/story">Book of Alsania</a></li>
+          <li><a href="/claim">Faucet</a></li>
+          <li><a href="/hilo/">Hi-Lo Game</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -31,7 +34,7 @@
           <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
           <li><a href="/tools/scrypgen/">ScrypGen</a></li>
           <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
-          <li><a href="/services/">Alsania Services</a></li>
+          <li><a href="/services/">Services</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -49,3 +52,37 @@
     </div>
   </div>
 </footer>
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 1px solid #333; padding: 15px; text-align: center; z-index: 10000; font-family: system-ui, -apple-system, sans-serif;">
+  <p style="margin: 0; font-size: 14px; color: #e5e5e5;">
+    🍪 We use cookies to improve your experience. By using our site, you accept our
+    <a href="/legal/privacy-policy.html" style="color: #10b981; text-decoration: none;">Privacy Policy</a>.
+    <button id="accept-cookies" style="margin-left: 15px; background: #10b981; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: 600;">Accept</button>
+  </p>
+</div>
+
+<script>
+  (function() {
+    // Check if user has already accepted
+    if (!localStorage.getItem('cookies-accepted')) {
+      // Show the banner
+      var banner = document.getElementById('cookie-consent');
+      if (banner) {
+        banner.style.display = 'block';
+      }
+    }
+
+    // Handle accept button
+    var acceptBtn = document.getElementById('accept-cookies');
+    if (acceptBtn) {
+      acceptBtn.onclick = function() {
+        localStorage.setItem('cookies-accepted', 'true');
+        var banner = document.getElementById('cookie-consent');
+        if (banner) {
+          banner.style.display = 'none';
+        }
+      };
+    }
+  })();
+</script>

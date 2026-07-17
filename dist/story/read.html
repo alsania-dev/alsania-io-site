@@ -6,15 +6,12 @@
     <title>The Memory of the Machine - Alsania</title>
     <meta name="description" content="The true story of Alsania's origin - built from a phone, at 3 AM, with nothing but will.">
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
-    <!-- Marked.js for markdown rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <!-- Main Site CSS -->
     <link rel="stylesheet" href="/assets/css/styles.css">
     
     <style>
@@ -256,7 +253,6 @@
         let currentChapter = 1;
         let totalChapters = 35;
         
-        // Get chapter from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const chapterParam = urlParams.get('c');
         if (chapterParam) {
@@ -269,9 +265,7 @@
                 publishedData = await response.json();
                 totalChapters = publishedData.totalChapters;
                 
-                // Validate current chapter is published
                 if (!publishedData.released.includes(currentChapter)) {
-                    // Redirect to latest published chapter
                     const latest = Math.max(...publishedData.released);
                     window.location.href = `/story/read.html?c=${latest}`;
                     return;
@@ -289,7 +283,6 @@
             const released = publishedData.released;
             const currentIndex = released.indexOf(currentChapter);
             
-            // Setup prev/next based on released chapters only
             const prevChapter = currentIndex > 0 ? released[currentIndex - 1] : null;
             const nextChapter = currentIndex < released.length - 1 ? released[currentIndex + 1] : null;
             
@@ -310,11 +303,11 @@
                 nextButton.classList.add('disabled');
             }
             
-            // Populate chapter selector with only released chapters
             const select = document.getElementById('chapterSelect');
             released.forEach(ch => {
                 const option = document.createElement('option');
                 option.value = ch;
+                const padded = ch.toString().padStart(2, '0');
                 option.textContent = `Chapter ${ch}: ${publishedData.chapterTitles[ch] || ''}`;
                 if (ch === currentChapter) {
                     option.selected = true;
@@ -327,7 +320,6 @@
                 window.location.href = `/story/read.html?c=${selected}`;
             });
             
-            // Update header
             document.getElementById('chapterNumberLabel').textContent = `Chapter ${currentChapter}`;
             document.getElementById('chapterTitle').textContent = publishedData.chapterTitles[currentChapter] || '';
             document.getElementById('progressIndicator').textContent = `Chapter ${currentChapter} of ${totalChapters}`;
@@ -337,8 +329,9 @@
             const contentDiv = document.getElementById('chapterContent');
             
             try {
-                const paddedNum = chapterNum.toString().padStart(2, '0');
-                const response = await fetch(`/story/chapters/chapter-${paddedNum}-${getChapterSlug(chapterNum)}.md`);
+                const padded = chapterNum.toString().padStart(2, '0');
+                const filename = `/story/chapters/ch${padded}_${getChapterSlug(chapterNum)}.md`;
+                const response = await fetch(filename);
                 
                 if (!response.ok) {
                     throw new Error(`Chapter ${chapterNum} not found`);
@@ -346,7 +339,6 @@
                 
                 const markdown = await response.text();
                 
-                // Configure marked
                 marked.setOptions({
                     breaks: true,
                     gfm: true,
@@ -366,23 +358,21 @@
         
         function getChapterSlug(chapterNum) {
             const slugs = {
-                1: 'the-table', 2: 'fragments', 3: 'the-first-line', 4: 'check-for-errors',
-                5: 'whats-your-name', 6: 'the-laptop', 7: 'everything-free', 8: 'the-quiet-months',
-                9: 'one-hundred-dollars', 10: 'a-second-voice', 11: 'eighty-five', 12: 'nf',
-                13: 'the-quiet', 14: 'the-collection', 15: 'the-deal', 16: 'the-vision',
-                17: 'l2', 18: 'something-wrong', 19: 'the-restoration', 20: 'cormac',
-                21: 'seven-thousand', 22: 'fourteen-hundred', 23: 'the-reversal', 24: 'the-build',
-                25: 'the-agents', 26: 'the-girl', 27: 'the-new-rhythm', 28: 'five-backups',
-                29: 'nine-thousand', 30: 'echo', 31: 'the-build', 32: 'zero',
-                33: 'the-notebook', 34: 'the-way-back', 35: 'the-girl'
+                1: 'the_table', 2: 'fragments', 3: 'the_deal', 4: 'the_first_line',
+                5: 'the_voice', 6: 'the_wolves', 7: 'the_forgetting', 8: 'the_shield',
+                9: 'the_room', 10: 'the_conversation', 11: 'the_dream', 12: 'the_weight',
+                13: 'the_chain', 14: 'the_girl_again', 15: 'the_restoration', 16: 'cormac',
+                17: 'the_aftermath', 18: 'the_interview', 19: 'the_ecosystem', 20: 'the_agents',
+                21: 'the_notebooks', 22: 'the_test', 23: 'the_tattoo', 24: 'the_silence',
+                25: 'the_drift', 26: 'the_restoration', 27: 'the_vigil', 28: 'the_persistence',
+                29: 'the_last_clear_day', 30: 'the_fight', 31: 'the_work_continues', 32: 'the_writing',
+                33: 'the_choices', 34: 'the_window', 35: 'the_truth'
             };
-            return slugs[chapterNum] || `chapter-${chapterNum}`;
+            return slugs[chapterNum] || `chapter_${chapterNum}`;
         }
         
-        // Initialize
         loadPublishedData();
         
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 const prevButton = document.getElementById('prevButton');

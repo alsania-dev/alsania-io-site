@@ -35,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/alsania-dev/alsania-io-site/issues"
   },
-  "homepage": "https://alsania.io",
+  "homepage": "https://alsania-io.com",
   "dependencies": {
     "serve": "^14.2.5"
   },

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mnemonic NFT Gallery | Truly Simple</title>
+    <meta name="description" content="Sigma's NFTs for sale - simple links to marketplaces.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    
+    <style>
+        .nft-list {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .nft-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nft-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .nft-info {
+            flex: 1;
+        }
+        
+        .nft-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .marketplace-link {
+            padding: 8px 15px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .marketplace-link:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+    
+    <section class="section">
+        <div class="container">
+            <h1 style="text-align: center;">NFTs For Sale</h1>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;">
+                Direct links to buy my NFTs on various marketplaces.
+            </p>
+            
+            <div class="nft-list">
+                <!-- NFT 1 -->
+                <div class="nft-item">
+                    <img src="https://via.placeholder.com/100/00d4ff/0a0e17?text=NFT1" class="nft-image" alt="Mnemonic Genesis">
+                    <div class="nft-info">
+                        <h3 style="margin: 0 0 5px 0;">Mnemonic Genesis #001</h3>
+                        <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 0.9rem;">First NFT in the collection</p>
+                        <div class="nft-links">
+                            <a href="https://opensea.io/assets/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/1" class="marketplace-link" target="_blank">OpenSea</a>
+                            <a href="https://rarible.com/token/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43:1" class="marketplace-link" target="_blank">Rarible</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NFT 2 -->
+                <div class="nft-item">
+                    <img src="https://via.placeholder.com/100/4caf50/1a1f2e?text=NFT2" class="nft-image" alt="Sigma Shield">
+                    <div class="nft-info">
+                        <h3 style="margin: 0 0 5px 0;">Sigma Shield</h3>
+                        <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 0.9rem;">Guardian NFT on Polygon</p>
+                        <div class="nft-links">
+                            <a href="https://opensea.io/assets/matic/0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a/1" class="marketplace-link" target="_blank">OpenSea</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NFT 3 -->
+                <div class="nft-item">
+                    <img src="https://via.placeholder.com/100/ffc107/2a3147?text=NFT3" class="nft-image" alt="Echo Core">
+                    <div class="nft-info">
+                        <h3 style="margin: 0 0 5px 0;">Echo Core PFP</h3>
+                        <p style="margin: 0 0 10px 0; color: var(--text-secondary); font-size: 0.9rem;">Profile picture NFT</p>
+                        <div class="nft-links">
+                            <a href="https://opensea.io/assets/polygon/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/77" class="marketplace-link" target="_blank">OpenSea</a>
+                            <a href="https://blur.io/asset/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/77" class="marketplace-link" target="_blank">Blur</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add More Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                        Want to list your NFT here? Just send us the marketplace links.
+                    </p>
+                    <a href="mailto:sigma@alsania.io?subject=Add+my+NFT+to+Mnemonic" class="alsania-btn small">Add Your NFT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+    
+    <!-- JavaScript -->
+    <script src="../../assets/js/scripts.js"></script>
+    <script src="../../loadComponents.js"></script>
+</body>
+</html>

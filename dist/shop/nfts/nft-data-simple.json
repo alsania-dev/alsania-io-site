@@ -1,0 +1,95 @@
+{
+  "wallet": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+  "lastUpdated": "2026-02-07",
+  "description": "Sigma's NFT Collection - Only NFTs listed for sale",
+  "nfts": [
+    {
+      "id": "mnemonic-genesis-001",
+      "name": "Mnemonic Genesis #001",
+      "collection": "Mnemonic Genesis Collection",
+      "description": "First NFT in the Mnemonic collection. Represents the beginning of the Alsania merchandise ecosystem.",
+      "image": "https://via.placeholder.com/400x400/00d4ff/0a0e17?text=Mnemonic+Genesis+1",
+      "contract": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+      "tokenId": "1",
+      "blockchain": "Ethereum",
+      "listed": true,
+      "price": "0.5 ETH",
+      "marketplaces": [
+        {
+          "name": "OpenSea",
+          "icon": "🌊",
+          "url": "https://opensea.io/assets/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/1"
+        },
+        {
+          "name": "Rarible",
+          "icon": "🖼️",
+          "url": "https://rarible.com/token/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43:1"
+        }
+      ],
+      "attributes": [
+        { "trait_type": "Collection", "value": "Genesis" },
+        { "trait_type": "Rarity", "value": "Legendary" },
+        { "trait_type": "Purpose", "value": "Merchandise Foundation" }
+      ]
+    },
+    {
+      "id": "sigma-shield",
+      "name": "Sigma Shield",
+      "collection": "Alsania Guardians",
+      "description": "Digital representation of Sigma's strategic shield in the Alsania ecosystem.",
+      "image": "https://via.placeholder.com/400x400/4caf50/1a1f2e?text=Sigma+Shield",
+      "contract": "0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a",
+      "tokenId": "1",
+      "blockchain": "Polygon",
+      "listed": true,
+      "price": "0.1 MATIC",
+      "marketplaces": [
+        {
+          "name": "OpenSea",
+          "icon": "🌊",
+          "url": "https://opensea.io/assets/matic/0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a/1"
+        }
+      ],
+      "attributes": [
+        { "trait_type": "Role", "value": "Guardian" },
+        { "trait_type": "Element", "value": "Shield" },
+        { "trait_type": "Rarity", "value": "Epic" }
+      ]
+    },
+    {
+      "id": "echo-core",
+      "name": "Echo Core PFP",
+      "collection": "Alsania Identity",
+      "description": "Profile picture NFT representing the Echo AI core. Perfect for Alsania community members.",
+      "image": "https://via.placeholder.com/400x400/ffc107/2a3147?text=Echo+Core+PFP",
+      "contract": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+      "tokenId": "77",
+      "blockchain": "Polygon",
+      "listed": true,
+      "price": "0.25 MATIC",
+      "marketplaces": [
+        {
+          "name": "OpenSea",
+          "icon": "🌊",
+          "url": "https://opensea.io/assets/polygon/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/77"
+        },
+        {
+          "name": "Blur",
+          "icon": "🌀",
+          "url": "https://blur.io/asset/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/77"
+        }
+      ],
+      "attributes": [
+        { "trait_type": "Character", "value": "Echo" },
+        { "trait_type": "Type", "value": "PFP" },
+        { "trait_type": "Network", "value": "Polygon" }
+      ]
+    }
+  ],
+  "instructions": {
+    "addNFT": "Copy an existing NFT object and update: name, description, image URL, contract, tokenId, price, and marketplace URLs",
+    "updateImage": "Replace placeholder URLs with actual IPFS/Arweave links or hosted images",
+    "marketplaces": "Add marketplace URLs where the NFT is actually listed",
+    "monetization": "To add other users' NFTs: they pay, you add their NFT object to this array"
+  }
+}

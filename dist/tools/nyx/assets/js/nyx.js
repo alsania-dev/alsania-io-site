@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initDownloadButtons();
   initPlatformAnimation();
   initFeatureHover();
-  initMobileMenu();
+  initNyxMobileMenu();
 
   // Track analytics events
   initAnalytics();
@@ -291,7 +291,7 @@ function initFeatureHover() {
 }
 
 // Mobile menu toggle (if needed on Nyx page)
-function initMobileMenu() {
+function initNyxMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", function () {

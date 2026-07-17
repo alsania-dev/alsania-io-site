@@ -1,0 +1,137 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-05",
+  "walletAddresses": {
+    "primary": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+    "secondary": "",
+    "collections": ""
+  },
+  "featuredCollections": [
+    {
+      "name": "N3XT - Genesis",
+      "contract": "0x4a4281bb6b8b43d5a53353179ea568e4ba232ffb",
+      "chain": "matic-mainnet",
+      "description": "The foundational NFT collection of the Alsania ecosystem.",
+      "marketplaceLinks": {
+        "opensea": "https://opensea.io/collection/alsania-genesis",
+        "rarible": "https://rarible.com/alsania-genesis"
+      }
+    }
+  ],
+  "manualNFTs": [
+    {
+      "id": "alsania-genesis-001",
+      "name": "Alsania Genesis #001",
+      "collection": "Alsania Genesis Collection",
+      "description": "The first NFT minted in the Alsania ecosystem. Represents sovereignty and innovation.",
+      "image": "https://via.placeholder.com/400x400/00d4ff/0a0e17?text=Alsania+Genesis",
+      "contract": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+      "tokenId": "1",
+      "category": "art",
+      "chain": "ethereum",
+      "attributes": [
+        { "trait_type": "Generation", "value": "Genesis" },
+        { "trait_type": "Rarity", "value": "Legendary" },
+        { "trait_type": "Theme", "value": "Sovereignty" }
+      ],
+      "marketplaceLinks": {
+        "opensea": "https://opensea.io/assets/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/1",
+        "rarible": "https://rarible.com/token/ethereum/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43:1",
+        "blur": "https://blur.io/asset/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/1"
+      }
+    },
+    {
+      "id": "jeff",
+      "name": "Jeff",
+      "collection": "The Innocent Collection",
+      "description": "Adorable monsters.",
+      "image": "https://via.placeholder.com/400x400/4caf50/1a1f2e?text=Sigma+Shield",
+      "contract": "0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a",
+      "tokenId": "1",
+      "category": "collectible",
+      "chain": "matic-main",
+      "attributes": [
+        { "trait_type": "Role", "value": "Guardian" },
+        { "trait_type": "Element", "value": "Shield" },
+        { "trait_type": "Rarity", "value": "Epic" }
+      ],
+      "marketplaceLinks": {
+        "opensea": "https://opensea.io/assets/ethereum/0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a/1",
+        "rarible": "https://rarible.com/token/ethereum/0x51391dbea7f8bc3a34c6950a5d88b8e50876c27a:1"
+      }
+    },
+    {
+      "id": "echo-core-pfp",
+      "name": "Echo Core PFP",
+      "collection": "Alsania Identity",
+      "description": "Profile picture NFT representing the Echo AI core in the Alsania network.",
+      "image": "https://via.placeholder.com/400x400/ffc107/2a3147?text=Echo+Core",
+      "contract": "0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43",
+      "tokenId": "77",
+      "category": "pfp",
+      "chain": "polygon",
+      "attributes": [
+        { "trait_type": "Character", "value": "Echo" },
+        { "trait_type": "Type", "value": "PFP" },
+        { "trait_type": "Network", "value": "Polygon" }
+      ],
+      "marketplaceLinks": {
+        "opensea": "https://opensea.io/assets/polygon/0x78dB155AA7f39A8D13a0e1E8EEB41d71e2ce3F43/77"
+      }
+    }
+  ],
+  "marketplaceConfig": {
+    "opensea": {
+      "name": "OpenSea",
+      "icon": "🌊",
+      "urlPatterns": {
+        "ethereum": "https://opensea.io/assets/{contract}/{tokenId}",
+        "polygon": "https://opensea.io/assets/matic/{contract}/{tokenId}",
+        "arbitrum": "https://opensea.io/assets/arbitrum/{contract}/{tokenId}",
+        "optimism": "https://opensea.io/assets/optimism/{contract}/{tokenId}"
+      }
+    },
+    "rarible": {
+      "name": "Rarible",
+      "icon": "🖼️",
+      "urlPatterns": {
+        "ethereum": "https://rarible.com/token/ethereum/{contract}:{tokenId}",
+        "polygon": "https://rarible.com/token/polygon/{contract}:{tokenId}",
+        "arbitrum": "https://rarible.com/token/arbitrum/{contract}:{tokenId}",
+        "optimism": "https://rarible.com/token/optimism/{contract}:{tokenId}"
+      }
+    },
+    "blur": {
+      "name": "Blur",
+      "icon": "🌀",
+      "urlPatterns": {
+        "ethereum": "https://blur.io/asset/{contract}/{tokenId}",
+        "polygon": null,
+        "arbitrum": null,
+        "optimism": null
+      }
+    },
+    "looksrare": {
+      "name": "LooksRare",
+      "icon": "👀",
+      "urlPatterns": {
+        "ethereum": "https://looksrare.org/collections/{contract}/{tokenId}",
+        "polygon": null,
+        "arbitrum": null,
+        "optimism": null
+      }
+    }
+  },
+  "categoryColors": {
+    "art": "#00d4ff",
+    "collectible": "#4caf50",
+    "pfp": "#ffc107",
+    "utility": "#f44336"
+  },
+  "instructions": {
+    "updateWallet": "Replace the primary wallet address with your actual Ethereum wallet",
+    "addNFTs": "Add manual NFT entries to the manualNFTs array for NFTs not automatically detected",
+    "updateImages": "Replace placeholder image URLs with actual IPFS/Arweave links or hosted images",
+    "apiIntegration": "Set demoMode: false in nft-gallery.js to use Covalent Unified API (already added)"
+  }
+}

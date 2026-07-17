@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hi-Lo — Alsania</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: radial-gradient(circle at 20% 30%, #0a0a1a, #050510); font-family: 'Space Grotesk', sans-serif; color: #fff; min-height: 100vh; }
+    .container { max-width: 550px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+    h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; background: linear-gradient(135deg, #00f3ff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+    .subtitle { color: #94a3b8; margin-bottom: 30px; font-size: 0.9rem; }
+    .card { background: rgba(10, 20, 40, 0.7); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 28px; padding: 1.8rem; margin: 1rem 0; backdrop-filter: blur(16px); }
+    .number { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; color: #00f3ff; margin: 0.5rem 0; text-shadow: 0 0 25px rgba(0,243,255,0.4); letter-spacing: 4px; }
+    .streak { color: #fbbf24; font-size: 1.2rem; font-weight: 600; }
+    .payout { color: #10b981; font-size: 1.2rem; font-weight: 600; }
+    .balance { background: rgba(0,0,0,0.5); border-radius: 100px; padding: 8px 16px; margin-bottom: 1rem; font-size: 0.85rem; display: inline-block; }
+    .balance span { color: #00f3ff; font-weight: bold; }
+    button { padding: 14px 28px; border-radius: 40px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; border: none; margin: 6px; transition: all 0.2s; font-size: 1rem; }
+    .btn-higher { background: linear-gradient(135deg, #00f3ff, #0891b2); color: #fff; }
+    .btn-lower { background: linear-gradient(135deg, #f59e0b, #b45309); color: #000; }
+    .btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; }
+    .btn-approve { background: linear-gradient(135deg, #10b981, #047857); color: #fff; }
+    .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; }
+    button:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    select { padding: 12px 20px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.15); background: #0f0f1a; color: #fff; font-size: 1rem; cursor: pointer; }
+    .status { margin-top: 1rem; padding: 12px; border-radius: 16px; font-size: 0.85rem; animation: fadeIn 0.2s; }
+    .status-info { background: rgba(0,243,255,0.1); color: #00f3ff; border: 1px solid rgba(0,243,255,0.3); }
+    .status-success { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .status-error { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    .network-badge { position: fixed; top: 16px; right: 16px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); padding: 6px 14px; border-radius: 40px; font-size: 0.7rem; font-family: monospace; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+    .network-valid { color: #10b981; border-color: rgba(16,185,129,0.3); }
+    .network-invalid { color: #f87171; border-color: rgba(239,68,68,0.3); }
+    .warning-banner { background: rgba(245,158,11,0.15); border: 1px solid #f59e0b; border-radius: 16px; padding: 12px; margin: 10px 0; color: #fbbf24; font-size: 0.85rem; }
+    a { color: #00f3ff; text-decoration: none; }
+    hr { border-color: rgba(255,255,255,0.05); margin: 15px 0; }
+    .approve-note { font-size: 0.7rem; color: #6b7280; margin-top: 10px; }
+    .contract-balance { font-size: 0.7rem; color: #94a3b8; margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 16px; }
+    .faucet-link { color: #fbbf24; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="network-badge" id="networkBadge" onclick="switchNetwork()">⟳ Loading...</div>
+  <h1>🎲 HI-LO</h1>
+  <p class="subtitle">Double your streak. Cash out anytime.<br><span style="color:#fbbf24;">⚠️ Wrong guess = game over</span></p>
+  <div id="status"></div>
+
+  <div class="card" id="startScreen">
+    <div class="balance">🛡️ ALSA: <span id="alsaBal">—</span> &nbsp;|&nbsp; 🐺 SPIRIT: <span id="spiritBal">—</span></div>
+    <p style="margin: 15px 0 10px; color:#94a3b8;">Bet 1 token</p>
+    <select id="tokenSelect">
+      <option value="alsa">🛡️ ALSA</option>
+      <option value="spirit">🐺 SPIRIT</option>
+    </select><br><br>
+    <button class="btn-approve" id="approveBtn">✓ APPROVE MAX (ONE-TIME)</button>
+    <button class="btn-primary" id="startBtn">▶ START GAME</button>
+    <div class="approve-note">💡 Approve once, play many games. No per-game approval needed.</div>
+    <div class="contract-balance" id="contractBalance">📊 Contract Balance: —</div>
+  </div>
+
+  <div class="card" id="gameScreen" style="display:none;">
+    <div class="balance">🛡️ <span id="gameAlsa">—</span> &nbsp;|&nbsp; 🐺 <span id="gameSpirit">—</span></div>
+    <p style="color:#94a3b8; margin-bottom:5px;">Current number</p>
+    <div class="number" id="currentNumber">?</div>
+    <div class="streak">🔥 STREAK: <span id="streakCount">0</span></div>
+    <div class="payout">💰 PAYOUT: <span id="payoutAmount">0</span></div>
+    <div id="streakWarning" style="display:none;" class="warning-banner"></div>
+    <button class="btn-higher" id="higherBtn">⬆ HIGHER</button>
+    <button class="btn-lower" id="lowerBtn">⬇ LOWER</button><br>
+    <button class="btn-success" id="cashoutBtn">💎 CASH OUT</button>
+  </div>
+
+  <div class="card" style="font-size:0.75rem; color:#475569; text-align:left;">
+    <hr><strong>🎲 HOW TO PLAY</strong><br>
+    Start with 1 ALSA or SPIRIT. Each correct guess doubles your payout.<br>
+    Cash out BEFORE you guess wrong. 2.5% house edge.<br>
+    <a href="https://polygonscan.com/address/0x9c9B69d52b195241b5EfBAD43d368567a59d8C53" target="_blank">📜 Contract</a>
+    <hr>
+    <strong>💧 FREE TOKENS</strong><br>
+    Get free ALSA and SPIRIT tokens to play:<br>
+    <a href="/claim/" target="_blank" class="faucet-link">🛡️ Alsania Faucet</a> | 
+    <a href="https://spiritwolf3397.github.io/claim/" target="_blank" class="faucet-link">🐺 SpiritWolf Faucet</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
+<script>
+  // ============================================================
+  // CONFIGURATION
+  // ============================================================
+  const CONTRACT_ADDR = '0x9c9B69d52b195241b5EfBAD43d368567a59d8C53';
+  const ALSA_ADDR = '0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74';
+  const SPIRIT_ADDR = '0xec5E56058494F2cb260Fd7D81B15f04872dbC34a';
+  const POLYGON_CHAIN_ID = '0x89';
+
+  // ABI
+  const GAME_ABI = [
+    'function getGame(address) view returns (bool,uint8,uint256,uint256,uint256,uint256)',
+    'function startGameAlsa(uint256)',
+    'function startGameSpirit(uint256)',
+    'function guessHigher()',
+    'function guessLower()',
+    'function cashOut()'
+  ];
+  const ERC20_ABI = [
+    'function balanceOf(address) view returns (uint256)',
+    'function approve(address,uint256) returns (bool)',
+    'function allowance(address,address) view returns (uint256)'
+  ];
+
+  // State
+  let provider, signer, gameContract, userAddress;
+  let isProcessing = false;
+
+  // ============================================================
+  // UI HELPERS
+  // ============================================================
+  function showStatus(msg, type) {
+    const el = document.getElementById('status');
+    el.innerHTML = `<div class="status status-${type}">${msg}</div>`;
+    setTimeout(() => { if (el.innerHTML.includes(msg)) el.innerHTML = ''; }, 4000);
+  }
+
+  function setButtons(enable) {
+    ['startBtn', 'approveBtn', 'higherBtn', 'lowerBtn', 'cashoutBtn'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) btn.disabled = !enable;
+    });
+  }
+
+  // ============================================================
+  // CHECK IF APPROVED (REAL ON-CHAIN CHECK)
+  // ============================================================
+  async function isTokenApproved(token) {
+    if (!signer || !userAddress) return false;
+    const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
+    const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
+    const allowance = await tokenContract.allowance(userAddress, CONTRACT_ADDR);
+    const minRequired = ethers.parseEther('1');
+    return allowance >= minRequired;
+  }
+
+  async function updateApprovalStatus() {
+    const token = document.getElementById('tokenSelect').value;
+    const approved = await isTokenApproved(token);
+    const approveBtn = document.getElementById('approveBtn');
+    if (approved) {
+      approveBtn.textContent = '✓ ALREADY APPROVED';
+      approveBtn.disabled = true;
+      approveBtn.style.opacity = '0.6';
+    } else {
+      approveBtn.textContent = `✓ APPROVE MAX (ONE-TIME)`;
+      approveBtn.disabled = false;
+      approveBtn.style.opacity = '1';
+    }
+  }
+
+  // ============================================================
+  // CONTRACT BALANCE DISPLAY
+  // ============================================================
+  async function updateContractBalance() {
+    if (!provider) return;
+    try {
+      const alsaContract = new ethers.Contract(ALSA_ADDR, ERC20_ABI, provider);
+      const spiritContract = new ethers.Contract(SPIRIT_ADDR, ERC20_ABI, provider);
+      const alsaBalance = await alsaContract.balanceOf(CONTRACT_ADDR);
+      const spiritBalance = await spiritContract.balanceOf(CONTRACT_ADDR);
+      const alsaF = parseFloat(ethers.formatEther(alsaBalance)).toFixed(2);
+      const spiritF = parseFloat(ethers.formatEther(spiritBalance)).toFixed(2);
+      document.getElementById('contractBalance').innerHTML = `📊 Contract Balance: 🛡️ ${alsaF} ALSA | 🐺 ${spiritF} SPIRIT`;
+      if (alsaBalance < ethers.parseEther('10')) {
+        document.getElementById('contractBalance').style.color = '#f87171';
+      } else {
+        document.getElementById('contractBalance').style.color = '#94a3b8';
+      }
+    } catch(e) { console.warn('Contract balance error:', e); }
+  }
+
+  // ============================================================
+  // NETWORK & WALLET
+  // ============================================================
+  async function switchNetwork() {
+    if (!window.ethereum) return alert('Install Rabby or MetaMask');
+    try {
+      await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: POLYGON_CHAIN_ID }] });
+      location.reload();
+    } catch(e) {
+      if (e.code === 4902) {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{ chainId: POLYGON_CHAIN_ID, chainName: 'Polygon', nativeCurrency: { name: 'POL', symbol: 'POL', decimals: 18 }, rpcUrls: ['https://polygon-rpc.com'], blockExplorerUrls: ['https://polygonscan.com'] }]
+        });
+        location.reload();
+      } else alert('Switch to Polygon network in your wallet');
+    }
+  }
+
+  async function checkNetworkAndConnect() {
+    if (!window.ethereum) { alert('Install Rabby or MetaMask'); return false; }
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    const badge = document.getElementById('networkBadge');
+    if (chainId === POLYGON_CHAIN_ID) {
+      badge.innerHTML = '✅ Polygon';
+      badge.className = 'network-badge network-valid';
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
+      userAddress = await signer.getAddress();
+      gameContract = new ethers.Contract(CONTRACT_ADDR, GAME_ABI, signer);
+      window.ethereum.on('chainChanged', () => location.reload());
+      window.ethereum.on('accountsChanged', () => location.reload());
+      return true;
+    } else {
+      badge.innerHTML = '⚠️ Wrong Network - Click';
+      badge.className = 'network-badge network-invalid';
+      return false;
+    }
+  }
+
+  // ============================================================
+  // BALANCES & GAME STATE
+  // ============================================================
+  async function loadBalances() {
+    if (!provider || !userAddress) return;
+    try {
+      const alsa = new ethers.Contract(ALSA_ADDR, ERC20_ABI, provider);
+      const spirit = new ethers.Contract(SPIRIT_ADDR, ERC20_ABI, provider);
+      const [alsaBal, spiritBal] = await Promise.all([alsa.balanceOf(userAddress), spirit.balanceOf(userAddress)]);
+      const alsaF = parseFloat(ethers.formatEther(alsaBal)).toFixed(4);
+      const spiritF = parseFloat(ethers.formatEther(spiritBal)).toFixed(4);
+      document.getElementById('alsaBal').innerText = alsaF;
+      document.getElementById('spiritBal').innerText = spiritF;
+      document.getElementById('gameAlsa').innerText = alsaF;
+      document.getElementById('gameSpirit').innerText = spiritF;
+    } catch(e) { console.warn('Balance error:', e); }
+  }
+
+  async function refreshGame() {
+    if (!gameContract || !userAddress) return;
+    try {
+      const game = await gameContract.getGame(userAddress);
+      const isActive = game[0];
+      if (!isActive) {
+        document.getElementById('startScreen').style.display = 'block';
+        document.getElementById('gameScreen').style.display = 'none';
+        return;
+      }
+      const number = game[3].toString();
+      const streak = game[4].toString();
+      const tokenId = game[1];
+      const payoutRaw = game[5];
+      const payoutFormatted = parseFloat(ethers.formatEther(payoutRaw)).toFixed(4);
+      const tokenSymbol = tokenId == 1 ? 'ALSA' : 'SPIRIT';
+      document.getElementById('currentNumber').innerText = number;
+      document.getElementById('streakCount').innerText = streak;
+      document.getElementById('payoutAmount').innerHTML = `${payoutFormatted} ${tokenSymbol}`;
+      document.getElementById('startScreen').style.display = 'none';
+      document.getElementById('gameScreen').style.display = 'block';
+      const warningDiv = document.getElementById('streakWarning');
+      if (parseInt(streak) >= 3) {
+        warningDiv.style.display = 'block';
+        warningDiv.innerHTML = `⚠️ <strong>${streak} in a row!</strong> Cash out now to secure ${payoutFormatted} ${tokenSymbol}.`;
+      } else {
+        warningDiv.style.display = 'none';
+      }
+    } catch(e) { console.warn('Refresh error:', e); }
+  }
+
+  // ============================================================
+  // APPROVAL & GAME ACTIONS
+  // ============================================================
+  async function approveMax(token) {
+    if (isProcessing) return false;
+    isProcessing = true;
+    setButtons(false);
+    const tokenAddr = token === 'alsa' ? ALSA_ADDR : SPIRIT_ADDR;
+    try {
+      showStatus(`Approving max ${token.toUpperCase()}... (one-time only)`, 'info');
+      const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, signer);
+      const maxAmount = ethers.MaxUint256;
+      const approveTx = await tokenContract.approve(CONTRACT_ADDR, maxAmount);
+      await approveTx.wait();
+      showStatus(`✅ ${token.toUpperCase()} approved! You can now play multiple games without re-approving.`, 'success');
+      await loadBalances();
+      await updateApprovalStatus();
+      return true;
+    } catch(e) {
+      showStatus(`Approval failed: ${e.reason || e.message}`, 'error');
+      return false;
+    } finally {
+      isProcessing = false;
+      setButtons(true);
+    }
+  }
+
+  document.getElementById('approveBtn').onclick = async () => {
+    if (!gameContract) { const ok = await checkNetworkAndConnect(); if (!ok) return; }
+    const token = document.getElementById('tokenSelect').value;
+    await approveMax(token);
+  };
+
+  document.getElementById('startBtn').onclick = async () => {
+    if (isProcessing) return;
+    if (!gameContract) { const ok = await checkNetworkAndConnect(); if (!ok) return; }
+    const token = document.getElementById('tokenSelect').value;
+    const amount = ethers.parseEther('1');
+    
+    const approved = await isTokenApproved(token);
+    if (!approved) {
+      const wantApprove = confirm(`You haven't approved ${token.toUpperCase()} yet. Approve max once to play multiple games?`);
+      if (wantApprove) {
+        const approvedSuccess = await approveMax(token);
+        if (!approvedSuccess) return;
+      } else {
+        showStatus(`Please approve ${token.toUpperCase()} first using the Approve button.`, 'error');
+        return;
+      }
+    }
+    
+    isProcessing = true;
+    setButtons(false);
+    try {
+      showStatus('Starting game...', 'info');
+      const tx = token === 'alsa' ? await gameContract.startGameAlsa(amount) : await gameContract.startGameSpirit(amount);
+      await tx.wait();
+      await Promise.all([refreshGame(), loadBalances()]);
+      showStatus('Game started! Good luck 🎲', 'success');
+    } catch(e) { showStatus(e.reason || e.message || 'Start failed', 'error'); }
+    isProcessing = false;
+    setButtons(true);
+  };
+
+  async function makeGuess(isHigher) {
+    if (isProcessing) return;
+    if (!gameContract) return;
+    isProcessing = true;
+    setButtons(false);
+    try {
+      showStatus(`Guessing ${isHigher ? 'HIGHER' : 'LOWER'}...`, 'info');
+      const tx = isHigher ? await gameContract.guessHigher() : await gameContract.guessLower();
+      await tx.wait();
+      await refreshGame();
+      await loadBalances();
+      const game = await gameContract.getGame(userAddress);
+      if (!game[0]) showStatus('❌ Wrong! Game over. Start a new game.', 'error');
+      else showStatus(`✅ Correct! Streak: ${game[4]}`, 'success');
+    } catch(e) { showStatus(e.reason || e.message || 'Guess failed', 'error'); }
+    isProcessing = false;
+    setButtons(true);
+  }
+
+  document.getElementById('higherBtn').onclick = () => makeGuess(true);
+  document.getElementById('lowerBtn').onclick = () => makeGuess(false);
+
+  document.getElementById('cashoutBtn').onclick = async () => {
+    if (isProcessing) return;
+    if (!gameContract) return;
+    isProcessing = true;
+    setButtons(false);
+    try {
+      showStatus('Cashing out...', 'info');
+      const tx = await gameContract.cashOut();
+      await tx.wait();
+      await Promise.all([refreshGame(), loadBalances()]);
+      showStatus('💰 Cashed out successfully!', 'success');
+    } catch(e) { showStatus(e.reason || e.message || 'Cashout failed', 'error'); }
+    isProcessing = false;
+    setButtons(true);
+  };
+
+  document.getElementById('tokenSelect').onchange = () => {
+    updateApprovalStatus();
+  };
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  (async () => {
+    const ok = await checkNetworkAndConnect();
+    if (ok) {
+      await loadBalances();
+      await refreshGame();
+      await updateApprovalStatus();
+      await updateContractBalance();
+      setInterval(() => { if (!isProcessing) { loadBalances(); refreshGame(); updateContractBalance(); } }, 8000);
+    }
+  })();
+</script>
+</body>
+</html>

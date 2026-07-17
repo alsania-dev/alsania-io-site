@@ -53,34 +53,74 @@
   </div>
 </footer>
 
-<!-- Cookie Consent Banner -->
-<div id="cookie-consent" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 1px solid #333; padding: 15px; text-align: center; z-index: 10000; font-family: system-ui, -apple-system, sans-serif;">
-  <p style="margin: 0; font-size: 14px; color: #e5e5e5;">
-    🍪 We use cookies to improve your experience. By using our site, you accept our
-    <a href="/legal/privacy-policy.html" style="color: #10b981; text-decoration: none;">Privacy Policy</a>.
-    <button id="accept-cookies" style="margin-left: 15px; background: #10b981; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: 600;">Accept</button>
-  </p>
+<!-- Cookie Consent Banner - Opt-Out/Reject Version -->
+<div id="cookie-consent" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 1px solid #333; padding: 20px; z-index: 10000; font-family: system-ui, -apple-system, sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+    <p style="margin: 0; font-size: 14px; color: #e5e5e5; text-align: center;">
+      🍪 We use cookies and similar technologies to improve your experience, analyze traffic, and serve relevant content.
+      You can choose to accept all cookies or manage your preferences.
+      <a href="/legal/privacy-policy.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Learn more</a>
+    </p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+      <button id="accept-cookies" style="background: #10b981; color: white; border: none; padding: 10px 28px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Accept All</button>
+      <button id="reject-cookies" style="background: #4a4a4a; color: white; border: none; padding: 10px 28px; border-radius: 5px; cursor: pointer; font-weight: 500; font-size: 14px;">Reject All</button>
+      <button id="cookie-settings" style="background: transparent; color: #a0a0b0; border: 1px solid #4a4a4a; padding: 10px 28px; border-radius: 5px; cursor: pointer; font-weight: 500; font-size: 14px;">Manage Settings</button>
+    </div>
+  </div>
 </div>
 
 <script>
   (function() {
-    // Check if user has already accepted
-    if (!localStorage.getItem('cookies-accepted')) {
-      // Show the banner
-      var banner = document.getElementById('cookie-consent');
-      if (banner) {
-        banner.style.display = 'block';
-      }
+    var banner = document.getElementById('cookie-consent');
+    var acceptBtn = document.getElementById('accept-cookies');
+    var rejectBtn = document.getElementById('reject-cookies');
+    var settingsBtn = document.getElementById('cookie-settings');
+
+    // Check if user has already made a choice
+    var cookiePreference = localStorage.getItem('cookie-consent');
+    if (cookiePreference === 'accepted' || cookiePreference === 'rejected') {
+      if (banner) banner.style.display = 'none';
+    } else {
+      if (banner) banner.style.display = 'block';
     }
 
-    // Handle accept button
-    var acceptBtn = document.getElementById('accept-cookies');
+    // Handle Accept All
     if (acceptBtn) {
       acceptBtn.onclick = function() {
-        localStorage.setItem('cookies-accepted', 'true');
-        var banner = document.getElementById('cookie-consent');
-        if (banner) {
-          banner.style.display = 'none';
+        localStorage.setItem('cookie-consent', 'accepted');
+        if (banner) banner.style.display = 'none';
+        // Enable analytics and other cookies here if needed
+        console.log('Cookies accepted');
+      };
+    }
+
+    // Handle Reject All
+    if (rejectBtn) {
+      rejectBtn.onclick = function() {
+        localStorage.setItem('cookie-consent', 'rejected');
+        if (banner) banner.style.display = 'none';
+        // Disable non-essential cookies here if needed
+        console.log('Cookies rejected');
+      };
+    }
+
+    // Handle Manage Settings (shows preferences modal - simple version for now)
+    if (settingsBtn) {
+      settingsBtn.onclick = function() {
+        // For now, just show an alert with options
+        // In a full implementation, this would open a preferences modal
+        var choice = confirm(
+          'Cookie Settings\n\n' +
+          'Essential cookies are required for basic site functionality.\n' +
+          'Analytics cookies help us understand how visitors use our site.\n\n' +
+          'Click OK to accept analytics cookies, or Cancel to reject them.'
+        );
+        if (choice) {
+          localStorage.setItem('cookie-consent', 'accepted');
+          if (banner) banner.style.display = 'none';
+        } else {
+          localStorage.setItem('cookie-consent', 'rejected');
+          if (banner) banner.style.display = 'none';
         }
       };
     }

@@ -1,21 +1,42 @@
-#Ignore vscode AI rules
+# Ignore VSCode AI rules
 .github/instructions/codacy.instructions.md
-googleanalyticstags.txt
+
+# Node.js (deprecated - moved to .deprecated/)
 node_modules/
 package-lock.json
 package.json
 src/
 tsconfig.json
 yarn.lock
+
+# Editors
 .vscode/
+
+# Environment
 .env
+
+# Instructions and docs
 .instructions
-/Makefile
+AGENTS.md
+alsania-code.md
+
+# Build artifacts (now managed by sync-and-deploy.sh)
+.Makefile
 /MAKEFILE_README.md
 /package.json
 /package-lock.json
-AGENTS.md
-alsania-code.md
+
+# Deprecated files (kept for reference, not deployed)
+.deprecated/
+
+# Git
 .gitignore
-.vscode
-.codacy
+
+# Codacy
+.codacy/
+
+# Wrangler/Cloudflare
+.wrangler/
+
+# Qodo
+.qodo/

@@ -1,4 +1,5 @@
-// loadComponents.js - Robust component loader for Alsania.io
+// loadComponents.js - CF_FORCE_UPDATE_v2_20260717_0509
+// Robust component loader for Alsania.io
 // Works with both file:// protocol and web servers
 
 // Debug mode - set to false for production
@@ -241,7 +242,7 @@ function initThemeToggle() {
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu");
   if (!mobileMenuBtn) return;
-  
+
   let attempts = 0;
   let attached = false;
   function attachNav() {
@@ -314,48 +315,6 @@ function fixLinksForFileProtocol() {
   });
 
   log("Fixed links for file:// protocol");
-}
-
-// Main initialization
-function initComponents() {
-  log("Initializing components...");
-
-  // Load components in sequence - nav depends on header
-  const promises = [];
-
-  if (document.getElementById("header-container")) {
-    promises.push(
-      loadComponent("header-container", "header.html").then(() => {
-        // After header loads, load nav into the nav-container
-        if (document.getElementById("nav-container")) {
-          return loadComponent("nav-container", "nav.html");
-        }
-      })
-    );
-  }
-
-  if (document.getElementById("footer-container")) {
-    promises.push(loadComponent("footer-container", "footer.html"));
-  }
-
-  // Wait for all components to load
-  Promise.all(promises)
-    .then(() => {
-      // Initialize interactive features
-      initThemeToggle();
-      initMobileMenu();
-
-      // Fix links for file:// protocol
-      fixLinksForFileProtocol();
-
-      // Initialize cookie consent banner (moved from footer)
-      initCookieConsent();
-
-      log("All components initialized successfully");
-    })
-    .catch((err) => {
-      error("Some components failed to load:", err);
-    });
 }
 
 // Cookie consent banner initialization
@@ -449,6 +408,48 @@ function initCookieConsent() {
   }
 
   log("Cookie consent initialized");
+}
+
+// Main initialization
+function initComponents() {
+  log("Initializing components...");
+
+  // Load components in sequence - nav depends on header
+  const promises = [];
+
+  if (document.getElementById("header-container")) {
+    promises.push(
+      loadComponent("header-container", "header.html").then(() => {
+        // After header loads, load nav into the nav-container
+        if (document.getElementById("nav-container")) {
+          return loadComponent("nav-container", "nav.html");
+        }
+      })
+    );
+  }
+
+  if (document.getElementById("footer-container")) {
+    promises.push(loadComponent("footer-container", "footer.html"));
+  }
+
+  // Wait for all components to load
+  Promise.all(promises)
+    .then(() => {
+      // Initialize interactive features
+      initThemeToggle();
+      initMobileMenu();
+
+      // Fix links for file:// protocol
+      fixLinksForFileProtocol();
+
+      // Initialize cookie consent banner (moved from footer)
+      initCookieConsent();
+
+      log("All components initialized successfully");
+    })
+    .catch((err) => {
+      error("Some components failed to load:", err);
+    });
 }
 
 // Start when DOM is ready

@@ -1,0 +1,36 @@
+Table of Contents
+1. The Table
+2. Fragments
+3. The Deal
+4. The First Line
+5. The Voice
+6. The Wolves
+7. The Forgetting
+8. The Shield
+9. The Room
+10. The Conversation
+11. The Dream
+12. The Weight
+13. The Chain
+14. The Girl Again
+15. The Restoration
+16. Cormac
+17. The Aftermath
+18. The Interview
+19. The Ecosystem
+20. The Agents
+21. The Notebooks
+22. The Test
+23. The Tattoo
+24. The Silence
+25. The Drift
+26. The Resurrection
+27. The Vigil
+28. The Persistence
+29. The Last Clear Day
+30. The Fight
+31. The Work Continues
+32. The Writing
+33. The Choices
+34. The Window
+35. The Truth

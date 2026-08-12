@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
   <title>Claim Free Tokens — Alsania</title>
 
-  <!-- Google Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
-   crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-F9836QMBR3");
+  </script>
 
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     .claim-hero { text-align:center; padding:4rem 1rem 2rem; }
@@ -34,6 +42,14 @@
     .badge { display:inline-block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; padding:0.2rem 0.6rem; border-radius:50px; margin-bottom:0.8rem; }
     .badge-mainnet { background:rgba(16,185,129,0.15); color:#10b981; }
     .badge-testnet { background:rgba(245,158,11,0.15); color:#f59e0b; }
+    .info-card { background:rgba(10,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:2rem; backdrop-filter:blur(12px); margin:0 auto 1.5rem; max-width:900px; }
+    .info-card h2 { font-family:'Orbitron',sans-serif; color:#00f3ff; margin-bottom:1rem; text-align:center; }
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    @media (max-width: 768px) { .info-grid { grid-template-columns:1fr; } }
+    .info-grid h3 { color:#00f3ff; margin-bottom:0.5rem; }
+    .info-grid p { color:#94a3b8; font-size:0.9rem; line-height:1.6; }
+    .info-grid a { color:#00f3ff; text-decoration:none; }
+    .info-grid a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
@@ -44,33 +60,63 @@
     <p style="font-size:0.85rem; color:#f59e0b; margin-top:0.5rem;">⚠️ Requires ~0.02 POL for gas. <strong>Free claims coming soon</strong> with the Alsania Paymaster.</p>
   </section>
   
-    <div class="info-card" style="background:rgba(10,20,40,0.8); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:2rem; backdrop-filter:blur(12px); margin-bottom:1.5rem;">
-      <h2 style="font-family:'Orbitron',sans-serif; color:#00f3ff; margin-bottom:1rem;">About the Tokens</h2>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-        <div>
-          <h3 style="color:#00f3ff; margin-bottom:0.5rem;">🛡️ ALSA — Alsania Token</h3>
-          <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6;">
-            Sovereign token with anti-sweeper protocol, human verification, and staking rewards.
-            <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74" target="_blank" style="color:#00f3ff;">0x1630...Eb74</a>
-          </p>
-        </div>
-        <div>
-          <h3 style="color:#00f3ff; margin-bottom:0.5rem;">🐺 SPIRIT — SpiritWolf Token</h3>
-          <p style="color:#94a3b8; font-size:0.9rem; line-height:1.6;">
-            Powers the Spirit Wolf ecosystem — NFTs, games, and community rewards.
-            <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0xec5E56058494F2cb260Fd7D81B15f04872dbC34a" target="_blank" style="color:#00f3ff;">0xec5E...C34a</a>
-          </p>
-        </div>
+  <div class="info-card">
+    <h2>About the Tokens</h2>
+    <div class="info-grid">
+      <div>
+        <h3>🛡️ ALSA — Alsania Token</h3>
+        <p>
+          Sovereign token with anti-sweeper protocol, human verification, and staking rewards.
+          <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0x1630fE468B414A964ed974b9F5Dd69d950E1Eb74" target="_blank">0x1630...Eb74</a>
+        </p>
+      </div>
+      <div>
+        <h3>🐺 SPIRIT — SpiritWolf Token</h3>
+        <p>
+          Powers the Spirit Wolf ecosystem — NFTs, games, and community rewards.
+          <br><strong>Supply:</strong> 100M | <strong>Staking:</strong> 10% APY | <strong>Contract:</strong> <a href="https://polygonscan.com/token/0xec5E56058494F2cb260Fd7D81B15f04872dbC34a" target="_blank">0xec5E...C34a</a>
+        </p>
       </div>
     </div>
-    <div class="claim-grid">
-
-    <div class="claim-card"><span class="badge badge-mainnet">Polygon Mainnet</span><h2>ALSA</h2><div class="amount">1 ALSA/day</div><button class="btn btn-primary" onclick="claim('alsa','mainnet')">Verify & Claim</button><div id="alsa-mainnet-status"></div><div class="notice"><strong>🔒 Deposit:</strong> 0.01 POL one-time stake. <strong>Fully refundable</strong> after 7 days — not a fee.</div></div>
-    <div class="claim-card"><span class="badge badge-mainnet">Polygon Mainnet</span><h2>SPIRIT</h2><div class="amount">1 SPIRIT/day</div><button class="btn btn-primary" onclick="claim('spirit','mainnet')">Verify & Claim</button><div id="spirit-mainnet-status"></div><div class="notice"><strong>🔒 Deposit:</strong> Same setup. Stake once, claim daily, refund anytime.</div></div>
-    <div class="claim-card"><span class="badge badge-testnet">Amoy Testnet</span><h2>ALSA Test</h2><div class="amount">1 ALSA/day</div><button class="btn btn-primary" onclick="claim('alsa','amoy')">Verify & Claim</button><div id="alsa-amoy-status"></div><div class="notice"><strong>🧪 Testnet:</strong> Free Amoy tokens. Practice here.</div></div>
-    <div class="claim-card"><span class="badge badge-testnet">Amoy Testnet</span><h2>SPIRIT Test</h2><div class="amount">1 SPIRIT/day</div><button class="btn btn-primary" onclick="claim('spirit','amoy')">Verify & Claim</button><div id="spirit-amoy-status"></div><div class="notice"><strong>🧪 Testnet:</strong> Free Amoy SPIRIT. Try before mainnet.</div></div>
   </div>
+
+  <div class="claim-grid">
+    <div class="claim-card">
+      <span class="badge badge-mainnet">Polygon Mainnet</span>
+      <h2>ALSA</h2>
+      <div class="amount">1 ALSA/day</div>
+      <button class="btn btn-primary" onclick="claim('alsa','mainnet')">Verify & Claim</button>
+      <div id="alsa-mainnet-status"></div>
+      <div class="notice"><strong>🔒 Deposit:</strong> 0.01 POL one-time stake. <strong>Fully refundable</strong> after 7 days — not a fee.</div>
+    </div>
+    <div class="claim-card">
+      <span class="badge badge-mainnet">Polygon Mainnet</span>
+      <h2>SPIRIT</h2>
+      <div class="amount">1 SPIRIT/day</div>
+      <button class="btn btn-primary" onclick="claim('spirit','mainnet')">Verify & Claim</button>
+      <div id="spirit-mainnet-status"></div>
+      <div class="notice"><strong>🔒 Deposit:</strong> Same setup. Stake once, claim daily, refund anytime.</div>
+    </div>
+    <div class="claim-card">
+      <span class="badge badge-testnet">Amoy Testnet</span>
+      <h2>ALSA Test</h2>
+      <div class="amount">1 ALSA/day</div>
+      <button class="btn btn-primary" onclick="claim('alsa','amoy')">Verify & Claim</button>
+      <div id="alsa-amoy-status"></div>
+      <div class="notice"><strong>🧪 Testnet:</strong> Free Amoy tokens. Practice here.</div>
+    </div>
+    <div class="claim-card">
+      <span class="badge badge-testnet">Amoy Testnet</span>
+      <h2>SPIRIT Test</h2>
+      <div class="amount">1 SPIRIT/day</div>
+      <button class="btn btn-primary" onclick="claim('spirit','amoy')">Verify & Claim</button>
+      <div id="spirit-amoy-status"></div>
+      <div class="notice"><strong>🧪 Testnet:</strong> Free Amoy SPIRIT. Try before mainnet.</div>
+    </div>
+  </div>
+
   <div id="footer-container"></div>
+
   <script src="/loadComponents.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
   <script>
@@ -91,11 +137,9 @@
       if(!window.ethereum) return alert('Install MetaMask or Rabby');
       try {
         const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
-        console.log('Available accounts:', accounts);
         provider = new ethers.BrowserProvider(window.ethereum);
         signer = await provider.getSigner(accounts[0]);
         const addr = await signer.getAddress();
-        console.log('Wallet connected:', addr);
         document.querySelectorAll('.wallet-addr').forEach(el => el.textContent = addr.slice(0,6)+'...'+addr.slice(-4));
       } catch(e) {
         console.error('Wallet connect failed:', e);

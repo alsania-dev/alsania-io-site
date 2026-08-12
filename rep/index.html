@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alsania Agent Registry | AI Reputation System</title>
+    <meta name="description" content="Alsania Agent Registry - Enhanced ERC-8004 standard for weighted reputation and fee discounts. Verify AI agent trustworthiness on-chain.">
+    
     <!-- Google Adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="../assets/css/styles.css" />
     <style>
         * {
             margin: 0;
@@ -15,9 +18,9 @@
         }
         
         body {
-            font-family: 'Segoe UI', 'Orbitron', 'Rajdhani', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #0d1a0d 100%);
-            color: #e0e0e0;
+            font-family: 'Inter', 'Segoe UI', 'Orbitron', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
         }
         
@@ -27,22 +30,23 @@
             padding: 2rem;
         }
         
-        header {
+        .page-header {
             text-align: center;
             padding: 2rem 0;
-            border-bottom: 1px solid #39FF14;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 2rem;
         }
         
-        h1 {
+        .page-header h1 {
             font-size: 2.5rem;
-            color: #39FF14;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-primary);
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
             letter-spacing: 2px;
         }
         
-        .subtitle {
-            color: #888;
+        .page-header .subtitle {
+            color: var(--text-secondary);
             margin-top: 0.5rem;
         }
         
@@ -50,8 +54,9 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
+            flex-wrap: wrap;
         }
         
         .tab {
@@ -59,16 +64,17 @@
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s;
+            color: var(--text-secondary);
         }
         
         .tab.active {
-            background: #39FF14;
-            color: #0a0a0a;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
             font-weight: bold;
         }
         
         .tab:hover:not(.active) {
-            background: #2a2a2a;
+            background: var(--bg-secondary);
         }
         
         .panel {
@@ -86,10 +92,10 @@
         }
         
         .card {
-            background: rgba(20, 20, 20, 0.8);
+            background: var(--bg-secondary);
             border-radius: 16px;
             padding: 1.5rem;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
             backdrop-filter: blur(10px);
         }
         
@@ -101,43 +107,43 @@
         }
         
         .stat-card {
-            background: rgba(30, 30, 30, 0.9);
+            background: var(--bg-tertiary);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
-            border-left: 3px solid #39FF14;
+            border-left: 3px solid var(--accent-primary);
         }
         
         .stat-value {
             font-size: 2rem;
             font-weight: bold;
-            color: #39FF14;
+            color: var(--accent-primary);
         }
         
         .stat-label {
             font-size: 0.875rem;
-            color: #888;
+            color: var(--text-secondary);
             margin-top: 0.5rem;
         }
         
         input, select {
             width: 100%;
             padding: 0.75rem;
-            background: #2a2a2a;
-            border: 1px solid #444;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: white;
+            color: var(--text-primary);
             font-size: 1rem;
         }
         
         input:focus, select:focus {
             outline: none;
-            border-color: #39FF14;
+            border-color: var(--accent-primary);
         }
         
         button {
-            background: #39FF14;
-            color: #0a0a0a;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
             border: none;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -163,32 +169,26 @@
             align-items: center;
             margin-bottom: 2rem;
             padding: 1rem;
-            background: rgba(30, 30, 30, 0.6);
+            background: var(--bg-tertiary);
             border-radius: 12px;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         
         .alert {
             background: rgba(57, 255, 20, 0.1);
-            border-left: 3px solid #39FF14;
+            border-left: 3px solid var(--accent-primary);
             padding: 1rem;
             border-radius: 8px;
             margin: 1rem 0;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #333;
-            color: #666;
-            font-size: 0.875rem;
+            color: var(--text-secondary);
         }
         
         .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 2px solid #39FF14;
+            border: 2px solid var(--accent-primary);
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
@@ -198,77 +198,86 @@
             to { transform: rotate(360deg); }
         }
         
+        .content-wrapper {
+            min-height: 60vh;
+        }
+        
         @media (max-width: 768px) {
             .container { padding: 1rem; }
-            h1 { font-size: 1.75rem; }
+            .page-header h1 { font-size: 1.75rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .tabs { flex-wrap: wrap; }
+            .wallet-section { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
     <div class="container">
-        <header>
-            <h1>⚡ ALSANIA AGENT REGISTRY</h1>
-            <p class="subtitle">Enhanced ERC-8004 | Weighted Reputation | Fee Discounts</p>
-        </header>
-
-        <div class="wallet-section">
-            <span>🔗 Network: <strong>Polygon Mainnet</strong></span>
-            <button id="connectWallet">Connect Wallet</button>
-        </div>
-
-        <div class="tabs">
-            <div class="tab active" data-tab="search">🔍 Search Agent</div>
-            <div class="tab" data-tab="fees">💰 Fee Calculator</div>
-        </div>
-
-        <!-- Search Panel -->
-        <div id="searchPanel" class="panel active">
-            <div class="card">
-                <h3>Agent Reputation</h3>
-                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <input type="number" id="agentId" placeholder="Enter Agent ID (e.g., 0, 1, 2...)" style="flex: 1;">
-                    <button id="searchBtn">Search</button>
-                </div>
-                <div id="agentResult" style="margin-top: 1.5rem;"></div>
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>⚡ ALSANIA AGENT REGISTRY</h1>
+                <p class="subtitle">Enhanced ERC-8004 | Weighted Reputation | Fee Discounts</p>
             </div>
-        </div>
 
-        <!-- Fee Calculator Panel -->
-        <div id="feesPanel" class="panel">
-            <div class="card">
-                <h3>Fee Discount Tiers</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">2.5%</div>
-                        <div class="stat-label">Base Fee</div>
+            <div class="wallet-section">
+                <span>🔗 Network: <strong>Polygon Mainnet</strong></span>
+                <button id="connectWallet">Connect Wallet</button>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="search">🔍 Search Agent</div>
+                <div class="tab" data-tab="fees">💰 Fee Calculator</div>
+            </div>
+
+            <!-- Search Panel -->
+            <div id="searchPanel" class="panel active">
+                <div class="card">
+                    <h3>Agent Reputation</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                        <input type="number" id="agentId" placeholder="Enter Agent ID (e.g., 0, 1, 2...)" style="flex: 1; min-width: 200px;">
+                        <button id="searchBtn">Search</button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value">3.5★ → 2.0%</div>
-                        <div class="stat-label">Tier 1 Discount (0.5% off)</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">4.0★ → 1.5%</div>
-                        <div class="stat-label">Tier 2 Discount (1.0% off)</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">4.5★ → 0.5%</div>
-                        <div class="stat-label">Tier 3 Discount (2.0% off)</div>
-                    </div>
-                </div>
-                <div class="alert">
-                    🎯 High reputation agents pay significantly lower fees!
+                    <div id="agentResult" style="margin-top: 1.5rem;"></div>
                 </div>
             </div>
-        </div>
 
-        <footer>
-            <p>Alsania Agent Registry | Enhanced ERC-8004 Standard</p>
-            <p style="font-size: 0.75rem; margin-top: 0.5rem;">Contract addresses verified on Polygonscan</p>
-        </footer>
+            <!-- Fee Calculator Panel -->
+            <div id="feesPanel" class="panel">
+                <div class="card">
+                    <h3>Fee Discount Tiers</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">2.5%</div>
+                            <div class="stat-label">Base Fee</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3.5★ → 2.0%</div>
+                            <div class="stat-label">Tier 1 Discount (0.5% off)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.0★ → 1.5%</div>
+                            <div class="stat-label">Tier 2 Discount (1.0% off)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.5★ → 0.5%</div>
+                            <div class="stat-label">Tier 3 Discount (2.0% off)</div>
+                        </div>
+                    </div>
+                    <div class="alert">
+                        🎯 High reputation agents pay significantly lower fees!
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <script src="../loadComponents.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
         // FINAL MAINNET ADDRESSES

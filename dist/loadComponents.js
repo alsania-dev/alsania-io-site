@@ -1,4 +1,4 @@
-// loadComponents.js - CF_FORCE_UPDATE_v3_20260812_ConsentMode
+// loadComponents.js - CF_FORCE_UPDATE_v4_20260813_FixedPaths
 // Robust component loader for Alsania.io with Google Consent Mode v2
 // Works with both file:// protocol and web servers
 
@@ -30,7 +30,6 @@ function setDefaultConsent() {
     });
     log("Default consent set to denied");
   } else {
-    // gtag not loaded yet, wait for it
     log("gtag not available, will set consent after load");
     window.addEventListener('load', function() {
       if (typeof gtag !== 'undefined') {
@@ -91,20 +90,23 @@ function updateConsent(choice) {
 
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
-  const pathname = window.location.pathname;
+  
+  // For file:// protocol, try to find the project root
   if (protocol === "file:") {
+    const pathname = window.location.pathname;
     const projectRoot = pathname.substring(
       0,
-      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
+      pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length
     );
     return "file://" + projectRoot + "/components";
-  } else {
-    return "/components";
   }
+  
+  // For http/https - always use absolute path from root
+  return "/components";
 }
 
 // ============================================================
-// INLINE COMPONENTS
+// INLINE COMPONENTS (fallback for file:// or fetch failures)
 // ============================================================
 
 const INLINE_COMPONENTS = {
@@ -232,6 +234,7 @@ function loadComponent(containerId, componentName) {
       log(`Loading ${containerId}: ${componentName}`);
 
       if (window.location.protocol === "file:") {
+        // Use inline components for file:// protocol
         if (INLINE_COMPONENTS[componentName]) {
           container.innerHTML = INLINE_COMPONENTS[componentName];
           log(`✓ ${containerId} loaded from inline`);
@@ -244,6 +247,7 @@ function loadComponent(containerId, componentName) {
           throw new Error(`Inline component not found: ${componentName}`);
         }
       } else {
+        // Use fetch for http/https
         const basePath = getComponentsBasePath();
         const url = `${basePath}/${componentName}`;
 
@@ -265,21 +269,41 @@ function loadComponent(containerId, componentName) {
           })
           .catch((err) => {
             error(`Failed to load ${containerId}:`, err.message);
-            container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
-                            <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
-                            <small style="color: #999;">Check browser console (F12) for more details</small>
-                        </div>`;
-            reject(err);
+            // Fallback to inline component
+            if (INLINE_COMPONENTS[componentName]) {
+              log(`Using inline fallback for ${componentName}`);
+              container.innerHTML = INLINE_COMPONENTS[componentName];
+              setTimeout(() => {
+                initThemeToggle();
+                initMobileMenu();
+              }, 0);
+              resolve(container);
+            } else {
+              container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
+                <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
+                <small style="color: #999;">Check browser console (F12) for more details</small>
+              </div>`;
+              reject(err);
+            }
           });
       }
     } catch (err) {
       error(`Failed to load ${containerId}:`, err.message);
       const container = document.getElementById(containerId);
       if (container) {
-        container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
-                    <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
-                    <small style="color: #999;">Check browser console (F12) for more details</small>
-                </div>`;
+        // Try inline fallback
+        if (INLINE_COMPONENTS[componentName]) {
+          container.innerHTML = INLINE_COMPONENTS[componentName];
+          setTimeout(() => {
+            initThemeToggle();
+            initMobileMenu();
+          }, 0);
+        } else {
+          container.innerHTML = `<div style="color: #ff6b6b; padding: 20px; border: 2px solid #ff6b6b; background: rgba(255, 107, 107, 0.1); border-radius: 5px;">
+            <strong>⚠️ Component Load Error:</strong> ${err.message}<br>
+            <small style="color: #999;">Check browser console (F12) for more details</small>
+          </div>`;
+        }
       }
       reject(err);
     }
@@ -319,34 +343,57 @@ function initThemeToggle() {
 
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu");
-  if (!mobileMenuBtn) return;
+  if (!mobileMenuBtn) {
+    log("Mobile menu button not found");
+    return;
+  }
+
+  log("Initializing mobile menu...");
+
+  // Remove any existing listeners by cloning and replacing
+  const newBtn = mobileMenuBtn.cloneNode(true);
+  mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+  
+  const btn = document.querySelector(".mobile-menu");
+  if (!btn) return;
 
   let attempts = 0;
   let attached = false;
+  
   function attachNav() {
     if (attached) return;
     const navMenu = document.querySelector(".alsania-nav");
     if (!navMenu) {
       attempts++;
-      if (attempts < 5) { setTimeout(attachNav, 500); }
+      if (attempts < 10) { 
+        setTimeout(attachNav, 300); 
+      }
       return;
     }
     attached = true;
-    const btn = document.querySelector(".mobile-menu");
-    if (!btn) return;
-    btn.addEventListener("click", (e) => {
+    log("Mobile menu attached to nav");
+    
+    btn.addEventListener("click", function(e) {
       e.stopPropagation();
       navMenu.classList.toggle("active");
       btn.classList.toggle("active");
+      log("Mobile menu toggled");
     });
-    document.addEventListener("click", (e) => {
+    
+    document.addEventListener("click", function(e) {
       if (!navMenu.contains(e.target) && !btn.contains(e.target)) {
         navMenu.classList.remove("active");
         btn.classList.remove("active");
       }
     });
   }
+  
+  // Try immediately, and again after a short delay
   attachNav();
+  if (!attached) {
+    setTimeout(attachNav, 500);
+    setTimeout(attachNav, 1000);
+  }
 }
 
 // ============================================================
@@ -398,25 +445,20 @@ function fixLinksForFileProtocol() {
 function initCookieConsent() {
   log("Initializing cookie consent with Google Consent Mode v2...");
 
-  // Set default consent (denied) before checking for existing preference
   setDefaultConsent();
 
-  // Check if user has already made a choice
   var cookiePreference = localStorage.getItem('cookie-consent');
   if (cookiePreference === 'accepted' || cookiePreference === 'rejected') {
     log("Cookie preference already set: " + cookiePreference);
-    // Apply the saved consent
     updateConsent(cookiePreference);
     return;
   }
 
-  // Check if banner already exists
   var banner = document.getElementById('cookie-consent');
   var acceptBtn = document.getElementById('accept-cookies');
   var rejectBtn = document.getElementById('reject-cookies');
   var settingsBtn = document.getElementById('cookie-settings');
 
-  // If banner doesn't exist, create it
   if (!banner) {
     log("Creating cookie banner...");
     banner = document.createElement('div');
@@ -443,10 +485,8 @@ function initCookieConsent() {
     settingsBtn = document.getElementById('cookie-settings');
   }
 
-  // Show the banner (only if no preference set)
   if (banner) banner.style.display = 'block';
 
-  // Handle Accept All
   if (acceptBtn) {
     acceptBtn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -457,7 +497,6 @@ function initCookieConsent() {
     });
   }
 
-  // Handle Reject All
   if (rejectBtn) {
     rejectBtn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -468,7 +507,6 @@ function initCookieConsent() {
     });
   }
 
-  // Handle Manage Settings
   if (settingsBtn) {
     settingsBtn.addEventListener('click', function(e) {
       e.preventDefault();

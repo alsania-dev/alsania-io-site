@@ -1,52 +1,16 @@
-// Alsania Main JavaScript
-// Site functionality (components loaded by loadComponents.js)
+// Alsania Page Functionality
+// This file handles page-specific interactive features
+// loadComponents.js handles header, footer, theme, mobile menu, and cookie consent
 
-// Load all components when DOM is ready
-// Components are loaded by loadComponents.js, which has better path handling
-// This file only handles interactive functionality
-document.addEventListener("DOMContentLoaded", async () => {
-  // Initialize theme toggle if it exists (component loaded by loadComponents.js)
-  initThemeToggle();
-
-  // Initialize mobile menu
-  initMobileMenu();
-
-  // Initialize any other functionality
+document.addEventListener("DOMContentLoaded", function() {
   initWaitlistForm();
   initNyxDownload();
+  initNyxPageButtons();
 });
 
-// Mobile menu functionality
-function initMobileMenu() {
-  const mobileMenuBtn = document.querySelector(".mobile-menu");
-  const navMenu = document.querySelector(".alsania-nav");
-
-  if (mobileMenuBtn && navMenu) {
-    mobileMenuBtn.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-      mobileMenuBtn.classList.toggle("active");
-    });
-  }
-}
-
-// Theme toggle functionality
-function initThemeToggle() {
-  const themeToggle = document.getElementById("theme-toggle");
-  if (!themeToggle) return;
-
-  // Check for saved theme or default to dark
-  const currentTheme = localStorage.getItem("theme") || "dark";
-  document.documentElement.setAttribute("data-theme", currentTheme);
-  themeToggle.checked = currentTheme === "light";
-
-  themeToggle.addEventListener("change", () => {
-    const newTheme = themeToggle.checked ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-  });
-}
-
-// Waitlist form functionality
+// ============================================================
+// WAITLIST FORM
+// ============================================================
 function initWaitlistForm() {
   const waitlistForm = document.getElementById("waitlist-form");
   if (!waitlistForm) return;
@@ -66,37 +30,28 @@ function initWaitlistForm() {
       return;
     }
 
-    // Disable button and show loading
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
     try {
       // In production, replace with actual API call
       console.log("Waitlist submission:", email);
-
-      // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       showMessage(
         messageDiv,
         "Thank you! You'll be notified when we launch.",
-        "success",
+        "success"
       );
       waitlistForm.reset();
 
-      // Track conversion (analytics)
-      if (typeof gtag !== "undefined") {
-        gtag("event", "waitlist_signup", {
-          event_category: "Engagement",
-          event_label: "Homepage Waitlist",
-        });
-      }
+      trackEvent("Engagement", "waitlist_signup", "Homepage Waitlist");
     } catch (error) {
       console.error("Waitlist submission error:", error);
       showMessage(
         messageDiv,
         "Something went wrong. Please try again.",
-        "error",
+        "error"
       );
     } finally {
       submitBtn.disabled = false;
@@ -105,45 +60,65 @@ function initWaitlistForm() {
   });
 }
 
-// Nyx download functionality
+// ============================================================
+// NYX DOWNLOAD
+// ============================================================
 function initNyxDownload() {
   const nyxDownloadBtn = document.getElementById("download-nyx");
   if (!nyxDownloadBtn) return;
 
   nyxDownloadBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
-    // Track download click
-    if (typeof gtag !== "undefined") {
-      gtag("event", "nyx_download_click", {
-        event_category: "Downloads",
-        event_label: "Homepage Nyx Button",
-      });
-    }
-
-    // Redirect to Nyx page (download happens there)
+    trackEvent("Downloads", "nyx_download_click", "Homepage Nyx Button");
     window.location.href = "../nyx/index.html";
   });
 }
 
-// Helper functions
+// ============================================================
+// NYX PAGE PLATFORM DOWNLOAD BUTTONS
+// ============================================================
+function initNyxPageButtons() {
+  const downloadButtons = document.querySelectorAll(".platform-download-btn");
+  if (!downloadButtons.length) return;
+
+  downloadButtons.forEach((btn) => {
+    btn.addEventListener("click", function() {
+      const platform = this.getAttribute("data-platform");
+      const zipFiles = {
+        windows: "/tools/nyx/downloads/Nyx-Control-v4.0.2.zip",
+        macos: "/tools/nyx/downloads/Nyx-Control-v4.0.2.zip",
+        linux: "/tools/nyx/downloads/Nyx-Control-v4.0.2.zip"
+      };
+      
+      if (zipFiles[platform]) {
+        trackEvent("Downloads", "nyx_platform_download", platform);
+        const link = document.createElement("a");
+        link.href = zipFiles[platform];
+        link.download = `nyx-${platform}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  });
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
 function isValidEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function showMessage(element, message, type) {
   element.textContent = message;
   element.className = `form-message ${type}`;
   element.style.display = "block";
-
-  // Auto-hide after 5 seconds
   setTimeout(() => {
     element.style.display = "none";
   }, 5000);
 }
 
-// Google Analytics event tracking helper
 function trackEvent(category, action, label) {
   if (typeof gtag !== "undefined") {
     gtag("event", action, {

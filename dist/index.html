@@ -3,25 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-adsense-account" content="ca-pub-5211456845193148">
+    <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
     <title>Alsania – Sovereign Technology Ecosystem</title>
     <meta
       name="description"
       content="Alsania is a sovereign technology ecosystem for creators and innovators. Own your identity, control your data, and build with tools that respect your sovereignty."
     />
 
-    <!-- Adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
-         crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
+      crossorigin="anonymous"
+    ></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
+    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
+    <!-- Consent is managed by loadComponents.js -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"
+    ></script>
     <script>
+      // Initialize dataLayer
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-F9836QMBR3');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      
+      // Default consent state - will be updated by loadComponents.js
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+      
+      gtag("js", new Date());
+      gtag("config", "G-F9836QMBR3");
     </script>
 
     <!-- Fonts -->
@@ -42,8 +62,12 @@
         margin-bottom: 1.2rem;
         line-height: 1.6;
       }
-      .mt-3 { margin-top: 1.5rem; }
-      .text-center { text-align: center; }
+      .mt-3 {
+        margin-top: 1.5rem;
+      }
+      .text-center {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -64,7 +88,7 @@
           <div class="hero-actions">
             <a href="#waitlist" class="alsania-btn">Join the Waitlist</a>
             <a href="/tools/nyx/" class="alsania-btn secondary" id="download-nyx"
-            >Try Nyx Now</a
+              >Try Nyx Now</a
             >
           </div>
         </div>
@@ -76,19 +100,55 @@
       <div class="container">
         <h2 class="section-title">What is Alsania?</h2>
         <div class="about-content">
-          <p>Alsania is a sovereign technology ecosystem built for creators, innovators, and visionaries who believe technology should empower individuals, not corporations. We're building tools that respect your sovereignty - from the Nyx browser extension that gives AI real hands, to our token system that rewards participation, to our memory systems that give AI lasting identity.</p>
+          <p>
+            Alsania is a sovereign technology ecosystem built for creators,
+            innovators, and visionaries who believe technology should empower
+            individuals, not corporations. We're building tools that respect
+            your sovereignty - from the Nyx browser extension that gives AI real
+            hands, to our token system that rewards participation, to our memory
+            systems that give AI lasting identity.
+          </p>
 
-          <p>Unlike platforms that trap your data and control your experience, Alsania puts you in charge. Own your identity through AED domains. Control your data through encrypted systems. Build with tools that don't lock you in. Every project we build is designed to be open, modular, and owned by the community - not by us.</p>
+          <p>
+            Unlike platforms that trap your data and control your experience,
+            Alsania puts you in charge. Own your identity through AED domains.
+            Control your data through encrypted systems. Build with tools that
+            don't lock you in. Every project we build is designed to be open,
+            modular, and owned by the community - not by us.
+          </p>
 
-          <p>Started on a phone at 3 AM with a single question - "Can I code a blockchain on my android phone?" - Alsania has grown into a full ecosystem with thousands of users, live products, and a vision for a better internet. What began as a late-night experiment became a movement. Today, we're building AI agents that remember conversations, browser extensions that automate repetitive tasks, and blockchain systems that put sovereignty first.</p>
+          <p>
+            Started on a phone at 3 AM with a single question - "Can I code a
+            blockchain on my android phone?" - Alsania has grown into a full
+            ecosystem with thousands of users, live products, and a vision for a
+            better internet. What began as a late-night experiment became a
+            movement. Today, we're building AI agents that remember
+            conversations, browser extensions that automate repetitive tasks,
+            and blockchain systems that put sovereignty first.
+          </p>
 
-          <p>We don't have venture capital. We don't have a corporate board. We have a small team of dedicated builders, a community of early adopters, and a belief that technology should work for people - not the other way around. Every line of code, every project, every update comes from a place of purpose, not profit.</p>
+          <p>
+            We don't have venture capital. We don't have a corporate board. We
+            have a small team of dedicated builders, a community of early
+            adopters, and a belief that technology should work for people - not
+            the other way around. Every line of code, every project, every
+            update comes from a place of purpose, not profit.
+          </p>
 
-          <p>The Alsania ecosystem includes the Nyx browser extension (used by thousands across 13+ AI platforms), the Echo memory system (persistent AI identity), ALSA and SPIRIT tokens (community-driven economies), the hi-lo game (play with real tokens), and the AED domain system (your identity on-chain). And we're just getting started.</p>
+          <p>
+            The Alsania ecosystem includes the Nyx browser extension (used by
+            thousands across 13+ AI platforms), the Echo memory system
+            (persistent AI identity), ALSA and SPIRIT tokens (community-driven
+            economies), the hi-lo game (play with real tokens), and the AED
+            domain system (your identity on-chain). And we're just getting
+            started.
+          </p>
 
           <div class="text-center mt-3">
             <a href="/story/" class="alsania-btn secondary">Preview The Book →</a>
-            <a href="/blog/" class="alsania-btn" style="margin-left: 1rem;">Visit Our Blog →</a>
+            <a href="/blog/" class="alsania-btn" style="margin-left: 1rem;"
+              >Visit Our Blog →</a
+            >
           </div>
         </div>
       </div>
@@ -134,11 +194,7 @@
     </section>
 
     <!-- Coming Soon Section -->
-    <section
-      id="ecosystem"
-      class="section"
-      style="background: var(--bg-tertiary)"
-    >
+    <section id="ecosystem" class="section" style="background: var(--bg-tertiary);">
       <div class="container">
         <h2 class="section-title">Coming Soon to Alsania</h2>
         <p class="text-center mb-3">
@@ -225,7 +281,7 @@
           <div id="waitlist-message" class="form-message"></div>
           <p
             class="text-center mt-2"
-            style="color: var(--text-muted); font-size: 0.9rem"
+            style="color: var(--text-muted); font-size: 0.9rem;"
           >
             Join 500+ creators already waiting. We respect your privacy and
             won't share your email.

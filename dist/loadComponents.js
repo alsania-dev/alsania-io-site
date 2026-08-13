@@ -1,5 +1,5 @@
-// loadComponents.js - CF_FORCE_UPDATE_v2_20260717_0509
-// Robust component loader for Alsania.io
+// loadComponents.js - CF_FORCE_UPDATE_v3_20260812_ConsentMode
+// Robust component loader for Alsania.io with Google Consent Mode v2
 // Works with both file:// protocol and web servers
 
 // Debug mode - set to false for production
@@ -13,27 +13,100 @@ function error(...args) {
   console.error("[Components]", ...args);
 }
 
-// Calculate correct path to components based on current page
+// ============================================================
+// GOOGLE CONSENT MODE v2
+// ============================================================
+
+// Default consent state (denied until user chooses)
+function setDefaultConsent() {
+  if (typeof gtag !== 'undefined') {
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'denied',
+      'personalization_storage': 'denied',
+      'security_storage': 'granted',
+      'wait_for_update': 500
+    });
+    log("Default consent set to denied");
+  } else {
+    // gtag not loaded yet, wait for it
+    log("gtag not available, will set consent after load");
+    window.addEventListener('load', function() {
+      if (typeof gtag !== 'undefined') {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied',
+          'functionality_storage': 'denied',
+          'personalization_storage': 'denied',
+          'security_storage': 'granted',
+          'wait_for_update': 500
+        });
+        log("Default consent set to denied (after load)");
+      }
+    });
+  }
+}
+
+// Update consent based on user choice
+function updateConsent(choice) {
+  if (typeof gtag === 'undefined') {
+    log("gtag not available, consent update skipped");
+    return;
+  }
+
+  if (choice === 'accepted') {
+    gtag('consent', 'update', {
+      'ad_storage': 'granted',
+      'analytics_storage': 'granted',
+      'functionality_storage': 'granted',
+      'personalization_storage': 'granted',
+      'security_storage': 'granted'
+    });
+    log("Consent updated: All granted");
+  } else if (choice === 'rejected') {
+    gtag('consent', 'update', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'denied',
+      'personalization_storage': 'denied',
+      'security_storage': 'granted'
+    });
+    log("Consent updated: All denied (security granted)");
+  } else if (choice === 'essential') {
+    gtag('consent', 'update', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'personalization_storage': 'denied',
+      'security_storage': 'granted'
+    });
+    log("Consent updated: Essential only");
+  }
+}
+
+// ============================================================
+// CALCULATE COMPONENTS BASE PATH
+// ============================================================
+
 function getComponentsBasePath() {
   const protocol = window.location.protocol;
   const pathname = window.location.pathname;
   if (protocol === "file:") {
-    // For file:// - build absolute file:// path to components folder
-    // pathname example: /home/sigma/Desktop/insidedev/alsania-io-site/index.html
-    // or: /home/sigma/Desktop/insidedev/alsania-io-site/tools/nyx/index.html
-    // Find project root by locating 'alsania-io-site'
     const projectRoot = pathname.substring(
       0,
       pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
     );
     return "file://" + projectRoot + "/components";
   } else {
-    // For http/https - use absolute path from root
     return "/components";
   }
 }
 
-// Inline component content for file:// protocol fallback
+// ============================================================
+// INLINE COMPONENTS
+// ============================================================
+
 const INLINE_COMPONENTS = {
   "header.html": `<header class="alsania-header">
   <div class="nav-container">
@@ -47,7 +120,7 @@ const INLINE_COMPONENTS = {
     <nav class="alsania-nav">
       <ul>
         <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/story/" class="nav-link">Story</a></li>
+        <li><a href="/services/" class="nav-link">Services</a></li>
         <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
         <li><a href="/hilo/" class="nav-link">Hi-Lo Game</a></li>
         <li><a href="/shop/" class="nav-link">Shop</a></li>
@@ -128,6 +201,7 @@ const INLINE_COMPONENTS = {
         <h3>Legal</h3>
         <ul>
           <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/legal/cookie-policy.html">Cookie Policy</a></li>
           <li><a href="/legal/terms.html">Terms of Service</a></li>
           <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
           <li><a href="/legal/refund-policy.html">Refund Policy</a></li>
@@ -135,13 +209,16 @@ const INLINE_COMPONENTS = {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Alsania I/O. All rights reserved. Built with purpose.</p>
+      <p>© 2026 Alsania I/O. All rights reserved. Built with purpose.</p>
     </div>
   </div>
 </footer>`,
 };
 
-// Load a single component
+// ============================================================
+// LOAD COMPONENT
+// ============================================================
+
 function loadComponent(containerId, componentName) {
   return new Promise((resolve, reject) => {
     try {
@@ -155,7 +232,6 @@ function loadComponent(containerId, componentName) {
       log(`Loading ${containerId}: ${componentName}`);
 
       if (window.location.protocol === "file:") {
-        // Use inline components for file:// protocol
         if (INLINE_COMPONENTS[componentName]) {
           container.innerHTML = INLINE_COMPONENTS[componentName];
           log(`✓ ${containerId} loaded from inline`);
@@ -168,7 +244,6 @@ function loadComponent(containerId, componentName) {
           throw new Error(`Inline component not found: ${componentName}`);
         }
       } else {
-        // Use fetch for http/https
         const basePath = getComponentsBasePath();
         const url = `${basePath}/${componentName}`;
 
@@ -211,7 +286,10 @@ function loadComponent(containerId, componentName) {
   });
 }
 
-// Initialize theme toggle
+// ============================================================
+// THEME TOGGLE
+// ============================================================
+
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) {
@@ -219,17 +297,14 @@ function initThemeToggle() {
     return;
   }
 
-  // Get saved theme or default to dark
   const savedTheme = localStorage.getItem("alsania-theme");
   const currentTheme = savedTheme || "dark";
 
-  // Apply theme
   document.documentElement.setAttribute("data-theme", currentTheme);
   themeToggle.checked = currentTheme === "light";
 
   log(`Theme initialized: ${currentTheme} (saved: ${savedTheme || "none"})`);
 
-  // Add change listener
   themeToggle.addEventListener("change", () => {
     const newTheme = themeToggle.checked ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
@@ -238,7 +313,10 @@ function initThemeToggle() {
   });
 }
 
-// Initialize mobile menu
+// ============================================================
+// MOBILE MENU
+// ============================================================
+
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector(".mobile-menu");
   if (!mobileMenuBtn) return;
@@ -271,39 +349,35 @@ function initMobileMenu() {
   attachNav();
 }
 
-// Redirect mapping for file:// protocol
+// ============================================================
+// REDIRECTS
+// ============================================================
+
 const REDIRECTS = {
   "/dashery": "https://mnemonic.dashery.com/",
   "/redbubble": "https://www.redbubble.com/people/AlsaniaArt/shop",
   "/merch": "shop/index.html",
 };
 
-// Fix links for file:// protocol
 function fixLinksForFileProtocol() {
   if (window.location.protocol !== "file:") return;
 
-  // Get the project root from current pathname
   const pathname = window.location.pathname;
   const projectRoot = pathname.substring(
     0,
     pathname.indexOf("/alsania-io-site") + "/alsania-io-site".length,
   );
 
-  // Fix all navigation links
   document.querySelectorAll("a").forEach((link) => {
     const href = link.getAttribute("href");
     if (!href) return;
 
-    // Check if this is a redirect link
     if (REDIRECTS[href]) {
       link.href = REDIRECTS[href];
-      // Keep target="_blank" for external redirects
       return;
     }
 
-    // Convert internal absolute paths to file:// URLs
     if (href.startsWith("/") && !href.startsWith("//")) {
-      // Determine if it needs index.html
       let filePath = href;
       if (href.endsWith("/") || !href.includes(".")) {
         filePath = href.endsWith("/")
@@ -317,9 +391,24 @@ function fixLinksForFileProtocol() {
   log("Fixed links for file:// protocol");
 }
 
-// Cookie consent banner initialization
+// ============================================================
+// COOKIE CONSENT BANNER (with Google Consent Mode v2)
+// ============================================================
+
 function initCookieConsent() {
-  log("Initializing cookie consent...");
+  log("Initializing cookie consent with Google Consent Mode v2...");
+
+  // Set default consent (denied) before checking for existing preference
+  setDefaultConsent();
+
+  // Check if user has already made a choice
+  var cookiePreference = localStorage.getItem('cookie-consent');
+  if (cookiePreference === 'accepted' || cookiePreference === 'rejected') {
+    log("Cookie preference already set: " + cookiePreference);
+    // Apply the saved consent
+    updateConsent(cookiePreference);
+    return;
+  }
 
   // Check if banner already exists
   var banner = document.getElementById('cookie-consent');
@@ -338,7 +427,7 @@ function initCookieConsent() {
         <p style="margin: 0; font-size: 14px; color: #e5e5e5; text-align: center;">
           🍪 We use cookies and similar technologies to improve your experience, analyze traffic, and serve relevant content.
           You can choose to accept all cookies or manage your preferences.
-          <a href="/legal/privacy-policy.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Learn more</a>
+          <a href="/legal/cookie-policy.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Learn more</a>
         </p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
           <button id="accept-cookies" style="background: #10b981; color: white; border: none; padding: 10px 28px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 14px;">Accept All</button>
@@ -349,21 +438,12 @@ function initCookieConsent() {
     `;
     document.body.appendChild(banner);
 
-    // Update references
     acceptBtn = document.getElementById('accept-cookies');
     rejectBtn = document.getElementById('reject-cookies');
     settingsBtn = document.getElementById('cookie-settings');
   }
 
-  // Check if user has already made a choice
-  var cookiePreference = localStorage.getItem('cookie-consent');
-  if (cookiePreference === 'accepted' || cookiePreference === 'rejected') {
-    if (banner) banner.style.display = 'none';
-    log("Cookie preference already set: " + cookiePreference);
-    return;
-  }
-
-  // Show the banner
+  // Show the banner (only if no preference set)
   if (banner) banner.style.display = 'block';
 
   // Handle Accept All
@@ -372,6 +452,7 @@ function initCookieConsent() {
       e.preventDefault();
       localStorage.setItem('cookie-consent', 'accepted');
       if (banner) banner.style.display = 'none';
+      updateConsent('accepted');
       log('Cookies accepted');
     });
   }
@@ -382,6 +463,7 @@ function initCookieConsent() {
       e.preventDefault();
       localStorage.setItem('cookie-consent', 'rejected');
       if (banner) banner.style.display = 'none';
+      updateConsent('rejected');
       log('Cookies rejected');
     });
   }
@@ -393,34 +475,39 @@ function initCookieConsent() {
       var choice = confirm(
         'Cookie Settings\n\n' +
         'Essential cookies are required for basic site functionality.\n' +
-        'Analytics cookies help us understand how visitors use our site.\n\n' +
-        'Click OK to accept analytics cookies, or Cancel to reject them.'
+        'Analytics cookies help us understand how visitors use our site.\n' +
+        'Advertising cookies help us show relevant content.\n\n' +
+        'Click OK to accept all (including analytics & ads).\n' +
+        'Click Cancel to reject all except essential.'
       );
       if (choice) {
         localStorage.setItem('cookie-consent', 'accepted');
         if (banner) banner.style.display = 'none';
+        updateConsent('accepted');
       } else {
-        localStorage.setItem('cookie-consent', 'rejected');
+        localStorage.setItem('cookie-consent', 'essential');
         if (banner) banner.style.display = 'none';
+        updateConsent('essential');
       }
       log('Cookie settings saved: ' + localStorage.getItem('cookie-consent'));
     });
   }
 
-  log("Cookie consent initialized");
+  log("Cookie consent initialized with Google Consent Mode v2");
 }
 
-// Main initialization
+// ============================================================
+// MAIN INITIALIZATION
+// ============================================================
+
 function initComponents() {
   log("Initializing components...");
 
-  // Load components in sequence - nav depends on header
   const promises = [];
 
   if (document.getElementById("header-container")) {
     promises.push(
       loadComponent("header-container", "header.html").then(() => {
-        // After header loads, load nav into the nav-container
         if (document.getElementById("nav-container")) {
           return loadComponent("nav-container", "nav.html");
         }
@@ -432,19 +519,12 @@ function initComponents() {
     promises.push(loadComponent("footer-container", "footer.html"));
   }
 
-  // Wait for all components to load
   Promise.all(promises)
     .then(() => {
-      // Initialize interactive features
       initThemeToggle();
       initMobileMenu();
-
-      // Fix links for file:// protocol
       fixLinksForFileProtocol();
-
-      // Initialize cookie consent banner (moved from footer)
       initCookieConsent();
-
       log("All components initialized successfully");
     })
     .catch((err) => {
@@ -456,7 +536,6 @@ function initComponents() {
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);
 } else {
-  // DOM already loaded
   initComponents();
 }
 
@@ -465,4 +544,5 @@ window.alsaniaComponents = {
   reload: initComponents,
   getComponentsBasePath,
   debug: DEBUG,
+  updateConsent: updateConsent,
 };

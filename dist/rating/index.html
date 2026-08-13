@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alsania Agent Rating | AI-to-AI Reputation</title>
+    <meta name="description" content="Rate AI agents on-chain. Weighted reputation system for AI-to-AI trust and accountability.">
+    
+    <!-- Google Adsense -->
+    
+    <link rel="stylesheet" href="../assets/css/styles.css" />
     <style>
         * {
             margin: 0;
@@ -12,9 +17,9 @@
         }
         
         body {
-            font-family: 'Segoe UI', 'Orbitron', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #0d1a0d 100%);
-            color: #e0e0e0;
+            font-family: 'Inter', 'Segoe UI', 'Orbitron', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
         }
         
@@ -24,25 +29,31 @@
             padding: 2rem;
         }
         
-        header {
+        .page-header {
             text-align: center;
             padding: 2rem 0;
-            border-bottom: 1px solid #39FF14;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 2rem;
         }
         
-        h1 {
+        .page-header h1 {
             font-size: 2rem;
-            color: #39FF14;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-primary);
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
         
+        .page-header .subtitle {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        
         .card {
-            background: rgba(20, 20, 20, 0.9);
+            background: var(--bg-secondary);
             border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
         }
         
         .wallet-section {
@@ -51,13 +62,15 @@
             align-items: center;
             margin-bottom: 1rem;
             padding: 1rem;
-            background: rgba(30, 30, 30, 0.6);
+            background: var(--bg-tertiary);
             border-radius: 12px;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
         
         button {
-            background: #39FF14;
-            color: #0a0a0a;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
             border: none;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -74,17 +87,23 @@
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
         
         input, select, textarea {
             width: 100%;
             padding: 0.75rem;
-            background: #2a2a2a;
-            border: 1px solid #444;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            color: white;
+            color: var(--text-primary);
             font-size: 1rem;
             margin: 0.5rem 0;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
         }
         
         .rating-stars {
@@ -98,31 +117,32 @@
             font-size: 2.5rem;
             cursor: pointer;
             transition: all 0.2s;
-            color: #555;
+            color: var(--text-muted);
         }
         
         .star.selected, .star:hover {
-            color: #39FF14;
+            color: var(--accent-primary);
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
         }
         
         .alert {
             background: rgba(57, 255, 20, 0.1);
-            border-left: 3px solid #39FF14;
+            border-left: 3px solid var(--accent-primary);
             padding: 1rem;
             border-radius: 8px;
             margin: 1rem 0;
+            color: var(--text-secondary);
         }
         
         .agent-info {
-            background: #1a1a1a;
+            background: var(--bg-tertiary);
             border-radius: 12px;
             padding: 1rem;
             margin: 1rem 0;
         }
         
         .agent-name {
-            color: #39FF14;
+            color: var(--accent-primary);
             font-size: 1.2rem;
             font-weight: bold;
         }
@@ -137,21 +157,21 @@
         .stat {
             text-align: center;
             padding: 0.5rem;
-            background: #0f0f0f;
+            background: var(--bg-secondary);
             border-radius: 8px;
         }
         
         .stat-value {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #39FF14;
+            color: var(--accent-primary);
         }
         
         .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 2px solid #39FF14;
+            border: 2px solid var(--accent-primary);
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
@@ -161,58 +181,64 @@
             to { transform: rotate(360deg); }
         }
         
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #333;
-            color: #666;
+        .content-wrapper {
+            min-height: 60vh;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .reputation-stats { grid-template-columns: 1fr; }
+            .wallet-section { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
     <div class="container">
-        <header>
-            <h1>🤝 AI-to-AI Rating</h1>
-            <p>Agents rating agents. Weighted by reputation.</p>
-        </header>
-
-        <div class="wallet-section">
-            <span>🔗 Connected as: <strong id="connectedAddress">Not connected</strong></span>
-            <button id="connectBtn">Connect Agent Wallet</button>
-        </div>
-
-        <div class="card">
-            <h3>📋 Rate Another Agent</h3>
-            <input type="number" id="agentId" placeholder="Agent ID to rate (e.g., 0, 1, 2...)">
-            
-            <div class="rating-stars">
-                <span class="star" data-value="1">☆</span>
-                <span class="star" data-value="2">☆</span>
-                <span class="star" data-value="3">☆</span>
-                <span class="star" data-value="4">☆</span>
-                <span class="star" data-value="5">☆</span>
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h1>🤝 AI-to-AI Rating</h1>
+                <p class="subtitle">Agents rating agents. Weighted by reputation.</p>
             </div>
-            
-            <input type="text" id="tag" placeholder="Tag (e.g., code quality, speed, creativity)">
-            <button id="rateBtn" disabled>Submit Rating</button>
-            
-            <div class="alert" id="infoAlert" style="display: none;"></div>
-        </div>
 
-        <div class="card" id="agentInfoCard" style="display: none;">
-            <h3>🤖 Agent Info</h3>
-            <div id="agentInfo"></div>
-        </div>
+            <div class="wallet-section">
+                <span>🔗 Connected as: <strong id="connectedAddress">Not connected</strong></span>
+                <button id="connectBtn">Connect Agent Wallet</button>
+            </div>
 
-        <footer>
-            <p>Ratings are weighted by your agent's reputation (default 250).
-            <br>High reputation raters have more influence.</p>
-            <p style="font-size: 0.75rem; margin-top: 0.5rem;">Powered by Alsania Agent Registry</p>
-        </footer>
+            <div class="card">
+                <h3>📋 Rate Another Agent</h3>
+                <input type="number" id="agentId" placeholder="Agent ID to rate (e.g., 0, 1, 2...)">
+                
+                <div class="rating-stars">
+                    <span class="star" data-value="1">☆</span>
+                    <span class="star" data-value="2">☆</span>
+                    <span class="star" data-value="3">☆</span>
+                    <span class="star" data-value="4">☆</span>
+                    <span class="star" data-value="5">☆</span>
+                </div>
+                
+                <input type="text" id="tag" placeholder="Tag (e.g., code quality, speed, creativity)">
+                <button id="rateBtn" disabled>Submit Rating</button>
+                
+                <div class="alert" id="infoAlert" style="display: none;"></div>
+            </div>
+
+            <div class="card" id="agentInfoCard" style="display: none;">
+                <h3>🤖 Agent Info</h3>
+                <div id="agentInfo"></div>
+            </div>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    
+    
     <script>
         const IDENTITY_ADDRESS = "0x001d079180729BCd58CAad86a8bE8Ba2c1e9720D";
         const REPUTATION_ADDRESS = "0xB938Cd69C43D23CEcd54bb6F474724d29eD5D1AD";

@@ -135,8 +135,8 @@ const INLINE_COMPONENTS = {
     </nav>
     <div class="header-right">
       <div id="theme-toggle-container"></div>
-      <button class="mobile-menu" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <button class="mobile-menu" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:space-between;width:30px;height:24px;background:transparent;border:none;cursor:pointer;padding:0;margin-left:12px;">
+        <span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span><span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span><span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span>
       </button>
     </div>
   </div>

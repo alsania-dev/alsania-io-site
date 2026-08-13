@@ -64,84 +64,9 @@
         padding: 1rem;
         min-height: 400px;
       }
-      .embed-container .referral-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
-      }
-      .embed-container .referral-card {
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 24px;
-        text-align: center;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-      .embed-container .referral-card:hover {
-        border-color: var(--accent-primary);
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(0, 255, 127, 0.08);
-      }
-      .embed-container .referral-card .logo {
-        font-size: 2.5rem;
-      }
-      .embed-container .referral-card h3 {
-        margin: 0;
-        color: var(--text-primary);
-      }
-      .embed-container .referral-card p {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin: 0;
-        flex: 1;
-      }
-      .embed-container .referral-card .btn {
-        display: inline-block;
-        padding: 10px 24px;
-        border-radius: 30px;
-        background: var(--accent-primary);
-        color: var(--bg-primary);
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border: 1px solid transparent;
+      .embed-container invitation-user-codes {
+        display: block;
         width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-      }
-      .embed-container .referral-card .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3);
-      }
-      .embed-container .referral-card .btn-secondary {
-        background: transparent;
-        color: var(--text-primary);
-        border-color: var(--border-color);
-      }
-      .embed-container .referral-card .btn-secondary:hover {
-        border-color: var(--accent-primary);
-        box-shadow: none;
-      }
-      .embed-container .referral-card .badge {
-        display: inline-block;
-        background: rgba(0, 255, 127, 0.15);
-        color: var(--accent-primary);
-        padding: 2px 12px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      .embed-container .referral-header {
-        text-align: center;
-        margin-bottom: 24px;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
       }
       .footer-note {
         text-align: center;
@@ -155,6 +80,24 @@
       }
       .footer-note a:hover {
         text-decoration: underline;
+      }
+      .loading-placeholder {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-secondary);
+      }
+      .loading-placeholder .spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border-color);
+        border-top-color: var(--accent-primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-bottom: 16px;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
     </style>
   </head>
@@ -172,43 +115,23 @@
     </section>
 
     <div class="embed-container">
-      <div class="referral-header">
-        🔗 Below are referral links for tools we actually use. Sign up through these links and Alsania earns credits — at no cost to you.
+      <div id="widget-loading" class="loading-placeholder">
+        <div class="spinner"></div>
+        <p>Loading referral links...</p>
       </div>
 
-      <div class="referral-grid">
-        <!-- Invitation.codes -->
-        <div class="referral-card">
-          <div class="logo">📋</div>
-          <h3>Invitation Codes</h3>
-          <p>Find and share referral codes for your favorite services.</p>
-          <span class="badge">Featured</span>
-          <a href="https://invitation.codes/ifALpcEPw" target="_blank" rel="noopener" class="btn">
-            View Our Referral Page →
-          </a>
-        </div>
-
-        <!-- Add more referral links here as needed -->
-        <div class="referral-card">
-          <div class="logo">🤖</div>
-          <h3>Suggest a Link</h3>
-          <p>Know a tool we should add? Send us your suggestions.</p>
-          <span class="badge">Community</span>
-          <a href="/contact/" class="btn btn-secondary">
-            Suggest a Link →
-          </a>
-        </div>
-
-        <div class="referral-card">
-          <div class="logo">💚</div>
-          <h3>Direct Support</h3>
-          <p>Prefer to donate directly? Every contribution helps.</p>
-          <span class="badge">Support</span>
-          <a href="/donate/" class="btn btn-secondary">
-            Donate Directly →
-          </a>
-        </div>
-      </div>
+      <invitation-user-codes
+        id="invitation-widget"
+        user="ifALpcEPw"
+        layout="grid"
+        dark="true"
+        style="display: none;"
+      >
+        <a href="https://invitation.codes">
+          Find and share referral codes on Invitation
+        </a>
+        - the referral community.
+      </invitation-user-codes>
     </div>
 
     <p class="footer-note">
@@ -220,5 +143,25 @@
     <div id="footer-container"></div>
 
     <script src="/loadComponents.js"></script>
+
+    <!-- Invitation Widget Script -->
+    <script
+      defer
+      async
+      src="https://invitation.codes/invitation-widgets.js"
+      onload="document.getElementById('widget-loading').style.display='none'; document.getElementById('invitation-widget').style.display='block';"
+      onerror="document.getElementById('widget-loading').innerHTML='<p style=\'font-size:1.5rem;margin-bottom:16px;\'>🔗</p><p>Unable to load referral widget.</p><p style=\'font-size:0.9rem;margin-top:8px;\'>Visit <a href=\'https://invitation.codes/ifALpcEPw\' target=\'_blank\' style=\'color:var(--accent-primary);\'>our referral page</a> directly.</p>'"
+    ></script>
+
+    <!-- Fallback: If widget doesn't load within 8 seconds, show fallback -->
+    <script>
+      setTimeout(function() {
+        var loading = document.getElementById('widget-loading');
+        var widget = document.getElementById('invitation-widget');
+        if (loading && loading.style.display !== 'none') {
+          loading.innerHTML = '<p style="font-size:1.5rem;margin-bottom:16px;">🔗</p><p>Referral widget taking too long to load.</p><p style="font-size:0.9rem;margin-top:8px;">Visit <a href="https://invitation.codes/ifALpcEPw" target="_blank" style="color:var(--accent-primary);">our referral page</a> directly.</p>';
+        }
+      }, 8000);
+    </script>
   </body>
 </html>

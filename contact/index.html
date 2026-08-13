@@ -1,14 +1,16 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
-
-<head>
-  <meta charset="UTF-8" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
+    <title>Alsania</title>
+    <meta name="description" content="Sovereign technology ecosystem for creators and innovators." />
 
     <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
 
     <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -24,67 +26,13 @@
       gtag("js", new Date());
       gtag("config", "G-F9836QMBR3");
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
 
-    
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Contact Alsania - Get in Touch | Sovereign Technology Ecosystem
-  </title>
-  <meta name="description"
-    content="Contact the Alsania team for inquiries, partnerships, support, or media requests. We're here to help with sovereign technology solutions." />
-  <!-- Google Adsense -->
-   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+  </head>
+<!doctype html>
+<html lang="en" data-theme="dark">
 
-
-     href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
-    rel="stylesheet" />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="../assets/css/styles.css" />
-
-  <style>
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 40px 0;
-    }
-
-    .contact-method {
-      background: var(--bg-secondary);
-      padding: 30px;
-      border-radius: var(--border-radius);
-      text-align: center;
-      border: 1px solid var(--border-color);
-      transition: var(--transition);
-    }
-
-    .contact-method:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-5px);
-    }
-
-    .contact-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .contact-email {
-      font-size: 1.2rem;
-      color: var(--accent-primary);
-      word-break: break-all;
-    }
-
-    .response-time {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 10px;
-    }
-  </style>
-</head>
 
 <body>
   <!-- Header Component -->
@@ -297,8 +245,6 @@
           contactForm.reset();
 
           // Track contact form submission
-          if (typeof gtag !== "undefined") {
-            gtag("event", "contact_form_submit", {
               event_category: "Engagement",
               event_label: subject,
             });
@@ -343,6 +289,7 @@
       }
     });
   </script>
+    <script src="/loadComponents.js"></script>
 </body>
 
 </html>

@@ -17,16 +17,29 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Google Analytics (gtag.js) -->
+    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
+    <!-- Consent is managed by loadComponents.js -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"
     ></script>
     <script>
+      // Initialize dataLayer
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
+      
+      // Default consent state - will be updated by loadComponents.js
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+      
       gtag("js", new Date());
       gtag("config", "G-F9836QMBR3");
     </script>

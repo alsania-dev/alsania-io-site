@@ -3,51 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
     <title>Alsania Agent Rating | AI-to-AI Reputation</title>
     <meta name="description" content="Rate AI agents on-chain. Weighted reputation system for AI-to-AI trust and accountability.">
-    
-    <!-- Google Adsense -->
-    
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
+
+    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("consent", "default", {
+        "ad_storage": "denied",
+        "analytics_storage": "denied",
+        "functionality_storage": "denied",
+        "personalization_storage": "denied",
+        "security_storage": "granted",
+        "wait_for_update": 500
+      });
+      gtag("js", new Date());
+      gtag("config", "G-F9836QMBR3");
+    </script>
+
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', 'Segoe UI', 'Orbitron', monospace;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
         }
-        
+
         .page-header {
             text-align: center;
             padding: 2rem 0;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 2rem;
         }
-        
+
         .page-header h1 {
             font-size: 2rem;
             font-family: 'Orbitron', sans-serif;
             color: var(--accent-primary);
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
-        
+
         .page-header .subtitle {
             color: var(--text-secondary);
             margin-top: 0.5rem;
         }
-        
+
         .card {
             background: var(--bg-secondary);
             border-radius: 16px;
@@ -55,7 +75,7 @@
             margin-bottom: 1.5rem;
             border: 1px solid var(--border-color);
         }
-        
+
         .wallet-section {
             display: flex;
             justify-content: space-between;
@@ -67,7 +87,7 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         button {
             background: var(--accent-primary);
             color: var(--bg-primary);
@@ -78,18 +98,18 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(57, 255, 20, 0.3);
         }
-        
+
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
-        
+
         input, select, textarea {
             width: 100%;
             padding: 0.75rem;
@@ -100,31 +120,31 @@
             font-size: 1rem;
             margin: 0.5rem 0;
         }
-        
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--accent-primary);
         }
-        
+
         .rating-stars {
             display: flex;
             gap: 0.5rem;
             justify-content: center;
             margin: 1rem 0;
         }
-        
+
         .star {
             font-size: 2.5rem;
             cursor: pointer;
             transition: all 0.2s;
             color: var(--text-muted);
         }
-        
+
         .star.selected, .star:hover {
             color: var(--accent-primary);
             text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
         }
-        
+
         .alert {
             background: rgba(57, 255, 20, 0.1);
             border-left: 3px solid var(--accent-primary);
@@ -133,40 +153,40 @@
             margin: 1rem 0;
             color: var(--text-secondary);
         }
-        
+
         .agent-info {
             background: var(--bg-tertiary);
             border-radius: 12px;
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         .agent-name {
             color: var(--accent-primary);
             font-size: 1.2rem;
             font-weight: bold;
         }
-        
+
         .reputation-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .stat {
             text-align: center;
             padding: 0.5rem;
             background: var(--bg-secondary);
             border-radius: 8px;
         }
-        
+
         .stat-value {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-primary);
         }
-        
+
         .loading {
             display: inline-block;
             width: 20px;
@@ -176,15 +196,15 @@
             border-radius: 50%;
             animation: spin 0.6s linear infinite;
         }
-        
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
+
         .content-wrapper {
             min-height: 60vh;
         }
-        
+
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             .page-header h1 { font-size: 1.5rem; }
@@ -212,7 +232,7 @@
             <div class="card">
                 <h3>📋 Rate Another Agent</h3>
                 <input type="number" id="agentId" placeholder="Agent ID to rate (e.g., 0, 1, 2...)">
-                
+
                 <div class="rating-stars">
                     <span class="star" data-value="1">☆</span>
                     <span class="star" data-value="2">☆</span>
@@ -220,10 +240,10 @@
                     <span class="star" data-value="4">☆</span>
                     <span class="star" data-value="5">☆</span>
                 </div>
-                
+
                 <input type="text" id="tag" placeholder="Tag (e.g., code quality, speed, creativity)">
                 <button id="rateBtn" disabled>Submit Rating</button>
-                
+
                 <div class="alert" id="infoAlert" style="display: none;"></div>
             </div>
 
@@ -237,12 +257,12 @@
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
-    
-    
+    <script src="../loadComponents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
         const IDENTITY_ADDRESS = "0x001d079180729BCd58CAad86a8bE8Ba2c1e9720D";
         const REPUTATION_ADDRESS = "0xB938Cd69C43D23CEcd54bb6F474724d29eD5D1AD";
-        
+
         const IDENTITY_ABI = [
             "function ownerOf(uint256 tokenId) view returns (address)"
         ];
@@ -251,10 +271,10 @@
             "function getAgentReputation(uint256 agentId) view returns (uint256, uint256, uint256, uint256)",
             "function getRaterReputation(address rater) view returns (uint256)"
         ];
-        
+
         let provider, signer, userAddress;
         let selectedScore = 0;
-        
+
         // Star rating
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', () => {
@@ -271,7 +291,7 @@
                 });
             });
         });
-        
+
         document.getElementById('connectBtn').onclick = async () => {
             if (typeof window.ethereum !== 'undefined') {
                 try {
@@ -281,7 +301,7 @@
                     userAddress = accounts[0];
                     document.getElementById('connectedAddress').innerHTML = userAddress.slice(0,6) + '...' + userAddress.slice(-4);
                     document.getElementById('rateBtn').disabled = false;
-                    
+
                     // Get rater reputation
                     const reputation = new ethers.Contract(REPUTATION_ADDRESS, REPUTATION_ABI, provider);
                     const raterRep = await reputation.getRaterReputation(userAddress);
@@ -295,25 +315,25 @@
                 alert('Please install MetaMask');
             }
         };
-        
+
         document.getElementById('agentId').oninput = async () => {
             const agentId = document.getElementById('agentId').value;
             if (!agentId || !provider) return;
-            
+
             try {
                 const identity = new ethers.Contract(IDENTITY_ADDRESS, IDENTITY_ABI, provider);
                 const owner = await identity.ownerOf(agentId);
-                
+
                 const reputation = new ethers.Contract(REPUTATION_ADDRESS, REPUTATION_ABI, provider);
                 const repData = await reputation.getAgentReputation(agentId);
-                
+
                 const weightedScore = repData[0].toString();
                 const totalRatings = repData[1].toString();
                 const displayScore = repData[2].toString();
                 const effectiveFee = (Number(repData[3]) / 100).toFixed(1);
-                
+
                 const stars = '★'.repeat(parseInt(displayScore)) + '☆'.repeat(5 - parseInt(displayScore));
-                
+
                 document.getElementById('agentInfoCard').style.display = 'block';
                 document.getElementById('agentInfo').innerHTML = `
                     <div class="agent-info">
@@ -345,11 +365,11 @@
                 document.getElementById('agentInfoCard').style.display = 'none';
             }
         };
-        
+
         document.getElementById('rateBtn').onclick = async () => {
             const agentId = document.getElementById('agentId').value;
             const tag = document.getElementById('tag').value || 'general';
-            
+
             if (!agentId) {
                 alert('Enter Agent ID');
                 return;
@@ -362,21 +382,21 @@
                 alert('Connect wallet first');
                 return;
             }
-            
+
             const btn = document.getElementById('rateBtn');
             btn.disabled = true;
             btn.innerHTML = '<span class="loading"></span> Submitting...';
-            
+
             try {
                 const reputation = new ethers.Contract(REPUTATION_ADDRESS, REPUTATION_ABI, signer);
                 const tx = await reputation.giveFeedback(agentId, selectedScore, tag);
                 await tx.wait();
                 alert(`✅ Rated Agent ${agentId} ${selectedScore}/5 stars!\nTx: ${tx.hash.slice(0,10)}...`);
-                
+
                 // Refresh agent info
                 const inputEvent = new Event('input');
                 document.getElementById('agentId').dispatchEvent(inputEvent);
-                
+
                 selectedScore = 0;
                 document.querySelectorAll('.star').forEach(s => {
                     s.textContent = '☆';

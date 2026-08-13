@@ -3,72 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
   <title>Hi-Lo — Alsania</title>
   <meta name="description" content="Play Hi-Lo on Polygon. Double your streak with ALSA and SPIRIT tokens. Cash out anytime.">
 
-  <!-- Google Adsense -->
-  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics (gtag.js) - Consent Mode ready -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("consent", "default", {
+      "ad_storage": "denied",
+      "analytics_storage": "denied",
+      "functionality_storage": "denied",
+      "personalization_storage": "denied",
+      "security_storage": "granted",
+      "wait_for_update": 500
+    });
+    gtag("js", new Date());
+    gtag("config", "G-F9836QMBR3");
+  </script>
+
   <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      background: var(--bg-primary); 
-      font-family: 'Space Grotesk', sans-serif; 
-      color: var(--text-primary); 
-      min-height: 100vh; 
+    body {
+      background: var(--bg-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-primary);
+      min-height: 100vh;
     }
     .container { max-width: 550px; margin: 0 auto; padding: 40px 20px; text-align: center; }
-    .page-header h1 { 
-      font-family: 'Orbitron', sans-serif; 
-      font-size: 2.5rem; 
-      background: linear-gradient(135deg, #00f3ff, #c084fc); 
-      -webkit-background-clip: text; 
-      -webkit-text-fill-color: transparent; 
-      margin-bottom: 10px; 
+    .page-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #00f3ff, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
     }
-    .page-header .subtitle { 
-      color: var(--text-secondary); 
-      margin-bottom: 30px; 
-      font-size: 0.9rem; 
+    .page-header .subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+      font-size: 0.9rem;
     }
-    .card { 
-      background: var(--bg-secondary); 
-      border: 1px solid var(--border-color); 
-      border-radius: 28px; 
-      padding: 1.8rem; 
-      margin: 1rem 0; 
-      backdrop-filter: blur(16px); 
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 28px;
+      padding: 1.8rem;
+      margin: 1rem 0;
+      backdrop-filter: blur(16px);
     }
-    .number { 
-      font-family: 'Orbitron', sans-serif; 
-      font-size: 5.5rem; 
-      color: #00f3ff; 
-      margin: 0.5rem 0; 
-      text-shadow: 0 0 25px rgba(0,243,255,0.4); 
-      letter-spacing: 4px; 
+    .number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5.5rem;
+      color: #00f3ff;
+      margin: 0.5rem 0;
+      text-shadow: 0 0 25px rgba(0,243,255,0.4);
+      letter-spacing: 4px;
     }
     .streak { color: #fbbf24; font-size: 1.2rem; font-weight: 600; }
     .payout { color: #10b981; font-size: 1.2rem; font-weight: 600; }
-    .balance { 
-      background: var(--bg-tertiary); 
-      border-radius: 100px; 
-      padding: 8px 16px; 
-      margin-bottom: 1rem; 
-      font-size: 0.85rem; 
-      display: inline-block; 
+    .balance {
+      background: var(--bg-tertiary);
+      border-radius: 100px;
+      padding: 8px 16px;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      display: inline-block;
     }
     .balance span { color: #00f3ff; font-weight: bold; }
-    button { 
-      padding: 14px 28px; 
-      border-radius: 40px; 
-      font-family: 'Space Grotesk', sans-serif; 
-      font-weight: 600; 
-      cursor: pointer; 
-      border: none; 
-      margin: 6px; 
-      transition: all 0.2s; 
-      font-size: 1rem; 
+    button {
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      margin: 6px;
+      transition: all 0.2s;
+      font-size: 1rem;
     }
     .btn-higher { background: linear-gradient(135deg, #00f3ff, #0891b2); color: #fff; }
     .btn-lower { background: linear-gradient(135deg, #f59e0b, #b45309); color: #000; }
@@ -77,32 +97,32 @@
     .btn-success { background: linear-gradient(135deg, #10b981, #047857); color: #fff; }
     button:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
     button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    select { 
-      padding: 12px 20px; 
-      border-radius: 40px; 
-      border: 1px solid var(--border-color); 
-      background: var(--bg-tertiary); 
-      color: var(--text-primary); 
-      font-size: 1rem; 
-      cursor: pointer; 
+    select {
+      padding: 12px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      cursor: pointer;
     }
     .status { margin-top: 1rem; padding: 12px; border-radius: 16px; font-size: 0.85rem; animation: fadeIn 0.2s; }
     .status-info { background: rgba(0,243,255,0.1); color: #00f3ff; border: 1px solid rgba(0,243,255,0.3); }
     .status-success { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
     .status-error { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-    .network-badge { 
-      position: fixed; 
-      top: 80px; 
-      right: 16px; 
-      background: var(--bg-secondary); 
-      backdrop-filter: blur(8px); 
-      padding: 6px 14px; 
-      border-radius: 40px; 
-      font-size: 0.7rem; 
-      font-family: monospace; 
-      cursor: pointer; 
-      border: 1px solid var(--border-color); 
+    .network-badge {
+      position: fixed;
+      top: 80px;
+      right: 16px;
+      background: var(--bg-secondary);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-family: monospace;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
       z-index: 100;
     }
     .network-valid { color: #10b981; border-color: rgba(16,185,129,0.3); }
@@ -117,7 +137,7 @@
     .game-footer hr { border-color: var(--border-color); margin: 15px 0; }
     .game-footer a { color: var(--accent-primary); text-decoration: none; }
     .game-footer a:hover { text-decoration: underline; }
-    
+
     @media (max-width: 768px) {
       .container { padding: 20px 16px; }
       .page-header h1 { font-size: 1.8rem; }
@@ -138,7 +158,7 @@
         <h1>🎲 HI-LO</h1>
         <p class="subtitle">Double your streak. Cash out anytime.<br><span style="color:#fbbf24;">⚠️ Wrong guess = game over</span></p>
       </div>
-      
+
       <div id="status"></div>
 
       <div class="card" id="startScreen">
@@ -174,7 +194,7 @@
         <hr>
         <strong>💧 FREE TOKENS</strong><br>
         Get free ALSA and SPIRIT tokens to play:<br>
-        <a href="/claim/" target="_blank" class="faucet-link">🛡️ Alsania Faucet</a> | 
+        <a href="/claim/" target="_blank" class="faucet-link">🛡️ Alsania Faucet</a> |
         <a href="https://spiritwolf3397.github.io/claim/" target="_blank" class="faucet-link">🐺 SpiritWolf Faucet</a>
       </div>
     </div>
@@ -183,8 +203,8 @@
   <!-- Footer Component -->
   <div id="footer-container"></div>
 
-  
-  
+  <script src="../loadComponents.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
   <script>
     // ============================================================
     // CONFIGURATION
@@ -405,7 +425,7 @@
       if (!gameContract) { const ok = await checkNetworkAndConnect(); if (!ok) return; }
       const token = document.getElementById('tokenSelect').value;
       const amount = ethers.parseEther('1');
-      
+
       const approved = await isTokenApproved(token);
       if (!approved) {
         const wantApprove = confirm(`You haven't approved ${token.toUpperCase()} yet. Approve max once to play multiple games?`);
@@ -417,7 +437,7 @@
           return;
         }
       }
-      
+
       isProcessing = true;
       setButtons(false);
       try {

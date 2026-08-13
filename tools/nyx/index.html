@@ -2,113 +2,42 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
-
-    <!-- Google AdSense -->
-
-    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("consent", "default", {
-        "ad_storage": "denied",
-        "analytics_storage": "denied",
-        "functionality_storage": "denied",
-        "personalization_storage": "denied",
-        "security_storage": "granted",
-        "wait_for_update": 500
-      });
-      gtag("js", new Date());
-      gtag("config", "G-F9836QMBR3");
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
-
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
     <title>Nyx - Browser Extension for AI Automation | Alsania</title>
     <meta
       name="description"
       content="Nyx browser extension integrates tools with 13+ AI platforms. Automate your workflow with DeepSeek, Gemini, Perplexity, GitHub Copilot, and more."
     />
 
-    <!-- Google Adsense -->
-     crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
+      crossorigin="anonymous"
+    ></script>
 
-    
-    
+    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("consent", "default", {
+        "ad_storage": "denied",
+        "analytics_storage": "denied",
+        "functionality_storage": "denied",
+        "personalization_storage": "denied",
+        "security_storage": "granted",
+        "wait_for_update": 500
+      });
+      gtag("js", new Date());
+      gtag("config", "G-F9836QMBR3");
+    </script>
 
     <!-- Fonts -->
-    <!-- Google AdSense -->
-
-    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("consent", "default", {
-        "ad_storage": "denied",
-        "analytics_storage": "denied",
-        "functionality_storage": "denied",
-        "personalization_storage": "denied",
-        "security_storage": "granted",
-        "wait_for_update": 500
-      });
-      gtag("js", new Date());
-      gtag("config", "G-F9836QMBR3");
-    </script>
-    
-    
-    
-        <!-- Google AdSense -->
-
-    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("consent", "default", {
-        "ad_storage": "denied",
-        "analytics_storage": "denied",
-        "functionality_storage": "denied",
-        "personalization_storage": "denied",
-        "security_storage": "granted",
-        "wait_for_update": 500
-      });
-      gtag("js", new Date());
-      gtag("config", "G-F9836QMBR3");
-    </script>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
-    <script>
-    </script>
-
-     href="https://fonts.googleapis.com" />
-    <!-- Google AdSense -->
-
-    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("consent", "default", {
-        "ad_storage": "denied",
-        "analytics_storage": "denied",
-        "functionality_storage": "denied",
-        "personalization_storage": "denied",
-        "security_storage": "granted",
-        "wait_for_update": 500
-      });
-      gtag("js", new Date());
-      gtag("config", "G-F9836QMBR3");
-    </script>
-    
-    
-    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap"
@@ -117,6 +46,7 @@
 
     <!-- Main Site CSS -->
     <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
 
     <!-- Nyx Page CSS -->
     <link rel="stylesheet" href="assets/css/nyx.css" />
@@ -399,26 +329,12 @@
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
-    <!-- Site JavaScript -->
-    
-    
-
-    <!-- Nyx Page JavaScript -->
-    
+    <script src="/loadComponents.js"></script>
 
     <script>
       // Link both download buttons
       document.addEventListener("DOMContentLoaded", function () {
         const mainDownloadBtn = document.getElementById("nyx-download-btn");
-        const packageDownloadBtn = document.getElementById(
-          "nyx-download-package-btn",
-        );
-
-        if (mainDownloadBtn && packageDownloadBtn) {
-          packageDownloadBtn.addEventListener("click", function () {
-            mainDownloadBtn.click();
-          });
-        }
 
         // Platform download buttons
         document.querySelectorAll('.platform-download-btn').forEach(btn => {

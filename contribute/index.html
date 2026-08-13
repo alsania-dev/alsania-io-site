@@ -62,6 +62,14 @@
         max-width: 900px;
         margin: 0 auto;
         padding: 1rem;
+        min-height: 400px;
+      }
+      .embed-container iframe {
+        width: 100%;
+        min-height: 500px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background: var(--bg-secondary);
       }
       .footer-note {
         text-align: center;
@@ -75,6 +83,24 @@
       }
       .footer-note a:hover {
         text-decoration: underline;
+      }
+      .embed-loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-secondary);
+      }
+      .embed-loading .spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border-color);
+        border-top-color: var(--accent-primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-bottom: 16px;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
       }
     </style>
   </head>
@@ -92,10 +118,19 @@
     </section>
 
     <div class="embed-container">
-      <invitation-user-codes user="ifALpcEPw" layout="grid" dark="true" heading="">
-        <a href="https://invitation.codes">Find and share referral codes on Invitation</a>
-        - the referral community.
-      </invitation-user-codes>
+      <div id="embed-loading" class="embed-loading">
+        <div class="spinner"></div>
+        <p>Loading referral links...</p>
+      </div>
+      <iframe
+        id="invitation-embed"
+        src="https://invitation.codes/embed/user/ifALpcEPw?layout=grid&dark=true"
+        frameborder="0"
+        scrolling="auto"
+        style="display: none;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </div>
 
     <p class="footer-note">
@@ -107,6 +142,32 @@
     <div id="footer-container"></div>
 
     <script src="/loadComponents.js"></script>
-    <script src="https://invitation.codes/embed.js" defer></script>
+    <script>
+      // Load the iframe and show/hide loading state
+      document.addEventListener('DOMContentLoaded', function() {
+        const loading = document.getElementById('embed-loading');
+        const iframe = document.getElementById('invitation-embed');
+
+        if (iframe) {
+          iframe.addEventListener('load', function() {
+            if (loading) loading.style.display = 'none';
+            iframe.style.display = 'block';
+          });
+
+          // If iframe doesn't load within 5 seconds, show fallback
+          setTimeout(function() {
+            if (loading && loading.style.display !== 'none') {
+              loading.innerHTML = `
+                <p style="font-size: 1.5rem; margin-bottom: 16px;">🔗</p>
+                <p>Unable to load referral links directly.</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;">
+                  Visit <a href="https://invitation.codes/ifALpcEPw" target="_blank" style="color: var(--accent-primary);">our referral page</a> directly.
+                </p>
+              `;
+            }
+          }, 5000);
+        }
+      });
+    </script>
   </body>
 </html>

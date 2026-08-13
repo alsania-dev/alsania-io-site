@@ -4,14 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
-    <title>Alsania</title>
-    <meta name="description" content="Sovereign technology ecosystem for creators and innovators." />
+    <title>Donate - Support Alsania | Sovereign Technology</title>
+    <meta
+      name="description"
+      content="Support Alsania's open-source development. Your donation helps fund Nyx, DevCon, ScrypGen, and infrastructure for sovereign technology."
+    />
 
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148" crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
@@ -27,11 +37,141 @@
       gtag("config", "G-F9836QMBR3");
     </script>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/components.css" />
+
+    <style>
+      .donation-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+      .donation-option {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 30px;
+        text-align: center;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .donation-option:hover {
+        border-color: var(--accent-primary);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+      .donation-option.featured {
+        border-color: var(--accent-primary);
+        border-width: 2px;
+      }
+      .donation-amount {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--accent-primary);
+        margin: 15px 0;
+        font-family: "Orbitron", sans-serif;
+      }
+      .paypal-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #0070ba, #003087);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        margin-top: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .paypal-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 112, 186, 0.4);
+      }
+      .custom-amount {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        text-align: center;
+      }
+      .custom-input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin: 20px 0;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .currency-symbol {
+        background: var(--bg-tertiary);
+        padding: 12px 16px;
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+        border: 2px solid var(--border-color);
+        border-right: none;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .amount-input {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        border: 2px solid var(--border-color);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        min-width: 0;
+        font-weight: 600;
+      }
+      .amount-input:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+      }
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+        margin: 40px 0;
+      }
+      .impact-item {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 25px;
+        text-align: center;
+        transition: var(--transition);
+      }
+      .impact-item:hover {
+        border-color: var(--accent-primary);
+      }
+      .impact-icon {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .what-we-do {
+        background: var(--bg-tertiary);
+        padding: 60px 0;
+      }
+    </style>
   </head>
-<!doctype html>
-<html lang="en" data-theme="dark">
   <body>
     <!-- Header Component -->
     <div id="header-container"></div>
@@ -54,7 +194,6 @@
     <section class="section">
       <div class="container">
         <h2 class="section-title">Choose Your Contribution</h2>
-
         <div class="donation-options">
           <div class="donation-option">
             <h3>Community Supporter</h3>
@@ -76,7 +215,6 @@
               </button>
             </form>
           </div>
-
           <div class="donation-option featured">
             <h3>Sustaining Member</h3>
             <p>Fund ongoing development and community initiatives</p>
@@ -97,7 +235,6 @@
               </button>
             </form>
           </div>
-
           <div class="donation-option">
             <h3>Visionary Backer</h3>
             <p>Enable ambitious projects and long-term sustainability</p>
@@ -124,7 +261,6 @@
         <div class="custom-amount">
           <h3>Custom Amount</h3>
           <p>Choose your own donation amount via PayPal</p>
-
           <div class="custom-input">
             <span class="currency-symbol">$</span>
             <input
@@ -138,7 +274,6 @@
               placeholder="Enter amount"
             />
           </div>
-
           <form
             action="https://www.paypal.com/donate"
             method="post"
@@ -159,7 +294,6 @@
               <span style="font-weight: bold">Pay</span>Pal Custom Donation
             </button>
           </form>
-
           <p
             style="
               color: var(--text-muted);
@@ -186,7 +320,6 @@
         >
           What Your Support Enables
         </h2>
-
         <div class="impact-grid">
           <div class="impact-item">
             <span class="impact-icon">🚀</span>
@@ -195,21 +328,16 @@
               Funding for Nyx, DevCon, ScrypGen, and other open-source projects
             </p>
           </div>
-
           <div class="impact-item">
             <span class="impact-icon">🛡️</span>
-            <h4>Infrastructure & Security</h4>
+            <h4>Infrastructure &amp; Security</h4>
             <p>Servers, domains, SSL certificates, and security audits</p>
           </div>
-
           <div class="impact-item">
             <span class="impact-icon">📚</span>
-            <h4>Documentation & Education</h4>
-            <p>
-              Tutorials, guides, and educational resources for the community
-            </p>
+            <h4>Documentation &amp; Education</h4>
+            <p>Tutorials, guides, and educational resources for the community</p>
           </div>
-
           <div class="impact-item">
             <span class="impact-icon">🌍</span>
             <h4>Community Initiatives</h4>
@@ -222,8 +350,7 @@
     <!-- Transparency Section -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Transparency & Values</h2>
-
+        <h2 class="section-title">Transparency &amp; Values</h2>
         <div class="ecosystem-grid">
           <div class="ecosystem-item">
             <h3>100% Open Finance</h3>
@@ -232,7 +359,6 @@
               expenses, no executive salaries.
             </p>
           </div>
-
           <div class="ecosystem-item">
             <h3>No Corporate Funding</h3>
             <p>
@@ -240,7 +366,6 @@
               independence and values.
             </p>
           </div>
-
           <div class="ecosystem-item">
             <h3>Community Driven</h3>
             <p>
@@ -249,7 +374,6 @@
             </p>
           </div>
         </div>
-
         <div style="text-align: center; margin-top: 40px">
           <p style="font-size: 1.1rem">
             <strong>Direct PayPal:</strong> You can also send directly to our
@@ -287,23 +411,17 @@
         >
           Other Ways to Support
         </h2>
-
         <div class="ecosystem-grid">
           <div class="ecosystem-item">
             <h3>🛍️ Buy Merchandise</h3>
-            <p>
-              Support through our official merchandise store. Wear your values.
-            </p>
+            <p>Support through our official merchandise store. Wear your values.</p>
             <a href="../shop/index.html" class="alsania-btn secondary"
               >Shop Merch</a
             >
           </div>
-
           <div class="ecosystem-item">
             <h3>💻 Contribute Code</h3>
-            <p>
-              Help build Alsania projects on GitHub. Every line of code helps.
-            </p>
+            <p>Help build Alsania projects on GitHub. Every line of code helps.</p>
             <a
               href="https://github.com/alsania-dev"
               class="alsania-btn secondary"
@@ -312,12 +430,11 @@
               >Contribute</a
             >
           </div>
-
           <div class="ecosystem-item">
             <h3>📣 Spread the Word</h3>
             <p>
-              Share Alsania with your network. Follow us on social media and
-              join discussions.
+              Share Alsania with your network. Follow us on social media and join
+              discussions.
             </p>
             <a
               href="https://twitter.com/alsania-io"
@@ -334,61 +451,42 @@
     <!-- Footer Component -->
     <div id="footer-container"></div>
 
-    <!-- JavaScript -->
-    
-    
-
+    <script src="/loadComponents.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Update custom amount for PayPal
         const amountInput = document.getElementById("custom-amount");
         const paypalAmount = document.getElementById("paypal-amount");
         const customForm = document.getElementById("custom-form");
 
         if (amountInput && paypalAmount) {
           amountInput.addEventListener("input", function () {
-            const value = Math.max(
-              1,
-              Math.min(1000, parseInt(this.value) || 1),
-            );
+            const value = Math.max(1, Math.min(1000, parseInt(this.value) || 1));
             this.value = value;
             paypalAmount.value = value;
           });
-
           amountInput.addEventListener("change", function () {
-            const value = Math.max(
-              1,
-              Math.min(1000, parseInt(this.value) || 1),
-            );
+            const value = Math.max(1, Math.min(1000, parseInt(this.value) || 1));
             this.value = value;
             paypalAmount.value = value;
           });
         }
 
-        // Track donation button clicks
         document.querySelectorAll(".paypal-button").forEach((button) => {
           button.addEventListener("click", function () {
             const form = this.closest("form");
             const amount = form.querySelector('[name="amount"]')
               ? form.querySelector('[name="amount"]').value
               : "custom";
-
-                event_category: "Engagement",
-                event_label: `Donation $${amount}`,
-              });
-            }
           });
         });
 
-        // Add note about PayPal button IDs
         console.log(
-          "Note: Replace YOUR_PAYPAL_BUTTON_ID_* with actual PayPal button IDs",
+          "Note: Replace YOUR_PAYPAL_BUTTON_ID_* with actual PayPal button IDs"
         );
         console.log(
-          "Also replace [Your PayPal Email Here] with your actual PayPal email",
+          "Also replace [Your PayPal Email Here] with your actual PayPal email"
         );
       });
     </script>
-    <script src="/loadComponents.js"></script>
   </body>
 </html>

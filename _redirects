@@ -6,6 +6,11 @@
 /mnemonic /shop/index.html 302
 /spiritwolf https://spiritwolf.dashery.com/ 302
 
+# DreamAI Mint page
+/dreamai-mint /dreamai/ 301
+/dreamai-mint/ /dreamai/ 301
+/dreamai-mint/* /dreamai/:splat 301
+
 # Legal page redirects
 /disclaimer /legal/disclaimer.html 301
 /privacy /legal/privacy-policy.html 301

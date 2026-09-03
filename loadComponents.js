@@ -122,15 +122,39 @@ const INLINE_COMPONENTS = {
     <nav class="alsania-nav">
       <ul>
         <li><a href="/" class="nav-link">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">Products <span class="arrow">▾</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tools/nyx/">Nyx Extension</a></li>
+            <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
+            <li><a href="/tools/scrypgen/">ScrypGen</a></li>
+            <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">Ecosystem <span class="arrow">▾</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/rep/">Agent Registry</a></li>
+            <li><a href="/rating/">Rate Agents</a></li>
+            <li><a href="/claim/">Alsa Faucet</a></li>
+            <li><a href="/hilo/">Hi-Lo Game</a></li>
+          <li><a href="/dreamai/">DreamAI Mint</a></li>
+            <li><a href="/dreamai/">DreamAI Mint</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle">Community <span class="arrow">▾</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/story/">Book of Alsania</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contribute/">Contribute</a></li>
+            <li><a href="/donate/">Donate</a></li>
+          </ul>
+        </li>
+        <li><a href="/shop/" class="nav-link">Merch</a></li>
         <li><a href="/services/" class="nav-link">Services</a></li>
-        <li><a href="/tools/nyx/" class="nav-link">Nyx</a></li>
-        <li><a href="/hilo/" class="nav-link">Hi-Lo Game</a></li>
-        <li><a href="/shop/" class="nav-link">Shop</a></li>
-        <li><a href="/about/" class="nav-link">About</a></li>
         <li><a href="/contact/" class="nav-link">Contact</a></li>
-        <li><a href="/token/" class="nav-link">Token</a></li>
-        <li><a href="/claim/" class="nav-link">Claim</a></li>
-        <li><a href="/donate/" class="nav-link">Support</a></li>
       </ul>
     </nav>
     <div class="header-right">

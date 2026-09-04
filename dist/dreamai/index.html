@@ -749,6 +749,119 @@
             document.body.style.overflow = 'hidden';
         })();
 
+        // ===== MOBILE NAV DROPDOWN TOGGLE =====
+        (function() {
+            // Wait for header to load
+            function initMobileDropdowns() {
+                const dropdownToggles = document.querySelectorAll('.alsania-nav .dropdown-toggle');
+                const isMobile = window.innerWidth <= 768;
+
+                dropdownToggles.forEach(function(toggle) {
+                    // Remove any existing listeners to prevent duplicates
+                    toggle.removeEventListener('click', handleDropdownToggle);
+                    // Add click listener for mobile
+                    toggle.addEventListener('click', handleDropdownToggle);
+                });
+            }
+
+            function handleDropdownToggle(e) {
+                const isMobile = window.innerWidth <= 768;
+                if (!isMobile) return;
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                const parentLi = this.closest('.dropdown');
+                if (!parentLi) return;
+
+                const menu = parentLi.querySelector('.dropdown-menu');
+                if (!menu) return;
+
+                // Toggle this menu
+                const isOpen = menu.style.display === 'block';
+                
+                // Close all other dropdown menus first
+                const allMenus = document.querySelectorAll('.alsania-nav .dropdown-menu');
+                allMenus.forEach(function(m) {
+                    if (m !== menu) {
+                        m.style.display = 'none';
+                        const parent = m.closest('.dropdown');
+                        if (parent) {
+                            parent.classList.remove('open');
+                        }
+                    }
+                });
+
+                if (isOpen) {
+                    menu.style.display = 'none';
+                    parentLi.classList.remove('open');
+                } else {
+                    menu.style.display = 'block';
+                    parentLi.classList.add('open');
+                }
+            }
+
+            // Initialize on load and after header loads
+            function init() {
+                // Check if header is loaded
+                const header = document.querySelector('.alsania-header');
+                if (header) {
+                    initMobileDropdowns();
+                } else {
+                    // Header not loaded yet, wait for it
+                    const observer = new MutationObserver(function() {
+                        const headerCheck = document.querySelector('.alsania-header');
+                        if (headerCheck) {
+                            initMobileDropdowns();
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(document.body, { childList: true, subtree: true });
+                    
+                    // Fallback timeout
+                    setTimeout(function() {
+                        const headerCheck = document.querySelector('.alsania-header');
+                        if (headerCheck) {
+                            initMobileDropdowns();
+                            observer.disconnect();
+                        }
+                    }, 3000);
+                }
+            }
+
+            // Run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+            // Re-initialize on window resize (in case user switches between desktop/mobile)
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    // Reset dropdowns on resize
+                    const allMenus = document.querySelectorAll('.alsania-nav .dropdown-menu');
+                    if (window.innerWidth > 768) {
+                        // Desktop: show dropdowns on hover (CSS handles this)
+                        allMenus.forEach(function(m) {
+                            m.style.display = '';
+                        });
+                    } else {
+                        // Mobile: hide all dropdowns
+                        allMenus.forEach(function(m) {
+                            m.style.display = 'none';
+                        });
+                        const openItems = document.querySelectorAll('.alsania-nav .dropdown.open');
+                        openItems.forEach(function(item) {
+                            item.classList.remove('open');
+                        });
+                    }
+                }, 300);
+            });
+        })();
+
         // ===== CONTRACT CONFIG =====
         const CONTRACT_ADDRESS = '0x1eE8ab76C389827E3faE3C0fD8f9729C8eA586Fd';
         const METADATA_CID = 'bafybeifccmaxcq3wtey7qgmxoku7botftr3rbubmtxfxhju7vpvdsydpka';

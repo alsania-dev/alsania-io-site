@@ -235,11 +235,32 @@
     box-shadow: none;
     padding: 0 0 0 16px;
     backdrop-filter: none;
+    display: none !important;
+  }
+  
+  .alsania-nav .dropdown.open .dropdown-menu {
+    display: block !important;
   }
   
   .alsania-nav .dropdown-menu a {
     padding: 6px 12px;
     font-size: 13px;
+    color: #6af7ff !important;
+    display: block;
+  }
+
+  .alsania-nav .dropdown-menu a:hover {
+    background: rgba(0, 243, 255, 0.1);
+    color: #39FF14 !important;
+  }
+
+  .alsania-nav .dropdown-toggle .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+
+  .alsania-nav .dropdown.open .dropdown-toggle .arrow {
+    transform: rotate(180deg);
   }
   
   .mobile-menu {

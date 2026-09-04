@@ -402,6 +402,11 @@ function initMobileMenu() {
       navMenu.classList.toggle("active");
       btn.classList.toggle("active");
       log("Mobile menu toggled");
+      
+      // When mobile menu opens, init dropdown toggles
+      if (navMenu.classList.contains("active")) {
+        initMobileDropdowns();
+      }
     });
     
     document.addEventListener("click", function(e) {
@@ -410,6 +415,9 @@ function initMobileMenu() {
         btn.classList.remove("active");
       }
     });
+    
+    // Initialize dropdown toggles right away
+    initMobileDropdowns();
   }
   
   // Try immediately, and again after a short delay
@@ -417,6 +425,56 @@ function initMobileMenu() {
   if (!attached) {
     setTimeout(attachNav, 500);
     setTimeout(attachNav, 1000);
+  }
+}
+
+// ===== MOBILE DROPDOWN TOGGLE =====
+function initMobileDropdowns() {
+  const dropdownToggles = document.querySelectorAll('.alsania-nav .dropdown-toggle');
+  const isMobile = window.innerWidth <= 768;
+  
+  dropdownToggles.forEach(function(toggle) {
+    // Remove any existing listeners to prevent duplicates
+    toggle.removeEventListener('click', handleMobileDropdownToggle);
+    // Add click listener for mobile
+    toggle.addEventListener('click', handleMobileDropdownToggle);
+  });
+}
+
+function handleMobileDropdownToggle(e) {
+  const isMobile = window.innerWidth <= 768;
+  if (!isMobile) return;
+  
+  e.preventDefault();
+  e.stopPropagation();
+  
+  const parentLi = this.closest('.dropdown');
+  if (!parentLi) return;
+  
+  const menu = parentLi.querySelector('.dropdown-menu');
+  if (!menu) return;
+  
+  // Toggle this menu
+  const isOpen = menu.style.display === 'block';
+  
+  // Close all other dropdown menus first
+  const allMenus = document.querySelectorAll('.alsania-nav .dropdown-menu');
+  allMenus.forEach(function(m) {
+    if (m !== menu) {
+      m.style.display = 'none';
+      const parent = m.closest('.dropdown');
+      if (parent) {
+        parent.classList.remove('open');
+      }
+    }
+  });
+  
+  if (isOpen) {
+    menu.style.display = 'none';
+    parentLi.classList.remove('open');
+  } else {
+    menu.style.display = 'block';
+    parentLi.classList.add('open');
   }
 }
 

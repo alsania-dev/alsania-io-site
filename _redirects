@@ -11,6 +11,10 @@
 /dreamai-mint/ /dreamai/ 301
 /dreamai-mint/* /dreamai/:splat 301
 
+# Crash redirects
+/crash https://alsania-crash.netlify.app/ 302
+/crash/* https://alsania-crash.netlify.app/$1 302
+
 # Legal page redirects
 /disclaimer /legal/disclaimer.html 301
 /privacy /legal/privacy-policy.html 301

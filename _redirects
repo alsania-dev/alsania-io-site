@@ -12,8 +12,8 @@
 /dreamai-mint/* /dreamai/:splat 301
 
 # Crash redirects
-/crash https://alsania-crash.netlify.app/ 302
-/crash/* https://alsania-crash.netlify.app/$1 302
+/crash / 302
+/crash/* https://graceful-daffodil-f21571.netlify.app/:splat 302
 
 # Legal page redirects
 /disclaimer /legal/disclaimer.html 301

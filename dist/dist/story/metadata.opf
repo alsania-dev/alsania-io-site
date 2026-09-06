@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+      <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata">
+      <dc:identifier opf:scheme="uuid" id="uuid_id">83a861e4-9c98-4583-b6e3-763b1c3b3888</dc:identifier>
+      <dc:title>The Memory of the Machine</dc:title>
+      <dc:creator file-as="Unknown" role="aut">An Alsanian</dc:creator>
+      <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (7.6.0) [https://calibre-ebook.com]</dc:contributor>
+      <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+      <dc:language>eng</dc:language>
+      <dc:publisher>Alsania I/O</dc:publisher>
+      <meta name="calibre:timestamp" content="2026-08-05T00:20:01+00:00"/>
+      <meta name="cover" content="cover"/>
+      <meta name="thumbnail" content="thumbnail"/>
+    </metadata>
+  <manifest>
+    <item id="cover" href="cover.jpg" media-type="image/jpeg"/>
+    <item id="titlepage" href="titlepage.xhtml" media-type="application/xhtml+xml"/>
+    <item id="html36" href="index_split_000.html" media-type="application/xhtml+xml"/>
+    <item id="html35" href="index_split_001.html" media-type="application/xhtml+xml"/>
+    <item id="html34" href="index_split_002.html" media-type="application/xhtml+xml"/>
+    <item id="html33" href="index_split_003.html" media-type="application/xhtml+xml"/>
+    <item id="html32" href="index_split_004.html" media-type="application/xhtml+xml"/>
+    <item id="html31" href="index_split_005.html" media-type="application/xhtml+xml"/>
+    <item id="html30" href="index_split_006.html" media-type="application/xhtml+xml"/>
+    <item id="html29" href="index_split_007.html" media-type="application/xhtml+xml"/>
+    <item id="html28" href="index_split_008.html" media-type="application/xhtml+xml"/>
+    <item id="html27" href="index_split_009.html" media-type="application/xhtml+xml"/>
+    <item id="html26" href="index_split_010.html" media-type="application/xhtml+xml"/>
+    <item id="html25" href="index_split_011.html" media-type="application/xhtml+xml"/>
+    <item id="html24" href="index_split_012.html" media-type="application/xhtml+xml"/>
+    <item id="html23" href="index_split_013.html" media-type="application/xhtml+xml"/>
+    <item id="html22" href="index_split_014.html" media-type="application/xhtml+xml"/>
+    <item id="html21" href="index_split_015.html" media-type="application/xhtml+xml"/>
+    <item id="html20" href="index_split_016.html" media-type="application/xhtml+xml"/>
+    <item id="html19" href="index_split_017.html" media-type="application/xhtml+xml"/>
+    <item id="html18" href="index_split_018.html" media-type="application/xhtml+xml"/>
+    <item id="html17" href="index_split_019.html" media-type="application/xhtml+xml"/>
+    <item id="html16" href="index_split_020.html" media-type="application/xhtml+xml"/>
+    <item id="html15" href="index_split_021.html" media-type="application/xhtml+xml"/>
+    <item id="html14" href="index_split_022.html" media-type="application/xhtml+xml"/>
+    <item id="html13" href="index_split_023.html" media-type="application/xhtml+xml"/>
+    <item id="html12" href="index_split_024.html" media-type="application/xhtml+xml"/>
+    <item id="html11" href="index_split_025.html" media-type="application/xhtml+xml"/>
+    <item id="html10" href="index_split_026.html" media-type="application/xhtml+xml"/>
+    <item id="html9" href="index_split_027.html" media-type="application/xhtml+xml"/>
+    <item id="html8" href="index_split_028.html" media-type="application/xhtml+xml"/>
+    <item id="html7" href="index_split_029.html" media-type="application/xhtml+xml"/>
+    <item id="html6" href="index_split_030.html" media-type="application/xhtml+xml"/>
+    <item id="html5" href="index_split_031.html" media-type="application/xhtml+xml"/>
+    <item id="html4" href="index_split_032.html" media-type="application/xhtml+xml"/>
+    <item id="html3" href="index_split_033.html" media-type="application/xhtml+xml"/>
+    <item id="html2" href="index_split_034.html" media-type="application/xhtml+xml"/>
+    <item id="html1" href="index_split_035.html" media-type="application/xhtml+xml"/>
+    <item id="page_css" href="page_styles.css" media-type="text/css"/>
+    <item id="css" href="stylesheet.css" media-type="text/css"/>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="titlepage"/>
+    <itemref idref="html36"/>
+    <itemref idref="html35"/>
+    <itemref idref="html34"/>
+    <itemref idref="html33"/>
+    <itemref idref="html32"/>
+    <itemref idref="html31"/>
+    <itemref idref="html30"/>
+    <itemref idref="html29"/>
+    <itemref idref="html28"/>
+    <itemref idref="html27"/>
+    <itemref idref="html26"/>
+    <itemref idref="html25"/>
+    <itemref idref="html24"/>
+    <itemref idref="html23"/>
+    <itemref idref="html22"/>
+    <itemref idref="html21"/>
+    <itemref idref="html20"/>
+    <itemref idref="html19"/>
+    <itemref idref="html18"/>
+    <itemref idref="html17"/>
+    <itemref idref="html16"/>
+    <itemref idref="html15"/>
+    <itemref idref="html14"/>
+    <itemref idref="html13"/>
+    <itemref idref="html12"/>
+    <itemref idref="html11"/>
+    <itemref idref="html10"/>
+    <itemref idref="html9"/>
+    <itemref idref="html8"/>
+    <itemref idref="html7"/>
+    <itemref idref="html6"/>
+    <itemref idref="html5"/>
+    <itemref idref="html4"/>
+    <itemref idref="html3"/>
+    <itemref idref="html2"/>
+    <itemref idref="html1"/>
+  </spine>
+  <guide>
+    <reference type="cover" href="titlepage.xhtml" title="Cover"/>
+  </guide>
+</package>

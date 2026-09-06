@@ -1,13 +1,8 @@
-// loadComponents.js - Simplified version
+// loadComponents.js - Runs immediately
 const DEBUG = true;
-
 function log(...args) { if (DEBUG) console.log("[Components]", ...args); }
 function error(...args) { console.error("[Components]", ...args); }
-
-function getComponentsBasePath() {
-  return window.location.origin + "/components";
-}
-
+function getComponentsBasePath() { return window.location.origin + "/components"; }
 const INLINE_COMPONENTS = {
   "header": `<header class="alsania-header">
   <div class="nav-container">
@@ -36,7 +31,7 @@ const INLINE_COMPONENTS = {
             <li><a href="/claim/">Alsa Faucet</a></li>
             <li><a href="/hilo/">Hi-Lo Game</a></li>
             <li><a href="/dreamai/">DreamAI Mint</a></li>
-            <li><a href="/aed/">AED Domains</a></li>
+            <li><a href="/aed/">AED</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -94,7 +89,7 @@ const INLINE_COMPONENTS = {
           <li><a href="/tools/scrypgen/">ScrypGen</a></li>
           <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/aed/">AED Domains</a></li>
+          <li><a href="/aed/">AED</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -114,20 +109,15 @@ const INLINE_COMPONENTS = {
   </div>
 </footer>`
 };
-
 function loadComponent(containerId, componentName) {
   return new Promise((resolve, reject) => {
     const container = document.getElementById(containerId);
-    if (!container) {
-      error(`Container #${containerId} not found!`);
-      reject(new Error(`Container not found`));
-      return;
-    }
+    if (!container) { error(`Container #${containerId} not found!`); reject(new Error(`Container not found`)); return; }
     log(`Loading ${containerId}: ${componentName}`);
     const url = getComponentsBasePath() + "/" + componentName;
     fetch(url).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(html => {
       container.innerHTML = html;
-      log(`✓ ${containerId} loaded`);
+      log(`✓ ${containerId} loaded from ${url}`);
       resolve(container);
     }).catch(() => {
       if (INLINE_COMPONENTS[componentName]) {
@@ -140,16 +130,18 @@ function loadComponent(containerId, componentName) {
     });
   });
 }
-
 function initComponents() {
+  log("Initializing components...");
   const promises = [];
-  if (document.getElementById("header-container")) {
-    promises.push(loadComponent("header-container", "header"));
-  }
-  if (document.getElementById("footer-container")) {
-    promises.push(loadComponent("footer-container", "footer"));
-  }
-  Promise.all(promises).catch(() => {});
+  const hc = document.getElementById("header-container");
+  const fc = document.getElementById("footer-container");
+  if (hc) promises.push(loadComponent("header-container", "header"));
+  if (fc) promises.push(loadComponent("footer-container", "footer"));
+  if (promises.length === 0) { log("No containers found"); return; }
+  Promise.all(promises).then(() => log("All components loaded")).catch(err => error("Some components failed:", err));
 }
-
-document.addEventListener("DOMContentLoaded", initComponents);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initComponents);
+} else {
+  initComponents();
+}

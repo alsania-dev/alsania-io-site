@@ -8,7 +8,7 @@
     "build": "npm run lint && npm run test && npm run optimize",
     "lint": "echo 'Linting...' && exit 0",
     "test": "echo 'Running tests...' && exit 0",
-    "optimize": "mkdir -p dist && cp -r aed dist/ && cp -r components dist/ && cp loadComponents.js dist/",
+    "optimize": "mkdir -p dist && cp -r aed components loadComponents.js tools dist/ 2>/dev/null || true && cp -r *.{html,js,css,json,svg,png,jpg,ico,webp,avif} dist/ 2>/dev/null || true",
     "deploy": "npm run build && echo 'Deploying...' && exit 0",
     "deploy:github": "npx gh-pages -d dist",
     "deploy:cloudflare": "npx wrangler pages deploy dist",
@@ -17,15 +17,7 @@
     "prettier": "npx prettier --write .",
     "security": "npx npm audit --production"
   },
-  "keywords": [
-    "sovereign",
-    "technology",
-    "ecosystem",
-    "alsania",
-    "web",
-    "site",
-    "gateway"
-  ],
+  "keywords": ["sovereign", "technology", "ecosystem", "alsania", "web", "site", "gateway"],
   "author": "Alsania I/O <admin@alsania-io.com>",
   "license": "MIT",
   "repository": {
@@ -48,19 +40,8 @@
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
-  "files": [
-    "dist/",
-    "assets/",
-    "components/",
-    "*.html",
-    "*.js",
-    "*.css"
-  ],
+  "browserslist": [">0.2%", "not dead", "not op_mini all"],
+  "files": ["dist/", "assets/", "components/", "*.html", "*.js", "*.css"],
   "bin": {},
   "man": [],
   "directories": {},

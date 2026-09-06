@@ -26,5 +26,5 @@
 /terms /legal/terms.html 301
 /cookies /legal/disclaimer.html 301
 
-# Fallback - keep this last
-/* /404.html 404
+# Fallback - keep this last, redirect to home
+/* / 302

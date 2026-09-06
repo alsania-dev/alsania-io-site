@@ -1,9 +1,6 @@
 name = "alsania-io-site"
 compatibility_date = "2026-08-01"
-
-[pages]
-build = { command = "npm run build" }
+pages_build_output_dir = "dist"
 
 [env.production]
-[env.production.pages]
-build = { command = "npm run build", output_dir = "dist" }
+pages_build_output_dir = "dist"

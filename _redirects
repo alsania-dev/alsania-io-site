@@ -1,5 +1,8 @@
 # Alsania.io Redirects
 
+# AED demo - serve files directly (must come before catch-all)
+/aed/* /aed/:splat 200
+
 # Store redirects
 /dashery https://mnemonic.dashery.com/ 302
 /redbubble https://www.redbubble.com/people/AlsaniaArt/shop 302
@@ -27,5 +30,5 @@
 # API redirects (for future)
 # /api/* https://api.alsania-io.com/:splat 200
 
-# Fallback
+# Fallback - keep this last
 /* /404.html 404

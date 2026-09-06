@@ -1,6 +1,8 @@
 # Alsania.io Redirects
 
 # AED demo - serve files directly (must come before catch-all)
+/aed  /aed/index.html 200
+/aed/ /aed/index.html 200
 /aed/* /aed/:splat 200
 
 # Store redirects
@@ -23,12 +25,6 @@
 /privacy /legal/privacy-policy.html 301
 /terms /legal/terms.html 301
 /cookies /legal/disclaimer.html 301
-
-# Legacy redirects (if needed)
-# /old-path /new-path 301
-
-# API redirects (for future)
-# /api/* https://api.alsania-io.com/:splat 200
 
 # Fallback - keep this last
 /* /404.html 404

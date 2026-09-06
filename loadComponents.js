@@ -130,6 +130,25 @@ function loadComponent(containerId, componentName) {
     });
   });
 }
+function initMobileMenu() {
+  const btn = document.querySelector(".mobile-menu");
+  if (!btn) { log("Mobile menu button not found"); return; }
+  log("Initializing mobile menu...");
+  const nav = document.querySelector(".alsania-nav");
+  if (!nav) { setTimeout(initMobileMenu, 300); return; }
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    nav.classList.toggle("active");
+    btn.classList.toggle("active");
+    log("Mobile menu toggled");
+  });
+  document.addEventListener("click", function(e) {
+    if (!nav.contains(e.target) && !btn.contains(e.target)) {
+      nav.classList.remove("active");
+      btn.classList.remove("active");
+    }
+  });
+}
 function initComponents() {
   log("Initializing components...");
   const promises = [];
@@ -138,7 +157,10 @@ function initComponents() {
   if (hc) promises.push(loadComponent("header-container", "header"));
   if (fc) promises.push(loadComponent("footer-container", "footer"));
   if (promises.length === 0) { log("No containers found"); return; }
-  Promise.all(promises).then(() => log("All components loaded")).catch(err => error("Some components failed:", err));
+  Promise.all(promises).then(() => {
+    log("All components loaded");
+    setTimeout(initMobileMenu, 100);
+  }).catch(err => error("Some components failed:", err));
 }
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);

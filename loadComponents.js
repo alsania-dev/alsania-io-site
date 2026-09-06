@@ -31,7 +31,7 @@ const INLINE_COMPONENTS = {
             <li><a href="/claim/">Alsa Faucet</a></li>
             <li><a href="/hilo/">Hi-Lo Game</a></li>
             <li><a href="/dreamai/">DreamAI Mint</a></li>
-            <li><a href="/aed/">AED Domains</a></li>
+            <li><a href="/aed/">AED</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -89,7 +89,7 @@ const INLINE_COMPONENTS = {
           <li><a href="/tools/scrypgen/">ScrypGen</a></li>
           <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/aed/">AED Domains</a></li>
+          <li><a href="/aed/">AED</a></li>
         </ul>
       </div>
       <div class="footer-section">

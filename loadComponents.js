@@ -102,7 +102,7 @@ function getComponentsBasePath() {
   }
   
   // For http/https - always use absolute path from root
-  return "/components";
+  return window.location.origin + "/components";
 }
 
 // ============================================================

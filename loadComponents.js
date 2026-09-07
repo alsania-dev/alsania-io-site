@@ -136,22 +136,21 @@ function loadComponent(containerId, componentName) {
 }
 
 function initMobileMenu() {
-  // Wait for the header to be fully rendered
+  // Wait for DOM to be ready
   setTimeout(function() {
     const btn = document.querySelector(".mobile-menu");
     if (!btn) {
-      log("Mobile menu button not found, retrying...");
-      setTimeout(initMobileMenu, 500);
+      log("Mobile menu button not found");
       return;
     }
     log("Initializing mobile menu...");
     const nav = document.querySelector(".alsania-nav");
     if (!nav) {
-      log("Nav not found, retrying...");
-      setTimeout(initMobileMenu, 500);
+      log("Nav not found");
       return;
     }
-    // Remove any existing listeners
+    
+    // Remove existing listeners by cloning
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     
@@ -170,7 +169,7 @@ function initMobileMenu() {
     });
     
     log("Mobile menu initialized");
-  }, 100);
+  }, 200);
 }
 
 function initComponents() {
@@ -180,18 +179,31 @@ function initComponents() {
   const fc = document.getElementById("footer-container");
   if (hc) promises.push(loadComponent("header-container", "header"));
   if (fc) promises.push(loadComponent("footer-container", "footer"));
-  if (promises.length === 0) { log("No containers found"); return; }
+  if (promises.length === 0) { 
+    log("No containers found - skipping component loading");
+    // Still initialize mobile menu
+    initMobileMenu();
+    return; 
+  }
   Promise.all(promises).then(() => {
     log("All components loaded");
-    // Initialize mobile menu with multiple retries
     initMobileMenu();
-    setTimeout(initMobileMenu, 500);
-    setTimeout(initMobileMenu, 1000);
   }).catch(err => error("Some components failed:", err));
 }
 
+// Run on DOM ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);
 } else {
+  // DOM already ready, run now
   initComponents();
 }
+
+// Also run after a delay to catch any late-rendered content
+setTimeout(function() {
+  const btn = document.querySelector(".mobile-menu");
+  if (btn && !btn._listenerAdded) {
+    log("Late mobile menu initialization");
+    initMobileMenu();
+  }
+}, 500);

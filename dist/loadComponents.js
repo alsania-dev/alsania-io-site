@@ -3,6 +3,7 @@ const DEBUG = true;
 function log(...args) { if (DEBUG) console.log("[Components]", ...args); }
 function error(...args) { console.error("[Components]", ...args); }
 function getComponentsBasePath() { return window.location.origin + "/components"; }
+
 const INLINE_COMPONENTS = {
   "header": `<header class="alsania-header">
   <div class="nav-container">
@@ -109,6 +110,7 @@ const INLINE_COMPONENTS = {
   </div>
 </footer>`
 };
+
 function loadComponent(containerId, componentName) {
   return new Promise((resolve, reject) => {
     const container = document.getElementById(containerId);
@@ -130,6 +132,72 @@ function loadComponent(containerId, componentName) {
     });
   });
 }
+
+function initMobileMenu() {
+  setTimeout(function() {
+    const btn = document.querySelector(".mobile-menu");
+    const nav = document.querySelector(".alsania-nav");
+    
+    if (!btn || !nav) {
+      log("Mobile menu button or nav not found");
+      return;
+    }
+    
+    log("Initializing mobile menu...");
+    
+    // Toggle mobile menu on hamburger click
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      nav.classList.toggle("active");
+      btn.classList.toggle("active");
+      log("Mobile menu toggled");
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener("click", function(e) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove("active");
+        btn.classList.remove("active");
+      }
+    });
+    
+    // Handle dropdown toggles on mobile
+    const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener("click", function(e) {
+        // On mobile, toggle the dropdown menu instead of navigating
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const parentLi = this.closest(".dropdown");
+          if (parentLi) {
+            const menu = parentLi.querySelector(".dropdown-menu");
+            if (menu) {
+              menu.classList.toggle("open");
+              log("Dropdown toggled");
+            }
+          }
+        }
+      });
+    });
+    
+    // Close dropdowns when a link is clicked
+    const navLinks = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
+    navLinks.forEach(link => {
+      link.addEventListener("click", function() {
+        // Close all dropdowns
+        document.querySelectorAll(".dropdown-menu").forEach(menu => {
+          menu.classList.remove("open");
+        });
+        // Close mobile menu
+        nav.classList.remove("active");
+        btn.classList.remove("active");
+      });
+    });
+    
+    log("Mobile menu initialized successfully");
+  }, 200);
+}
+
 function initComponents() {
   log("Initializing components...");
   const promises = [];
@@ -137,11 +205,27 @@ function initComponents() {
   const fc = document.getElementById("footer-container");
   if (hc) promises.push(loadComponent("header-container", "header"));
   if (fc) promises.push(loadComponent("footer-container", "footer"));
-  if (promises.length === 0) { log("No containers found"); return; }
-  Promise.all(promises).then(() => log("All components loaded")).catch(err => error("Some components failed:", err));
+  if (promises.length === 0) { 
+    log("No containers found - skipping component loading");
+    initMobileMenu();
+    return; 
+  }
+  Promise.all(promises).then(() => {
+    log("All components loaded");
+    initMobileMenu();
+  }).catch(err => error("Some components failed:", err));
 }
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);
 } else {
   initComponents();
 }
+
+setTimeout(function() {
+  const btn = document.querySelector(".mobile-menu");
+  if (btn && !btn._listenerAdded) {
+    log("Late mobile menu initialization");
+    initMobileMenu();
+  }
+}, 500);

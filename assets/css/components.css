@@ -1,12 +1,47 @@
+/* Mobile menu button - hidden by default on desktop */
+.mobile-menu {
+  display: none;
+  background: transparent;
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40px;
+  height: 32px;
+  align-items: center;
+}
+.mobile-menu span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Show mobile menu on small screens */
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: flex;
+  }
+  .alsania-nav {
+    display: none;
+  }
+  .alsania-nav.active {
+    display: flex !important;
+  }
+}
+
 /* Mobile menu active state */
 .alsania-nav.active {
-  display: flex !important;
   flex-direction: column;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--bg-secondary);
+  background: var(--bg-secondary, #1a1a2e);
   padding: 20px;
   z-index: 999;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -16,5 +51,5 @@
   gap: 10px;
 }
 .mobile-menu.active {
-  border-color: var(--accent);
+  border-color: var(--accent, #667eea);
 }

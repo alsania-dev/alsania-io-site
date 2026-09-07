@@ -139,36 +139,65 @@ function initMobileMenu() {
   // Wait for DOM to be ready
   setTimeout(function() {
     const btn = document.querySelector(".mobile-menu");
-    if (!btn) {
-      log("Mobile menu button not found");
-      return;
-    }
-    log("Initializing mobile menu...");
     const nav = document.querySelector(".alsania-nav");
-    if (!nav) {
-      log("Nav not found");
+    
+    if (!btn || !nav) {
+      log("Mobile menu button or nav not found");
       return;
     }
     
-    // Remove existing listeners by cloning
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
+    log("Initializing mobile menu...");
     
-    newBtn.addEventListener("click", function(e) {
+    // Toggle mobile menu on hamburger click
+    btn.addEventListener("click", function(e) {
       e.stopPropagation();
       nav.classList.toggle("active");
-      this.classList.toggle("active");
+      btn.classList.toggle("active");
       log("Mobile menu toggled");
     });
     
+    // Close menu when clicking outside
     document.addEventListener("click", function(e) {
-      if (!nav.contains(e.target) && !newBtn.contains(e.target)) {
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
         nav.classList.remove("active");
-        newBtn.classList.remove("active");
+        btn.classList.remove("active");
       }
     });
     
-    log("Mobile menu initialized");
+    // Handle dropdown toggles on mobile
+    const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener("click", function(e) {
+        // On mobile, toggle the dropdown menu instead of navigating
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const parentLi = this.closest(".dropdown");
+          if (parentLi) {
+            const menu = parentLi.querySelector(".dropdown-menu");
+            if (menu) {
+              menu.classList.toggle("open");
+              log("Dropdown toggled");
+            }
+          }
+        }
+      });
+    });
+    
+    // Close dropdowns when a link is clicked
+    const navLinks = document.querySelectorAll(".nav-link:not(.dropdown-toggle)");
+    navLinks.forEach(link => {
+      link.addEventListener("click", function() {
+        // Close all dropdowns
+        document.querySelectorAll(".dropdown-menu").forEach(menu => {
+          menu.classList.remove("open");
+        });
+        // Close mobile menu
+        nav.classList.remove("active");
+        btn.classList.remove("active");
+      });
+    });
+    
+    log("Mobile menu initialized successfully");
   }, 200);
 }
 

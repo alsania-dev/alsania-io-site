@@ -11,6 +11,7 @@
   width: 40px;
   height: 32px;
   align-items: center;
+  z-index: 1001;
 }
 .mobile-menu span {
   display: block;
@@ -24,32 +25,86 @@
 /* Show mobile menu on small screens */
 @media (max-width: 768px) {
   .mobile-menu {
-    display: flex;
+    display: flex !important;
   }
   .alsania-nav {
-    display: none;
+    display: none !important;
   }
   .alsania-nav.active {
     display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1a1a2e;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .alsania-nav.active ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .alsania-nav.active ul li {
+    width: 100%;
+  }
+  .alsania-nav.active ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #e0e0e0;
+    text-decoration: none;
+  }
+  .alsania-nav.active ul li a:hover {
+    background: rgba(102, 126, 234, 0.1);
+  }
+  .mobile-menu.active {
+    border-color: #667eea;
   }
 }
 
-/* Mobile menu active state */
-.alsania-nav.active {
-  flex-direction: column;
+/* Dropdown styles */
+.alsania-nav .dropdown {
+  position: relative;
+}
+.alsania-nav .dropdown .dropdown-menu {
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
-  background: var(--bg-secondary, #1a1a2e);
-  padding: 20px;
-  z-index: 999;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  min-width: 200px;
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
 }
-.alsania-nav.active ul {
-  flex-direction: column;
-  gap: 10px;
+.alsania-nav .dropdown:hover .dropdown-menu,
+.alsania-nav .dropdown .dropdown-menu.open {
+  display: block;
 }
-.mobile-menu.active {
-  border-color: var(--accent, #667eea);
+.alsania-nav .dropdown .dropdown-menu li {
+  display: block;
+}
+.alsania-nav .dropdown .dropdown-menu li a {
+  display: block;
+  padding: 8px 20px;
+  color: #e0e0e0;
+  text-decoration: none;
+}
+.alsania-nav .dropdown .dropdown-menu li a:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* Mobile dropdown fix */
+@media (max-width: 768px) {
+  .alsania-nav .dropdown .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    background: rgba(255,255,255,0.05);
+    margin-left: 10px;
+  }
+  .alsania-nav .dropdown .dropdown-menu.open {
+    display: block;
+  }
 }

@@ -3,6 +3,8 @@ const DEBUG = true;
 function log(...args) { if (DEBUG) console.log("[Components]", ...args); }
 function error(...args) { console.error("[Components]", ...args); }
 function getComponentsBasePath() { return window.location.origin + "/components"; }
+
+// Inline components for fallback
 const INLINE_COMPONENTS = {
   "header": `<header class="alsania-header">
   <div class="nav-container">
@@ -19,7 +21,7 @@ const INLINE_COMPONENTS = {
           <ul class="dropdown-menu">
             <li><a href="/tools/nyx/">Nyx Extension</a></li>
             <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
-            <li><a href="/tools/scrypgen/">ScrypGen</a></li>
+            <li><a href="https://github.com/alsania-dev/scrypgen" target="_blank">ScrypGen</a></li>
             <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
           </ul>
         </li>
@@ -30,6 +32,7 @@ const INLINE_COMPONENTS = {
             <li><a href="/rating/">Rate Agents</a></li>
             <li><a href="/claim/">Alsa Faucet</a></li>
             <li><a href="/hilo/">Hi-Lo Game</a></li>
+            <li><a href="/crash/">Crash</a></li>
             <li><a href="/dreamai/">DreamAI Mint</a></li>
             <li><a href="/aed/">AED</a></li>
           </ul>
@@ -109,6 +112,7 @@ const INLINE_COMPONENTS = {
   </div>
 </footer>`
 };
+
 function loadComponent(containerId, componentName) {
   return new Promise((resolve, reject) => {
     const container = document.getElementById(containerId);
@@ -130,25 +134,45 @@ function loadComponent(containerId, componentName) {
     });
   });
 }
+
 function initMobileMenu() {
-  const btn = document.querySelector(".mobile-menu");
-  if (!btn) { log("Mobile menu button not found"); return; }
-  log("Initializing mobile menu...");
-  const nav = document.querySelector(".alsania-nav");
-  if (!nav) { setTimeout(initMobileMenu, 300); return; }
-  btn.addEventListener("click", function(e) {
-    e.stopPropagation();
-    nav.classList.toggle("active");
-    btn.classList.toggle("active");
-    log("Mobile menu toggled");
-  });
-  document.addEventListener("click", function(e) {
-    if (!nav.contains(e.target) && !btn.contains(e.target)) {
-      nav.classList.remove("active");
-      btn.classList.remove("active");
+  // Wait for the header to be fully rendered
+  setTimeout(function() {
+    const btn = document.querySelector(".mobile-menu");
+    if (!btn) {
+      log("Mobile menu button not found, retrying...");
+      setTimeout(initMobileMenu, 500);
+      return;
     }
-  });
+    log("Initializing mobile menu...");
+    const nav = document.querySelector(".alsania-nav");
+    if (!nav) {
+      log("Nav not found, retrying...");
+      setTimeout(initMobileMenu, 500);
+      return;
+    }
+    // Remove any existing listeners
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      nav.classList.toggle("active");
+      this.classList.toggle("active");
+      log("Mobile menu toggled");
+    });
+    
+    document.addEventListener("click", function(e) {
+      if (!nav.contains(e.target) && !newBtn.contains(e.target)) {
+        nav.classList.remove("active");
+        newBtn.classList.remove("active");
+      }
+    });
+    
+    log("Mobile menu initialized");
+  }, 100);
 }
+
 function initComponents() {
   log("Initializing components...");
   const promises = [];
@@ -159,9 +183,13 @@ function initComponents() {
   if (promises.length === 0) { log("No containers found"); return; }
   Promise.all(promises).then(() => {
     log("All components loaded");
-    setTimeout(initMobileMenu, 100);
+    // Initialize mobile menu with multiple retries
+    initMobileMenu();
+    setTimeout(initMobileMenu, 500);
+    setTimeout(initMobileMenu, 1000);
   }).catch(err => error("Some components failed:", err));
 }
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initComponents);
 } else {

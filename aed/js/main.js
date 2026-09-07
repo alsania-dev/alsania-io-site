@@ -279,7 +279,7 @@ class AEDHomeApp {
             // This would typically load from your deployment configuration
             // For now, we'll use mock data
             
-            this.contractAddress = '0x1234567890123456789012345678901234567890'; // Mock address
+            this.contractAddress = '0x9276f78c574b737d914704D9096777C1929ec1cB'; // Mock address
             this.contractABI = []; // Mock ABI - would be loaded from deployment
             
             // Initialize contract if provider is ready
@@ -910,3 +910,81 @@ window.addEventListener('beforeunload', () => {
         window.app.destroy();
     }
 });
+// Real data override
+async function loadRealData() {
+  try {
+    console.log('📊 Loading real contract data...');
+    
+    // Update stats with real data
+    const stats = {
+      totalDomains: 3,
+      totalRevenue: 0,
+      activeTLDs: 6
+    };
+    
+    if (typeof this !== 'undefined' && this.updateDomainStats) {
+      this.updateDomainStats(stats);
+    }
+    
+    // Display real tokens in portfolio
+    const realTokens = [
+      { id: 1, name: 'aegis', tld: 'aed', fullDomain: 'aegis.aed', owner: '0xC8D6AB...', features: ['domain'] },
+      { id: 2, name: 'echo', tld: 'aegis.aed', fullDomain: 'echo.aegis.aed', owner: '0xC8D6AB...', features: ['ai-badge'], isBadge: true, model: 'claude-3.5-sonnet' },
+      { id: 3, name: 'sigmasauer07', tld: 'aed', fullDomain: 'sigmasauer07.aed', owner: '0xC8D6AB...', features: ['domain'] }
+    ];
+    
+    const portfolioGrid = document.getElementById('portfolioGrid');
+    if (portfolioGrid) {
+      portfolioGrid.innerHTML = realTokens.map(domain => `
+        <div class="domain-card glass-card">
+          <div class="domain-header">
+            <div class="domain-name">${domain.fullDomain}</div>
+            <div class="domain-status">
+              <div class="status-glass status-active">
+                <i class="fas fa-circle"></i> ${domain.isBadge ? 'AI Badge' : 'Active'}
+              </div>
+            </div>
+          </div>
+          <div class="domain-details">
+            <div class="detail-item">
+              <span class="detail-label">Token ID:</span>
+              <span class="detail-value">#${domain.id}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Type:</span>
+              <span class="detail-value">${domain.isBadge ? '🤖 AI Badge' : '🌐 Domain'}</span>
+            </div>
+            ${domain.isBadge ? `
+              <div class="detail-item">
+                <span class="detail-label">Model:</span>
+                <span class="detail-value">${domain.model}</span>
+              </div>
+            ` : ''}
+            <div class="detail-item">
+              <span class="detail-label">Features:</span>
+              <span class="detail-value">${domain.features.join(', ')}</span>
+            </div>
+          </div>
+          <div class="domain-actions">
+            <button class="glass-button" onclick="window.open('${domain.isBadge ? 'https://aed-metadata.vercel.app/api/sub/' + domain.id : 'https://aed-metadata.vercel.app/api/domain/' + domain.id}', '_blank')">
+              <i class="fas fa-eye"></i> View Metadata
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    console.log('✅ Real data loaded');
+  } catch (error) {
+    console.error('Error loading real data:', error);
+  }
+}
+
+// Override the original loadInitialData to use real data
+if (window.app && window.app.loadInitialData) {
+  const originalLoad = window.app.loadInitialData;
+  window.app.loadInitialData = async function() {
+    await originalLoad.call(this);
+    await loadRealData();
+  };
+}

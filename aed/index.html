@@ -652,4 +652,131 @@
     <script src="js/agent-ui.js"></script>
     <script src="js/main.js"></script>
 </body>
-</html>
+</html>    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+    </div>
+
+    <style>
+        /* Dark theme default */
+        body.dark-theme {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+            color: #e0e0e0;
+        }
+        
+        body.light-theme {
+            background: #f5f5f7;
+            color: #1a1a1a;
+        }
+        
+        .theme-toggle-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .theme-toggle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 20, 40, 0.8);
+            backdrop-filter: blur(10px);
+            color: #00f5ff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        body.light-theme .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a3a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .theme-toggle-btn:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Hide theme toggle in sections where it might overlap */
+        @media (max-width: 768px) {
+            .theme-toggle-container {
+                top: 70px;
+                right: 10px;
+            }
+            .theme-toggle-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Theme management
+        (function() {
+            // Default to dark theme
+            const defaultTheme = 'dark';
+            let currentTheme = localStorage.getItem('aed-theme') || defaultTheme;
+            
+            // Apply theme
+            function applyTheme(theme) {
+                document.body.classList.remove('dark-theme', 'light-theme');
+                document.body.classList.add(theme + '-theme');
+                localStorage.setItem('aed-theme', theme);
+                currentTheme = theme;
+                
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                }
+                
+                // Update toggle button background
+                const btn = document.getElementById('themeToggle');
+                if (btn) {
+                    if (theme === 'dark') {
+                        btn.style.background = 'rgba(0, 20, 40, 0.8)';
+                        btn.style.color = '#00f5ff';
+                    } else {
+                        btn.style.background = 'rgba(255, 255, 255, 0.9)';
+                        btn.style.color = '#1a1a3a';
+                    }
+                }
+            }
+            
+            // Toggle theme
+            function toggleTheme() {
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            }
+            
+            // Wait for DOM and apply
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    applyTheme(currentTheme);
+                    const btn = document.getElementById('themeToggle');
+                    if (btn) {
+                        btn.addEventListener('click', toggleTheme);
+                    }
+                });
+            } else {
+                applyTheme(currentTheme);
+                const btn = document.getElementById('themeToggle');
+                if (btn) {
+                    btn.addEventListener('click', toggleTheme);
+                }
+            }
+        })();
+    </script>

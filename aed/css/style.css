@@ -1705,3 +1705,265 @@
 * {
   color-adjust: exact !important;
 }
+
+/* ===================================
+   Light Theme Overrides
+   =================================== */
+
+body.light-theme {
+  background: #f0f2f5 !important;
+  color: #1a1a2e !important;
+}
+
+body.light-theme .glass-nav {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-theme .glass-nav-link {
+  color: #1a1a2e !important;
+}
+
+body.light-theme .glass-nav-link:hover {
+  color: #00aaff !important;
+}
+
+body.light-theme .glass-nav-link.active {
+  color: #0077cc !important;
+}
+
+body.light-theme .glass-panel {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .glass-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-theme .glass-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme .panel-title,
+body.light-theme .section-header h2,
+body.light-theme .title-secondary {
+  color: #0a0a1a !important;
+}
+
+body.light-theme p,
+body.light-theme .text-body,
+body.light-theme .hero-description {
+  color: #333 !important;
+}
+
+body.light-theme .hero-subtitle {
+  color: #0077cc !important;
+}
+
+body.light-theme .gradient-text {
+  background: linear-gradient(135deg, #0077cc, #6633cc) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body.light-theme .glass-input {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  color: #1a1a2e !important;
+}
+
+body.light-theme .glass-input::placeholder {
+  color: #888 !important;
+}
+
+body.light-theme .glass-input:focus {
+  border-color: #0077cc !important;
+  box-shadow: 0 0 20px rgba(0, 119, 204, 0.15) !important;
+}
+
+body.light-theme .connect-btn {
+  background: linear-gradient(135deg, #0077cc, #6633cc) !important;
+  color: #ffffff !important;
+}
+
+body.light-theme .connect-btn.connected {
+  background: rgba(0, 200, 80, 0.15) !important;
+  color: #008844 !important;
+  border: 1px solid #008844 !important;
+}
+
+body.light-theme .wallet-status {
+  color: #1a1a2e !important;
+}
+
+body.light-theme .status-glass.status-active {
+  background: rgba(0, 200, 80, 0.1) !important;
+  border: 1px solid #008844 !important;
+  color: #008844 !important;
+}
+
+body.light-theme .status-glass.status-active i {
+  color: #008844 !important;
+}
+
+body.light-theme .stat-number {
+  color: #0077cc !important;
+}
+
+body.light-theme .stat-label {
+  color: #666 !important;
+}
+
+body.light-theme .domain-name {
+  color: #0077cc !important;
+}
+
+body.light-theme .detail-label {
+  color: #666 !important;
+}
+
+body.light-theme .detail-value {
+  color: #0077cc !important;
+}
+
+body.light-theme .agent-id {
+  color: #6633cc !important;
+  background: rgba(102, 51, 204, 0.1) !important;
+}
+
+body.light-theme .agent-icon {
+  background: linear-gradient(135deg, #0077cc, #6633cc) !important;
+}
+
+body.light-theme .score-number {
+  background: linear-gradient(135deg, #0077cc, #6633cc) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body.light-theme .discount-tier {
+  color: #0077cc !important;
+}
+
+body.light-theme .discount-card.featured {
+  border-color: #00aa66 !important;
+  box-shadow: 0 0 30px rgba(0, 170, 102, 0.15) !important;
+}
+
+body.light-theme .discount-card.featured .discount-tier {
+  color: #00aa66 !important;
+}
+
+body.light-theme .discount-badge {
+  color: #00aa66 !important;
+  background: rgba(0, 170, 102, 0.1) !important;
+  border-color: rgba(0, 170, 102, 0.3) !important;
+}
+
+body.light-theme .feature-card .feature-title {
+  color: #0077cc !important;
+}
+
+body.light-theme .feature-card .feature-description {
+  color: #444 !important;
+}
+
+body.light-theme .pricing-card .pricing-title {
+  color: #0077cc !important;
+}
+
+body.light-theme .pricing-card .pricing-price {
+  color: #1a1a2e !important;
+}
+
+body.light-theme .pricing-card .pricing-features li {
+  color: #444 !important;
+}
+
+body.light-theme .pricing-card .pricing-features i {
+  color: #00aa66 !important;
+}
+
+body.light-theme .footer-bottom p {
+  color: #666 !important;
+}
+
+body.light-theme .footer-link {
+  color: #555 !important;
+}
+
+body.light-theme .footer-link:hover {
+  color: #0077cc !important;
+}
+
+body.light-theme .empty-state h3 {
+  color: #0077cc !important;
+}
+
+body.light-theme .empty-state p {
+  color: #555 !important;
+}
+
+body.light-theme .empty-state i {
+  color: #0077cc !important;
+}
+
+body.light-theme .breakdown-total span {
+  color: #0077cc !important;
+}
+
+body.light-theme .form-label {
+  color: #0077cc !important;
+}
+
+body.light-theme .tld-card .tld-name {
+  color: #0077cc !important;
+}
+
+body.light-theme .tld-option input[type="radio"]:checked + .tld-card {
+  background: rgba(0, 119, 204, 0.08) !important;
+  border-color: #0077cc !important;
+}
+
+body.light-theme .feature-option .feature-name {
+  color: #0077cc !important;
+}
+
+body.light-theme .feature-option input[type="checkbox"]:checked ~ .feature-info {
+  background: rgba(0, 119, 204, 0.06) !important;
+  border-color: #0077cc !important;
+}
+
+body.light-theme .batch-summary .stat-value {
+  color: #0077cc !important;
+}
+
+body.light-theme .hero-stats .stat-number {
+  color: #0077cc !important;
+}
+
+body.light-theme .hero-stats .stat-label {
+  color: #666 !important;
+}
+
+/* Theme toggle visibility in light mode */
+body.light-theme .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1a1a3a !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-theme .theme-toggle-btn:hover {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2) !important;
+}

@@ -3,31 +3,29 @@
 # Security headers for all pages
 /*
   X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
 # CORS for assets
 /assets/*
   Access-Control-Allow-Origin: *
 
-# Component files - allow CORS and relax nosniff
+# Component files
 /components/*
   Access-Control-Allow-Origin: *
-  X-Content-Type-Options: nosniff
+
+# JavaScript files - allow loading, set correct MIME type
+/*.js
+  Content-Type: application/javascript
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS files
+/*.css
+  Content-Type: text/css
+  Cache-Control: public, max-age=31536000, immutable
 
 # HTML files - no cache
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
-
-# CSS files - cache for 1 year
-/*.css
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: text/css
-
-# JS files - cache for 1 year
-/*.js
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: application/javascript
 
 # Images
 /*.png

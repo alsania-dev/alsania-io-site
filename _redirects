@@ -1,5 +1,10 @@
 # Alsania.io Redirects
 
+# AED demo - serve files directly (must come before catch-all)
+/aed  /aed/index.html 200
+/aed/ /aed/index.html 200
+/aed/* /aed/:splat 200
+
 # Store redirects
 /dashery https://mnemonic.dashery.com/ 302
 /redbubble https://www.redbubble.com/people/AlsaniaArt/shop 302
@@ -9,9 +14,11 @@
 # DreamAI Mint page
 /dreamai-mint /dreamai/ 301
 /dreamai-mint/ /dreamai/ 301
+/dreamai-mint/* /dreamai/:splat 301
 
 # Crash redirects
 /crash / 302
+/crash/* https://graceful-daffodil-f21571.netlify.app/:splat 302
 
 # Legal page redirects
 /disclaimer /legal/disclaimer.html 301
@@ -19,7 +26,5 @@
 /terms /legal/terms.html 301
 /cookies /legal/disclaimer.html 301
 
-# Splats
-/aed/* /aed/:splat 200
-/dreamai-mint/* /dreamai/:splat 301
-/crash/* https://graceful-daffodil-f21571.netlify.app/:splat 302
+# Fallback - keep this last
+/* /404.html 404

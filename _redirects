@@ -23,6 +23,3 @@
 /privacy /legal/privacy-policy.html 301
 /terms /legal/terms.html 301
 /cookies /legal/disclaimer.html 301
-
-# Fallback - keep this last, redirect to home
-/* / 302

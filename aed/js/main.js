@@ -260,7 +260,7 @@ class AEDHomeApp {
             await this.loadTLDInfo();
 
             // Load user's portfolio (if connected)
-            if (window.web3Provider.isConnected) {
+            if (window.web3Provider if (window.web3Provider.isConnected)if (window.web3Provider.isConnected) window.web3Provider.isConnected) {
                 await this.loadUserPortfolio();
             }
 
@@ -723,7 +723,7 @@ class AEDHomeApp {
      * Portfolio Management Functions
      */
     refreshPortfolio() {
-        if (window.web3Provider.isConnected) {
+        if (window.web3Provider if (window.web3Provider.isConnected)if (window.web3Provider.isConnected) window.web3Provider.isConnected) {
             this.loadUserPortfolio();
             window.glassUI.showNotification('Portfolio refreshed', 'success');
         } else {

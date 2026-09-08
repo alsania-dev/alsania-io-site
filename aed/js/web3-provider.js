@@ -1,7 +1,4 @@
-/**
- * Web3 Provider Integration
- * Handles wallet connections, network switching, and blockchain interactions
- */
+// Web3 Provider - Real MetaMask Connection
 
 class Web3Provider {
     constructor() {
@@ -9,500 +6,257 @@ class Web3Provider {
         this.signer = null;
         this.contract = null;
         this.userAddress = null;
-        this.network = null;
         this.isConnected = false;
-        this.contractAddress = null; // Will be set from deployment
-        this.contractABI = null; // Will be loaded from deployment
+        this.network = null;
+        this.chainId = null;
+        this.eventListeners = {
+            connected: [],
+            disconnected: [],
+            accountChanged: [],
+            transactionSent: [],
+            transactionConfirmed: [],
+            transactionFailed: []
+        };
         
-        this.initialize();
+        this.init();
     }
 
-    async initialize() {
-        try {
-            await this.detectProvider();
-            await this.setupEventListeners();
-            console.log('🔌 Web3 Provider initialized');
-        } catch (error) {
-            console.error('❌ Failed to initialize Web3 Provider:', error);
+    init() {
+        // Check if MetaMask is installed
+        if (typeof window.ethereum !== 'undefined') {
+            console.log('🦊 MetaMask detected');
+            this.provider = window.ethereum;
+            
+            // Handle account changes
+            this.provider.on('accountsChanged', (accounts) => {
+                console.log('🔄 Accounts changed:', accounts);
+                if (accounts.length > 0) {
+                    this.userAddress = accounts[0];
+                    this.isConnected = true;
+                    this.emit('accountChanged', this.userAddress);
+                    this.emit('connected', { address: this.userAddress });
+                    this.updateUI();
+                } else {
+                    this.disconnect();
+                }
+            });
+            
+            // Handle chain changes
+            this.provider.on('chainChanged', (chainId) => {
+                console.log('🔄 Chain changed:', chainId);
+                this.chainId = parseInt(chainId, 16);
+                this.updateUI();
+            });
+            
+            // Check if already connected
+            this.provider.request({ method: 'eth_accounts' })
+                .then(accounts => {
+                    if (accounts && accounts.length > 0) {
+                        this.userAddress = accounts[0];
+                        this.isConnected = true;
+                        this.emit('connected', { address: this.userAddress });
+                        this.updateUI();
+                    }
+                })
+                .catch(err => console.error('Error checking accounts:', err));
+                
+            // Check chain ID
+            this.provider.request({ method: 'eth_chainId' })
+                .then(chainId => {
+                    this.chainId = parseInt(chainId, 16);
+                    console.log('Chain ID:', this.chainId);
+                })
+                .catch(err => console.error('Error getting chain ID:', err));
+                
+        } else {
+            console.log('❌ MetaMask not detected');
+            document.getElementById('connectBtn')?.addEventListener('click', () => {
+                alert('Please install MetaMask to use this dApp');
+            });
         }
     }
 
-    /**
-     * Detect and setup Web3 provider
-     */
-    async detectProvider() {
-        // Check for MetaMask or other injected providers
-        if (typeof window.ethereum !== 'undefined') {
-            this.provider = new ethers.providers.Web3Provider(window.ethereum);
+    async connect() {
+        if (!this.provider) {
+            alert('Please install MetaMask');
+            return;
+        }
+        
+        try {
+            // Request account access
+            const accounts = await this.provider.request({ method: 'eth_requestAccounts' });
             
-            // Try to get the signer immediately
-            try {
-                await this.provider.send("eth_requestAccounts", []);
-                this.signer = this.provider.getSigner();
-                this.userAddress = await this.signer.getAddress();
-                this.network = await this.provider.getNetwork();
+            if (accounts.length > 0) {
+                this.userAddress = accounts[0];
                 this.isConnected = true;
                 
-                console.log('✅ Provider detected and connected');
-                console.log('📍 Address:', this.userAddress);
-                console.log('🌐 Network:', this.network.name, `(Chain ID: ${this.network.chainId})`);
+                // Get chain ID
+                const chainId = await this.provider.request({ method: 'eth_chainId' });
+                this.chainId = parseInt(chainId, 16);
                 
-            } catch (error) {
-                console.log('ℹ️ Provider detected but not connected');
-            }
-        } else {
-            // Fallback to read-only provider
-            console.log('ℹ️ No injected provider found, using read-only mode');
-            // You can add a default provider here for read-only operations
-            // this.provider = new ethers.providers.JsonRpcProvider('https://your-rpc-url');
-        }
-    }
-
-    /**
-     * Setup event listeners for provider changes
-     */
-    setupEventListeners() {
-        if (!window.ethereum) return;
-
-        // Handle account changes
-        window.ethereum.on('accountsChanged', (accounts) => {
-            console.log('👤 Accounts changed:', accounts);
-            if (accounts.length === 0) {
-                this.disconnect();
-            } else {
-                this.userAddress = accounts[0];
+                console.log('✅ Connected:', this.userAddress);
+                console.log('Chain ID:', this.chainId);
+                
+                this.emit('connected', { address: this.userAddress });
                 this.updateUI();
-                this.emit('accountChanged', accounts[0]);
+                
+                return { address: this.userAddress, chainId: this.chainId };
             }
-        });
-
-        // Handle chain changes
-        window.ethereum.on('chainChanged', (chainId) => {
-            console.log('🔗 Chain changed:', chainId);
-            window.location.reload(); // Reload to ensure proper network setup
-        });
-
-        // Handle disconnect
-        window.ethereum.on('disconnect', (error) => {
-            console.log('🔌 Provider disconnected:', error);
-            this.disconnect();
-        });
-    }
-
-    /**
-     * Connect wallet
-     */
-    async connectWallet() {
-        try {
-            if (!window.ethereum) {
-                throw new Error('No Web3 provider detected. Please install MetaMask.');
-            }
-
-            // Request account access
-            await this.provider.send("eth_requestAccounts", []);
-            
-            // Get signer and address
-            this.signer = this.provider.getSigner();
-            this.userAddress = await this.signer.getAddress();
-            this.network = await this.provider.getNetwork();
-            this.isConnected = true;
-
-            console.log('✅ Wallet connected successfully');
-            console.log('📍 Address:', this.userAddress);
-            console.log('🌐 Network:', this.network.name, `(Chain ID: ${this.network.chainId})`);
-
-            // Update UI
-            this.updateUI();
-            this.emit('connected', {
-                address: this.userAddress,
-                network: this.network
-            });
-
-            return {
-                success: true,
-                address: this.userAddress,
-                network: this.network
-            };
-
         } catch (error) {
-            console.error('❌ Failed to connect wallet:', error);
-            this.emit('connectionError', error);
-            
-            return {
-                success: false,
-                error: error.message
-            };
-        }
-    }
-
-    /**
-     * Disconnect wallet
-     */
-    disconnect() {
-        this.signer = null;
-        this.userAddress = null;
-        this.isConnected = false;
-        
-        console.log('🔌 Wallet disconnected');
-        
-        this.updateUI();
-        this.emit('disconnected');
-    }
-
-    /**
-     * Switch network
-     */
-    async switchNetwork(chainId) {
-        try {
-            if (!window.ethereum) {
-                throw new Error('No Web3 provider detected.');
-            }
-
-            await window.ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: chainId }]
-            });
-
-            console.log(`✅ Switched to network: ${chainId}`);
-            return { success: true };
-
-        } catch (error) {
-            console.error('❌ Failed to switch network:', error);
-            
-            // If network doesn't exist, try to add it
-            if (error.code === 4902) {
-                return await this.addNetwork(chainId);
-            }
-            
-            return {
-                success: false,
-                error: error.message
-            };
-        }
-    }
-
-    /**
-     * Add network to wallet
-     */
-    async addNetwork(chainId) {
-        try {
-            const networkConfig = this.getNetworkConfig(chainId);
-            if (!networkConfig) {
-                throw new Error(`Network configuration not found for chain ID: ${chainId}`);
-            }
-
-            await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [networkConfig]
-            });
-
-            console.log(`✅ Added network: ${networkConfig.chainName}`);
-            return { success: true };
-
-        } catch (error) {
-            console.error('❌ Failed to add network:', error);
-            return {
-                success: false,
-                error: error.message
-            };
-        }
-    }
-
-    /**
-     * Get network configuration
-     */
-    getNetworkConfig(chainId) {
-        const networks = {
-            '0x89': { // Polygon Mainnet
-                chainId: '0x89',
-                chainName: 'Polygon Mainnet',
-                nativeCurrency: {
-                    name: 'MATIC',
-                    symbol: 'MATIC',
-                    decimals: 18
-                },
-                rpcUrls: ['https://polygon-rpc.com'],
-                blockExplorerUrls: ['https://polygonscan.com']
-            },
-            '0x13882': { // Polygon Amoy Testnet
-                chainId: '0x13882',
-                chainName: 'Polygon Amoy Testnet',
-                nativeCurrency: {
-                    name: 'MATIC',
-                    symbol: 'MATIC',
-                    decimals: 18
-                },
-                rpcUrls: ['https://rpc-amoy.polygon.technology'],
-                blockExplorerUrls: ['https://amoy.polygonscan.com']
-            },
-            '0x13881': { // Polygon Mumbai Testnet (deprecated)
-                chainId: '0x13881',
-                chainName: 'Polygon Mumbai Testnet',
-                nativeCurrency: {
-                    name: 'MATIC',
-                    symbol: 'MATIC',
-                    decimals: 18
-                },
-                rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
-                blockExplorerUrls: ['https://mumbai.polygonscan.com']
-            }
-        };
-
-        return networks[chainId];
-    }
-
-    /**
-     * Get current network information
-     */
-    async getNetworkInfo() {
-        if (!this.provider) {
-            throw new Error('No provider available');
-        }
-
-        try {
-            const network = await this.provider.getNetwork();
-            const balance = this.signer ? await this.signer.getBalance() : null;
-            const blockNumber = await this.provider.getBlockNumber();
-            const gasPrice = await this.provider.getGasPrice();
-
-            return {
-                chainId: network.chainId,
-                name: network.name,
-                balance: balance ? ethers.utils.formatEther(balance) : null,
-                blockNumber: blockNumber,
-                gasPrice: ethers.utils.formatUnits(gasPrice, 'gwei')
-            };
-        } catch (error) {
-            console.error('❌ Failed to get network info:', error);
-            throw error;
-        }
-    }
-
-    /**
-     * Initialize contract instance
-     */
-    async initializeContract(contractAddress, contractABI) {
-        try {
-            if (!this.signer) {
-                throw new Error('No signer available. Please connect wallet first.');
-            }
-
-            this.contractAddress = contractAddress;
-            this.contractABI = contractABI;
-            this.contract = new ethers.Contract(contractAddress, contractABI, this.signer);
-
-            console.log('📋 Contract initialized:', contractAddress);
-            return this.contract;
-
-        } catch (error) {
-            console.error('❌ Failed to initialize contract:', error);
-            throw error;
-        }
-    }
-
-    /**
-     * Get contract instance (read-only if no signer)
-     */
-    getContract() {
-        if (!this.contractAddress || !this.contractABI) {
-            throw new Error('Contract not initialized');
-        }
-
-        if (this.signer) {
-            return new ethers.Contract(this.contractAddress, this.contractABI, this.signer);
-        } else {
-            return new ethers.Contract(this.contractAddress, this.contractABI, this.provider);
-        }
-    }
-
-    /**
-     * Estimate gas for a transaction
-     */
-    async estimateGas(functionName, params = []) {
-        try {
-            const contract = this.getContract();
-            const gasEstimate = await contract.estimateGas[functionName](...params);
-            
-            console.log(`⛽ Gas estimate for ${functionName}:`, gasEstimate.toString());
-            return gasEstimate;
-
-        } catch (error) {
-            console.error(`❌ Failed to estimate gas for ${functionName}:`, error);
-            throw error;
-        }
-    }
-
-    /**
-     * Send transaction with gas estimation
-     */
-    async sendTransaction(functionName, params = [], options = {}) {
-        try {
-            if (!this.signer) {
-                throw new Error('No signer available. Please connect wallet first.');
-            }
-
-            const contract = this.getContract();
-            
-            // Estimate gas if not provided
-            if (!options.gasLimit) {
-                const gasEstimate = await this.estimateGas(functionName, params);
-                options.gasLimit = gasEstimate.mul(110).div(100); // Add 10% buffer
-            }
-
-            console.log(`🚀 Sending transaction: ${functionName}`);
-            console.log('📋 Parameters:', params);
-            console.log('⚙️ Options:', options);
-
-            const tx = await contract[functionName](...params, options);
-            
-            console.log('📤 Transaction sent:', tx.hash);
-            this.emit('transactionSent', { hash: tx.hash, function: functionName });
-
-            return tx;
-
-        } catch (error) {
-            console.error(`❌ Transaction failed: ${functionName}`, error);
-            this.emit('transactionError', { error, function: functionName });
-            throw error;
-        }
-    }
-
-    /**
-     * Wait for transaction confirmation
-     */
-    async waitForTransaction(txHash, confirmations = 1) {
-        try {
-            console.log(`⏳ Waiting for ${confirmations} confirmation(s) for tx:`, txHash);
-            
-            const receipt = await this.provider.waitForTransaction(txHash, confirmations);
-            
-            console.log('✅ Transaction confirmed:', receipt);
-            this.emit('transactionConfirmed', receipt);
-            
-            return receipt;
-
-        } catch (error) {
-            console.error('❌ Transaction confirmation failed:', error);
+            console.error('❌ Connection failed:', error);
             this.emit('transactionFailed', error);
             throw error;
         }
     }
 
-    /**
-     * Get transaction receipt
-     */
-    async getTransactionReceipt(txHash) {
+    disconnect() {
+        this.userAddress = null;
+        this.isConnected = false;
+        this.emit('disconnected');
+        this.updateUI();
+    }
+
+    async getSigner() {
+        if (!this.provider) return null;
+        if (!this.isConnected) {
+            await this.connect();
+        }
+        
         try {
-            const receipt = await this.provider.getTransactionReceipt(txHash);
+            const { ethers } = window;
+            if (!ethers) {
+                console.error('Ethers not loaded');
+                return null;
+            }
+            const provider = new ethers.BrowserProvider(this.provider);
+            this.signer = await provider.getSigner();
+            return this.signer;
+        } catch (error) {
+            console.error('Error getting signer:', error);
+            return null;
+        }
+    }
+
+    async getContract(contractAddress, abi) {
+        try {
+            const signer = await this.getSigner();
+            if (!signer) return null;
+            
+            const { ethers } = window;
+            if (!ethers) return null;
+            
+            this.contract = new ethers.Contract(contractAddress, abi, signer);
+            return this.contract;
+        } catch (error) {
+            console.error('Error getting contract:', error);
+            return null;
+        }
+    }
+
+    async sendTransaction(tx) {
+        try {
+            this.emit('transactionSent', tx);
+            const receipt = await tx.wait();
+            this.emit('transactionConfirmed', receipt);
             return receipt;
         } catch (error) {
-            console.error('❌ Failed to get transaction receipt:', error);
+            console.error('Transaction failed:', error);
+            this.emit('transactionFailed', error);
             throw error;
         }
     }
 
-    /**
-     * Format wei to ether
-     */
-    formatEther(wei) {
-        return ethers.utils.formatEther(wei);
-    }
-
-    /**
-     * Parse ether to wei
-     */
-    parseEther(ether) {
-        return ethers.utils.parseEther(ether);
-    }
-
-    /**
-     * Format units
-     */
-    formatUnits(value, unit = 'ether') {
-        return ethers.utils.formatUnits(value, unit);
-    }
-
-    /**
-     * Parse units
-     */
-    parseUnits(value, unit = 'ether') {
-        return ethers.utils.parseUnits(value, unit);
-    }
-
-    /**
-     * Update UI based on connection status
-     */
     updateUI() {
         const connectBtn = document.getElementById('connectBtn');
         const walletAddress = document.getElementById('walletAddress');
         const statusIndicator = document.getElementById('statusIndicator');
-
-        if (this.isConnected) {
-            if (connectBtn) {
-                connectBtn.innerHTML = '<i class="fas fa-check-circle"></i> Connected';
-                connectBtn.classList.add('connected');
-                connectBtn.disabled = false;
-            }
+        
+        if (this.isConnected && this.userAddress) {
+            const shortAddress = `${this.userAddress.slice(0, 6)}...${this.userAddress.slice(-4)}`;
             
             if (walletAddress) {
-                const shortAddress = `${this.userAddress.slice(0, 6)}...${this.userAddress.slice(-4)}`;
                 walletAddress.textContent = shortAddress;
+                walletAddress.style.color = '#39ff14';
+            }
+            
+            if (connectBtn) {
+                connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${shortAddress}`;
+                connectBtn.classList.add('connected');
+                connectBtn.style.background = 'rgba(57, 255, 20, 0.15)';
+                connectBtn.style.border = '1px solid #39ff14';
+                connectBtn.style.color = '#39ff14';
             }
             
             if (statusIndicator) {
                 statusIndicator.classList.add('connected');
+                statusIndicator.style.background = '#39ff14';
+                statusIndicator.style.boxShadow = '0 0 10px #39ff14';
             }
         } else {
+            if (walletAddress) {
+                walletAddress.textContent = 'Connect Wallet';
+                walletAddress.style.color = '';
+            }
+            
             if (connectBtn) {
                 connectBtn.innerHTML = '<i class="fas fa-plug"></i> Connect';
                 connectBtn.classList.remove('connected');
-                connectBtn.disabled = false;
-            }
-            
-            if (walletAddress) {
-                walletAddress.textContent = 'Connect Wallet';
+                connectBtn.style.background = 'linear-gradient(135deg, #00f5ff, #ff00ff)';
+                connectBtn.style.border = 'none';
+                connectBtn.style.color = '#000';
             }
             
             if (statusIndicator) {
                 statusIndicator.classList.remove('connected');
+                statusIndicator.style.background = '#ff4444';
+                statusIndicator.style.boxShadow = 'none';
             }
         }
     }
 
-    /**
-     * Event emitter
-     */
-    emit(event, data) {
-        window.dispatchEvent(new CustomEvent(`web3:${event}`, { detail: data }));
-    }
-
-    /**
-     * Event listener
-     */
+    // Event emitter methods
     on(event, callback) {
-        window.addEventListener(`web3:${event}`, (e) => callback(e.detail));
+        if (this.eventListeners[event]) {
+            this.eventListeners[event].push(callback);
+        }
     }
 
-    /**
-     * Remove event listener
-     */
     off(event, callback) {
-        window.removeEventListener(`web3:${event}`, callback);
+        if (this.eventListeners[event]) {
+            this.eventListeners[event] = this.eventListeners[event].filter(cb => cb !== callback);
+        }
     }
 
-    /**
-     * Get current connection status
-     */
-    getConnectionStatus() {
-        return {
-            isConnected: this.isConnected,
-            address: this.userAddress,
-            network: this.network,
-            provider: this.provider,
-            signer: this.signer
-        };
+    emit(event, data) {
+        if (this.eventListeners[event]) {
+            this.eventListeners[event].forEach(callback => {
+                try {
+                    callback(data);
+                } catch (error) {
+                    console.error(`Error in ${event} listener:`, error);
+                }
+            });
+        }
     }
 }
 
-// Initialize Web3 Provider
-window.web3Provider = new Web3Provider();
+// Initialize global web3 provider
+const web3Provider = new Web3Provider();
+window.web3Provider = web3Provider;
+
+// Setup connect button
+document.addEventListener('DOMContentLoaded', () => {
+    const connectBtn = document.getElementById('connectBtn');
+    if (connectBtn) {
+        connectBtn.addEventListener('click', async () => {
+            try {
+                await web3Provider.connect();
+            } catch (error) {
+                console.error('Connection error:', error);
+            }
+        });
+    }
+    
+    // Initial UI update
+    web3Provider.updateUI();
+});

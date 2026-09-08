@@ -1,4 +1,4 @@
-// AED Main - Simplified version
+// AED Main - with wallet event integration
 console.log('🚀 AED App starting...');
 
 let appState = { isConnected: false, address: null };
@@ -6,8 +6,38 @@ let appState = { isConnected: false, address: null };
 document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 DOM ready');
     
+    // Set up wallet event listeners
+    if (window.web3Provider) {
+        window.web3Provider.on('connected', function(data) {
+            console.log('🔗 Wallet connected:', data.address);
+            appState.isConnected = true;
+            appState.address = data.address;
+            updateUI();
+            updatePortfolio();
+        });
+        
+        window.web3Provider.on('disconnected', function() {
+            console.log('🔌 Wallet disconnected');
+            appState.isConnected = false;
+            appState.address = null;
+            updateUI();
+        });
+        
+        window.web3Provider.on('accountChanged', function(data) {
+            console.log('🔄 Account changed:', data.address);
+            appState.address = data.address;
+            appState.isConnected = true;
+            updateUI();
+            updatePortfolio();
+        });
+    } else {
+        console.warn('⚠️ web3Provider not available');
+    }
+    
+    // Also handle the connect button directly as fallback
     const connectBtn = document.getElementById('connectBtn');
-    if (connectBtn) {
+    if (connectBtn && !connectBtn._listenerAttached) {
+        connectBtn._listenerAttached = true;
         connectBtn.addEventListener('click', async function() {
             if (window.web3Provider) {
                 try {
@@ -19,26 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 alert('Please install MetaMask');
             }
-        });
-    }
-    
-    if (window.web3Provider) {
-        window.web3Provider.on('connected', function(data) {
-            appState.isConnected = true;
-            appState.address = data.address;
-            updateUI();
-            updatePortfolio();
-        });
-        window.web3Provider.on('disconnected', function() {
-            appState.isConnected = false;
-            appState.address = null;
-            updateUI();
-        });
-        window.web3Provider.on('accountChanged', function(address) {
-            appState.address = address;
-            appState.isConnected = true;
-            updateUI();
-            updatePortfolio();
         });
     }
     
@@ -54,11 +64,17 @@ function updateUI() {
     if (appState.isConnected && appState.address) {
         const short = appState.address.slice(0,6) + '...' + appState.address.slice(-4);
         if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator connected"></span> ${short}`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`; connectBtn.classList.add('connected'); }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`;
+            connectBtn.classList.add('connected');
+        }
         if (statusIndicator) statusIndicator.classList.add('connected');
     } else {
         if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator"></span> Connect Wallet`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`; connectBtn.classList.remove('connected'); }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`;
+            connectBtn.classList.remove('connected');
+        }
         if (statusIndicator) statusIndicator.classList.remove('connected');
     }
 }

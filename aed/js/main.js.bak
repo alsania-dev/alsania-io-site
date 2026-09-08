@@ -1,11 +1,18 @@
 // AED Main - Simplified version
 console.log('🚀 AED App starting...');
 
-let appState = { isConnected: false, address: null };
+// Global state
+let appState = {
+    isConnected: false,
+    address: null,
+    chainId: null
+};
 
+// DOM ready
 document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 DOM ready');
     
+    // Connect button
     const connectBtn = document.getElementById('connectBtn');
     if (connectBtn) {
         connectBtn.addEventListener('click', async function() {
@@ -22,19 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Wallet status update from web3 provider
     if (window.web3Provider) {
         window.web3Provider.on('connected', function(data) {
+            console.log('🔗 Connected:', data);
             appState.isConnected = true;
             appState.address = data.address;
             updateUI();
             updatePortfolio();
         });
         window.web3Provider.on('disconnected', function() {
+            console.log('🔌 Disconnected');
             appState.isConnected = false;
             appState.address = null;
             updateUI();
         });
         window.web3Provider.on('accountChanged', function(address) {
+            console.log('👤 Account changed:', address);
             appState.address = address;
             appState.isConnected = true;
             updateUI();
@@ -42,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Update portfolio with real data
     updatePortfolio();
     updateStats();
 });
@@ -53,13 +65,27 @@ function updateUI() {
     
     if (appState.isConnected && appState.address) {
         const short = appState.address.slice(0,6) + '...' + appState.address.slice(-4);
-        if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator connected"></span> ${short}`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`; connectBtn.classList.add('connected'); }
-        if (statusIndicator) statusIndicator.classList.add('connected');
+        if (walletStatus) {
+            walletStatus.innerHTML = `<span class="status-indicator connected"></span> ${short}`;
+        }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`;
+            connectBtn.classList.add('connected');
+        }
+        if (statusIndicator) {
+            statusIndicator.classList.add('connected');
+        }
     } else {
-        if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator"></span> Connect Wallet`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`; connectBtn.classList.remove('connected'); }
-        if (statusIndicator) statusIndicator.classList.remove('connected');
+        if (walletStatus) {
+            walletStatus.innerHTML = `<span class="status-indicator"></span> Connect Wallet`;
+        }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`;
+            connectBtn.classList.remove('connected');
+        }
+        if (statusIndicator) {
+            statusIndicator.classList.remove('connected');
+        }
     }
 }
 
@@ -77,10 +103,17 @@ function updatePortfolio() {
         <div class="domain-card glass-card">
             <div class="domain-header">
                 <div class="domain-name">${t.domain}</div>
-                <div class="domain-status"><span class="status-glass"><i class="fas fa-circle"></i> ${t.type}</span></div>
+                <div class="domain-status">
+                    <span class="status-glass">
+                        <i class="fas fa-circle"></i> ${t.type}
+                    </span>
+                </div>
             </div>
             <div class="domain-details">
-                <div class="detail-item"><span class="detail-label">Token ID:</span><span class="detail-value">#${t.id}</span></div>
+                <div class="detail-item">
+                    <span class="detail-label">Token ID:</span>
+                    <span class="detail-value">#${t.id}</span>
+                </div>
                 ${t.model ? `<div class="detail-item"><span class="detail-label">Model:</span><span class="detail-value">${t.model}</span></div>` : ''}
             </div>
             <div class="domain-actions">

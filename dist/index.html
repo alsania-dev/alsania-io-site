@@ -1,415 +1,782 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-adsense-account" content="ca-pub-5211456845193148" />
-    <title>Alsania – Sovereign Technology Ecosystem</title>
-    <meta
-      name="description"
-      content="Alsania is a sovereign technology ecosystem for creators and innovators. Own your identity, control your data, and build with tools that respect your sovereignty."
-    />
-
-    <!-- Google AdSense -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5211456845193148"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- Google Analytics (gtag.js) - Consent Mode ready -->
-    <!-- Consent is managed by loadComponents.js -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-F9836QMBR3"
-    ></script>
-    <script>
-      // Initialize dataLayer
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      
-      // Default consent state - will be updated by loadComponents.js
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'analytics_storage': 'denied',
-        'functionality_storage': 'denied',
-        'personalization_storage': 'denied',
-        'security_storage': 'granted',
-        'wait_for_update': 500
-      });
-      
-      gtag("js", new Date());
-      gtag("config", "G-F9836QMBR3");
-    </script>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alsania Enhanced Domains - Web3 Domain Names</title>
+    <meta name="description" content="The future of Web3 domains - Secure, decentralized, and enhanced domain names on the blockchain">
+    
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../shared/glass-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Web3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.2/ethers.umd.min.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-icon">Æ</div>
+                <div class="logo-text">ALSANIA</div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">Initializing Web3 Connection...</div>
+        </div>
+    </div>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="particle-field"></div>
+        <div class="grid-overlay"></div>
+        <div class="scanline"></div>
+    </div>
 
-    <!-- Path fix for GitHub Pages -->
-    <script src="assets/js/fix-paths.js"></script>
-    <style>
-      .about-content p {
-        margin-bottom: 1.2rem;
-        line-height: 1.6;
-      }
-      .mt-3 {
-        margin-top: 1.5rem;
-      }
-      .text-center {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Header Component -->
-    <header class="alsania-header">
-  <div class="nav-container">
-    <a href="/" class="alsania-logo">
-      <div class="logo-container">
-        <span class="logo-text">
-          ALSANIA I/O
-        </span>
-      </div>
-    </a>
-    <nav class="alsania-nav">
-      <ul>
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li class="dropdown">
-          <a href="#" class="nav-link dropdown-toggle">Products <span class="arrow">▾</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/tools/nyx/">Nyx Extension</a></li>
-            <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
-            <li><a href="/tools/scrypgen/">ScrypGen</a></li>
-            <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="nav-link dropdown-toggle">Ecosystem <span class="arrow">▾</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/rep/">Agent Registry</a></li>
-            <li><a href="/rating/">Rate Agents</a></li>
-            <li><a href="/claim/">Alsa Faucet</a></li>
-            <li><a href="/hilo/">Hi-Lo Game</a></li>
-            <li><a href="/crash/">Crash</a></li>
-            <li><a href="/dreamai/">DreamAI Mint</a></li>
-            <li><a href="/aed/">AED</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="nav-link dropdown-toggle">Community <span class="arrow">▾</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/about/">About</a></li>
-            <li><a href="/story/">Book of Alsania</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="/contribute/">Contribute</a></li>
-            <li><a href="/donate/">Donate</a></li>
-          </ul>
-        </li>
-        <li><a href="/shop/" class="nav-link">Merch</a></li>
-        <li><a href="/services/" class="nav-link">Services</a></li>
-        <li><a href="/contact/" class="nav-link">Contact</a></li>
-      </ul>
+    <!-- Navigation -->
+    <nav class="glass-nav" id="mainNav">
+        <div class="glass-container">
+            <div class="nav-content">
+                <a href="#" class="glass-nav-brand">
+                    <div class="brand-icon">Æ</div>
+                    <span>ALSANIA</span>
+                </a>
+                
+                <div class="glass-nav-menu" id="navMenu">
+                    <a href="#home" class="glass-nav-link active" data-section="home">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="#domains" class="glass-nav-link" data-section="domains">
+                        <i class="fas fa-globe"></i> Domains
+                    </a>
+                    <a href="#features" class="glass-nav-link" data-section="features">
+                        <i class="fas fa-star"></i> Features
+                    </a>
+                    <a href="#pricing" class="glass-nav-link" data-section="pricing">
+                        <i class="fas fa-tags"></i> Pricing
+                    </a>
+                    <a href="#portfolio" class="glass-nav-link" data-section="portfolio">
+                        <i class="fas fa-wallet"></i> Portfolio
+                    </a>
+                </div>
+                
+                <div class="nav-actions">
+                    <div class="wallet-status glass-panel" id="walletStatus">
+                        <div class="status-indicator" id="statusIndicator"></div>
+                        <span id="walletAddress">Connect Wallet</span>
+                    </div>
+                    <button class="glass-button connect-btn" id="connectBtn">
+                        <i class="fas fa-plug"></i> Connect
+                    </button>
+                </div>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
     </nav>
-    <div class="header-right">
-      <div id="theme-toggle-container"></div>
-      <button class="mobile-menu" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:space-between;width:30px;height:24px;background:transparent;border:none;cursor:pointer;padding:0;margin-left:12px;">
-        <span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span>
-        <span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span>
-        <span style="display:block;height:3px;width:100%;background-color:#e0e0e0;border-radius:3px;transition:all 0.3s ease;"></span>
-      </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="glass-container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title glow-text">
+                            The Future of
+                            <span class="gradient-text">Web3 Domains</span>
+                        </h1>
+                        <p class="hero-subtitle">Secure • Decentralized • Enhanced</p>
+                        <p class="hero-description">
+                            Own your digital identity with blockchain-powered domain names that never expire. 
+                            Experience the next generation of internet addressing with advanced features, 
+                            subdomain capabilities, and complete decentralization.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalDomains">0</div>
+                                <div class="stat-label">Domains Registered</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalRevenue">0</div>
+                                <div class="stat-label">MATIC Generated</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="activeTLDs">6</div>
+                                <div class="stat-label">Available TLDs</div>
+                            </div>
+                        </div>
+                        <div class="hero-actions">
+                            <button class="glass-button cta-primary" id="getStartedBtn">
+                                <i class="fas fa-rocket"></i> Get Started
+                            </button>
+                            <button class="glass-button cta-secondary" id="learnMoreBtn">
+                                <i class="fas fa-info-circle"></i> Learn More
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="domain-showcase">
+                            <div class="showcase-header">
+                                <span class="showcase-title">Live Domain Search</span>
+                                <div class="status-glass status-active">
+                                    <i class="fas fa-circle"></i> System Online
+                                </div>
+                            </div>
+                            <div class="search-demo">
+                                <input type="text" class="glass-input search-input" 
+                                       placeholder="Enter your desired domain..." 
+                                       id="heroSearchInput">
+                                <div class="tld-selector">
+                                    <select class="glass-input" id="heroTLDSelect">
+                                        <option value="aed">.aed</option>
+                                        <option value="alsa">.alsa</option>
+                                        <option value="07">.07</option>
+                                        <option value="alsania">.alsania</option>
+                                        <option value="fx">.fx</option>
+                                        <option value="echo">.echo</option>
+                                    </select>
+                                </div>
+                                <button class="glass-button search-btn" id="heroSearchBtn">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
+                            </div>
+                            <div class="search-results" id="heroSearchResults">
+                                <div class="result-item placeholder">
+                                    <i class="fas fa-globe"></i>
+                                    <span>Start typing to search for available domains</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Domain Registration Section -->
+        <section id="domains" class="domains-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary">Domain Registration</h2>
+                    <p class="text-body">Secure your digital identity with our enhanced domain system</p>
+                </div>
+                
+                <div class="registration-panel glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">
+                            <i class="fas fa-plus-circle"></i> Register New Domain
+                        </h3>
+                        <div class="panel-actions">
+                            <button class="glass-button" id="refreshTLDsBtn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="registration-form">
+                        <div class="form-group">
+                            <label class="form-label">Domain Name</label>
+                            <div class="input-group">
+                                <input type="text" 
+                                       class="glass-input" 
+                                       id="domainNameInput" 
+                                       placeholder="your-domain-name"
+                                       maxlength="63">
+                                <div class="input-validation">
+                                    <span class="validation-icon" id="nameValidationIcon"></span>
+                                    <span class="validation-text" id="nameValidationText"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Top Level Domain</label>
+                            <div class="tld-grid" id="tldGrid">
+                                <!-- TLD options will be populated dynamically -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Features</label>
+                            <div class="features-grid">
+                                <label class="feature-option">
+                                    <input type="checkbox" id="subdomainFeature">
+                                    <span class="checkmark"></span>
+                                    <div class="feature-info">
+                                        <span class="feature-name">Subdomain Support</span>
+                                        <span class="feature-price" id="subdomainPrice">+ 2.0 MATIC</span>
+                                    </div>
+                                </label>
+                                <label class="feature-option">
+                                    <input type="checkbox" id="metadataFeature">
+                                    <span class="checkmark"></span>
+                                    <div class="feature-info">
+                                        <span class="feature-name">Enhanced Metadata</span>
+                                        <span class="feature-price">+ 0.5 MATIC</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Metadata URI (Optional)</label>
+                            <input type="url" 
+                                   class="glass-input" 
+                                   id="metadataURIInput" 
+                                   placeholder="https://your-metadata.json">
+                        </div>
+                        
+                        <div class="cost-breakdown glass-panel">
+                            <h4 class="breakdown-title">Cost Breakdown</h4>
+                            <div class="breakdown-items" id="costBreakdown">
+                                <div class="breakdown-item">
+                                    <span>Domain Registration</span>
+                                    <span id="baseCost">0.0 MATIC</span>
+                                </div>
+                            </div>
+                            <div class="breakdown-total">
+                                <span>Total Cost</span>
+                                <span id="totalCost">0.0 MATIC</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="glass-button cta-primary" id="registerDomainBtn" disabled>
+                                <i class="fas fa-check-circle"></i> Register Domain
+                            </button>
+                            <button class="glass-button secondary" id="resetFormBtn">
+                                <i class="fas fa-redo"></i> Reset Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Registration -->
+                <div class="batch-registration glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">
+                            <i class="fas fa-layer-group"></i> Batch Registration
+                        </h3>
+                        <div class="batch-controls">
+                            <button class="glass-button" id="addDomainRowBtn">
+                                <i class="fas fa-plus"></i> Add Domain
+                            </button>
+                            <button class="glass-button" id="clearBatchBtn">
+                                <i class="fas fa-trash"></i> Clear All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="batch-domains" id="batchDomains">
+                        <!-- Dynamic domain rows will be added here -->
+                    </div>
+                    
+                    <div class="batch-summary glass-panel">
+                        <h4 class="summary-title">Batch Summary</h4>
+                        <div class="summary-stats">
+                            <div class="stat">
+                                <span class="stat-label">Total Domains:</span>
+                                <span class="stat-value" id="batchCount">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Total Cost:</span>
+                                <span class="stat-value" id="batchTotalCost">0.0 MATIC</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Est. Gas:</span>
+                                <span class="stat-value" id="batchGasCost">~0.0 MATIC</span>
+                            </div>
+                        </div>
+                        <button class="glass-button cta-primary" id="registerBatchBtn" disabled>
+                            <i class="fas fa-layer-group"></i> Register Batch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary">Your Domain Portfolio</h2>
+                    <p class="text-body">Manage your registered domains and subdomains</p>
+                </div>
+                
+                <div class="portfolio-controls glass-panel">
+                    <div class="controls-left">
+                        <input type="text" 
+                               class="glass-input" 
+                               id="portfolioSearch" 
+                               placeholder="Search domains...">
+                        <select class="glass-input" id="portfolioFilter">
+                            <option value="all">All Domains</option>
+                            <option value="domains">Top-level Domains</option>
+                            <option value="subdomains">Subdomains</option>
+                            <option value="forsale">For Sale</option>
+                        </select>
+                    </div>
+                    <div class="controls-right">
+                        <button class="glass-button" id="refreshPortfolioBtn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button class="glass-button" id="exportPortfolioBtn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <!-- Domain cards will be populated dynamically -->
+                    <div class="empty-state">
+                        <i class="fas fa-globe-americas"></i>
+                        <h3>No domains found</h3>
+                        <p>Register your first domain to get started</p>
+                        <button class="glass-button cta-primary" onclick="scrollToSection('domains')">
+                            Register Domain
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <!-- Agent Registry Section -->
+        <!-- Reputation Section -->
+        <section id="reputation" class="reputation-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary"><i class="fas fa-star"></i> Agent Reputation</h2>
+                    <p class="text-body">Weighted reputation scoring with fee discounts</p>
+                </div>
+                
+                <div class="reputation-panel glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">
+                            <i class="fas fa-chart-bar"></i> Reputation Overview
+                        </h3>
+                        <div class="panel-actions">
+                            <button class="glass-button" id="refreshReputationBtn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="reputation-stats glass-panel">
+                        <div class="reputation-main">
+                            <div class="reputation-score">
+                                <span class="score-number" id="reputationScore">—</span>
+                                <span class="score-label">Weighted Score</span>
+                            </div>
+                            <div class="reputation-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Total Ratings</span>
+                                    <span class="detail-value" id="totalRatings">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Discount Tier</span>
+                                    <span class="detail-value" id="discountTier">—</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Effective Fee</span>
+                                    <span class="detail-value" id="effectiveFee">2.5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reputation-chart" id="reputationChart">
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Connect wallet to view reputation data</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fee-discounts glass-panel">
+                        <h4 class="panel-title">Fee Discount Tiers</h4>
+                        <div class="discount-grid">
+                            <div class="discount-card">
+                                <div class="discount-tier">Tier 1</div>
+                                <div class="discount-threshold">3.5★ → 2.0%</div>
+                                <div class="discount-badge">0.5% off</div>
+                            </div>
+                            <div class="discount-card">
+                                <div class="discount-tier">Tier 2</div>
+                                <div class="discount-threshold">4.0★ → 1.5%</div>
+                                <div class="discount-badge">1.0% off</div>
+                            </div>
+                            <div class="discount-card featured">
+                                <div class="discount-tier">Tier 3</div>
+                                <div class="discount-threshold">4.5★ → 0.5%</div>
+                                <div class="discount-badge">2.0% off</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="agents" class="agents-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary"><i class="fas fa-robot"></i> Agent Registry</h2>
+                    <p class="text-body">Manage your AI agents and their on-chain identities</p>
+                </div>
+                
+                <div class="agents-panel glass-panel">
+                    <div class="panel-header">
+                        <h3 class="panel-title">
+                            <i class="fas fa-list"></i> Your Agents
+                        </h3>
+                        <div class="panel-actions">
+                            <button class="glass-button" id="refreshAgentsBtn">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                            <button class="glass-button cta-primary" id="registerAgentBtn">
+                                <i class="fas fa-plus"></i> Register Agent
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="agents-grid" id="agentsGrid">
+                        <!-- Agent cards will be populated dynamically -->
+                        <div class="empty-state">
+                            <i class="fas fa-robot"></i>
+                            <h3>No agents registered</h3>
+                            <p>Connect your wallet and register your first AI agent</p>
+                            <button class="glass-button cta-primary" onclick="document.getElementById('registerAgentBtn').click()">
+                                Register Agent
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Details Modal -->
+                <div id="agentModal" class="modal-overlay" style="display:none;">
+                    <div class="modal-content glass-panel">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="agentModalTitle">Agent Details</h3>
+                            <button class="modal-close" onclick="document.getElementById('agentModal').style.display='none'">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="agentModalBody">
+                            <!-- Agent details will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features" class="features-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary">Enhanced Features</h2>
+                    <p class="text-body">Discover what makes our domains truly enhanced</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h3 class="feature-title">Never Expire</h3>
+                        <p class="feature-description">Your domain is yours forever. No renewal fees, no expiration dates.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h3 class="feature-title">Subdomain Support</h3>
+                        <p class="feature-description">Create unlimited subdomains and build your digital ecosystem.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3 class="feature-title">Rich Metadata</h3>
+                        <p class="feature-description">Custom images, descriptions, and attributes for your domains.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Reverse Resolution</h3>
+                        <p class="feature-description">Map your address to a human-readable domain name.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3 class="feature-title">Batch Operations</h3>
+                        <p class="feature-description">Register multiple domains efficiently in one transaction.</p>
+                    </div>
+                    
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Analytics</h3>
+                        <p class="feature-description">Track your domain performance and portfolio value.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing-section">
+            <div class="glass-container">
+                <div class="section-header">
+                    <h2 class="title-secondary">Transparent Pricing</h2>
+                    <p class="text-body">Simple, fair pricing with no hidden fees</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Free TLDs</h3>
+                            <div class="pricing-price">0 MATIC</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> .aed</li>
+                            <li><i class="fas fa-check"></i> .alsa</li>
+                            <li><i class="fas fa-check"></i> .07</li>
+                            <li><i class="fas fa-check"></i> Basic metadata</li>
+                        </ul>
+                        <button class="glass-button cta-primary">Get Started</button>
+                    </div>
+                    
+                    <div class="pricing-card glass-card featured">
+                        <div class="pricing-badge">Popular</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Premium TLDs</h3>
+                            <div class="pricing-price">1 MATIC</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> .alsania</li>
+                            <li><i class="fas fa-check"></i> .fx</li>
+                            <li><i class="fas fa-check"></i> .echo</li>
+                            <li><i class="fas fa-check"></i> Enhanced metadata</li>
+                        </ul>
+                        <button class="glass-button cta-primary">Choose Premium</button>
+                    </div>
+                    
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Features</h3>
+                            <div class="pricing-price">+2 MATIC</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Subdomain support</li>
+                            <li><i class="fas fa-check"></i> Custom metadata</li>
+                            <li><i class="fas fa-check"></i> Reverse resolution</li>
+                            <li><i class="fas fa-check"></i> Batch discounts</li>
+                        </ul>
+                        <button class="glass-button cta-primary">Add Features</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <div class="glass-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-icon">Æ</div>
+                    <span>ALSANIA</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://alsania-io.com" class="footer-link" target="_blank">Alsania I/O</a>
+                    <a href="https://alsania-io.com/rep/" class="footer-link" target="_blank">Agent Registry</a>
+                    <a href="https://alsania-io.com/rating/" class="footer-link" target="_blank">Rate Agents</a>
+                    <a href="https://alsania-io.com/" class="footer-link" target="_blank">Ecosystem</a>
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#domains" class="footer-link">Domains</a>
+                    <a href="#features" class="footer-link">Features</a>
+                    <a href="#pricing" class="footer-link">Pricing</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Alsania Enhanced Domains. All rights reserved.copy; 2026 Alsania I/O. All rights reserved. Built with purpose.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Modal Title</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be populated dynamically -->
+            </div>
+        </div>
     </div>
-  </div>
-</header>
 
-
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>The Future is Sovereign</h1>
-          <p>
-            Alsania is building the ecosystem for creators, innovators, and
-            visionaries who believe technology should empower individuals, not
-            corporations. Own your identity, control your data, and build with
-            tools that respect your sovereignty.
-          </p>
-          <div class="hero-actions">
-            <a href="#waitlist" class="alsania-btn">Join the Waitlist</a>
-            <a href="/tools/nyx/" class="alsania-btn secondary" id="download-nyx"
-              >Try Nyx Now</a
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Alsania Section -->
-    <section class="section" style="background: var(--bg-secondary);">
-      <div class="container">
-        <h2 class="section-title">What is Alsania?</h2>
-        <div class="about-content">
-          <p>
-            Alsania is a sovereign technology ecosystem built for creators,
-            innovators, and visionaries who believe technology should empower
-            individuals, not corporations. We're building tools that respect
-            your sovereignty - from the Nyx browser extension that gives AI real
-            hands, to our token system that rewards participation, to our memory
-            systems that give AI lasting identity.
-          </p>
-
-          <p>
-            Unlike platforms that trap your data and control your experience,
-            Alsania puts you in charge. Own your identity through AED domains.
-            Control your data through encrypted systems. Build with tools that
-            don't lock you in. Every project we build is designed to be open,
-            modular, and owned by the community - not by us.
-          </p>
-
-          <p>
-            Started on a phone at 3 AM with a single question - "Can I code a
-            blockchain on my android phone?" - Alsania has grown into a full
-            ecosystem with thousands of users, live products, and a vision for a
-            better internet. What began as a late-night experiment became a
-            movement. Today, we're building AI agents that remember
-            conversations, browser extensions that automate repetitive tasks,
-            and blockchain systems that put sovereignty first.
-          </p>
-
-          <p>
-            We don't have venture capital. We don't have a corporate board. We
-            have a small team of dedicated builders, a community of early
-            adopters, and a belief that technology should work for people - not
-            the other way around. Every line of code, every project, every
-            update comes from a place of purpose, not profit.
-          </p>
-
-          <p>
-            The Alsania ecosystem includes the Nyx browser extension (used by
-            thousands across 13+ AI platforms), the Echo memory system
-            (persistent AI identity), ALSA and SPIRIT tokens (community-driven
-            economies), the hi-lo game (play with real tokens), and the AED
-            domain system (your identity on-chain). And we're just getting
-            started.
-          </p>
-
-          <div class="text-center mt-3">
-            <a href="/story/" class="alsania-btn secondary">Preview The Book →</a>
-            <a href="/blog/" class="alsania-btn" style="margin-left: 1rem;"
-              >Visit Our Blog →</a
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Live Projects Section -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title">Live & Ready Now</h2>
-        <p class="text-center mb-3">
-          These projects are available today. No waiting required.
-        </p>
-        <div class="ecosystem-grid">
-          <div class="ecosystem-item">
-            <h3>Nyx Browser Extension</h3>
-            <p>
-              A powerful browser extension that integrates MCP tools with AI
-              platforms. Automate your workflow across 13+ AI platforms
-              including DeepSeek, Gemini, and GitHub Copilot.
-            </p>
-            <a href="/tools/nyx" class="alsania-btn">Download Nyx</a>
-          </div>
-          <div class="ecosystem-item">
-            <h3>Official Merchandise</h3>
-            <p>
-              Show your support for sovereign technology with official Alsania
-              merchandise. High-quality designs that represent the movement.
-            </p>
-            <a href="/dashery" class="alsania-btn secondary">Shop on Dashery</a>
-          </div>
-          <div class="ecosystem-item">
-            <h3>Community and More</h3>
-            <p>
-              Additional designs and creative merchandise from our community
-              artists on Redbubble. Wear your beliefs.
-            </p>
-            <a href="/redbubble" class="alsania-btn secondary"
-              >Browse Redbubble</a
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Coming Soon Section -->
-    <section id="ecosystem" class="section" style="background: var(--bg-tertiary);">
-      <div class="container">
-        <h2 class="section-title">Coming Soon to Alsania</h2>
-        <p class="text-center mb-3">
-          Get notified when these projects launch. Each solves real problems for
-          creators and developers.
-        </p>
-        <div class="ecosystem-grid">
-          <div class="ecosystem-item">
-            <h3>DevConX (VSCode Extension)</h3>
-            <p>
-              AI assistant integrated directly into VSCode. Get context-aware
-              coding assistance, documentation lookup, and intelligent code
-              completion.
-            </p>
-            <span class="status-badge">In Development</span>
-          </div>
-          <div class="ecosystem-item">
-            <h3>ScrypGen</h3>
-            <p>
-              Natural language to script generator. Describe what you need in
-              plain English, get working scripts in Python, JavaScript, Bash,
-              and more.
-            </p>
-            <span class="status-badge">Alpha Testing</span>
-          </div>
-          <div class="ecosystem-item">
-            <h3>Nyx Unified (Premium)</h3>
-            <p>
-              Enhanced version of Nyx with advanced features: team
-              collaboration, custom tool creation, priority support, and
-              enterprise deployment options.
-            </p>
-            <span class="status-badge">Coming Q2 2026</span>
-          </div>
-          <div class="ecosystem-item">
-            <h3>Alsania Enhanced Domains</h3>
-            <p>
-              Sovereign identity system on the blockchain. Mint, manage, and
-              enhance your unique Alsania domains as your digital identity.
-            </p>
-            <span class="status-badge">In Development</span>
-          </div>
-          <div class="ecosystem-item">
-            <h3>AlsaniaFX Marketplace</h3>
-            <p>
-              Decentralized marketplace for trading sovereign NFTs and tokens
-              with 1% platform fees (not 2.5% like others). Fair trading for
-              creators.
-            </p>
-            <span class="status-badge">Smart Contracts Ready</span>
-          </div>
-          <div class="ecosystem-item">
-            <h3>Encrypted Messaging</h3>
-            <p>
-              Connect with other Alsanians using fully encrypted on-chain
-              messaging and social features. Your conversations belong to you.
-            </p>
-            <span class="status-badge">Planned</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Waitlist Section -->
-      <section id="waitlist" class="section waitlist-section">
-        <div class="container">
-          <h2 class="section-title">Get Project Release Alerts</h2>
-          <p class="text-center mb-2">
-            Be the first to know when new projects launch. We'll email you about
-            releases, updates, and exclusive early access opportunities. No
-            spam, just important announcements.
-          </p>
-          <form id="waitlist-form" class="waitlist-form">
-            <input
-              type="email"
-              id="waitlist-email"
-              name="email"
-              placeholder="Enter your email address"
-              autocomplete="email"
-              required
-              aria-label="Email address for project alerts"
-            />
-            <button type="submit" class="alsania-btn">Get Notified</button>
-          </form>
-          <div id="waitlist-message" class="form-message"></div>
-          <p
-            class="text-center mt-2"
-            style="color: var(--text-muted); font-size: 0.9rem;"
-          >
-            Join 500+ creators already waiting. We respect your privacy and
-            won't share your email.
-          </p>
-        </div>
-      </section>
-
-      <!-- Footer Component -->
-      <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-grid">
-      <div class="footer-section">
-        <h3>Alsania I/O</h3>
-        <p>
-          Sovereign technology ecosystem. Built for creators, owned by no one,
-          open to everyone.
-        </p>
-        <div class="social-links">
-          <a href="https://github.com/alsania-dev" title="GitHub" target="_blank" rel="noopener"><img
-              src="/assets/img/web-icons/github-icon.svg" alt="GitHub" /></a>
-          <a href="https://x.com/sigmasauer07" title="X" target="_blank" rel="noopener"><img
-              src="/assets/img/web-icons/x-icon.svg" alt="X" /></a>
-          <a href="https://t.me/Alsania_io" title="Telegram" target="_blank" rel="noopener"><img
-              src="/assets/img/web-icons/telegram-icon.svg" alt="Telegram" /></a>
-          <a href="https://discord.gg/SaCTgSHqdv" title="Discord" target="_blank" rel="noopener"><img
-              src="/assets/img/web-icons/discord-icon.svg" alt="Discord" /></a>
-        </div>
-      </div>
-      <div class="footer-section">
-        <h3>Live Projects</h3>
-        <ul>
-          <li><a href="/tools/nyx/">Nyx Extension</a></li>
-          <li><a href="/shop/">Official Merch</a></li>
-          <li><a href="/story">Book of Alsania</a></li>
-          <li><a href="/claim">Faucet</a></li>
-          <li><a href="/hilo/">Hi-Lo Game</a></li>
-          <li><a href="/crash/">Crash</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Coming Soon</h3>
-        <ul>
-          <li><a href="/tools/devconx/">DevConX (VSCode)</a></li>
-          <li><a href="/tools/scrypgen/">ScrypGen</a></li>
-          <li><a href="/tools/nyx-unified/">Nyx Unified</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/aed/">AED</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Legal</h3>
-        <ul>
-          <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/legal/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="/legal/terms.html">Terms of Service</a></li>
-          <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
-          <li><a href="/legal/refund-policy.html">Refund Policy</a></li>
-        </ul>
-      </div>
+    <!-- Scripts -->
+    <script src="js/glass-ui.js"></script>
+    <script src="js/web3-provider.js"></script>
+    
+    
+    
+    
+    <script src="js/agent-ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Alsania I/O. All rights reserved. Built with purpose.</p>
-    </div>
-  </div>
-</footer>
 
+    <style>
+        /* Dark theme default */
+        body.dark-theme {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+            color: #e0e0e0;
+        }
+        
+        body.light-theme {
+            background: #f5f5f7;
+            color: #1a1a1a;
+        }
+        
+        .theme-toggle-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .theme-toggle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 20, 40, 0.8);
+            backdrop-filter: blur(10px);
+            color: #00f5ff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        body.light-theme .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a3a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .theme-toggle-btn:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Hide theme toggle in sections where it might overlap */
+        @media (max-width: 768px) {
+            .theme-toggle-container {
+                top: 70px;
+                right: 10px;
+            }
+            .theme-toggle-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 
-      <!-- JavaScript -->
-      <script src="/loadComponents.js"></script>
-    </section>
-  </body>
-</html>
+    <script>
+        // Theme management
+        (function() {
+            // Default to dark theme
+            const defaultTheme = 'dark';
+            let currentTheme = localStorage.getItem('aed-theme') || defaultTheme;
+            
+            // Apply theme
+            function applyTheme(theme) {
+                document.body.classList.remove('dark-theme', 'light-theme');
+                document.body.classList.add(theme + '-theme');
+                localStorage.setItem('aed-theme', theme);
+                currentTheme = theme;
+                
+                const icon = document.getElementById('themeIcon');
+                if (icon) {
+                    icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                }
+                
+                // Update toggle button background
+                const btn = document.getElementById('themeToggle');
+                if (btn) {
+                    if (theme === 'dark') {
+                        btn.style.background = 'rgba(0, 20, 40, 0.8)';
+                        btn.style.color = '#00f5ff';
+                    } else {
+                        btn.style.background = 'rgba(255, 255, 255, 0.9)';
+                        btn.style.color = '#1a1a3a';
+                    }
+                }
+            }
+            
+            // Toggle theme
+            function toggleTheme() {
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            }
+            
+            // Wait for DOM and apply
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    applyTheme(currentTheme);
+                    const btn = document.getElementById('themeToggle');
+                    if (btn) {
+                        btn.addEventListener('click', toggleTheme);
+                    }
+                });
+            } else {
+                applyTheme(currentTheme);
+                const btn = document.getElementById('themeToggle');
+                if (btn) {
+                    btn.addEventListener('click', toggleTheme);
+                }
+            }
+        })();
+    </script>

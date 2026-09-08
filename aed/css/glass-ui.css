@@ -1,0 +1,24 @@
+/* Glass UI - Minimal Version */
+:root { --primary-glow: #00f5ff; --secondary-glow: #ff00ff; --accent-glow: #39ff14; --glass-bg: rgba(0,20,40,0.25); --glass-border: rgba(0,245,255,0.3); --glass-shadow: rgba(0,245,255,0.2); }
+.glass-panel { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 24px; box-shadow: 0 8px 32px var(--glass-shadow); }
+.glass-card { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; transition: all 0.3s ease; }
+.glass-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px var(--glass-shadow); }
+.glass-button { padding: 10px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: 'Rajdhani', sans-serif; }
+.glass-button:hover { transform: scale(1.05); }
+.glass-input { padding: 10px 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-family: 'Rajdhani', sans-serif; transition: all 0.3s ease; }
+.glass-input:focus { outline: none; border-color: var(--primary-glow); box-shadow: 0 0 20px rgba(0,245,255,0.2); }
+.status-glass { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; background: rgba(57,255,20,0.15); border: 1px solid var(--accent-glow); color: var(--accent-glow); }
+.gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.title-secondary { font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 700; color: var(--primary-glow); }
+.text-body { font-size: 1.1rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.hero-title { font-family: 'Orbitron', monospace; font-size: 4rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
+.hero-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: var(--secondary-glow); letter-spacing: 2px; }
+.hero-description { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
+.hero-stats { display: flex; gap: 2rem; margin-bottom: 2rem; }
+.stat-number { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 700; color: var(--primary-glow); }
+.stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; }
+.empty-state { text-align: center; padding: 3rem; }
+.empty-state i { font-size: 3rem; color: var(--primary-glow); margin-bottom: 1rem; }
+.empty-state h3 { font-size: 1.5rem; color: var(--primary-glow); margin-bottom: 0.5rem; }
+.empty-state p { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }

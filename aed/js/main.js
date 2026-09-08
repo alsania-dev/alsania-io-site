@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     await window.web3Provider.connect();
                 } catch (e) {
                     console.error('Connection failed:', e);
+                    alert('Failed to connect: ' + e.message);
                 }
             } else {
                 alert('Please install MetaMask');
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             appState.isConnected = true;
             appState.address = data.address;
             updateUI();
+            updatePortfolio();
         });
         window.web3Provider.on('disconnected', function() {
             console.log('🔌 Disconnected');
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             appState.address = address;
             appState.isConnected = true;
             updateUI();
+            updatePortfolio();
         });
     }
     
@@ -101,9 +104,9 @@ function updatePortfolio() {
             <div class="domain-header">
                 <div class="domain-name">${t.domain}</div>
                 <div class="domain-status">
-                    <div class="status-glass status-active">
+                    <span class="status-glass">
                         <i class="fas fa-circle"></i> ${t.type}
-                    </div>
+                    </span>
                 </div>
             </div>
             <div class="domain-details">

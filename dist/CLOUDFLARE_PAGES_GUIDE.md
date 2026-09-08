@@ -1,7 +1,7 @@
 # Cloudflare Pages Deployment Guide
 
 ## Current Status
-✅ **GitHub Pages:** Live at https://alsania-dev.github.io/alsania-io-site/
+✅ **GitHub Pages:** Live at https://alsania-io.github.io/alsania-io-site/
 🔧 **Cloudflare Pages:** Needs connection to GitHub repo
 
 ## Option 1: Connect Existing Cloudflare Pages to GitHub
@@ -10,7 +10,7 @@
 1. Go to Cloudflare Dashboard → Pages → Your Project
 2. Click "Connect to Git"
 3. Authorize Cloudflare to access GitHub
-4. Select repository: `alsania-dev/alsania-io-site`
+4. Select repository: `alsania-io/alsania-io-site`
 5. Select branch: `main`
 6. **Build Settings:**
    - **Framework preset:** None
@@ -24,7 +24,7 @@
 1. Go to Cloudflare Dashboard → Pages
 2. Click "Create a project"
 3. Click "Connect to Git"
-4. Select `alsania-dev/alsania-io-site` repository
+4. Select `alsania-io/alsania-io-site` repository
 5. Configure:
    - **Project name:** `alsania-io-site` (or any name)
    - **Production branch:** `main`
@@ -103,7 +103,7 @@ If something breaks:
 ## Support
 
 - **Cloudflare Docs:** https://developers.cloudflare.com/pages/
-- **GitHub Repo:** https://github.com/alsania-dev/alsania-io-site
+- **GitHub Repo:** https://github.com/alsania-io/alsania-io-site
 - **Current Status:** All fixes deployed to GitHub Pages
 
 ## Aegis Notes

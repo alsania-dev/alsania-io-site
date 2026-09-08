@@ -1,7 +1,7 @@
 # Alsania I/O — Sovereign Technology Ecosystem
 
 [![Website](https://img.shields.io/badge/Website-alsania--io.com-00ff7f?style=flat-square&logo=google-chrome)](https://alsania-io.com)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live-181717?style=flat-square&logo=github)](https://alsania-dev.github.io/alsania-io-site/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live-181717?style=flat-square&logo=github)](https://alsania-io.github.io/alsania-io-site/)
 [![Cloudflare](https://img.shields.io/badge/Cloudflare_Pages-Deployed-F38020?style=flat-square&logo=cloudflare)](https://alsania-io.com)
 [![License](https://img.shields.io/badge/License-MIT-00ff7f?style=flat-square)](LICENSE)
 
@@ -14,7 +14,7 @@
 | Environment | URL | Purpose |
 |-------------|-----|---------|
 | **Production** | [https://alsania-io.com](https://alsania-io.com) | Main website (Cloudflare Pages) |
-| **GitHub Pages** | [https://alsania-dev.github.io/alsania-io-site/](https://alsania-dev.github.io/alsania-io-site/) | Fallback / GitHub Pages |
+| **GitHub Pages** | [https://alsania-io.github.io/alsania-io-site/](https://alsania-io.github.io/alsania-io-site/) | Fallback / GitHub Pages |
 | **Staging** | [alsania-io-site.pages.dev](https://alsania-io-site.pages.dev) | Cloudflare Pages staging |
 
 ---
@@ -109,7 +109,7 @@ The site is configured for automatic deployment via Cloudflare Pages:
 
 ```bash
 # Clone the repository
-git clone https://github.com/alsania-dev/alsania-io-site.git
+git clone https://github.com/alsania-io/alsania-io-site.git
 cd alsania-io-site
 
 # Open in browser (file:// protocol works)
@@ -190,11 +190,11 @@ We welcome contributions to the Alsania website! Please follow these guidelines:
 
 | Project | Repository | Description |
 |---------|------------|-------------|
-| **Nyx** | [alsania-dev/Nyx](https://github.com/alsania-dev/Nyx) | Browser extension for MCP tools |
+| **Nyx** | [alsania-io/Nyx](https://github.com/alsania-io/Nyx) | Browser extension for MCP tools |
 | **AED** | [alsania-io/aed](https://github.com/alsania-io/aed) | Alsania Enhanced Domains |
-| **AlsaniaMCP** | [alsania-dev/mcp](https://github.com/alsania-dev/mcp) | Universal MCP server |
-| **DevConX** | [alsania-dev/devconx](https://github.com/alsania-dev/devconx) | VSCode AI assistant |
-| **ScrypGen** | [alsania-dev/scrypgen](https://github.com/alsania-dev/scrypgen) | Script generator |
+| **AlsaniaMCP** | [alsania-io/mcp](https://github.com/alsania-io/mcp) | Universal MCP server |
+| **DevConX** | [alsania-io/devconx](https://github.com/alsania-io/devconx) | VSCode AI assistant |
+| **ScrypGen** | [alsania-io/scrypgen](https://github.com/alsania-io/scrypgen) | Script generator |
 
 ---
 
@@ -208,7 +208,7 @@ MIT License — See [LICENSE](LICENSE) for details.
 
 - **Website:** [alsania-io.com](https://alsania-io.com)
 - **Email:** admin@alsania-io.com
-- **GitHub:** [@alsania-dev](https://github.com/alsania-dev)
+- **GitHub:** [@alsania-io](https://github.com/alsania-io)
 - **Discord:** [Alsania Community](https://discord.gg/SaCTgSHqdv)
 - **Telegram:** [@Alsania_io](https://t.me/Alsania_io)
 - **X (Twitter):** [@sigmasauer07](https://x.com/sigmasauer07)

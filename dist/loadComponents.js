@@ -67,7 +67,7 @@ const INLINE_COMPONENTS = {
         <h3>Alsania I/O</h3>
         <p>Sovereign technology ecosystem. Built for creators, owned by no one, open to everyone.</p>
         <div class="social-links">
-          <a href="https://github.com/alsania-dev" target="_blank" rel="noopener"><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" style="width:28px;height:28px;" /></a>
+          <a href="https://github.com/alsania-io" target="_blank" rel="noopener"><img src="/assets/img/web-icons/github-icon.svg" alt="GitHub" style="width:28px;height:28px;" /></a>
           <a href="https://x.com/sigmasauer07" target="_blank" rel="noopener"><img src="/assets/img/web-icons/x-icon.svg" alt="X" style="width:28px;height:28px;" /></a>
           <a href="https://t.me/Alsania_io" target="_blank" rel="noopener"><img src="/assets/img/web-icons/telegram-icon.svg" alt="Telegram" style="width:28px;height:28px;" /></a>
           <a href="https://discord.gg/SaCTgSHqdv" target="_blank" rel="noopener"><img src="/assets/img/web-icons/discord-icon.svg" alt="Discord" style="width:28px;height:28px;" /></a>

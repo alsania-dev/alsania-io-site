@@ -60,7 +60,7 @@ function downloadPlatformPackage(platform, buttonElement) {
 
   // Get base path for GitHub Pages
   const getBasePath = () => {
-    if (window.location.hostname === 'alsania-dev.github.io') {
+    if (window.location.hostname === 'alsania-io.github.io') {
       return '/alsania-io-site';
     }
     return '';

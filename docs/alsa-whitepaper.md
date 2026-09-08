@@ -120,7 +120,7 @@ The Alsania Paymaster is an ERC-4337 compliant paymaster contract that sponsors 
 Alsania is founded and developed by **Sigma**, a full-stack developer and blockchain architect.
 
 - **X (Twitter):** [@SigmaSauer07](https://x.com/sigmasauer07)
-- **GitHub:** [alsania-dev](https://github.com/alsania-dev)
+- **GitHub:** [alsania-io](https://github.com/alsania-io)
 
 ---
 
@@ -156,7 +156,7 @@ Alsania is founded and developed by **Sigma**, a full-stack developer and blockc
 | Token Page | https://alsania-io.com/token |
 | X (Twitter) | https://x.com/alsania_io |
 | Discord | https://discord.gg/SaCTgSHqdv |
-| GitHub | https://github.com/alsania-dev |
+| GitHub | https://github.com/alsania-io |
 | Telegram | https://t.me/Alsania_io |
 
 ### Contact

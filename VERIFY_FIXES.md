@@ -2,45 +2,45 @@
 
 ## ✅ DEPLOYMENT SUCCESSFUL
 
-**Site is now live at:** https://alsania-dev.github.io/alsania-io-site/
+**Site is now live at:** https://alsania-io.github.io/alsania-io-site/
 
 ## Fixes Deployed:
 
 ### 1. Logo Size Fix ✅
 **Issue:** Logo was oversized
 **Fix:** Added `logo-image` class with `height: 60px; max-width: 300px;`
-**Test URL:** https://alsania-dev.github.io/alsania-io-site/
+**Test URL:** https://alsania-io.github.io/alsania-io-site/
 **Expected:** Logo displays at proper size
 
 ### 2. Download Links Fix ✅
 **Issue:** "File not found on this site" for all 3 zip files
 **Fix:** JavaScript now detects GitHub Pages and uses `/alsania-io-site/` prefix
-**Test URL:** https://alsania-dev.github.io/alsania-io-site/tools/nyx/
+**Test URL:** https://alsania-io.github.io/alsania-io-site/tools/nyx/
 **Expected:** Download buttons work
 
 ### 3. Tools Page Links Fix ✅
 **Issue:** Broken links to `downloads/nyx-setup-guide.md`
 **Fix:** Updated to point to `nyx/index.html`
-**Test URL:** https://alsania-dev.github.io/alsania-io-site/tools/
+**Test URL:** https://alsania-io.github.io/alsania-io-site/tools/
 **Expected:** All links work
 
 ## Manual Testing Checklist:
 
 1. **Main Page (Logo Test)**
-   - [ ] Open https://alsania-dev.github.io/alsania-io-site/
+   - [ ] Open https://alsania-io.github.io/alsania-io-site/
    - [ ] Verify logo is sized correctly (not oversized)
    - [ ] Verify header navigation works
    - [ ] Verify theme toggle works
 
 2. **Nyx Page (Download Test)**
-   - [ ] Open https://alsania-dev.github.io/alsania-io-site/tools/nyx/
+   - [ ] Open https://alsania-io.github.io/alsania-io-site/tools/nyx/
    - [ ] Click "Download Nyx Package" button
    - [ ] Select Windows/macOS/Linux platform
    - [ ] Verify download starts (or at least doesn't show "file not found")
    - [ ] Test all 3 platform buttons in the "Simple Download Package" section
 
 3. **Tools Page (Navigation Test)**
-   - [ ] Open https://alsania-dev.github.io/alsania-io-site/tools/
+   - [ ] Open https://alsania-io.github.io/alsania-io-site/tools/
    - [ ] Click "Download Nyx" button
    - [ ] Verify it redirects to Nyx page
    - [ ] Test other navigation links

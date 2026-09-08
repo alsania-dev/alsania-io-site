@@ -1,50 +1,104 @@
-// AED Main - Simplified version
+// AED Main - with wallet event integration and retry
 console.log('🚀 AED App starting...');
 
 let appState = { isConnected: false, address: null };
+let retryCount = 0;
+const MAX_RETRIES = 5;
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('📄 DOM ready');
+function initApp() {
+    console.log('📄 Initializing app...');
     
-    const connectBtn = document.getElementById('connectBtn');
-    if (connectBtn) {
-        connectBtn.addEventListener('click', async function() {
-            if (window.web3Provider) {
-                try {
-                    await window.web3Provider.connect();
-                } catch (e) {
-                    console.error('Connection failed:', e);
-                    alert('Failed to connect: ' + e.message);
-                }
-            } else {
-                alert('Please install MetaMask');
-            }
-        });
+    if (typeof window.web3Provider === 'undefined') {
+        if (retryCount < MAX_RETRIES) {
+            retryCount++;
+            console.log(`⏳ Waiting for web3Provider... (attempt ${retryCount}/${MAX_RETRIES})`);
+            setTimeout(initApp, 300);
+            return;
+        } else {
+            console.warn('⚠️ web3Provider not available after retries');
+            // Still try to set up the connect button as fallback
+            setupConnectButton();
+            return;
+        }
     }
     
-    if (window.web3Provider) {
-        window.web3Provider.on('connected', function(data) {
-            appState.isConnected = true;
-            appState.address = data.address;
-            updateUI();
-            updatePortfolio();
-        });
-        window.web3Provider.on('disconnected', function() {
-            appState.isConnected = false;
-            appState.address = null;
-            updateUI();
-        });
-        window.web3Provider.on('accountChanged', function(address) {
-            appState.address = address;
-            appState.isConnected = true;
-            updateUI();
-            updatePortfolio();
-        });
-    }
-    
+    console.log('✅ web3Provider available');
+    setupWalletListeners();
+    setupConnectButton();
+    updateUI();
     updatePortfolio();
     updateStats();
-});
+}
+
+function setupWalletListeners() {
+    if (!window.web3Provider) return;
+    
+    window.web3Provider.on('connected', function(data) {
+        console.log('🔗 Wallet connected:', data.address);
+        appState.isConnected = true;
+        appState.address = data.address;
+        updateUI();
+        updatePortfolio();
+    });
+    
+    window.web3Provider.on('disconnected', function() {
+        console.log('🔌 Wallet disconnected');
+        appState.isConnected = false;
+        appState.address = null;
+        updateUI();
+    });
+    
+    window.web3Provider.on('accountChanged', function(data) {
+        console.log('🔄 Account changed:', data.address);
+        appState.address = data.address;
+        appState.isConnected = true;
+        updateUI();
+        updatePortfolio();
+    });
+    
+    // Check if already connected
+    if (window.web3Provider.isConnected && window.web3Provider.isConnected()) {
+        const addr = window.web3Provider.getAddress();
+        if (addr) {
+            appState.isConnected = true;
+            appState.address = addr;
+            updateUI();
+            updatePortfolio();
+        }
+    }
+}
+
+function setupConnectButton() {
+    const connectBtn = document.getElementById('connectBtn');
+    if (!connectBtn) return;
+    
+    // Remove any existing listeners
+    const newBtn = connectBtn.cloneNode(true);
+    connectBtn.parentNode.replaceChild(newBtn, connectBtn);
+    
+    newBtn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        console.log('🔘 Connect button clicked');
+        
+        if (typeof window.ethereum === 'undefined') {
+            alert('Please install MetaMask!');
+            return;
+        }
+        
+        if (window.web3Provider) {
+            try {
+                await window.web3Provider.connect();
+            } catch (error) {
+                console.error('❌ Connection failed:', error);
+                alert('Failed to connect: ' + error.message);
+            }
+        } else {
+            alert('Web3 provider not ready. Please refresh the page.');
+        }
+    });
+    
+    console.log('✅ Connect button setup complete');
+}
 
 function updateUI() {
     const walletStatus = document.getElementById('walletStatus');
@@ -54,11 +108,17 @@ function updateUI() {
     if (appState.isConnected && appState.address) {
         const short = appState.address.slice(0,6) + '...' + appState.address.slice(-4);
         if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator connected"></span> ${short}`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`; connectBtn.classList.add('connected'); }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-check-circle"></i> ${short}`;
+            connectBtn.classList.add('connected');
+        }
         if (statusIndicator) statusIndicator.classList.add('connected');
     } else {
         if (walletStatus) walletStatus.innerHTML = `<span class="status-indicator"></span> Connect Wallet`;
-        if (connectBtn) { connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`; connectBtn.classList.remove('connected'); }
+        if (connectBtn) {
+            connectBtn.innerHTML = `<i class="fas fa-plug"></i> Connect`;
+            connectBtn.classList.remove('connected');
+        }
         if (statusIndicator) statusIndicator.classList.remove('connected');
     }
 }
@@ -99,6 +159,13 @@ function updateStats() {
     if (revenueEl) revenueEl.textContent = '0';
     const tldsEl = document.getElementById('activeTLDs');
     if (tldsEl) tldsEl.textContent = '6';
+}
+
+// Start the app when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
 }
 
 console.log('✅ AED App ready');

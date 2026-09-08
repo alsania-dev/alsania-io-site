@@ -343,7 +343,7 @@ class AEDHomeApp {
         try {
             if (!window.web3Provider.isConnected) return;
 
-            const address = window.web3Provider.userAddress;
+            const address = window.web3Provider ? window.web3Provider.userAddress : null;
             console.log('📂 Loading portfolio for:', address);
 
             // Mock portfolio data - would be replaced with actual contract calls
@@ -612,7 +612,7 @@ class AEDHomeApp {
             }
             
             if (walletAddress) {
-                const address = window.web3Provider.userAddress;
+                const address = window.web3Provider ? window.web3Provider.userAddress : null;
                 const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
                 walletAddress.textContent = shortAddress;
             }

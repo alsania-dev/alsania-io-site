@@ -260,3 +260,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial UI update
     web3Provider.updateUI();
 });
+
+// Global reference for other scripts
+window.web3Provider = web3Provider;
+
+// Auto-update UI on connection changes
+web3Provider.on('connected', (data) => {
+    console.log('🔗 Web3 connected event:', data);
+    if (window.app && window.app.updateConnectionStatus) {
+        window.app.updateConnectionStatus(true);
+    }
+});
+
+web3Provider.on('disconnected', () => {
+    console.log('🔌 Web3 disconnected event');
+    if (window.app && window.app.updateConnectionStatus) {
+        window.app.updateConnectionStatus(false);
+    }
+});
+
+web3Provider.on('accountChanged', (address) => {
+    console.log('👤 Account changed event:', address);
+    if (window.app && window.app.updateConnectionStatus) {
+        window.app.updateConnectionStatus(true);
+    }
+});

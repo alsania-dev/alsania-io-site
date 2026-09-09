@@ -1,0 +1,4 @@
+# Explicit file mappings for AED
+/js/* /aed/js/:splat 200
+/css/* /aed/css/:splat 200
+/assets/* /aed/assets/:splat 200

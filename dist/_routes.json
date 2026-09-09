@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/css/*",
+    "/js/*",
+    "/assets/*",
+    "/img/*",
+    "/aed/css/*",
+    "/aed/js/*",
+    "/aed/assets/*",
+    "/aed/img/*",
+    "/tools/*",
+    "/story/*",
+    "/about/*",
+    "/contact/*",
+    "*.css",
+    "*.js",
+    "*.png",
+    "*.jpg",
+    "*.svg",
+    "*.ico",
+    "*.webp",
+    "*.json"
+  ]
+}

@@ -1,3 +1,4 @@
-# Cloudflare Pages redirects
+# Cloudflare Pages redirects - serve static files correctly
 /aed/js/* /aed/js/:splat 200
 /aed/css/* /aed/css/:splat 200
+/aed/* /aed/index.html 200

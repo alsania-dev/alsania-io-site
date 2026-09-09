@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+/aed/js/* /aed/js/:splat 200
+/aed/css/* /aed/css/:splat 200

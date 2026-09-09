@@ -1,6 +1,6 @@
 name = "alsania-io-site"
 compatibility_date = "2026-08-01"
-pages_build_output_dir = "aed"
+pages_build_output_dir = "dist"
 
 [env.production]
-pages_build_output_dir = "aed"
+pages_build_output_dir = "dist"
